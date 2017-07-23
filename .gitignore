@@ -1,0 +1,10 @@
+*.Cache
+Thumbs.db
+*.suo
+**/bin/**
+**/obj/**
+*.user
+**/packages/**
+**/TestResults/**
+*.nupkg
+/.vs/config/applicationhost.config
