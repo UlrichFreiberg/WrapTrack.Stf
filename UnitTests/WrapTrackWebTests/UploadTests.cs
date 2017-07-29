@@ -33,6 +33,7 @@ namespace WrapTrackWebTests
             var uploadProfileImage = me.UploadProfileImage();
             var oldId = uploadProfileImage.Identification;
 
+            // TODO: should be part of solution
             uploadProfileImage.FileName = @"C:\temp\TestData\Kurt.png";
             uploadProfileImage.Upload();
 
