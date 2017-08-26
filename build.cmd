@@ -23,7 +23,7 @@ robocopy "%BUILD_SELENIUM_SERVERS%" "%BUILD_DEPLOY_DIR%\Selenium" /MIR
 
 REM Deploy the solutions and corresponding configuration
 robocopy "%BUILD_BIN%"               "%BUILD_DEPLOY_DIR%\StfBin" /MIR
-robocopy "%BUILD_CONFIGURATION_DIR%" "%BUILD_DEPLOY_DIR%\Configuration" StfConfiguration.xml
+robocopy "%BUILD_CONFIGURATION_DIR%" "%BUILD_DEPLOY_DIR%\Config" StfConfiguration.xml
 
 REM make sure we have a temp
 if NOT exist "%BUILD_DEPLOY_DIR%\Temp" (
