@@ -12,6 +12,7 @@ namespace WrapTrack.Stf.WrapTrackWeb.Interfaces
 {
     using Mir.Stf.Utilities;
 
+    using WrapTrack.Stf.Adapters.WebAdapter;
     using WrapTrack.Stf.WrapTrackWeb.Interfaces.Me;
 
     /// <summary>
@@ -19,6 +20,11 @@ namespace WrapTrack.Stf.WrapTrackWeb.Interfaces
     /// </summary>
     public interface IWrapTrackWebShell : IStfPlugin
     {
+        /// <summary>
+        /// Gets or sets the web adapter.
+        /// </summary>
+        IWebAdapter WebAdapter { get; set; }
+
         /// <summary>
         /// The learn more.
         /// </summary>

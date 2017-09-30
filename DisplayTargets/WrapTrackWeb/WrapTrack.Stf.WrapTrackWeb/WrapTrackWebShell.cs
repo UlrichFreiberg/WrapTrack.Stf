@@ -61,7 +61,7 @@ namespace WrapTrack.Stf.WrapTrackWeb
         /// <summary>
         /// Gets or sets the web adapter.
         /// </summary>
-        private IWebAdapter WebAdapter { get; set; }
+        public IWebAdapter WebAdapter { get; set; }
 
         /// <summary>
         /// The learn more.
