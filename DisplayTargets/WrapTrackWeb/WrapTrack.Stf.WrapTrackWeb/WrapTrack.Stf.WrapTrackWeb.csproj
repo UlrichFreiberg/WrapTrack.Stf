@@ -105,8 +105,8 @@
     <Compile Include="Interfaces\Me\IMe.cs" />
     <Compile Include="Interfaces\Me\IUploadProfileImage.cs" />
     <Compile Include="Market\Market.cs" />
-    <Compile Include="Me\Collection.cs" />
-    <Compile Include="Me\Me.cs" />
+    <Compile Include="MeClasses\Collection.cs" />
+    <Compile Include="MeClasses\Me.cs" />
     <Compile Include="WrapTrackWebShell.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

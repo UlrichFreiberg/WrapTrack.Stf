@@ -10,7 +10,6 @@
 
 using System;
 
-
 namespace WrapTrack.Stf.WrapTrackWeb
 {
     using Mir.Stf.Utilities;
@@ -20,9 +19,8 @@ namespace WrapTrack.Stf.WrapTrackWeb
     using WrapTrack.Stf.Adapters.WebAdapter;
     using WrapTrack.Stf.WrapTrackWeb.Explore;
     using WrapTrack.Stf.WrapTrackWeb.Interfaces;
-    using WrapTrack.Stf.WrapTrackWeb.Me;
-
-    using IMe = WrapTrack.Stf.WrapTrackWeb.Interfaces.Me.IMe;
+    using WrapTrack.Stf.WrapTrackWeb.Interfaces.Me;
+    using WrapTrack.Stf.WrapTrackWeb.MeClasses;
 
     /// <summary>
     /// The demo corp web shell.
@@ -41,12 +39,12 @@ namespace WrapTrack.Stf.WrapTrackWeb
         /// <summary>
         /// Gets the name.
         /// </summary>
-        public string Name { get; private set; }
+        public string Name { get; }
 
         /// <summary>
         /// Gets the version info.
         /// </summary>
-        public Version VersionInfo { get; private set; }
+        public Version VersionInfo { get; }
 
         /// <summary>
         /// Gets or sets the stf container.
@@ -61,7 +59,7 @@ namespace WrapTrack.Stf.WrapTrackWeb
         /// <summary>
         /// Gets or sets the web adapter.
         /// </summary>
-        public IWebAdapter WebAdapter { get; private set; }
+        public IWebAdapter WebAdapter { get; set; }
 
         /// <summary>
         /// The learn more.
@@ -114,13 +112,16 @@ namespace WrapTrack.Stf.WrapTrackWeb
         /// <summary>
         /// The sign up functionallity for new users
         /// </summary>
+        /// <returns>
+        /// The <see cref="bool"/>.
+        /// </returns>
         public bool SignUp()
         {
             var loginTabElem = WebAdapter.FindElement(By.Id("nav_login"));
 
             loginTabElem.Click();
 
-            var uniquePart = Guid.NewGuid().ToString().Replace("-", string.Empty).Substring(1,15);
+            var uniquePart = Guid.NewGuid().ToString().Replace("-", string.Empty).Substring(1, 15);
 
             // Create (semi) random username
             var newUsername = $"TEST-{uniquePart}";
@@ -143,9 +144,9 @@ namespace WrapTrack.Stf.WrapTrackWeb
 
             cond.Click();
 
-            var SignUpButtonElem = WebAdapter.FindElement(By.Id("OpretProfilKnap"));
+            var signUpButtonElem = WebAdapter.FindElement(By.Id("OpretProfilKnap"));
 
-            SignUpButtonElem.Click();
+            signUpButtonElem.Click();
 
             return true;
         }
@@ -160,7 +161,7 @@ namespace WrapTrack.Stf.WrapTrackWeb
         {
             // register my needed types
             StfContainer.RegisterType<ICollection, Collection>();
-            StfContainer.RegisterType<IMe, Me.Me>();
+            StfContainer.RegisterType<IMe, Me>();
             StfContainer.RegisterType<IExplorer, Explorer>();
             StfContainer.RegisterType<IFaq, Faq.Faq>();
 
@@ -169,9 +170,9 @@ namespace WrapTrack.Stf.WrapTrackWeb
 
             // LIVE:
             WebAdapter.OpenUrl("https://WrapTrack.org/");
-            // TEST:
-            //WebAdapter.OpenUrl("http://wt.troldvaerk.org/");
 
+            // TEST:
+            ////WebAdapter.OpenUrl("http://wt.troldvaerk.org/");
 
             var currentDomainBaseDirectory = AppDomain.CurrentDomain.BaseDirectory;
 
@@ -217,7 +218,6 @@ namespace WrapTrack.Stf.WrapTrackWeb
             var retVal = StfContainer.Get<IMe>();
 
             return retVal;
-
         }
 
         /// <summary>
@@ -228,14 +228,12 @@ namespace WrapTrack.Stf.WrapTrackWeb
         /// </returns>
         public IExplorer Explorer()
         {
-            //throw new NotImplementedException();
             var link = WebAdapter.FindElement(By.Id("nav_expl"));
-            link.Click();
 
+            link.Click();
             IExplorer retVal = StfContainer.Get<IExplorer>();
 
             return retVal;
-
         }
 
         /// <summary>

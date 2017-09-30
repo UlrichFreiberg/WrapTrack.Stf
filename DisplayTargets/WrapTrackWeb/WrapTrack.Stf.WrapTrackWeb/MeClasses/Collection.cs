@@ -8,7 +8,7 @@
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace WrapTrack.Stf.WrapTrackWeb.Me
+namespace WrapTrack.Stf.WrapTrackWeb.MeClasses
 {
     using WrapTrack.Stf.WrapTrackWeb.Interfaces;
 

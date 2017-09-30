@@ -8,22 +8,31 @@
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace WrapTrack.Stf.WrapTrackWeb.Me
+namespace WrapTrack.Stf.WrapTrackWeb.MeClasses
 {
-    using Adapters.WebAdapter;
-    using Mir.Stf.Utilities;
-    using OpenQA.Selenium;
     using System;
 
+    using OpenQA.Selenium;
+
+    using WrapTrack.Stf.Adapters.WebAdapter;
+    using WrapTrack.Stf.WrapTrackWeb.Interfaces;
     using WrapTrack.Stf.WrapTrackWeb.Interfaces.Me;
 
     /// <summary>
     /// The Me interface.
     /// </summary>
-    public class Me : IMe
+    public class Me : WrapTrackWebShellModelBase, IMe
     {
-        private IWebAdapter WebAdapter { get; set; }
-        //private IWebElement actualImage;
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Me"/> class.
+        /// </summary>
+        /// <param name="wrapTrackWebShell">
+        /// The wrap track web shell.
+        /// </param>
+        public Me(IWrapTrackWebShell wrapTrackWebShell)
+            : base(wrapTrackWebShell)
+        {
+        }
 
         /// <summary>
         /// The actual image related to users profile
