@@ -1,6 +1,7 @@
 *.Cache
 Thumbs.db
 *.suo
+**/StfBin/**
 **/bin/**
 **/obj/**
 *.user
