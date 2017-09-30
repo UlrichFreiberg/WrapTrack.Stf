@@ -8,6 +8,8 @@
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
 
+using OpenQA.Selenium;
+
 namespace WrapTrack.Stf.WrapTrackWeb.Interfaces.Me
 {
     /// <summary>
@@ -16,10 +18,19 @@ namespace WrapTrack.Stf.WrapTrackWeb.Interfaces.Me
     public interface IMe
     {
         /// <summary>
-        /// The upload profile image.
+        /// The image related to Me
         /// </summary>
         /// <returns>
-        /// The <see cref="IUploadProfileImage"/>.
+        /// IWebElement containing information about the actual img 
+        /// - false if no img related to Me
+        /// </returns>
+        string ActualImage();
+
+        /// <summary>
+        /// The actual image related to users profile
+        /// </summary>
+        /// <returns>
+        /// NULL if no image related
         /// </returns>
         IUploadProfileImage UploadProfileImage();
     }

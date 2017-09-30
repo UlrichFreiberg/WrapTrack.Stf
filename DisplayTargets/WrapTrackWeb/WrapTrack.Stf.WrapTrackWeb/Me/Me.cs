@@ -10,6 +10,9 @@
 
 namespace WrapTrack.Stf.WrapTrackWeb.Me
 {
+    using Adapters.WebAdapter;
+    using Mir.Stf.Utilities;
+    using OpenQA.Selenium;
     using System;
 
     using WrapTrack.Stf.WrapTrackWeb.Interfaces.Me;
@@ -19,15 +22,34 @@ namespace WrapTrack.Stf.WrapTrackWeb.Me
     /// </summary>
     public class Me : IMe
     {
+        private IWebAdapter WebAdapter { get; set; }
+        //private IWebElement actualImage;
+
         /// <summary>
-        /// The upload profile image.
+        /// The actual image related to users profile
         /// </summary>
         /// <returns>
-        /// The <see cref="IUploadProfileImage"/>.
+        /// NULL if no image related, otherwise the SRC path
         /// </returns>
-        public IUploadProfileImage UploadProfileImage()
+        public string ActualImage()
         {
+            var image = WebAdapter.FindElement(By.Id("img_profile"));
+            var retVal = image?.GetAttribute("src");
+
+            return retVal;  
+        }
+
+        /// <summary>
+        /// Upload an profile image 
+        /// </summary>
+        /// <returns></returns>
+         public IUploadProfileImage UploadProfileImage()
+        {
+            var image = WebAdapter.FindElement(By.Id("img_profile"));
+
+            //return new UploadProfileImage();
             throw new NotImplementedException();
+            
         }
     }
 }
