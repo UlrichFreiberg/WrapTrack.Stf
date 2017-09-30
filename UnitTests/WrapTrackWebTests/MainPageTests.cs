@@ -13,7 +13,7 @@ namespace WrapTrackWebTests
     using Microsoft.VisualStudio.TestTools.UnitTesting;
 
     using Mir.Stf;
-    using System;
+
     using WrapTrack.Stf.WrapTrackWeb.Interfaces;
 
     using WrapTrack.Stf.WrapTrackWeb.Interfaces.Me;
@@ -49,7 +49,7 @@ namespace WrapTrackWebTests
         /// </summary>
         /// <remarks>After log in it's possible to acess 'Me-page'</remarks>
         [TestMethod]
-        public void TestLogin_wrong_data()
+        public void TestLoginWrongData()
         {
             IWrapTrackWebShell wrapTrackShell = Get<IWrapTrackWebShell>();
 
@@ -62,10 +62,9 @@ namespace WrapTrackWebTests
             StfAssert.IsNotNull("wrapTrackShell", wrapTrackShell);
             StfAssert.IsNotNull("me", me);
 
-            //try wrong pw
+            // try wrong pw
             wrapTrackShell.Logout(); 
         }
-
 
         /// <summary>
         /// The test learn more.
@@ -75,7 +74,7 @@ namespace WrapTrackWebTests
         public void TestLogout()
         {
             IWrapTrackWebShell wrapTrackShell = Get<IWrapTrackWebShell>();
-            wrapTrackShell.Login("", "");
+            wrapTrackShell.Login();
             wrapTrackShell.Logout();
 
             // And the result....
@@ -84,6 +83,9 @@ namespace WrapTrackWebTests
             StfAssert.IsNull("me", me);
         }
 
+        /// <summary>
+        /// The test sign up.
+        /// </summary>
         [TestMethod]
         public void TestSignUp()
         {

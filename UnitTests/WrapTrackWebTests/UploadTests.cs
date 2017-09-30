@@ -36,7 +36,7 @@ namespace WrapTrackWebTests
 
             var me = wrapTrackShell.Me();
 
-            StfAssert.IsNotNull("Didn't got a Me", me);
+            StfAssert.IsNotNull("Got a Me", me);
 
             var oldImage = me.ActualImage();
 

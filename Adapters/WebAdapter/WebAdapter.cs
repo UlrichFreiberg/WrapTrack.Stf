@@ -53,7 +53,7 @@ namespace WrapTrack.Stf.Adapters.WebAdapter
         /// </returns>
         public bool OpenUrl(string url)
         {
-            bool retVal = true;
+            var retVal = true;
 
             try
             {
@@ -61,7 +61,7 @@ namespace WrapTrack.Stf.Adapters.WebAdapter
             }
             catch (Exception ex)
             {
-                var msg = string.Format("Couldn't OpenUrl [{0}] - got error [{1}]", url, ex.Message);
+                var msg = $"Couldn't OpenUrl [{url}] - got error [{ex.Message}]";
 
                 // this might not be an error - if we are looking for something to become rendered in a loop....
                 StfLogger.LogInternal(msg);
@@ -156,7 +156,21 @@ namespace WrapTrack.Stf.Adapters.WebAdapter
 
             return retVal;
         }
-        
+
+        /// <summary>
+        /// The close down.
+        /// </summary>
+        public void CloseDown()
+        {
+            WebDriver.Quit();
+        }
+
+        /// <summary>
+        /// The initialize web driver chrome.
+        /// </summary>
+        /// <returns>
+        /// The <see cref="bool"/>.
+        /// </returns>
         private bool InitializeWebDriverChrome()
         {
             var retVal = true;
@@ -219,14 +233,6 @@ namespace WrapTrack.Stf.Adapters.WebAdapter
             StfLogger.LogDebug("Done initializing {0}. Successful: {1}", GetType().Name, retVal.ToString());
 
             return retVal;
-        }
-
-        /// <summary>
-        /// The close down.
-        /// </summary>
-        public void CloseDown()
-        {
-            WebDriver.Quit();
         }
 
         /// <summary>
