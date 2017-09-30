@@ -20,6 +20,7 @@ namespace WrapTrack.Stf.WrapTrackWeb
     using OpenQA.Selenium;
 
     using WrapTrack.Stf.Adapters.WebAdapter;
+    using WrapTrack.Stf.WrapTrackWeb.Interfaces;
 
     /// <summary>
     /// The im shell model base.
@@ -32,7 +33,7 @@ namespace WrapTrack.Stf.WrapTrackWeb
         /// <param name="wrapTrackWebShell">
         /// The wrap track web shell.
         /// </param>
-        protected WrapTrackWebShellModelBase(WrapTrackWebShell wrapTrackWebShell)
+        protected WrapTrackWebShellModelBase(IWrapTrackWebShell wrapTrackWebShell)
         {
             WrapTrackWebShell = wrapTrackWebShell;
             WebAdapter = wrapTrackWebShell.WebAdapter;
@@ -41,7 +42,7 @@ namespace WrapTrack.Stf.WrapTrackWeb
         /// <summary>
         /// Gets or sets the wrap track web shell.
         /// </summary>
-        protected WrapTrackWebShell WrapTrackWebShell { get; set; }
+        protected IWrapTrackWebShell WrapTrackWebShell { get; set; }
 
         /// <summary>
         /// Gets or sets the web adapter.
