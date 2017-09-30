@@ -3,7 +3,7 @@
 
   <section name="Adapters">
     <section name="WebAdapter">
-      <section name="Browsers" defaultsection="InternetExplorer">
+      <section name="Browsers" defaultsection="Chrome">
         <section name="InternetExplorer">
           <key name="BrowserName" value="InternetExplorer" />
           <key name="BrowserTimeout" value="180" />

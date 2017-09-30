@@ -10,6 +10,7 @@
 
 namespace WrapTrack.Stf.WrapTrackWeb.Interfaces
 {
+    using Adapters.WebAdapter;
     using Mir.Stf.Utilities;
 
     using WrapTrack.Stf.WrapTrackWeb.Interfaces.Me;
@@ -19,6 +20,12 @@ namespace WrapTrack.Stf.WrapTrackWeb.Interfaces
     /// </summary>
     public interface IWrapTrackWebShell : IStfPlugin
     {
+
+        /// <summary>
+        /// WebAdaptor needed erverywhere
+        /// </summary>
+        IWebAdapter WebAdapter { get; }
+
         /// <summary>
         /// The learn more.
         /// </summary>
@@ -59,12 +66,33 @@ namespace WrapTrack.Stf.WrapTrackWeb.Interfaces
         /// </returns>
         IFaq Faq();
 
+
+        /// <summary>
+        /// Perform the login action.
+        /// </summary>
+        /// <returns>
+        /// <param name="userName">Name of the user</param>
+        /// <param name="password">Password of the user</param>
+        /// The <see cref="bool"/>.
+        /// Returns whether login succeeded
+        /// </returns>
+        bool Login(string userName = null, string password = null);
+
         /// <summary>
         /// The logout.
         /// </summary>
         /// <returns>
         /// The <see cref="bool"/>.
         /// </returns>
+        /// 
+        bool SignUp();
+        /// <summary>
+        /// The Sign up for new users.
+        /// </summary>
+        /// <returns>
+        /// The <see cref="bool"/>.
+        /// </returns>
         bool Logout();
+
     }
 }

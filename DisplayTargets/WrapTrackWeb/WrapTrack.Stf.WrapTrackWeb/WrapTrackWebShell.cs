@@ -10,13 +10,13 @@
 
 using System;
 
+
 namespace WrapTrack.Stf.WrapTrackWeb
 {
     using Mir.Stf.Utilities;
     using Mir.Stf.Utilities.Interfaces;
 
     using OpenQA.Selenium;
-
     using WrapTrack.Stf.Adapters.WebAdapter;
     using WrapTrack.Stf.WrapTrackWeb.Explore;
     using WrapTrack.Stf.WrapTrackWeb.Interfaces;
@@ -61,7 +61,7 @@ namespace WrapTrack.Stf.WrapTrackWeb
         /// <summary>
         /// Gets or sets the web adapter.
         /// </summary>
-        private IWebAdapter WebAdapter { get; set; }
+        public IWebAdapter WebAdapter { get; private set; }
 
         /// <summary>
         /// The learn more.
@@ -78,23 +78,74 @@ namespace WrapTrack.Stf.WrapTrackWeb
         /// <param name="password">
         /// The password.
         /// </param>
-        public bool Login(string userName, string password)
+        public bool Login(string userName = null, string password = null)
         {
-             var loginTabElem = WebAdapter.FindElement(By.Id("nav_login"));
+            if (string.IsNullOrWhiteSpace(userName))
+            {
+                userName = "ida88";
+            }
+
+            if (string.IsNullOrWhiteSpace(password))
+            {
+                password = "wraptrack4ever";
+            }
+
+            var loginTabElem = WebAdapter.FindElement(By.Id("nav_login"));
 
             loginTabElem.Click();
 
             var userNameElem = WebAdapter.FindElement(By.Id("input_username"));
 
+            userNameElem.Clear();
             userNameElem.SendKeys(userName);
 
             var passwordElem = WebAdapter.FindElement(By.Id("input_pw"));
 
+            passwordElem.Clear();
             passwordElem.SendKeys(password);
 
             var loginButtonElem = WebAdapter.FindElement(By.Id("nav_"));
 
             loginButtonElem.Click();
+
+            return true;
+        }
+
+        /// <summary>
+        /// The sign up functionallity for new users
+        /// </summary>
+        public bool SignUp()
+        {
+            var loginTabElem = WebAdapter.FindElement(By.Id("nav_login"));
+
+            loginTabElem.Click();
+
+            var uniquePart = Guid.NewGuid().ToString().Replace("-", string.Empty).Substring(1,15);
+
+            // Create (semi) random username
+            var newUsername = $"TEST-{uniquePart}";
+            var userNameElem = WebAdapter.FindElement(By.Id("input_newuser"));
+
+            userNameElem.Clear();
+            userNameElem.SendKeys(newUsername);
+
+            var passwordElem = WebAdapter.FindElement(By.Id("input_newPW"));
+
+            passwordElem.Clear();
+            passwordElem.SendKeys("123456");
+
+            var mailElem = WebAdapter.FindElement(By.Id("input_email"));
+
+            mailElem.Clear();
+            mailElem.SendKeys(newUsername + "@mitsite.org");
+
+            var cond = WebAdapter.FindElement(By.Id("check_cond"));
+
+            cond.Click();
+
+            var SignUpButtonElem = WebAdapter.FindElement(By.Id("OpretProfilKnap"));
+
+            SignUpButtonElem.Click();
 
             return true;
         }
@@ -115,13 +166,16 @@ namespace WrapTrack.Stf.WrapTrackWeb
 
             // get what I need - a WebAdapter:-)
             WebAdapter = StfContainer.Get<IWebAdapter>();
-            WebAdapter.OpenUrl("http://WrapTrack.org/");
+
+            // LIVE:
+            WebAdapter.OpenUrl("https://WrapTrack.org/");
+            // TEST:
+            //WebAdapter.OpenUrl("http://wt.troldvaerk.org/");
+
 
             var currentDomainBaseDirectory = AppDomain.CurrentDomain.BaseDirectory;
 
             StfLogger.LogKeyValue("Current Directory", currentDomainBaseDirectory, "Current Directory");
-            Login("ida88", "lk8dsafpUqwe");
-
             return true;
         }
 
@@ -149,7 +203,21 @@ namespace WrapTrack.Stf.WrapTrackWeb
         /// </returns>
         public IMe Me()
         {
-            throw new NotImplementedException();
+            try
+            {
+                var but = WebAdapter.FindElement(By.Id("nav_profile"));
+
+                but.Click();
+            }
+            catch (Exception)
+            {
+                return null;
+            }
+
+            var retVal = StfContainer.Get<IMe>();
+
+            return retVal;
+
         }
 
         /// <summary>
@@ -160,7 +228,14 @@ namespace WrapTrack.Stf.WrapTrackWeb
         /// </returns>
         public IExplorer Explorer()
         {
-            throw new NotImplementedException();
+            //throw new NotImplementedException();
+            var link = WebAdapter.FindElement(By.Id("nav_expl"));
+            link.Click();
+
+            IExplorer retVal = StfContainer.Get<IExplorer>();
+
+            return retVal;
+
         }
 
         /// <summary>
@@ -193,7 +268,11 @@ namespace WrapTrack.Stf.WrapTrackWeb
         /// </returns>
         public bool Logout()
         {
-            throw new NotImplementedException();
+            var logoutButtonElem = WebAdapter.FindElement(By.Id("nav_logout"));
+
+            logoutButtonElem?.Click();
+
+            return true;
         }
     }
 }
