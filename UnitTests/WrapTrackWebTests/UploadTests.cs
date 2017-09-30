@@ -19,7 +19,7 @@ namespace WrapTrackWebTests
     using WrapTrack.Stf.WrapTrackWeb.Interfaces.Me;
 
     /// <summary>
-    /// The main page tests.
+    /// Tests of diff kinds of upload pictures.
     /// </summary>
     [TestClass]
     public class UploadTests : StfTestScriptBase
@@ -35,27 +35,17 @@ namespace WrapTrackWebTests
             wrapTrackShell.Login("pstadel", "cellesaltogsolskin");
 
             var me = wrapTrackShell.Me();
-
             StfAssert.IsNotNull("Got a Me", me);
 
             var oldImage = me.ActualImage();
-
-            StfLogger.LogInfo("Found image [{1}] as actual Image", oldImage);
             StfLogger.LogInfo($"Found image [{oldImage}] as actual Image");
 
-            //  Console.Write(oldImage);
-            //IUploadProfileImage uploadProfileImage = me.UploadProfileImage();
-            //    string oldId = oldImage.TagName;
-            //    string newId = oldImage.TagName;
+            me.UploadProfileImage();
 
-            // TODO: should be part of solution
-            //uploadProfileImage.FileName = @"C:\temp\TestData\Kurt.png";
-            //uploadProfileImage.Upload();
+            var newImage = me.ActualImage();
+            StfLogger.LogInfo($"After upload found image [{newImage}] as actual Image");
 
-            //var newId = uploadProfileImage.Identification;
-
-            //StfAssert.AreNotEqual("New Picture Id", oldId, newId);
-            //StfAssert.AreEqual("New Picture Id", 1,1);
+            StfAssert.StringNotEquals("Got a new actual image", oldImage, newImage);
         }
     }
 }

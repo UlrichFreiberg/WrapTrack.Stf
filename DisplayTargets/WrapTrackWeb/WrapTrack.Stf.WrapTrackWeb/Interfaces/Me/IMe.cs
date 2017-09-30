@@ -32,6 +32,6 @@ namespace WrapTrack.Stf.WrapTrackWeb.Interfaces.Me
         /// <returns>
         /// NULL if no image related
         /// </returns>
-        IUploadProfileImage UploadProfileImage();
+        bool UploadProfileImage();
     }
 }

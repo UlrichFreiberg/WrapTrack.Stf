@@ -52,12 +52,22 @@ namespace WrapTrack.Stf.WrapTrackWeb.MeClasses
         /// Upload an profile image 
         /// </summary>
         /// <returns></returns>
-         public IUploadProfileImage UploadProfileImage()
+         public bool UploadProfileImage()
         {
-            var image = WebAdapter.FindElement(By.Id("img_profile"));
+            // Visit upload page
+            var nav = WebAdapter.FindElement(By.Id("nav_upload_profile"));
+            nav.Click(); 
 
-            //return new UploadProfileImage();
-            throw new NotImplementedException();
+            var element = WebAdapter.FindElement(By.Name("userfile"));
+            element.SendKeys(@"C:\Temp\Img\user_pstadel.jpg");
+            var submit_but = WebAdapter.FindElement(By.Id("but_upl_profile"));
+            submit_but.Submit();
+
+            // Back to me again
+            var navBack = WebAdapter.FindElement(By.Id("nav_back_profile"));
+            navBack.Click();
+
+            return true; 
             
         }
     }
