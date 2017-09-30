@@ -96,7 +96,7 @@ namespace WrapTrackWebTests
 
             var me = wrapTrackShell.Me();
 
-            StfAssert.IsNull("me", me);
+            StfAssert.IsNotNull("me", me);
         }
     }
 }
