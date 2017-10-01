@@ -91,11 +91,19 @@ namespace WrapTrack.Stf.WrapTrackWeb.Interfaces
         bool SignUp();
 
         /// <summary>
-        /// The Sign up for new users.
+        /// The logout.
         /// </summary>
+        /// <param name="doCareAboutErrors">
+        /// Mostly used in close down scenarios - there we just want to close down - not really caring about success or not
+        /// </param>
         /// <returns>
         /// The <see cref="bool"/>.
         /// </returns>
-        bool Logout();
+        bool Logout(bool doCareAboutErrors = true);
+
+        /// <summary>
+        /// Logout and Close down the web adapter
+        /// </summary>
+        void CloseDown();
     }
 }

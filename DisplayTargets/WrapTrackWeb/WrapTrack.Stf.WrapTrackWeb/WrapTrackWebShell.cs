@@ -152,35 +152,6 @@ namespace WrapTrack.Stf.WrapTrackWeb
         }
 
         /// <summary>
-        /// The init.
-        /// </summary>
-        /// <returns>
-        /// The <see cref="bool"/>.
-        /// </returns>
-        public bool Init()
-        {
-            // register my needed types
-            StfContainer.RegisterType<ICollection, Collection>();
-            StfContainer.RegisterType<IMe, Me>();
-            StfContainer.RegisterType<IExplorer, Explorer>();
-            StfContainer.RegisterType<IFaq, Faq.Faq>();
-
-            // get what I need - a WebAdapter:-)
-            WebAdapter = StfContainer.Get<IWebAdapter>();
-
-            // LIVE:
-            WebAdapter.OpenUrl("https://WrapTrack.org/");
-
-            // TEST:
-            ////WebAdapter.OpenUrl("http://wt.troldvaerk.org/");
-
-            var currentDomainBaseDirectory = AppDomain.CurrentDomain.BaseDirectory;
-
-            StfLogger.LogKeyValue("Current Directory", currentDomainBaseDirectory, "Current Directory");
-            return true;
-        }
-
-        /// <summary>
         /// The collection.
         /// </summary>
         /// <returns>
@@ -261,15 +232,67 @@ namespace WrapTrack.Stf.WrapTrackWeb
         /// <summary>
         /// The logout.
         /// </summary>
+        /// <param name="doCareAboutErrors">
+        /// Mostly used in close down scenarios - there we just want to close down - not really caring about success or not
+        /// </param>
         /// <returns>
         /// The <see cref="bool"/>.
         /// </returns>
-        public bool Logout()
+        public bool Logout(bool doCareAboutErrors = true)
         {
             var logoutButtonElem = WebAdapter.FindElement(By.Id("nav_logout"));
 
-            logoutButtonElem?.Click();
+            if (logoutButtonElem != null)
+            {
+                logoutButtonElem.Click();
 
+                return true;
+            }
+
+            if (doCareAboutErrors)
+            {
+                StfLogger.LogError("Got error while logging out");
+            }
+
+            // if we cant find the logout button, then the return value is down to if we care or not:-)
+            return doCareAboutErrors;
+        }
+
+        /// <summary>
+        /// Logout and Close down the web adapter
+        /// </summary>
+        public void CloseDown()
+        {
+            Logout(false);
+            WebAdapter.CloseDown();
+        }
+
+        /// <summary>
+        /// The init.
+        /// </summary>
+        /// <returns>
+        /// The <see cref="bool"/>.
+        /// </returns>
+        public bool Init()
+        {
+            // register my needed types
+            StfContainer.RegisterType<ICollection, Collection>();
+            StfContainer.RegisterType<IMe, Me>();
+            StfContainer.RegisterType<IExplorer, Explorer>();
+            StfContainer.RegisterType<IFaq, Faq.Faq>();
+
+            // get what I need - a WebAdapter:-)
+            WebAdapter = StfContainer.Get<IWebAdapter>();
+
+            // LIVE:
+            WebAdapter.OpenUrl("https://WrapTrack.org/");
+
+            // TEST:
+            ////WebAdapter.OpenUrl("http://wt.troldvaerk.org/");
+
+            var currentDomainBaseDirectory = AppDomain.CurrentDomain.BaseDirectory;
+
+            StfLogger.LogKeyValue("Current Directory", currentDomainBaseDirectory, "Current Directory");
             return true;
         }
     }
