@@ -1,0 +1,48 @@
+<?xml version="1.0"?>
+<configuration xmlns="http://www.testautomation.com/yacf" version="2013.04.21.0">
+
+  <section name="Environments" defaultsection="Prod">
+    <section name="Prod">
+      <section name="DisplayTargets">
+        <section name="WrapTrackWeb">
+          <key name="BaseUrl" value="https://WrapTrack.org/" />
+          <key name="Browser" value="Chrome" />
+
+          <section name="Users" defaultsection="%USERNAME%">
+            <section name="Ulrich">
+              <key name="UserName" value="Ida88" />
+              <key name="Password" value="wraptrack4ever" />
+            </section>
+            <section name="Pernille">
+              <key name="UserName" value="Ida88" />
+              <key name="Password" value="wraptrack4ever" />
+            </section>
+          </section>
+          
+        </section>
+      </section>
+    </section>
+
+    <section name="Test">
+      <section name="DisplayTargets">
+        <section name="WrapTrackWeb">
+          <key name="BaseUrl" value="http://wt.troldvaerk.org/" />
+          <key name="Browser" value="Chrome" />
+
+          <section name="Users" defaultsection="%USERNAME%">
+            <section name="Ulrich">
+              <key name="UserName" value="Ulrich" />
+              <key name="Password" value="Password1234" />
+            </section>
+            <section name="Pernille">
+              <key name="UserName" value="Pernille" />
+              <key name="Password" value="Password1234" />
+            </section>
+          </section>
+
+        </section>
+      </section>
+    </section>
+  </section>
+  
+</configuration>
