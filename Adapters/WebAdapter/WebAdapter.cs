@@ -134,14 +134,6 @@ namespace WrapTrack.Stf.Adapters.WebAdapter
             Configuration = GetConfiguration();
             DriverLogFile = GetDriverLogFilePath();
 
-            if (Configuration.KillAllSeleniumBeforeInit)
-            {
-                if (!KillProcesses())
-                {
-                    return false;
-                }
-            }
-
             switch (Configuration.BrowserName.ToLower())
             {
                 case "chrome":
@@ -178,6 +170,14 @@ namespace WrapTrack.Stf.Adapters.WebAdapter
 
             try
             {
+                if (Configuration.KillAllSeleniumBeforeInit)
+                {
+                    if (!KillProcesses("chromedriver.exe"))
+                    {
+                        return false;
+                    }
+                }
+
                 var driverService = ChromeDriverService.CreateDefaultService(Configuration.DriverServerPath);
 
                 driverService.LogPath = DriverLogFile;
@@ -212,6 +212,14 @@ namespace WrapTrack.Stf.Adapters.WebAdapter
 
             try
             {
+                if (Configuration.KillAllSeleniumBeforeInit)
+                {
+                    if (!KillProcesses("IEDriverServer"))
+                    {
+                        return false;
+                    }
+                }
+
                 var driverService = InternetExplorerDriverService.CreateDefaultService(Configuration.DriverServerPath);
 
                 driverService.LogFile = DriverLogFile;
@@ -244,7 +252,7 @@ namespace WrapTrack.Stf.Adapters.WebAdapter
         /// <returns>
         /// The <see cref="bool"/>.
         /// </returns>
-        private bool KillProcesses(string processName = "IEDriverServer")
+        private bool KillProcesses(string processName)
         {
             StfLogger.LogDebug("Starting to kill all processes with name [{0}]", processName);
 
