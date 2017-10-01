@@ -27,11 +27,14 @@ namespace WrapTrack.Stf.WrapTrackWeb.Interfaces.Me
         string ActualImage();
 
         /// <summary>
-        /// The actual image related to users profile
+        /// Upload an profile image 
         /// </summary>
+        /// <param name="clientSideFilePath">
+        /// The client Side File Path.
+        /// </param>
         /// <returns>
-        /// NULL if no image related
+        /// Inidcation of success
         /// </returns>
-        bool UploadProfileImage();
+        bool UploadProfileImage(string clientSideFilePath);
     }
 }

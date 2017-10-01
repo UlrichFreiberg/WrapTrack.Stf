@@ -10,11 +10,8 @@
 
 namespace WrapTrack.Stf.WrapTrackWeb.MeClasses
 {
-    using System;
-
     using OpenQA.Selenium;
 
-    using WrapTrack.Stf.Adapters.WebAdapter;
     using WrapTrack.Stf.WrapTrackWeb.Interfaces;
     using WrapTrack.Stf.WrapTrackWeb.Interfaces.Me;
 
@@ -45,30 +42,39 @@ namespace WrapTrack.Stf.WrapTrackWeb.MeClasses
             var image = WebAdapter.FindElement(By.Id("img_profile"));
             var retVal = image?.GetAttribute("src");
 
-            return retVal;  
+            return retVal;
         }
 
         /// <summary>
         /// Upload an profile image 
         /// </summary>
-        /// <returns></returns>
-         public bool UploadProfileImage()
+        /// <param name="clientSideFilePath">
+        /// The client Side File Path.
+        /// </param>
+        /// <returns>
+        /// Inidcation of success
+        /// </returns>
+        public bool UploadProfileImage(string clientSideFilePath)
         {
             // Visit upload page
             var nav = WebAdapter.FindElement(By.Id("nav_upload_profile"));
-            nav.Click(); 
+
+            nav.Click();
 
             var element = WebAdapter.FindElement(By.Name("userfile"));
-            element.SendKeys(@"C:\Temp\Img\user_pstadel.jpg");
-            var submit_but = WebAdapter.FindElement(By.Id("but_upl_profile"));
-            submit_but.Submit();
+
+            element.Clear();
+            element.SendKeys(clientSideFilePath);
+
+            var submitButton = WebAdapter.FindElement(By.Id("but_upl_profile"));
+
+            submitButton.Submit();
 
             // Back to me again
             var navBack = WebAdapter.FindElement(By.Id("nav_back_profile"));
-            navBack.Click();
 
-            return true; 
-            
+            navBack.Click();
+            return true;
         }
     }
 }
