@@ -38,6 +38,8 @@
           <Value>ms</Value>
           <Value>ny</Value>
           <Value>ok</Value>
+          <Value>Wt</Value>
+          <Value>wt</Value>
         </CollectionProperty>
       </AnalyzerSettings>
     </Analyzer>
