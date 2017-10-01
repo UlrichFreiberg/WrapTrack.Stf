@@ -80,15 +80,23 @@ namespace WrapTrackWebTests
         {
             // Make sure login is possible
             wrapTrackShell.Login("mie88", "wraptrack4ever");
-            StfAssert.IsTrue("No php errors", wtTestscriptUtils.PhpErrorFree(wrapTrackShell.WebAdapter));
 
             var me = wrapTrackShell.Me();
 
             StfAssert.IsNotNull("wrapTrackShell", wrapTrackShell);
-            StfAssert.IsNotNull("me", me);
+            StfAssert.IsInstanceOfType("me", me, typeof(IMe));
 
-            // TODO:try wrong pw
-            wrapTrackShell.Logout(); 
+            // try wrong pw
+            wrapTrackShell.Logout();
+            wrapTrackShell.Login("mie88", "1234");
+            var feedback = wrapTrackShell.InfoText("mes_loginerror");
+            StfAssert.IsTrue("User got feedback: 'wrong username/pw'", feedback);
+
+            // try unkown username
+            wrapTrackShell.Login("detvillemanadrigkaldesig", "wraptrack4ever");
+            var feedback2 = wrapTrackShell.InfoText("mes_loginerror");
+            StfAssert.IsTrue("User got feedback: 'wrong username/pw'", feedback2);
+
         }
 
         /// <summary>

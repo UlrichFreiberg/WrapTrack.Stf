@@ -257,7 +257,25 @@ namespace WrapTrack.Stf.WrapTrackWeb
             // if we cant find the logout button, then the return value is down to if we care or not:-)
             return doCareAboutErrors;
         }
-
+        /// <summary>
+        /// The text-feedback to user 
+        /// </summary>
+        /// <returns>
+        /// True if text-feedback found
+        /// </returns>
+        public bool InfoText(string infoType)
+        {
+            try
+            {
+                var svar = WebAdapter.FindElement(By.Id(infoType));
+                if (svar != null) return true;
+                else return false; 
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+        }
         /// <summary>
         /// Logout and Close down the web adapter
         /// </summary>

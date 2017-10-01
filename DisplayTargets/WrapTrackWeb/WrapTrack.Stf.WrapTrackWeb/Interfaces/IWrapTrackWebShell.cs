@@ -89,6 +89,13 @@ namespace WrapTrack.Stf.WrapTrackWeb.Interfaces
         /// The <see cref="bool"/>.
         /// </returns>
         bool SignUp();
+        /// <summary>
+        /// Checks if feedback for user is shown
+        /// </summary>
+        /// <returns>
+        /// 1: info element found
+        /// </returns>
+        bool InfoText(string v);
 
         /// <summary>
         /// The logout.
