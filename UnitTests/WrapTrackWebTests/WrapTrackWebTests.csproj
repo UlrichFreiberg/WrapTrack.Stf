@@ -83,8 +83,20 @@
       <HintPath>..\..\packages\Mir.Stf.Kernel.1.0.165.8167\lib\net45\Mir.Stf.Utilities.StfPlugin.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="Mir.Stf.Utilities.StfUtils, Version=1.0.157.2227, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Mir.Stf.Utilities.StfUtils.1.0.157.2227\lib\net45\Mir.Stf.Utilities.StfUtils.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Slapper, Version=1.0.0.6, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Slapper.AutoMapper.1.0.0.6\lib\Slapper.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Linq.Dynamic, Version=1.0.5840.25917, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\System.Linq.Dynamic.1.0.6\lib\net40\System.Linq.Dynamic.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="WebDriver, Version=3.5.1.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\..\packages\Selenium.WebDriver.3.5.1\lib\net40\WebDriver.dll</HintPath>
       <Private>True</Private>
@@ -113,10 +125,12 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="UnitTest1.cs" />
     <Compile Include="UploadTests.cs" />
-    <Compile Include="Util.cs" />
+    <Compile Include="WtTestscriptUtils.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="packages.config" />
+    <None Include="packages.config">
+      <SubType>Designer</SubType>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\Adapters\WebAdapter\WrapTrack.Stf.Adapters.WebAdapter.csproj">
@@ -127,6 +141,11 @@
       <Project>{a0d2edd8-9747-4b00-a017-4a110e3755c6}</Project>
       <Name>WrapTrack.Stf.WrapTrackWeb</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="TestData\Pictures\wraptrack-user-6-10.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">
