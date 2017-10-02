@@ -79,7 +79,7 @@ namespace WrapTrackWebTests
         public void TC002()
         {
             // Make sure login is possible
-            wrapTrackShell.Login("mie88", "wraptrack4ever");
+            wrapTrackShell.Login();
 
             var me = wrapTrackShell.Me();
 

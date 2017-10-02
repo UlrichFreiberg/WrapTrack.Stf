@@ -34,7 +34,7 @@ namespace WrapTrackWebTests
             var wrapTrackShell = Get<IWrapTrackWebShell>();
             var pathToNewImage = GetNewImagePath();
 
-            wrapTrackShell.Login("pstadel", "cellesaltogsolskin");
+            wrapTrackShell.Login();
 
             var me = wrapTrackShell.Me();
 
