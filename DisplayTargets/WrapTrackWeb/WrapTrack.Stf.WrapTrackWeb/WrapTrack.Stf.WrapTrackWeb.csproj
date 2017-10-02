@@ -8,7 +8,7 @@
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>WrapTrack.Stf.WrapTrackWeb</RootNamespace>
-    <AssemblyName>WrapTrack.Stf.WrapTrackWeb</AssemblyName>
+    <AssemblyName>WrapTrack.Stf.WrapTrackWeb.Shell</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -20,7 +20,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <DocumentationFile>..\..\..\StfBin\WrapTrack.Stf.WrapTrackWeb.XML</DocumentationFile>
+    <DocumentationFile>..\..\..\StfBin\WrapTrack.Stf.WrapTrackWeb.Shell.xml</DocumentationFile>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -29,7 +29,7 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <DocumentationFile>..\..\..\StfBin\WrapTrack.Stf.WrapTrackWeb.XML</DocumentationFile>
+    <DocumentationFile>..\..\..\StfBin\WrapTrack.Stf.WrapTrackWeb.Shell.xml</DocumentationFile>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Microsoft.Practices.ServiceLocation, Version=1.3.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
@@ -94,8 +94,11 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Configuration\User.cs" />
+    <Compile Include="Configuration\WtConfiguration.cs" />
     <Compile Include="Explore\Explorer.cs" />
     <Compile Include="Faq\Faq.cs" />
+    <Compile Include="Configuration\TargetBase.cs" />
     <Compile Include="WrapTrackWebShellModelBase.cs" />
     <Compile Include="Interfaces\IExplorer.cs" />
     <Compile Include="Interfaces\IFaq.cs" />
@@ -118,6 +121,11 @@
       <Project>{dd71247b-dd57-46a8-9b8e-07c0041a5ee0}</Project>
       <Name>WrapTrack.Stf.Adapters.WebAdapter</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="WrapTrack.Stf.WrapTrackWeb.Shell.dll.PluginSettings.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

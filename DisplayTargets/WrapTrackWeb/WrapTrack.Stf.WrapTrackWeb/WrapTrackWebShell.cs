@@ -12,11 +12,9 @@ using System;
 
 namespace WrapTrack.Stf.WrapTrackWeb
 {
-    using Mir.Stf.Utilities;
-    using Mir.Stf.Utilities.Interfaces;
-
     using OpenQA.Selenium;
     using WrapTrack.Stf.Adapters.WebAdapter;
+    using WrapTrack.Stf.WrapTrackWeb.Configuration;
     using WrapTrack.Stf.WrapTrackWeb.Explore;
     using WrapTrack.Stf.WrapTrackWeb.Interfaces;
     using WrapTrack.Stf.WrapTrackWeb.Interfaces.Me;
@@ -25,7 +23,7 @@ namespace WrapTrack.Stf.WrapTrackWeb
     /// <summary>
     /// The demo corp web shell.
     /// </summary>
-    public class WrapTrackWebShell : IWrapTrackWebShell
+    public class WrapTrackWebShell : TargetBase, IWrapTrackWebShell
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="WrapTrackWebShell"/> class. 
@@ -37,24 +35,9 @@ namespace WrapTrack.Stf.WrapTrackWeb
         }
 
         /// <summary>
-        /// Gets the name.
+        /// Gets or sets the wt configuration.
         /// </summary>
-        public string Name { get; }
-
-        /// <summary>
-        /// Gets the version info.
-        /// </summary>
-        public Version VersionInfo { get; }
-
-        /// <summary>
-        /// Gets or sets the stf container.
-        /// </summary>
-        public IStfContainer StfContainer { get; set; }
-
-        /// <summary>
-        /// Gets or sets the stf logger.
-        /// </summary>
-        public IStfLogger StfLogger { get; set; }
+        public WtConfiguration WtConfiguration { get; set; }
 
         /// <summary>
         /// Gets or sets the web adapter.
@@ -78,15 +61,9 @@ namespace WrapTrack.Stf.WrapTrackWeb
         /// </param>
         public bool Login(string userName = null, string password = null)
         {
-            if (string.IsNullOrWhiteSpace(userName))
-            {
-                userName = "ida88";
-            }
-
-            if (string.IsNullOrWhiteSpace(password))
-            {
-                password = "wraptrack4ever";
-            }
+            // Handle defaults for username password
+            userName = HandleDefault(userName, WtConfiguration.UserName);
+            password = HandleDefault(password, WtConfiguration.Password);
 
             var loginTabElem = WebAdapter.FindElement(By.Id("nav_login"));
 
@@ -293,6 +270,8 @@ namespace WrapTrack.Stf.WrapTrackWeb
         /// </returns>
         public bool Init()
         {
+            WtConfiguration = SetConfig<WtConfiguration>();
+
             // register my needed types
             StfContainer.RegisterType<ICollection, Collection>();
             StfContainer.RegisterType<IMe, Me>();
@@ -302,16 +281,34 @@ namespace WrapTrack.Stf.WrapTrackWeb
             // get what I need - a WebAdapter:-)
             WebAdapter = StfContainer.Get<IWebAdapter>();
 
-            // LIVE:
-            WebAdapter.OpenUrl("https://WrapTrack.org/");
-
-            // TEST:
-            ////WebAdapter.OpenUrl("http://wt.troldvaerk.org/");
+            WebAdapter.OpenUrl(WtConfiguration.Url);
 
             var currentDomainBaseDirectory = AppDomain.CurrentDomain.BaseDirectory;
 
             StfLogger.LogKeyValue("Current Directory", currentDomainBaseDirectory, "Current Directory");
             return true;
+        }
+
+        /// <summary>
+        /// The handle default.
+        /// </summary>
+        /// <param name="value">
+        /// The value.
+        /// </param>
+        /// <param name="defaultIfNull">
+        /// The default if null.
+        /// </param>
+        /// <returns>
+        /// The <see cref="string"/>.
+        /// </returns>
+        private string HandleDefault(string value, string defaultIfNull)
+        {
+            if (string.IsNullOrWhiteSpace(value))
+            {
+                return defaultIfNull;
+            }
+
+            return value;
         }
     }
 }
