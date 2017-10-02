@@ -29,7 +29,7 @@ namespace WrapTrackWebTests
         /// </summary>
         [TestMethod]
         [DeploymentItem(@"TestData\")]
-        public void TestUploadProfilePict()
+        public void TC005()
         {
             var wrapTrackShell = Get<IWrapTrackWebShell>();
             var pathToNewImage = GetNewImagePath();
