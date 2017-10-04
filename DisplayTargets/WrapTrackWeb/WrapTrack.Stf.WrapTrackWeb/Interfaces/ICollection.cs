@@ -10,7 +10,9 @@
 
 namespace WrapTrack.Stf.WrapTrackWeb.Interfaces
 {
-  
+    /// <summary>
+    /// The Collection interface.
+    /// </summary>
     public interface ICollection
     {
         /// <summary>
@@ -29,7 +31,5 @@ namespace WrapTrack.Stf.WrapTrackWeb.Interfaces
         /// Model of wrap 
         /// </param>
         bool AddToCollection(string brand = null, string pattern = null, string model = null); 
-
-
     }
 }

@@ -56,9 +56,11 @@ namespace WrapTrackWebTests
         /// <summary>
         /// The test learn more.
         /// </summary>
-        /// <remarks>After log in it's possible to acess 'Me-page'</remarks>
+        /// <remarks>
+        /// After log in it's possible to acess 'Me-page'
+        /// </remarks>
         [TestMethod]
-        public void TC001()
+        public void Tc001()
         {
             // Use default user
             wrapTrackShell.Login(); 
@@ -74,9 +76,11 @@ namespace WrapTrackWebTests
         /// <summary>
         /// The test learn more.
         /// </summary>
-        /// <remarks>After log in it's possible to acess 'Me-page'</remarks>
+        /// <remarks>
+        /// After log in it's possible to acess 'Me-page'
+        /// </remarks>
         [TestMethod]
-        public void TC002()
+        public void Tc002()
         {
             // Make sure login is possible
             wrapTrackShell.Login();
@@ -96,15 +100,16 @@ namespace WrapTrackWebTests
             wrapTrackShell.Login("detvillemanadrigkaldesig", "wraptrack4ever");
             var feedback2 = wrapTrackShell.InfoText("mes_loginerror");
             StfAssert.IsTrue("User got feedback: 'wrong username/pw'", feedback2);
-
         }
 
         /// <summary>
         /// The test learn more.
         /// </summary>
-        /// <remarks>After log out it's not possible to acess 'Me-page'</remarks>
+        /// <remarks>
+        /// After log out it's not possible to acess 'Me-page'
+        /// </remarks>
         [TestMethod]
-        public void TC003()
+        public void Tc003()
         {
             wrapTrackShell.Login();
             wrapTrackShell.Logout();
@@ -120,7 +125,7 @@ namespace WrapTrackWebTests
         /// The test sign up.
         /// </summary>
         [TestMethod]
-        public void TC004()
+        public void Tc004()
         {
             StfAssert.IsNotNull("wrapTrackShell", wrapTrackShell);
             wrapTrackShell.SignUp();

@@ -10,63 +10,87 @@
 
 namespace WrapTrack.Stf.WrapTrackWeb.MeClasses
 {
-    using Adapters.WebAdapter;
     using OpenQA.Selenium;
-    using OpenQA.Selenium.Interactions;
-    using System;
+
     using WrapTrack.Stf.WrapTrackWeb.Interfaces;
 
     /// <summary>
     /// The learn more.
     /// </summary>
     public class Collection : WrapTrackWebShellModelBase, ICollection
-     {
-        public Collection(IWrapTrackWebShell wrapTrackWebShell) : base(wrapTrackWebShell)
+    {
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Collection"/> class.
+        /// </summary>
+        /// <param name="wrapTrackWebShell">
+        /// The wrap track web shell.
+        /// </param>
+        public Collection(IWrapTrackWebShell wrapTrackWebShell)
+           : base(wrapTrackWebShell)
         {
         }
-
-        public IWebDriver WebAdapter { get; private set; }
 
         /// <summary>
         /// Add a wrap to users own collection
         /// </summary>
+        /// <param name="brand">
+        /// The brand.
+        /// </param>
+        /// <param name="pattern">
+        /// The pattern.
+        /// </param>
+        /// <param name="model">
+        /// The model.
+        /// </param>
         /// <returns>
         /// false if not possible
         /// </returns>
         public bool AddToCollection(string brand = null, string pattern = null, string model = null)
         {
-            // var wrapTrackShell = Get<IWrapTrackWebShell>();
+            ClickById("but_addwrap");
+            ClickById("lin_newwrap");
 
-            var nav1 = base.WebAdapter.FindElement(By.Id("but_addwrap"));
-            nav1.Click();
+            SelectDropdownByIdAndText("sel_brand", brand);
+            SelectDropdownByIdAndText("sel_pattern", pattern);
+            SelectDropdownByIdAndText("sel_model", model);
+            SelectDropdownByIdAndText("vaelg_str", "2");
 
-            var nav2 = base.WebAdapter.FindElement(By.Id("lin_newwrap"));
-            nav2.Click();
+            // add And Exit
+            ClickById("opretvikle1knap");
 
-            var BrandElem = base.WebAdapter.FindElement(By.Id("sel_brand"));
-            var PatternElem = base.WebAdapter.FindElement(By.Id("sel_pattern"));
-            var ModelElem = base.WebAdapter.FindElement(By.Id("sel_model"));
-            var StrElement = base.WebAdapter.FindElement(By.Id("vaelg_str"));
-
-            BrandElem.SendKeys(brand);
-            PatternElem.SendKeys(pattern);
-            ModelElem.SendKeys(model);
-            StrElement.SendKeys("2"); // Random size. Allowed values -1, 1-9
-
-            var AddAndExit = base.WebAdapter.FindElement(By.Id("opretvikle1knap"));
-            
-            //WebAdapter.WaitForComplete(8);
-            //Actions actions = new Actions(WebAdapter); 
-            //actions.MoveToElement(AddAndExit);
-
-            AddAndExit.Click(); //TODO: FIX
-
-            return true; 
+            return true;
         }
 
-        private object Get<T>()
+        /// <summary>
+        /// The click by id.
+        /// </summary>
+        /// <param name="id">
+        /// The id.
+        /// </param>
+        private void ClickById(string id)
         {
-            throw new NotImplementedException();
+            var elem = WebAdapter.FindElement(By.Id(id));
+
+            elem.Click();
+        }
+
+        /// <summary>
+        /// The set text by id.
+        /// </summary>
+        /// <param name="id">
+        /// The id.
+        /// </param>
+        /// <param name="brand">
+        /// The brand.
+        /// </param>
+        private void SelectDropdownByIdAndText(string id, string brand)
+        {
+            // mostly for demo purposes - you can follow what happens
+            WebAdapter.WaitForComplete(1);
+
+            var elem = WebAdapter.FindElement(By.Id(id));
+
+            elem.SendKeys(brand);
         }
     }
 }

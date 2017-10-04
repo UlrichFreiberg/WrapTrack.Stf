@@ -121,6 +121,7 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
+    <Compile Include="CollectionTests.cs" />
     <Compile Include="MainPageTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="UnitTest1.cs" />
