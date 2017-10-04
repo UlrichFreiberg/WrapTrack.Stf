@@ -46,6 +46,20 @@ namespace WrapTrack.Stf.WrapTrackWeb.MeClasses
         }
 
         /// <summary>
+        /// Finds users collection
+        /// </summary>
+        /// <returns>
+        /// NULL if user has no wraps in collection
+        /// </returns>
+        public ICollection Get_Collection()
+        {
+            var nav = WebAdapter.FindElement(By.Id("nav_collection"));
+          nav.Click();
+            var retVal = StfContainer.Get<ICollection>();
+            return retVal; 
+        }
+
+        /// <summary>
         /// Upload an profile image 
         /// </summary>
         /// <param name="clientSideFilePath">

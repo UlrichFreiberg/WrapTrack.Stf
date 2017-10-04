@@ -10,10 +10,26 @@
 
 namespace WrapTrack.Stf.WrapTrackWeb.Interfaces
 {
-    /// <summary>
-    /// The LearnMore interface.
-    /// </summary>
+  
     public interface ICollection
     {
+        /// <summary>
+        /// Add a wrap to collectio
+        /// </summary>
+        /// <returns>
+        /// Returns true id wrap is added 
+        /// </returns>
+        /// <param name="brand">
+        /// Brand of wrap
+        /// </param>
+        /// <param name="pattern">
+        /// Pattern of wrap
+        /// </param>
+        /// <param name="model">
+        /// Model of wrap 
+        /// </param>
+        bool AddToCollection(string brand = null, string pattern = null, string model = null); 
+
+
     }
 }

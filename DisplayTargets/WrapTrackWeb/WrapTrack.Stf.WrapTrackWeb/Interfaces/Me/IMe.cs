@@ -27,6 +27,14 @@ namespace WrapTrack.Stf.WrapTrackWeb.Interfaces.Me
         string ActualImage();
 
         /// <summary>
+        /// The users collection.
+        /// </summary>
+        /// <returns>
+        /// The <see cref="ICollection"/>.
+        /// </returns>
+        ICollection Get_Collection();
+
+        /// <summary>
         /// Upload an profile image 
         /// </summary>
         /// <param name="clientSideFilePath">
