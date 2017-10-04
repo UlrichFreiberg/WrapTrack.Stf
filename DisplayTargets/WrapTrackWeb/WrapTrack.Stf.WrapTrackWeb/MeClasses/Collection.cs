@@ -71,9 +71,15 @@ namespace WrapTrack.Stf.WrapTrackWeb.MeClasses
         {
             var elem = WebAdapter.FindElement(By.Id(id));
 
-            WebAdapter.MoveToElement(elem);
-
-            elem.Click();
+            try
+            {
+                elem.Click();
+            }
+            catch
+            {
+                WebAdapter.MoveToElement(elem);
+                elem.Click();
+            }
         }
 
         /// <summary>
