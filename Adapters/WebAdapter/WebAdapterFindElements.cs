@@ -14,6 +14,7 @@ namespace WrapTrack.Stf.Adapters.WebAdapter
     using System.Collections.Generic;
 
     using OpenQA.Selenium;
+    using OpenQA.Selenium.Interactions;
     using OpenQA.Selenium.Support.UI;
 
     /// <summary>
@@ -41,7 +42,7 @@ namespace WrapTrack.Stf.Adapters.WebAdapter
             catch (Exception ex)
             {
                 // this might not be an error - if we are looking for something to become rendered in a loop....
-                StfLogger.LogDebug(string.Format("Couldn't find element [{0}] - got error [{1}]", by, ex.Message));
+                StfLogger.LogDebug($"Couldn't find element [{by}] - got error [{ex.Message}]");
                 retVal = null;
             }
 
@@ -102,11 +103,25 @@ namespace WrapTrack.Stf.Adapters.WebAdapter
             catch (Exception ex)
             {
                 // this might not be an error - if we are looking for something to become rendered in a loop....
-                StfLogger.LogDebug(string.Format("Couldn't find one or more elements matching [{0}] - got error [{1}]", by, ex.Message));
+                StfLogger.LogDebug($"Couldn't find one or more elements matching [{by}] - got error [{ex.Message}]");
                 retVal = null;
             }
 
             return retVal;
         }
-   }
+
+        /// <summary>
+        /// The move to element.
+        /// </summary>
+        /// <param name="elem">
+        /// The elem.
+        /// </param>
+        public void MoveToElement(IWebElement elem)
+        {
+            var actions = new Actions(WebDriver);
+
+            actions.MoveToElement(elem);
+            actions.Perform();
+        }
+    }
 }

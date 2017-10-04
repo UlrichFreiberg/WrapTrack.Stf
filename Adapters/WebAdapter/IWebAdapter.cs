@@ -141,5 +141,13 @@ namespace WrapTrack.Stf.Adapters.WebAdapter
         /// The seconds.
         /// </param>
         void WaitForComplete(int seconds);
+
+        /// <summary>
+        /// The move to element.
+        /// </summary>
+        /// <param name="elem">
+        /// The elem.
+        /// </param>
+        void MoveToElement(IWebElement elem);
     }
 }
