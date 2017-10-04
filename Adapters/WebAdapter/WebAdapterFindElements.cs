@@ -15,6 +15,7 @@ namespace WrapTrack.Stf.Adapters.WebAdapter
 
     using OpenQA.Selenium;
     using OpenQA.Selenium.Interactions;
+    using OpenQA.Selenium.Support.Extensions;
     using OpenQA.Selenium.Support.UI;
 
     /// <summary>
@@ -118,10 +119,12 @@ namespace WrapTrack.Stf.Adapters.WebAdapter
         /// </param>
         public void MoveToElement(IWebElement elem)
         {
-            var actions = new Actions(WebDriver);
+            //var actions = new Actions(WebDriver);
 
-            actions.MoveToElement(elem);
-            actions.Perform();
+            //actions.MoveToElement(elem);
+            //actions.Perform();
+
+            WebDriver.ExecuteJavaScript("arguments[0].scrollIntoView(true);", elem);
         }
     }
 }
