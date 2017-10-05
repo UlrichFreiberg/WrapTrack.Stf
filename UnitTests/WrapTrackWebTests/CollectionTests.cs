@@ -45,5 +45,34 @@ namespace WrapTrackWebTests
             StfAssert.AreEqual("One more wrap in collection", numBefore + 1, numAfter); 
 
         }
+
+
+        /// <summary>
+        /// The t c 007.
+        /// </summary>
+        [TestMethod]
+        public void Tc007()
+        {
+            var wrapTrackShell = Get<IWrapTrackWebShell>();
+
+            wrapTrackShell.Login(); //default user
+
+            var me = wrapTrackShell.Me();
+            var collection = me.Get_Collection();
+
+            StfAssert.IsNotNull("Got a Me", me);
+            StfAssert.IsNotNull("Got my collection", collection);
+
+            // Be sure there is a wrap in collection. 
+            if (collection.NumOfWraps() == 0)
+            {
+                collection.AddWrap("Ali Dover", "Hygge", "White");
+            }
+
+            // Find a random wrap
+           // var wrapToGo = collection.GetRandomWrap();
+           //TODO: FIX
+        }
+
     }
 }

@@ -41,6 +41,19 @@ namespace WrapTrack.Stf.WrapTrackWeb.MeClasses
             return retval; 
         }
         /// <summary>
+        /// Returns random wrap in collection.        
+        /// /// </summary>
+       /* public IWrap GetRandomWrap()
+        {
+            var element = WebAdapter.FindElement(By.Id("lin_wrap"));
+            element.Click();
+            var retVal = StfContainer.Get<IWrap>();
+
+            return retVal;
+
+        }
+        */
+        /// <summary>
         /// Add a wrap to users own collection
         /// </summary>
         /// <param name="brand">
