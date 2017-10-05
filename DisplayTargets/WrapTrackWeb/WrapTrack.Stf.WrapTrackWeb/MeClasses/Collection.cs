@@ -31,6 +31,16 @@ namespace WrapTrack.Stf.WrapTrackWeb.MeClasses
         }
 
         /// <summary>
+        /// Counts number of wraps in collection
+        /// </summary>
+        public int NumOfWraps()
+        {
+            var elements = WebAdapter.FindElements(By.Id("elem_wrap"));
+            var retval = elements.Count; 
+
+            return retval; 
+        }
+        /// <summary>
         /// Add a wrap to users own collection
         /// </summary>
         /// <param name="brand">
@@ -45,7 +55,7 @@ namespace WrapTrack.Stf.WrapTrackWeb.MeClasses
         /// <returns>
         /// false if not possible
         /// </returns>
-        public bool AddToCollection(string brand = null, string pattern = null, string model = null)
+        public bool AddWrap(string brand = null, string pattern = null, string model = null)
         {
             ClickById("but_addwrap");
             ClickById("lin_newwrap");

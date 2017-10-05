@@ -36,7 +36,14 @@ namespace WrapTrackWebTests
             StfAssert.IsNotNull("Got a Me", me);
             StfAssert.IsNotNull("Got my collection", collection);
 
-            collection.AddToCollection("Ali Dover", "Hygge", "blue"); 
+            var numBefore = collection.NumOfWraps(); 
+
+            collection.AddWrap("Ali Dover", "Hygge", "blue");
+
+            var numAfter = collection.NumOfWraps();
+
+            StfAssert.AreEqual("One more wrap in collection", numBefore + 1, numAfter); 
+
         }
     }
 }

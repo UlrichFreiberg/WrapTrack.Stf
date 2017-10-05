@@ -16,6 +16,14 @@ namespace WrapTrack.Stf.WrapTrackWeb.Interfaces
     public interface ICollection
     {
         /// <summary>
+        /// Counts number of wraps in collection
+        /// </summary>
+        /// <returns>
+        /// Number of wraps 
+        /// </returns>   
+        int NumOfWraps();
+
+        /// <summary>
         /// Add a wrap to collectio
         /// </summary>
         /// <returns>
@@ -30,6 +38,7 @@ namespace WrapTrack.Stf.WrapTrackWeb.Interfaces
         /// <param name="model">
         /// Model of wrap 
         /// </param>
-        bool AddToCollection(string brand = null, string pattern = null, string model = null); 
+        bool AddWrap(string brand = null, string pattern = null, string model = null);
+
     }
 }
