@@ -8,9 +8,9 @@
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
 
-    namespace WrapTrack.Stf.WrapTrackWeb.Faq
+    namespace WrapTrack.Stf.WrapTrackWeb.FaqContact
     {
-        using WrapTrack.Stf.WrapTrackWeb.Interfaces;
+        using WrapTrack.Stf.WrapTrackWeb.Interfaces.FaqContact;
 
         /// <summary>
         /// The Faq interface.

@@ -31,21 +31,19 @@ namespace WrapTrackWebTests
             wrapTrackShell.Login();
 
             var me = wrapTrackShell.Me();
-            var collection = me.Get_Collection(); 
+            var collection = me.GetCollection();
 
-            StfAssert.IsNotNull("Got a Me", me);
+            StfAssert.IsNotNull("Got a MeProfile", me);
             StfAssert.IsNotNull("Got my collection", collection);
 
-            var numBefore = collection.NumOfWraps(); 
+            var numBefore = collection.NumOfWraps();
 
             collection.AddWrap("Ali Dover", "Hygge", "blue");
 
             var numAfter = collection.NumOfWraps();
 
-            StfAssert.AreEqual("One more wrap in collection", numBefore + 1, numAfter); 
-
+            StfAssert.AreEqual("One more wrap in collection", numBefore + 1, numAfter);
         }
-
 
         /// <summary>
         /// The t c 007.
@@ -55,12 +53,12 @@ namespace WrapTrackWebTests
         {
             var wrapTrackShell = Get<IWrapTrackWebShell>();
 
-            wrapTrackShell.Login(); //default user
+            wrapTrackShell.Login(); // default user
 
             var me = wrapTrackShell.Me();
-            var collection = me.Get_Collection();
+            var collection = me.GetCollection();
 
-            StfAssert.IsNotNull("Got a Me", me);
+            StfAssert.IsNotNull("Got a MeProfile", me);
             StfAssert.IsNotNull("Got my collection", collection);
 
             // Be sure there is a wrap in collection. 
@@ -70,9 +68,9 @@ namespace WrapTrackWebTests
             }
 
             // Find a random wrap
-           // var wrapToGo = collection.GetRandomWrap();
-           //TODO: FIX
-        }
+            var wrapToGo = collection.GetRandomWrap();
 
+            StfAssert.IsNotNull("Got a random wrap", wrapToGo);
+        }
     }
 }

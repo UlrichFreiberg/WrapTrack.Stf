@@ -8,7 +8,7 @@
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace WrapTrack.Stf.WrapTrackWeb.Interfaces
+namespace WrapTrack.Stf.WrapTrackWeb.Interfaces.Me
 {
     /// <summary>
     /// The Collection interface.
@@ -39,12 +39,13 @@ namespace WrapTrack.Stf.WrapTrackWeb.Interfaces
         /// Model of wrap 
         /// </param>
         bool AddWrap(string brand = null, string pattern = null, string model = null);
+
         /// <summary>
         /// Finds a random wrap in collection
         /// </summary>
         /// <returns>
         /// The wrap 
         /// </returns> 
-       // IWrap GetRandomWrap();
+        IWrap GetRandomWrap();
     }
 }

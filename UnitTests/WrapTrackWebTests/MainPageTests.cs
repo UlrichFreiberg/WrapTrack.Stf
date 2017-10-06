@@ -57,7 +57,7 @@ namespace WrapTrackWebTests
         /// The test learn more.
         /// </summary>
         /// <remarks>
-        /// After log in it's possible to acess 'Me-page'
+        /// After log in it's possible to acess 'MeProfile-page'
         /// </remarks>
         [TestMethod]
         public void Tc001()
@@ -70,14 +70,14 @@ namespace WrapTrackWebTests
             var me = wrapTrackShell.Me();
 
             StfAssert.IsNotNull("wrapTrackShell", wrapTrackShell);
-            StfAssert.IsInstanceOfType("me", me, typeof(IMe));
+            StfAssert.IsInstanceOfType("me", me, typeof(IMeProfile));
         }
 
         /// <summary>
         /// The test learn more.
         /// </summary>
         /// <remarks>
-        /// After log in it's possible to acess 'Me-page'
+        /// After log in it's possible to acess 'MeProfile-page'
         /// </remarks>
         [TestMethod]
         public void Tc002()
@@ -88,7 +88,7 @@ namespace WrapTrackWebTests
             var me = wrapTrackShell.Me();
 
             StfAssert.IsNotNull("wrapTrackShell", wrapTrackShell);
-            StfAssert.IsInstanceOfType("me", me, typeof(IMe));
+            StfAssert.IsInstanceOfType("me", me, typeof(IMeProfile));
 
             // try wrong pw
             wrapTrackShell.Logout();
@@ -106,7 +106,7 @@ namespace WrapTrackWebTests
         /// The test learn more.
         /// </summary>
         /// <remarks>
-        /// After log out it's not possible to acess 'Me-page'
+        /// After log out it's not possible to acess 'MeProfile-page'
         /// </remarks>
         [TestMethod]
         public void Tc003()
@@ -118,7 +118,7 @@ namespace WrapTrackWebTests
             var me = wrapTrackShell.Me();
 
             StfAssert.IsNotNull("wrapTrackShell", wrapTrackShell);
-            StfAssert.IsNotInstanceOfType("me", me, typeof(IMe));
+            StfAssert.IsNotInstanceOfType("me", me, typeof(IMeProfile));
         }
 
         /// <summary>

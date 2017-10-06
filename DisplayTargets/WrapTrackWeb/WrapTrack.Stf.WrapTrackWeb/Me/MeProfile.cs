@@ -1,14 +1,14 @@
 // --------------------------------------------------------------------------------------------------------------------
-// <copyright file="Me.cs" company="Mir Software">
+// <copyright file="MeProfile.cs" company="Mir Software">
 //   Copyright governed by Artistic license as described here:
 //          http://www.perlfoundation.org/artistic_license_2_0
 // </copyright>
 // <summary>
-//   The Me interface.
+//   The MeProfile interface.
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace WrapTrack.Stf.WrapTrackWeb.MeClasses
+namespace WrapTrack.Stf.WrapTrackWeb.Me
 {
     using OpenQA.Selenium;
 
@@ -16,17 +16,17 @@ namespace WrapTrack.Stf.WrapTrackWeb.MeClasses
     using WrapTrack.Stf.WrapTrackWeb.Interfaces.Me;
 
     /// <summary>
-    /// The Me interface.
+    /// The MeProfile interface.
     /// </summary>
-    public class Me : WrapTrackWebShellModelBase, IMe
+    public class MeProfile : WrapTrackWebShellModelBase, IMeProfile
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="Me"/> class.
+        /// Initializes a new instance of the <see cref="MeProfile"/> class.
         /// </summary>
         /// <param name="wrapTrackWebShell">
         /// The wrap track web shell.
         /// </param>
-        public Me(IWrapTrackWebShell wrapTrackWebShell)
+        public MeProfile(IWrapTrackWebShell wrapTrackWebShell)
             : base(wrapTrackWebShell)
         {
         }
@@ -51,7 +51,7 @@ namespace WrapTrack.Stf.WrapTrackWeb.MeClasses
         /// <returns>
         /// NULL if user has no wraps in collection
         /// </returns>
-        public ICollection Get_Collection()
+        public ICollection GetCollection()
         {
             var nav = WebAdapter.FindElement(By.Id("nav_collection"));
           nav.Click();

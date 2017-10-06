@@ -16,9 +16,13 @@ namespace WrapTrack.Stf.WrapTrackWeb
     using WrapTrack.Stf.Adapters.WebAdapter;
     using WrapTrack.Stf.WrapTrackWeb.Configuration;
     using WrapTrack.Stf.WrapTrackWeb.Explore;
+    using WrapTrack.Stf.WrapTrackWeb.FaqContact;
     using WrapTrack.Stf.WrapTrackWeb.Interfaces;
+    using WrapTrack.Stf.WrapTrackWeb.Interfaces.Explorer;
+    using WrapTrack.Stf.WrapTrackWeb.Interfaces.FaqContact;
     using WrapTrack.Stf.WrapTrackWeb.Interfaces.Me;
-    using WrapTrack.Stf.WrapTrackWeb.MeClasses;
+    using WrapTrack.Stf.WrapTrackWeb.Me;
+    using WrapTrack.Stf.WrapTrackWeb.Me.Collection;
 
     /// <summary>
     /// The demo corp web shell.
@@ -148,9 +152,9 @@ namespace WrapTrack.Stf.WrapTrackWeb
         /// The me.
         /// </summary>
         /// <returns>
-        /// The <see cref="IMe"/>.
+        /// The <see cref="IMeProfile"/>.
         /// </returns>
-        public IMe Me()
+        public IMeProfile Me()
         {
             try
             {
@@ -163,7 +167,7 @@ namespace WrapTrack.Stf.WrapTrackWeb
                 return null;
             }
 
-            var retVal = StfContainer.Get<IMe>();
+            var retVal = StfContainer.Get<IMeProfile>();
 
             return retVal;
         }
@@ -172,14 +176,14 @@ namespace WrapTrack.Stf.WrapTrackWeb
         /// The explorer.
         /// </summary>
         /// <returns>
-        /// The <see cref="IExplorer"/>.
+        /// The <see cref="IExplorerWraps"/>.
         /// </returns>
-        public IExplorer Explorer()
+        public IExplorerWraps Explorer()
         {
             var link = WebAdapter.FindElement(By.Id("nav_expl"));
 
             link.Click();
-            IExplorer retVal = StfContainer.Get<IExplorer>();
+            IExplorerWraps retVal = StfContainer.Get<IExplorerWraps>();
 
             return retVal;
         }
@@ -234,9 +238,13 @@ namespace WrapTrack.Stf.WrapTrackWeb
             // if we cant find the logout button, then the return value is down to if we care or not:-)
             return doCareAboutErrors;
         }
+
         /// <summary>
         /// The text-feedback to user 
         /// </summary>
+        /// <param name="infoType">
+        /// The info Type.
+        /// </param>
         /// <returns>
         /// True if text-feedback found
         /// </returns>
@@ -245,14 +253,16 @@ namespace WrapTrack.Stf.WrapTrackWeb
             try
             {
                 var svar = WebAdapter.FindElement(By.Id(infoType));
-                if (svar != null) return true;
-                else return false; 
+                var retVal = svar != null;
+
+                return retVal;
             }
             catch (Exception)
             {
                 return false;
             }
         }
+
         /// <summary>
         /// Logout and Close down the web adapter
         /// </summary>
@@ -271,12 +281,7 @@ namespace WrapTrack.Stf.WrapTrackWeb
         public bool Init()
         {
             WtConfiguration = SetConfig<WtConfiguration>();
-
-            // register my needed types
-            StfContainer.RegisterType<ICollection, Collection>();
-            StfContainer.RegisterType<IMe, Me>();
-            StfContainer.RegisterType<IExplorer, Explorer>();
-            StfContainer.RegisterType<IFaq, Faq.Faq>();
+            RegisterMyNeededTypes();
 
             // get what I need - a WebAdapter:-)
             WebAdapter = StfContainer.Get<IWebAdapter>();
@@ -287,6 +292,23 @@ namespace WrapTrack.Stf.WrapTrackWeb
 
             StfLogger.LogKeyValue("Current Directory", currentDomainBaseDirectory, "Current Directory");
             return true;
+        }
+
+        /// <summary>
+        /// The register my needed types.
+        /// </summary>
+        private void RegisterMyNeededTypes()
+        {
+            // Me classes
+            StfContainer.RegisterType<ICollection, Collection>();
+            StfContainer.RegisterType<IMeProfile, MeProfile>();
+            StfContainer.RegisterType<IWrap, Wrap>();
+
+            // Explorer
+            StfContainer.RegisterType<IExplorerWraps, ExplorerWraps>();
+
+            // FAQ and contact classes
+            StfContainer.RegisterType<IFaq, Faq>();
         }
 
         /// <summary>

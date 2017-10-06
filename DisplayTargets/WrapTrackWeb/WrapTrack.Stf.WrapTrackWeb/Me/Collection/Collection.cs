@@ -8,11 +8,12 @@
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace WrapTrack.Stf.WrapTrackWeb.MeClasses
+namespace WrapTrack.Stf.WrapTrackWeb.Me.Collection
 {
     using OpenQA.Selenium;
 
     using WrapTrack.Stf.WrapTrackWeb.Interfaces;
+    using WrapTrack.Stf.WrapTrackWeb.Interfaces.Me;
 
     /// <summary>
     /// The learn more.
@@ -33,26 +34,34 @@ namespace WrapTrack.Stf.WrapTrackWeb.MeClasses
         /// <summary>
         /// Counts number of wraps in collection
         /// </summary>
+        /// <returns>
+        /// The <see cref="int"/>.
+        /// </returns>
         public int NumOfWraps()
         {
             var elements = WebAdapter.FindElements(By.Id("elem_wrap"));
-            var retval = elements.Count; 
+            var retval = elements.Count;
 
-            return retval; 
+            return retval;
         }
+
         /// <summary>
         /// Returns random wrap in collection.        
-        /// /// </summary>
-       /* public IWrap GetRandomWrap()
+        /// </summary>
+        /// <returns>
+        /// The <see cref="IWrap"/>.
+        /// </returns>
+        public IWrap GetRandomWrap()
         {
             var element = WebAdapter.FindElement(By.Id("lin_wrap"));
+
             element.Click();
+
             var retVal = StfContainer.Get<IWrap>();
 
             return retVal;
-
         }
-        */
+
         /// <summary>
         /// Add a wrap to users own collection
         /// </summary>

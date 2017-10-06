@@ -96,21 +96,24 @@
   <ItemGroup>
     <Compile Include="Configuration\User.cs" />
     <Compile Include="Configuration\WtConfiguration.cs" />
-    <Compile Include="Explore\Explorer.cs" />
-    <Compile Include="Faq\Faq.cs" />
+    <Compile Include="Explore\ExplorerUsers.cs" />
+    <Compile Include="Explore\ExplorerWraps.cs" />
+    <Compile Include="FaqContact\Faq.cs" />
     <Compile Include="Configuration\TargetBase.cs" />
+    <Compile Include="Interfaces\Explorer\IExplorerUsers.cs" />
     <Compile Include="Interfaces\IWrap.cs" />
+    <Compile Include="Me\Collection\Wrap.cs" />
     <Compile Include="WrapTrackWebShellModelBase.cs" />
-    <Compile Include="Interfaces\IExplorer.cs" />
-    <Compile Include="Interfaces\IFaq.cs" />
+    <Compile Include="Interfaces\Explorer\IExplorerWraps.cs" />
+    <Compile Include="Interfaces\FaqContact\IFaq.cs" />
     <Compile Include="Interfaces\IMarket.cs" />
-    <Compile Include="Interfaces\ICollection.cs" />
+    <Compile Include="Interfaces\Me\ICollection.cs" />
     <Compile Include="Interfaces\IWrapTrackWebShell.cs" />
-    <Compile Include="Interfaces\Me\IMe.cs" />
+    <Compile Include="Interfaces\Me\IMeProfile.cs" />
     <Compile Include="Interfaces\Me\IUploadProfileImage.cs" />
     <Compile Include="Market\Market.cs" />
-    <Compile Include="MeClasses\Collection.cs" />
-    <Compile Include="MeClasses\Me.cs" />
+    <Compile Include="Me\Collection\Collection.cs" />
+    <Compile Include="Me\MeProfile.cs" />
     <Compile Include="WrapTrackWebShell.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

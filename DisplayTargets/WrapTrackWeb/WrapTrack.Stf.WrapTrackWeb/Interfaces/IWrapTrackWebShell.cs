@@ -14,6 +14,8 @@ namespace WrapTrack.Stf.WrapTrackWeb.Interfaces
     using Mir.Stf.Utilities;
     using Mir.Stf.Utilities.Attributes;
 
+    using WrapTrack.Stf.WrapTrackWeb.Interfaces.Explorer;
+    using WrapTrack.Stf.WrapTrackWeb.Interfaces.FaqContact;
     using WrapTrack.Stf.WrapTrackWeb.Interfaces.Me;
 
     /// <summary>
@@ -39,17 +41,17 @@ namespace WrapTrack.Stf.WrapTrackWeb.Interfaces
         /// The me.
         /// </summary>
         /// <returns>
-        /// The <see cref="IMe"/>.
+        /// The <see cref="IMeProfile"/>.
         /// </returns>
-        IMe Me();
+        IMeProfile Me();
 
         /// <summary>
         /// The explorer.
         /// </summary>
         /// <returns>
-        /// The <see cref="IExplorer"/>.
+        /// The <see cref="IExplorerWraps"/>.
         /// </returns>
-        IExplorer Explorer();
+        IExplorerWraps Explorer();
 
         /// <summary>
         /// The market.
@@ -89,9 +91,13 @@ namespace WrapTrack.Stf.WrapTrackWeb.Interfaces
         /// The <see cref="bool"/>.
         /// </returns>
         bool SignUp();
+
         /// <summary>
         /// Checks if feedback for user is shown
         /// </summary>
+        /// <param name="v">
+        /// The v.
+        /// </param>
         /// <returns>
         /// 1: info element found
         /// </returns>

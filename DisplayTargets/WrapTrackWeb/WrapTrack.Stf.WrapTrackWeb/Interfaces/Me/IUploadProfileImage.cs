@@ -4,7 +4,7 @@
 //          http://www.perlfoundation.org/artistic_license_2_0
 // </copyright>
 // <summary>
-//   The Me interface.
+//   The MeProfile interface.
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
 

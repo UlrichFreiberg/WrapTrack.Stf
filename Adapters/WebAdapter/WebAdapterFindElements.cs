@@ -14,7 +14,6 @@ namespace WrapTrack.Stf.Adapters.WebAdapter
     using System.Collections.Generic;
 
     using OpenQA.Selenium;
-    using OpenQA.Selenium.Interactions;
     using OpenQA.Selenium.Support.Extensions;
     using OpenQA.Selenium.Support.UI;
 
@@ -112,18 +111,13 @@ namespace WrapTrack.Stf.Adapters.WebAdapter
         }
 
         /// <summary>
-        /// The move to element.
+        /// The move to element. Used to scroll to an element hidden...
         /// </summary>
         /// <param name="elem">
         /// The elem.
         /// </param>
         public void MoveToElement(IWebElement elem)
         {
-            //var actions = new Actions(WebDriver);
-
-            //actions.MoveToElement(elem);
-            //actions.Perform();
-
             WebDriver.ExecuteJavaScript("arguments[0].scrollIntoView(true);", elem);
         }
     }

@@ -1,28 +1,26 @@
 // --------------------------------------------------------------------------------------------------------------------
-// <copyright file="Ime.cs" company="Mir Software">
+// <copyright file="IMeProfile.cs" company="Mir Software">
 //   Copyright governed by Artistic license as described here:
 //          http://www.perlfoundation.org/artistic_license_2_0
 // </copyright>
 // <summary>
-//   The Me interface.
+//   The MeProfile interface.
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
-
-using OpenQA.Selenium;
 
 namespace WrapTrack.Stf.WrapTrackWeb.Interfaces.Me
 {
     /// <summary>
-    /// The Me interface.
+    /// The MeProfile interface.
     /// </summary>
-    public interface IMe
+    public interface IMeProfile
     {
         /// <summary>
-        /// The image related to Me
+        /// The image related to MeProfile
         /// </summary>
         /// <returns>
         /// IWebElement containing information about the actual img 
-        /// - false if no img related to Me
+        /// - false if no img related to MeProfile
         /// </returns>
         string ActualImage();
 
@@ -32,7 +30,7 @@ namespace WrapTrack.Stf.WrapTrackWeb.Interfaces.Me
         /// <returns>
         /// The <see cref="ICollection"/>.
         /// </returns>
-        ICollection Get_Collection();
+        ICollection GetCollection();
 
         /// <summary>
         /// Upload an profile image 
