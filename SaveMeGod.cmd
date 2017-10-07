@@ -1,11 +1,20 @@
 @echo off
 setlocal
 
-echo Killing Selenium ChromeDrivers
-taskkill /F /IM chromedriver.exe
+set SMG_ROOT=%~dp0
 
-echo Killing Selenium ChromeDrivers
-taskkill /F /IM IEDriverServer
+pushd "%SMG_ROOT%"
+echo Cleaning up at %CD%
 
+echo.
+echo Killing Selenium ChromeDrivers
+taskkill /F /IM chromedriver.exe 2> nul:
+
+echo Killing Selenium IEDriverServer
+taskkill /F /IM IEDriverServer 2> nul:
+
+echo.
 echo Cleaning up the repository
-call %~dp0build\clean.cmd
+call "%SMG_ROOT%build\clean.cmd"
+
+popd
