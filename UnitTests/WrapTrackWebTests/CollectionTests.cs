@@ -70,7 +70,8 @@ namespace WrapTrackWebTests
             // Find a random wrap
             var wrapToGo = collection.GetRandomWrap();
 
-            StfAssert.IsNotNull("Got a random wrap", wrapToGo);
+            var X = wrapToGo.passOn("Mie88"); 
+            //StfAssert.IsNotNull("Got a random wrap", wrapToGo);
         }
     }
 }

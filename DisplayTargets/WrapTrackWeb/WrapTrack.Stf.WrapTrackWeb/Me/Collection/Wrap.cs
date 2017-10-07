@@ -10,6 +10,7 @@
 
 namespace WrapTrack.Stf.WrapTrackWeb.Me.Collection
 {
+    using OpenQA.Selenium;
     using WrapTrack.Stf.WrapTrackWeb.Interfaces;
 
     /// <summary>
@@ -42,5 +43,23 @@ namespace WrapTrack.Stf.WrapTrackWeb.Me.Collection
         /// Gets or sets the wraps.
         /// </summary>
         public int Wraps { get; set; }
+
+        /// <summary>
+        /// Pass on the wrap to user 'username'
+        /// </summary>
+        public bool passOn(string username)
+        {
+            WebAdapter.WaitForComplete(10);
+            var buts = WebAdapter.FindElement(By.ClassName("basisknap"));
+            WebAdapter.WaitForComplete(10);
+            buts.Click(); 
+            //but.Click();
+           // var element = WebAdapter.FindElement(By.Id("inputBrugerSoeg"));
+            //element.Clear();
+            //element.SendKeys(username);
+
+            return true; 
+        }
+
     }
 }

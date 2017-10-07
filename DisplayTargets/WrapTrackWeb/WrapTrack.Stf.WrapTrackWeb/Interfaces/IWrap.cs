@@ -29,5 +29,9 @@ namespace WrapTrack.Stf.WrapTrackWeb.Interfaces
         /// Gets or sets the wraps.
         /// </summary>
         int Wraps { get; set; }
-        }
+        /// <summary>
+        /// Pass on wrap to user v's collection
+        /// </summary>
+        bool passOn(string v);
+    }
     }
