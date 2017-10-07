@@ -1,21 +1,19 @@
 // --------------------------------------------------------------------------------------------------------------------
-// <copyright file="ExplorerUsers.cs" company="Mir Software">
+// <copyright file="IMeSettings.cs" company="Mir Software">
 //   Copyright governed by Artistic license as described here:
 //          http://www.perlfoundation.org/artistic_license_2_0
 // </copyright>
 // <summary>
-//   Defines the ExplorerWrapsWraps type.
+//   Defines the IMeSettings type.
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
 
-    namespace WrapTrack.Stf.WrapTrackWeb.Explore
+namespace WrapTrack.Stf.WrapTrackWeb.Interfaces.Me
 {
-    using WrapTrack.Stf.WrapTrackWeb.Interfaces.Explorer;
-
     /// <summary>
-    /// The explorer users.
+    /// The MeSettings interface.
     /// </summary>
-    public class ExplorerUsers : IExplorerWraps
+    public interface IMeSettings
     {
     }
 }

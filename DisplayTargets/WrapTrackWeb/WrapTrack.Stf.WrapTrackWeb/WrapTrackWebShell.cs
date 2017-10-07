@@ -18,7 +18,7 @@ namespace WrapTrack.Stf.WrapTrackWeb
     using WrapTrack.Stf.WrapTrackWeb.Explore;
     using WrapTrack.Stf.WrapTrackWeb.FaqContact;
     using WrapTrack.Stf.WrapTrackWeb.Interfaces;
-    using WrapTrack.Stf.WrapTrackWeb.Interfaces.Explorer;
+    using WrapTrack.Stf.WrapTrackWeb.Interfaces.Explore;
     using WrapTrack.Stf.WrapTrackWeb.Interfaces.FaqContact;
     using WrapTrack.Stf.WrapTrackWeb.Interfaces.Me;
     using WrapTrack.Stf.WrapTrackWeb.Me;
@@ -176,14 +176,14 @@ namespace WrapTrack.Stf.WrapTrackWeb
         /// The explorer.
         /// </summary>
         /// <returns>
-        /// The <see cref="IExplorerWraps"/>.
+        /// The <see cref="IExploreWraps"/>.
         /// </returns>
-        public IExplorerWraps Explorer()
+        public IExploreWraps Explorer()
         {
             var link = WebAdapter.FindElement(By.Id("nav_expl"));
 
             link.Click();
-            IExplorerWraps retVal = StfContainer.Get<IExplorerWraps>();
+            IExploreWraps retVal = StfContainer.Get<IExploreWraps>();
 
             return retVal;
         }
@@ -300,12 +300,20 @@ namespace WrapTrack.Stf.WrapTrackWeb
         private void RegisterMyNeededTypes()
         {
             // Me classes
+            StfContainer.RegisterType<IMeInbox, MeInbox>();
+            StfContainer.RegisterType<IMeReviews, MeReviews>();
+            StfContainer.RegisterType<IMeSettings, MeSettings>();
             StfContainer.RegisterType<ICollection, Collection>();
             StfContainer.RegisterType<IMeProfile, MeProfile>();
             StfContainer.RegisterType<IWrap, Wrap>();
 
             // Explorer
-            StfContainer.RegisterType<IExplorerWraps, ExplorerWraps>();
+            StfContainer.RegisterType<IExploreBirthWraps, ExploreBirthWraps>();
+            StfContainer.RegisterType<IExploreBrands, ExploreBrands>();
+            StfContainer.RegisterType<IExploreModels, ExploreModels>();
+            StfContainer.RegisterType<IExplorePatterns, ExplorePatterns>();
+            StfContainer.RegisterType<IExploreUsers, ExploreUsers>();
+            StfContainer.RegisterType<IExploreWraps, ExploreWraps>();
 
             // FAQ and contact classes
             StfContainer.RegisterType<IFaq, Faq>();

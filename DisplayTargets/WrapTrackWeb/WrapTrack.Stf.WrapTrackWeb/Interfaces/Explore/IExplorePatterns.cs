@@ -1,19 +1,19 @@
 // --------------------------------------------------------------------------------------------------------------------
-// <copyright file="IExplorerWraps.cs" company="Mir Software">
+// <copyright file="IExplorePatterns.cs" company="Mir Software">
 //   Copyright governed by Artistic license as described here:
 //          http://www.perlfoundation.org/artistic_license_2_0
 // </copyright>
 // <summary>
-//   Defines the IExplorerWraps type.
+//   Defines the IExplorePatterns type.
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
 
-    namespace WrapTrack.Stf.WrapTrackWeb.Interfaces.Explorer
+namespace WrapTrack.Stf.WrapTrackWeb.Interfaces.Explore
 {
     /// <summary>
-    /// The ExplorerWraps interface.
+    /// The ExplorePatterns interface.
     /// </summary>
-    public interface IExplorerWraps
+    public interface IExplorePatterns
     {
     }
 }

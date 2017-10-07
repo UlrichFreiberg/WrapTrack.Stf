@@ -1,21 +1,19 @@
 // --------------------------------------------------------------------------------------------------------------------
-// <copyright file="Market.cs" company="Mir Software">
+// <copyright file="IExploreModels.cs" company="Mir Software">
 //   Copyright governed by Artistic license as described here:
 //          http://www.perlfoundation.org/artistic_license_2_0
 // </copyright>
 // <summary>
-//   Defines the Market type.
+//   Defines the IExploreModels type.
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace WrapTrack.Stf.WrapTrackWeb.Market
+namespace WrapTrack.Stf.WrapTrackWeb.Interfaces.Explore
 {
-    using WrapTrack.Stf.WrapTrackWeb.Interfaces;
-
     /// <summary>
-    /// The market.
+    /// The ExploreModels interface.
     /// </summary>
-    public class Market : IMarket
+    public interface IExploreModels
     {
     }
 }

@@ -14,7 +14,7 @@ namespace WrapTrack.Stf.WrapTrackWeb.Interfaces
     using Mir.Stf.Utilities;
     using Mir.Stf.Utilities.Attributes;
 
-    using WrapTrack.Stf.WrapTrackWeb.Interfaces.Explorer;
+    using WrapTrack.Stf.WrapTrackWeb.Interfaces.Explore;
     using WrapTrack.Stf.WrapTrackWeb.Interfaces.FaqContact;
     using WrapTrack.Stf.WrapTrackWeb.Interfaces.Me;
 
@@ -49,9 +49,9 @@ namespace WrapTrack.Stf.WrapTrackWeb.Interfaces
         /// The explorer.
         /// </summary>
         /// <returns>
-        /// The <see cref="IExplorerWraps"/>.
+        /// The <see cref="IExploreWraps"/>.
         /// </returns>
-        IExplorerWraps Explorer();
+        IExploreWraps Explorer();
 
         /// <summary>
         /// The market.

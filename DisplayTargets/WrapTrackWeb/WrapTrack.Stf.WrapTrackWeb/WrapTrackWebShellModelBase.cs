@@ -1,7 +1,7 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="WrapTrackWebShellModelBase.cs" company="Nordea">
+// <copyright file="WrapTrackWebShellModelBase.cs" company="Mir Software">
 //   Copyright governed by Artistic license as described here:
-//   //          http://www.perlfoundation.org/artistic_license_2_0
+//          http://www.perlfoundation.org/artistic_license_2_0
 // </copyright>
 // <summary>
 //   The im shell model base.
@@ -10,14 +10,7 @@
 
 namespace WrapTrack.Stf.WrapTrackWeb
 {
-    using System;
-    using System.Collections.Generic;
-    using System.Linq;
-    using System.Reflection;
-
     using Mir.Stf.Utilities;
-
-    using OpenQA.Selenium;
 
     using WrapTrack.Stf.Adapters.WebAdapter;
     using WrapTrack.Stf.WrapTrackWeb.Interfaces;

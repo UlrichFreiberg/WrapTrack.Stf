@@ -1,21 +1,19 @@
 // --------------------------------------------------------------------------------------------------------------------
-// <copyright file="Market.cs" company="Mir Software">
+// <copyright file="IMeInbox.cs" company="Mir Software">
 //   Copyright governed by Artistic license as described here:
 //          http://www.perlfoundation.org/artistic_license_2_0
 // </copyright>
 // <summary>
-//   Defines the Market type.
+//   Defines the IMeInbox type.
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace WrapTrack.Stf.WrapTrackWeb.Market
+namespace WrapTrack.Stf.WrapTrackWeb.Interfaces.Me
 {
-    using WrapTrack.Stf.WrapTrackWeb.Interfaces;
-
     /// <summary>
-    /// The market.
+    /// The MeInbox interface.
     /// </summary>
-    public class Market : IMarket
+    public interface IMeInbox
     {
     }
 }
