@@ -32,6 +32,7 @@
     <Analyzer AnalyzerId="StyleCop.CSharp.NamingRules">
       <AnalyzerSettings>
         <CollectionProperty Name="Hungarian">
+          <Value>me</Value>
           <Value>db</Value>
           <Value>es</Value>
           <Value>ft</Value>
