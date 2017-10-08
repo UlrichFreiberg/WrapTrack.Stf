@@ -127,6 +127,10 @@ namespace WrapTrack.Stf.WrapTrackWeb
 
             var signUpButtonElem = WebAdapter.FindElement(By.Id("OpretProfilKnap"));
 
+            if (!signUpButtonElem.Enabled)
+            {
+                WebAdapter.WaitForComplete(1); 
+            }; 
             signUpButtonElem.Click();
 
             return true;
