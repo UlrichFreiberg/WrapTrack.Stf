@@ -49,12 +49,9 @@ namespace WrapTrack.Stf.WrapTrackWeb.Me.Collection
         /// </summary>
         public bool passOn(string username)
         {
-            WebAdapter.WaitForComplete(10);
-            var buts = WebAdapter.FindElement(By.ClassName("basisknap"));
-            WebAdapter.WaitForComplete(10);
-            buts.Click(); 
-            //but.Click();
-           // var element = WebAdapter.FindElement(By.Id("inputBrugerSoeg"));
+            WebAdapter.WaitForComplete(5);
+            var buts = WebAdapter.FindElements(By.Id("but_basis"));
+            // var element = WebAdapter.FindElement(By.Id("inputBrugerSoeg"));
             //element.Clear();
             //element.SendKeys(username);
 

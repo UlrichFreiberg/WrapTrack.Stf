@@ -46,6 +46,6 @@ namespace WrapTrack.Stf.WrapTrackWeb.Interfaces.Me
         /// <returns>
         /// The wrap 
         /// </returns> 
-        IWrap GetRandomWrap();
+       IWrap GetRandomWrap();
     }
 }
