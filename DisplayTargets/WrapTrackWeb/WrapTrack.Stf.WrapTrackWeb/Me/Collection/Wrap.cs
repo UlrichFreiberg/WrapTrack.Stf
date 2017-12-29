@@ -45,18 +45,45 @@ namespace WrapTrack.Stf.WrapTrackWeb.Me.Collection
         public int Wraps { get; set; }
 
         /// <summary>
+        /// Gets the wt id.
+        /// </summary>
+        public string WtId
+        {
+            get
+            {
+                const string Xpath = "//p[starts-with(normalize-space(),'Wraptrack - ID')]/span";
+                var elem = WebAdapter.FindElement(By.XPath(Xpath));
+                var retVal = elem.Text.Trim();
+
+                return retVal;
+            }
+        }
+
+        /// <summary>
         /// Pass on the wrap to user 'username'
         /// </summary>
-        public bool passOn(string username)
+        /// <param name="username">
+        /// The username.
+        /// </param>
+        /// <returns>
+        /// The <see cref="bool"/>.
+        /// </returns>
+        public bool PassOn(string username)
         {
+            const string Xpath = "//knap_videregivvikle/div[1]/knap_basis/button/p/span[2]/span";
+
             WebAdapter.WaitForComplete(5);
-            var buts = WebAdapter.FindElements(By.Id("but_basis"));
-            // var element = WebAdapter.FindElement(By.Id("inputBrugerSoeg"));
-            //element.Clear();
-            //element.SendKeys(username);
+
+            var button = WebAdapter.FindElement(By.XPath(Xpath));
+
+            button.Click();
+
+            var element = WebAdapter.FindElement(By.Id("inputBrugerSoeg"));
+
+            element.Clear();
+            element.SendKeys(username);
 
             return true; 
         }
-
     }
 }

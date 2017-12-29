@@ -21,8 +21,10 @@ namespace WrapTrack.Stf.WrapTrackWeb
     using WrapTrack.Stf.WrapTrackWeb.Interfaces.Explore;
     using WrapTrack.Stf.WrapTrackWeb.Interfaces.FaqContact;
     using WrapTrack.Stf.WrapTrackWeb.Interfaces.Me;
+    using WrapTrack.Stf.WrapTrackWeb.Interfaces.WtRestApi;
     using WrapTrack.Stf.WrapTrackWeb.Me;
     using WrapTrack.Stf.WrapTrackWeb.Me.Collection;
+    using WrapTrack.Stf.WrapTrackWeb.WtRestApi;
 
     /// <summary>
     /// The demo corp web shell.
@@ -130,7 +132,8 @@ namespace WrapTrack.Stf.WrapTrackWeb
             if (!signUpButtonElem.Enabled)
             {
                 WebAdapter.WaitForComplete(1); 
-            }; 
+            }
+
             signUpButtonElem.Click();
 
             return true;
@@ -321,6 +324,9 @@ namespace WrapTrack.Stf.WrapTrackWeb
 
             // FAQ and contact classes
             StfContainer.RegisterType<IFaq, Faq>();
+
+            // TODO:The WT API is resting (no punt intended:-)) here until the validation target is born
+            StfContainer.RegisterType<IWtApi, WtApi>();
         }
 
         /// <summary>
