@@ -41,7 +41,7 @@ namespace WrapTrackWebTests.Collection
         [TestInitialize]
         public void TestInitialize()
         {
-            CurrentUser = "Ida88";
+            CurrentUser = "sniksnak";
             WrapTrackShell = Get<IWrapTrackWebShell>();
             WrapTrackShell.Login(CurrentUser); // default user
         }

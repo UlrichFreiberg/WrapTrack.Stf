@@ -51,9 +51,10 @@ namespace WrapTrack.Stf.WrapTrackWeb.Me.Collection
         {
             get
             {
-                const string Xpath = "//p[starts-with(normalize-space(),'Wraptrack - ID')]/span";
-                var elem = WebAdapter.FindElement(By.XPath(Xpath));
-                var retVal = elem.Text.Trim();
+                const string Xpath = "//p[starts-with(normalize-space(),'Wraptrack-ID')]/span";
+                var retVal = WebAdapter.GetText(By.XPath(Xpath));
+
+                retVal = retVal.Trim();
 
                 return retVal;
             }
@@ -70,19 +71,29 @@ namespace WrapTrack.Stf.WrapTrackWeb.Me.Collection
         /// </returns>
         public bool PassOn(string username)
         {
-            const string Xpath = "//knap_videregivvikle/div[1]/knap_basis/button/p/span[2]/span";
+            // click the Pass On Button in the menu
+            if (!WebAdapter.ButtonClickByXpath("//knap_videregivvikle/div[1]/knap_basis/button/p/span[2]/span"))
+            {
+                return false;
+            }
 
-            WebAdapter.WaitForComplete(5);
+            if (!WebAdapter.TextboxSetTextById("inputBrugerSoeg", username))
+            {
+                return false;
+            }
 
-            var button = WebAdapter.FindElement(By.XPath(Xpath));
+            // click the select user button
+            if (!WebAdapter.ButtonClickById("but_selUser"))
+            {
+                return false;
+            }
 
-            button.Click();
-
-            var element = WebAdapter.FindElement(By.Id("inputBrugerSoeg"));
-
-            element.Clear();
-            element.SendKeys(username);
-
+            // answer the R U sure
+            if (!WebAdapter.ButtonClickById("but_goPassOn"))
+            {
+                return false;
+            }
+            
             return true; 
         }
     }
