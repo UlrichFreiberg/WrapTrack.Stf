@@ -39,6 +39,8 @@ namespace WrapTrack.Stf.Adapters.WebAdapter
 
             if (button == null || depth >= 5)
             {
+                StfLogger.LogInternal($"Can't find button - by=[{by}]");
+
                 return false;
             }
 
