@@ -60,7 +60,6 @@ namespace WrapTrack.Stf.WrapTrackWeb.Me.Collection
             var retVal = StfContainer.Get<IWrap>();
 
             return retVal;
-            
         }
 
         /// <summary>

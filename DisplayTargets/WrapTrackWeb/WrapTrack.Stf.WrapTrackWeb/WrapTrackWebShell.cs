@@ -14,6 +14,7 @@ namespace WrapTrack.Stf.WrapTrackWeb
 {
     using OpenQA.Selenium;
     using WrapTrack.Stf.Adapters.WebAdapter;
+    using WrapTrack.Stf.Core;
     using WrapTrack.Stf.WrapTrackWeb.Configuration;
     using WrapTrack.Stf.WrapTrackWeb.Explore;
     using WrapTrack.Stf.WrapTrackWeb.FaqContact;
@@ -21,10 +22,8 @@ namespace WrapTrack.Stf.WrapTrackWeb
     using WrapTrack.Stf.WrapTrackWeb.Interfaces.Explore;
     using WrapTrack.Stf.WrapTrackWeb.Interfaces.FaqContact;
     using WrapTrack.Stf.WrapTrackWeb.Interfaces.Me;
-    using WrapTrack.Stf.WrapTrackWeb.Interfaces.WtRestApi;
     using WrapTrack.Stf.WrapTrackWeb.Me;
     using WrapTrack.Stf.WrapTrackWeb.Me.Collection;
-    using WrapTrack.Stf.WrapTrackWeb.WtRestApi;
 
     /// <summary>
     /// The demo corp web shell.
@@ -71,23 +70,15 @@ namespace WrapTrack.Stf.WrapTrackWeb
             userName = HandleDefault(userName, WtConfiguration.UserName);
             password = HandleDefault(password, WtConfiguration.Password);
 
-            var loginTabElem = WebAdapter.FindElement(By.Id("nav_login"));
+            // Click tab page Login
+            WebAdapter.ButtonClickById("nav_login");
 
-            loginTabElem.Click();
+            // fill in creds
+            WebAdapter.TextboxSetTextById("input_username", userName);
+            WebAdapter.TextboxSetTextById("input_pw", password);
 
-            var userNameElem = WebAdapter.FindElement(By.Id("input_username"));
-
-            userNameElem.Clear();
-            userNameElem.SendKeys(userName);
-
-            var passwordElem = WebAdapter.FindElement(By.Id("input_pw"));
-
-            passwordElem.Clear();
-            passwordElem.SendKeys(password);
-
-            var loginButtonElem = WebAdapter.FindElement(By.Id("nav_"));
-
-            loginButtonElem.Click();
+            // Click tab page Login
+            WebAdapter.ButtonClickById("nav_");
 
             return true;
         }
@@ -100,41 +91,16 @@ namespace WrapTrack.Stf.WrapTrackWeb
         /// </returns>
         public bool SignUp()
         {
-            var loginTabElem = WebAdapter.FindElement(By.Id("nav_login"));
-
-            loginTabElem.Click();
-
-            var uniquePart = Guid.NewGuid().ToString().Replace("-", string.Empty).Substring(1, 15);
-
             // Create (semi) random username
+            var uniquePart = Guid.NewGuid().ToString().Replace("-", string.Empty).Substring(1, 15);
             var newUsername = $"TEST-{uniquePart}";
-            var userNameElem = WebAdapter.FindElement(By.Id("input_newuser"));
 
-            userNameElem.Clear();
-            userNameElem.SendKeys(newUsername);
-
-            var passwordElem = WebAdapter.FindElement(By.Id("input_newPW"));
-
-            passwordElem.Clear();
-            passwordElem.SendKeys("123456");
-
-            var mailElem = WebAdapter.FindElement(By.Id("input_email"));
-
-            mailElem.Clear();
-            mailElem.SendKeys(newUsername + "@mitsite.org");
-
-            var cond = WebAdapter.FindElement(By.Id("check_cond"));
-
-            cond.Click();
-
-            var signUpButtonElem = WebAdapter.FindElement(By.Id("OpretProfilKnap"));
-
-            if (!signUpButtonElem.Enabled)
-            {
-                WebAdapter.WaitForComplete(1); 
-            }
-
-            signUpButtonElem.Click();
+            WebAdapter.ButtonClickById("nav_login");
+            WebAdapter.TextboxSetTextById("input_newuser", newUsername);
+            WebAdapter.TextboxSetTextById("input_newPW", "123456");
+            WebAdapter.TextboxSetTextById("input_email", newUsername + "@mitsite.org");
+            WebAdapter.ButtonClickById("check_cond");
+            WebAdapter.ButtonClickById("OpretProfilKnap");
 
             return true;
         }
@@ -165,9 +131,7 @@ namespace WrapTrack.Stf.WrapTrackWeb
         {
             try
             {
-                var but = WebAdapter.FindElement(By.Id("nav_profile"));
-
-                but.Click();
+                WebAdapter.Click(By.Id("nav_profile"));
             }
             catch (Exception)
             {
@@ -187,10 +151,9 @@ namespace WrapTrack.Stf.WrapTrackWeb
         /// </returns>
         public IExploreWraps Explorer()
         {
-            var link = WebAdapter.FindElement(By.Id("nav_expl"));
+            WebAdapter.Click(By.Id("nav_expl"));
 
-            link.Click();
-            IExploreWraps retVal = StfContainer.Get<IExploreWraps>();
+            var retVal = StfContainer.Get<IExploreWraps>();
 
             return retVal;
         }
@@ -228,12 +191,8 @@ namespace WrapTrack.Stf.WrapTrackWeb
         /// </returns>
         public bool Logout(bool doCareAboutErrors = true)
         {
-            var logoutButtonElem = WebAdapter.FindElement(By.Id("nav_logout"));
-
-            if (logoutButtonElem != null)
+            if (WebAdapter.Click(By.Id("nav_logout")))
             {
-                logoutButtonElem.Click();
-
                 return true;
             }
 
@@ -242,7 +201,7 @@ namespace WrapTrack.Stf.WrapTrackWeb
                 StfLogger.LogError("Got error while logging out");
             }
 
-            // if we cant find the logout button, then the return value is down to if we care or not:-)
+            // if we cant click the logout button, then the return value is down to if we care or not:-)
             return doCareAboutErrors;
         }
 
@@ -324,9 +283,6 @@ namespace WrapTrack.Stf.WrapTrackWeb
 
             // FAQ and contact classes
             StfContainer.RegisterType<IFaq, Faq>();
-
-            // TODO:The WT API is resting (no punt intended:-)) here until the validation target is born
-            StfContainer.RegisterType<IWtApi, WtApi>();
         }
 
         /// <summary>

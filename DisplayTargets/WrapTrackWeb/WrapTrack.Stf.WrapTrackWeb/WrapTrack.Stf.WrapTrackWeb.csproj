@@ -9,8 +9,9 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>WrapTrack.Stf.WrapTrackWeb</RootNamespace>
     <AssemblyName>WrapTrack.Stf.WrapTrackWeb.Shell</AssemblyName>
-    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -80,10 +81,6 @@
       <HintPath>..\..\..\packages\Mir.Stf.Kernel.1.0.165.8167\lib\net45\Mir.Stf.Utilities.StfPlugin.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Newtonsoft.Json, Version=10.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
-      <HintPath>..\..\..\packages\Newtonsoft.Json.10.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Drawing" />
@@ -108,7 +105,6 @@
     <Compile Include="Explore\ExploreUsers.cs" />
     <Compile Include="Explore\ExploreWraps.cs" />
     <Compile Include="FaqContact\Faq.cs" />
-    <Compile Include="Configuration\TargetBase.cs" />
     <Compile Include="Interfaces\Explore\IExploreBirthWraps.cs" />
     <Compile Include="Interfaces\Explore\IExploreBrands.cs" />
     <Compile Include="Interfaces\Explore\IExploreModels.cs" />
@@ -118,7 +114,6 @@
     <Compile Include="Interfaces\Me\IMeInbox.cs" />
     <Compile Include="Interfaces\Me\IMeReviews.cs" />
     <Compile Include="Interfaces\Me\IMeSettings.cs" />
-    <Compile Include="Interfaces\WtRestApi\IWtApi.cs" />
     <Compile Include="MenuManager.cs" />
     <Compile Include="Me\Collection\Wrap.cs" />
     <Compile Include="Me\MeInbox.cs" />
@@ -137,8 +132,6 @@
     <Compile Include="Me\MeProfile.cs" />
     <Compile Include="WrapTrackWebShell.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="WtRestApi\WrapInfo.cs" />
-    <Compile Include="WtRestApi\WtApi.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config">
@@ -149,6 +142,10 @@
     <ProjectReference Include="..\..\..\Adapters\WebAdapter\WrapTrack.Stf.Adapters.WebAdapter.csproj">
       <Project>{dd71247b-dd57-46a8-9b8e-07c0041a5ee0}</Project>
       <Name>WrapTrack.Stf.Adapters.WebAdapter</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\WrapTrack.Stf.Core\WrapTrack.Stf.Core.csproj">
+      <Project>{31C88D4B-F626-4F49-B408-CD71563C9098}</Project>
+      <Name>WrapTrack.Stf.Core</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
