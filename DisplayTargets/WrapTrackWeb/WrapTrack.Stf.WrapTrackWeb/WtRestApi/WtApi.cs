@@ -39,7 +39,8 @@ namespace WrapTrack.Stf.WrapTrackWeb.WtRestApi
             var retVal = new WrapInfo
             {
                 OwnerId = info.SelectToken("ejerskab_bruger_id").ToString(),
-                OwnerName = info.SelectToken("ejerskab_bruger_navn").ToString()
+                OwnerName = info.SelectToken("ejerskab_bruger_navn").ToString(),
+                Size = info.SelectToken("stoerrelse").ToString()
             };
 
             return retVal;

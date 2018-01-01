@@ -24,5 +24,10 @@ namespace WrapTrack.Stf.WrapTrackWeb.WtRestApi
         /// Gets or sets the name of the owner.
         /// </summary>
         public string OwnerName { get; set; }
+
+        /// <summary>
+        /// Gets or sets the size.
+        /// </summary>
+        public string Size { get; set; }
     }
 }
