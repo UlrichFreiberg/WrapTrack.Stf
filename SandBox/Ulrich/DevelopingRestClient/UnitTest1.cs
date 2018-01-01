@@ -15,7 +15,7 @@ namespace DevelopingRestClient
     using System.Net.Http;
     using System.Threading.Tasks;
 
-//    using Newtonsoft.Json.Linq;
+    using Newtonsoft.Json.Linq;
 
     /// <summary>
     /// The unit test 1.
@@ -35,9 +35,9 @@ namespace DevelopingRestClient
         /// The <see cref="Task"/>.
         /// </returns>
         [TestMethod]
-        public async Task TestMethod1()
+        public void TestMethod1()
         {
-            await DownloadData();
+            DownloadData();
 
             Assert.AreEqual(wtRestResponse, "jj");
         }
@@ -48,7 +48,7 @@ namespace DevelopingRestClient
         /// <returns>
         /// The <see cref="Task"/>.
         /// </returns>
-        public async Task DownloadData()
+        public string DownloadData()
         {
             const string RequestUri = "https://wraptrack.org/API/maerke/200/vikler";
             var client = new HttpClient();
@@ -56,12 +56,12 @@ namespace DevelopingRestClient
             client.DefaultRequestHeaders.Add("Accept", "application/json");
             wtRestResponse = await client.GetStringAsync(RequestUri);
 
-            //dynamic json = JToken.Parse(wtRestResponse);
+            dynamic json = JToken.Parse(wtRestResponse);
 
-            //foreach (var item in json.RestResponse.wtRestResponse)
-            //{
-            //    txtarea.InnerText = item.ToString();
-            //}
+            foreach (var item in json.RestResponse.wtRestResponse)
+            {
+                var txt = item.ToString();
+            }
         }
     }
 }
