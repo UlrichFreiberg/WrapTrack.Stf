@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<configuration xmlns="http://www.testautomation.com/yacf" version="2013.04.21.0">
+
+  <section name="Environments" defaultsection="Prod">
+    <section name="Prod">
+      <section name="ValidationTargets">
+        <section name="WrapTrackApi">
+          <key name="BaseUrl" value="https://WrapTrack.org/API" />
+        </section>
+      </section>
+    </section>
+
+    <section name="Test">
+      <section name="ValidationTargets">
+        <section name="WrapTrackApi">
+          <key name="BaseUrl" value="http://wt.troldvaerk.org/API" />
+        </section>
+      </section>
+    </section>
+  </section>
+  
+</configuration>

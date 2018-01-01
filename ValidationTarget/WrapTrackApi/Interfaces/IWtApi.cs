@@ -1,28 +1,31 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="WrapInfo.cs" company="Mir Software">
+// <copyright file="IWtApi.cs" company="Mir Software">
 //   Copyright governed by Artistic license as described here:
 //          http://www.perlfoundation.org/artistic_license_2_0
 // </copyright>
 // <summary>
-//   Defines the WrapInfo type.
+//   Defines the IWtApi type.
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace WrapTrack.Stf.WrapTrackWeb.WtRestApi
+namespace WrapTrack.Stf.WrapTrackApi.Interfaces
 {
+    using Mir.Stf.Utilities;
+
     /// <summary>
-    /// The wrap info.
+    /// The WtApi interface. For the WT REST API 
     /// </summary>
-    public class WrapInfo
+    public interface IWtApi : IStfPlugin
     {
         /// <summary>
-        /// Gets or sets the id of the owner.
+        /// The wrap info.
         /// </summary>
-        public string OwnerId { get; set; }
-
-        /// <summary>
-        /// Gets or sets the name of the owner.
-        /// </summary>
-        public string OwnerName { get; set; }
+        /// <param name="wtWrapId">
+        /// The wt wrap id.
+        /// </param>
+        /// <returns>
+        /// The <see cref="string"/>.
+        /// </returns>
+        WrapInfo WrapInfo(string wtWrapId);
     }
 }
