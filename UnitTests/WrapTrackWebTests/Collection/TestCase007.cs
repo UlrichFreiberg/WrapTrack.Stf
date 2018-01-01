@@ -14,9 +14,9 @@ namespace WrapTrackWebTests.Collection
 
     using Mir.Stf;
 
+    using WrapTrack.Stf.WrapTrackApi.Interfaces;
     using WrapTrack.Stf.WrapTrackWeb.Interfaces;
     using WrapTrack.Stf.WrapTrackWeb.Interfaces.Me;
-    using WrapTrack.Stf.WrapTrackWeb.Interfaces.WtRestApi;
 
     /// <summary>
     /// The collection tests.
