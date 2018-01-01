@@ -8,14 +8,12 @@
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
 
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-
-namespace WrapTrackWebTests
+namespace WrapTrackApiTests
 {
-    using Mir.Stf;
+    using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-    using WrapTrack.Stf.WrapTrackWeb.Interfaces;
-    using WrapTrack.Stf.WrapTrackWeb.Interfaces.WtRestApi;
+    using Mir.Stf;
+    using WrapTrack.Stf.WrapTrackApi.Interfaces;
 
     /// <summary>
     /// The wt api tests.
@@ -29,9 +27,6 @@ namespace WrapTrackWebTests
         [TestMethod]
         public void TestBasicWrapInfo()
         {
-            // right now the registration of the interface is hosted in the webShell
-            Get<IWrapTrackWebShell>();
-
             var wtApi = Get<IWtApi>();
             var wrapInfo = wtApi.WrapInfo("13639");
 

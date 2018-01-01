@@ -8,14 +8,14 @@
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace WrapTrack.Stf.WrapTrackWeb.Interfaces.WtRestApi
+namespace WrapTrack.Stf.WrapTrackApi.Interfaces
 {
-    using WrapTrack.Stf.WrapTrackWeb.WtRestApi;
+    using Mir.Stf.Utilities;
 
     /// <summary>
     /// The WtApi interface. For the WT REST API 
     /// </summary>
-    public interface IWtApi
+    public interface IWtApi : IStfPlugin
     {
         /// <summary>
         /// The wrap info.

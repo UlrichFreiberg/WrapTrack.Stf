@@ -28,6 +28,12 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		WtTestSettings.testsettings = WtTestSettings.testsettings
 	EndProjectSection
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ValidationTargets", "ValidationTargets", "{B0BF1DD7-D25E-4FF4-B067-CB0F81B9340D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WrapTrackApi", "ValidationTarget\WrapTrackApi\WrapTrackApi.csproj", "{5CC4B250-6779-4FE4-8E17-3435AC8846AF}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WrapTrackApiTests", "UnitTests\WrapTrackApiTests\WrapTrackApiTests.csproj", "{55420873-0B5B-4810-A1A4-481A4C2749CE}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -50,6 +56,14 @@ Global
 		{A0D2EDD8-9747-4B00-A017-4A110E3755C6}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A0D2EDD8-9747-4B00-A017-4A110E3755C6}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A0D2EDD8-9747-4B00-A017-4A110E3755C6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5CC4B250-6779-4FE4-8E17-3435AC8846AF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5CC4B250-6779-4FE4-8E17-3435AC8846AF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5CC4B250-6779-4FE4-8E17-3435AC8846AF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5CC4B250-6779-4FE4-8E17-3435AC8846AF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{55420873-0B5B-4810-A1A4-481A4C2749CE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{55420873-0B5B-4810-A1A4-481A4C2749CE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{55420873-0B5B-4810-A1A4-481A4C2749CE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{55420873-0B5B-4810-A1A4-481A4C2749CE}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -59,5 +73,7 @@ Global
 		{4C59FC05-88B5-4B18-B19E-205BBEB88340} = {F3DA7D40-EF8D-45E7-A027-A0DC7FE89487}
 		{07BCBDE0-13B6-405F-B4DE-A08082187CAF} = {A06AD72F-23AA-40E7-8313-64C8E0BC1C87}
 		{A0D2EDD8-9747-4B00-A017-4A110E3755C6} = {07BCBDE0-13B6-405F-B4DE-A08082187CAF}
+		{5CC4B250-6779-4FE4-8E17-3435AC8846AF} = {B0BF1DD7-D25E-4FF4-B067-CB0F81B9340D}
+		{55420873-0B5B-4810-A1A4-481A4C2749CE} = {F3DA7D40-EF8D-45E7-A027-A0DC7FE89487}
 	EndGlobalSection
 EndGlobal

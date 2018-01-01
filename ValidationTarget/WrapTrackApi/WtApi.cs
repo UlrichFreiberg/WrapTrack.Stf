@@ -8,22 +8,52 @@
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace WrapTrack.Stf.WrapTrackWeb.WtRestApi
+namespace WrapTrack.Stf.WrapTrackApi
 {
+    using System;
     using System.Net.Http;
     using System.Threading.Tasks;
 
     using Newtonsoft.Json.Linq;
 
-    using WrapTrack.Stf.WrapTrackWeb.Interfaces.WtRestApi;
+    using WrapTrack.Stf.Core;
+    using WrapTrack.Stf.WrapTrackApi.Configuration;
+    using WrapTrack.Stf.WrapTrackApi.Interfaces;
 
     // using https://www.newtonsoft.com/json/help/html/QueryJsonSelectTokenWithLinq.htm
 
     /// <summary>
     /// The wt api.
     /// </summary>
-    public class WtApi : IWtApi
+    public class WtApi : TargetBase, IWtApi
     {
+        /// <summary>
+        /// Initializes a new instance of the <see cref="WtApi"/> class.
+        /// </summary>
+        public WtApi()
+        {
+            Name = "WrapTrackApi";
+            VersionInfo = new Version(1, 0, 0, 0);
+        }
+
+        /// <summary>
+        /// Gets or sets the wt api configuration.
+        /// </summary>
+        public WtApiConfiguration WtApiConfiguration { get; set; }
+
+        /// <summary>
+        /// The init.
+        /// </summary>
+        /// <returns>
+        /// The <see cref="bool"/>.
+        /// </returns>
+        public bool Init()
+        {
+            WtApiConfiguration = SetConfig<WtApiConfiguration>();
+            RegisterMyNeededTypes();
+            return true;
+        }
+
         /// <summary>
         /// The wrap info.
         /// </summary>
@@ -57,7 +87,7 @@ namespace WrapTrack.Stf.WrapTrackWeb.WtRestApi
         /// </returns>
         protected async Task<JObject> GetWrapRestInfo(string wtWrapId)
         {
-            var uri = $"https://wraptrack.org/API/vikle/{wtWrapId.Trim()}/plus_ejerskab_nuv";
+            var uri = $"{WtApiConfiguration.Url}/vikle/{wtWrapId.Trim()}/plus_ejerskab_nuv";
             var client = new HttpClient();
 
             client.DefaultRequestHeaders.Add("Accept", "application/json");
@@ -66,6 +96,13 @@ namespace WrapTrack.Stf.WrapTrackWeb.WtRestApi
             var retVal = JObject.Parse(response);
 
             return retVal;
+        }
+
+        /// <summary>
+        /// The register my needed types.
+        /// </summary>
+        private void RegisterMyNeededTypes()
+        {
         }
     }
 }

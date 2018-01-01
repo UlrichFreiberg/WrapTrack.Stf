@@ -8,7 +8,7 @@
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace WrapTrack.Stf.WrapTrackWeb.WtRestApi
+namespace WrapTrack.Stf.WrapTrackApi
 {
     /// <summary>
     /// The wrap info.

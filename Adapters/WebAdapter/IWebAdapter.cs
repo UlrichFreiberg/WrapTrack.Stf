@@ -12,6 +12,7 @@ namespace WrapTrack.Stf.Adapters.WebAdapter
 {
     using System;
     using System.Collections.Generic;
+
     using Configuration;
 
     using Mir.Stf.Utilities;
@@ -149,5 +150,55 @@ namespace WrapTrack.Stf.Adapters.WebAdapter
         /// The elem.
         /// </param>
         void MoveToElement(IWebElement elem);
+
+        /// <summary>
+        /// The button click by xpath.
+        /// </summary>
+        /// <param name="xpath">
+        /// The xpath.
+        /// </param>
+        /// <returns>
+        /// The <see cref="bool"/>.
+        /// </returns>
+        bool ButtonClickByXpath(string xpath);
+
+        /// <summary>
+        /// The button click by id.
+        /// </summary>
+        /// <param name="id">
+        /// The id.
+        /// </param>
+        /// <returns>
+        /// The <see cref="bool"/>.
+        /// </returns>
+        bool ButtonClickById(string id);
+
+        /// <summary>
+        /// The textbox set text by id.
+        /// </summary>
+        /// <param name="id">
+        /// The id.
+        /// </param>
+        /// <param name="textToEnter">
+        /// The text to enter.
+        /// </param>
+        /// <returns>
+        /// The <see cref="bool"/>.
+        /// </returns>
+        bool TextboxSetTextById(string id, string textToEnter);
+
+        /// <summary>
+        /// The textbox set text by xpath.
+        /// </summary>
+        /// <param name="xpath">
+        /// The xpath.
+        /// </param>
+        /// <param name="textToEnter">
+        /// The text to enter.
+        /// </param>
+        /// <returns>
+        /// The <see cref="bool"/>.
+        /// </returns>
+        bool TextboxSetTextByXpath(string xpath, string textToEnter);
     }
 }
