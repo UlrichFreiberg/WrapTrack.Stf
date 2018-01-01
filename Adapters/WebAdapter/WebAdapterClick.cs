@@ -44,6 +44,11 @@ namespace WrapTrack.Stf.Adapters.WebAdapter
                 return false;
             }
 
+            if (!button.Enabled)
+            {
+                WaitForComplete(1);
+            }
+
             try
             {
                 button.Click();
