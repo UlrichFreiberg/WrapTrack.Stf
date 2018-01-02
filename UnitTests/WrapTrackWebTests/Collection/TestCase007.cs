@@ -41,7 +41,7 @@ namespace WrapTrackWebTests.Collection
         [TestInitialize]
         public void TestInitialize()
         {
-            CurrentUser = "sniksnak";
+            CurrentUser = "Ida88";
             WrapTrackShell = Get<IWrapTrackWebShell>();
             WrapTrackShell.Login(CurrentUser); // default user
         }
@@ -81,6 +81,7 @@ namespace WrapTrackWebTests.Collection
         /// </returns>
         private bool ValidatePassOn(string wrapToGo, string anotherUsername)
         {
+
             var validationTarget = Get<IWtApi>();
             var wrapInfo = validationTarget.WrapInfo(wrapToGo);
             var retVal = wrapInfo.OwnerName == anotherUsername;

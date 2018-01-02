@@ -87,7 +87,8 @@ namespace WrapTrack.Stf.WrapTrackApi
         /// </returns>
         protected async Task<JObject> GetWrapRestInfo(string wtWrapId)
         {
-            var uri = $"{WtApiConfiguration.Url}/vikle/{wtWrapId.Trim()}/plus_ejerskab_nuv";
+
+            var uri = $"{WtApiConfiguration.Url}/vikle/null/plus_ejerskab_nuv/{wtWrapId.Trim()}";
             var client = new HttpClient();
 
             client.DefaultRequestHeaders.Add("Accept", "application/json");
