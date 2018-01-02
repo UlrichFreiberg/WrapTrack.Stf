@@ -117,8 +117,7 @@ namespace WrapTrackWebTests
             // And the result....
             var me = wrapTrackShell.Me();
 
-            StfAssert.IsNotNull("wrapTrackShell", wrapTrackShell);
-            StfAssert.IsNotInstanceOfType("me", me, typeof(IMeProfile));
+            StfAssert.IsNull("me", me);
         }
 
         /// <summary>

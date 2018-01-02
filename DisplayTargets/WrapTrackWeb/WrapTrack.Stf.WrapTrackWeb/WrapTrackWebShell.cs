@@ -129,16 +129,10 @@ namespace WrapTrack.Stf.WrapTrackWeb
         /// </returns>
         public IMeProfile Me()
         {
-            try
-            {
-                WebAdapter.Click(By.Id("nav_profile"));
-            }
-            catch (Exception)
-            {
-                return null;
-            }
-
-            var retVal = StfContainer.Get<IMeProfile>();
+            var buttonClicked = WebAdapter.ButtonClickById("nav_profile");
+            var retVal = buttonClicked 
+                ? StfContainer.Get<IMeProfile>() 
+                : null;
 
             return retVal;
         }

@@ -44,13 +44,13 @@ namespace WrapTrack.Stf.Adapters.WebAdapter
                 return false;
             }
 
-            if (!button.Enabled)
-            {
-                WaitForComplete(1);
-            }
-
             try
             {
+                if (!button.Enabled)
+                {
+                    WaitForComplete(1);
+                }
+
                 button.Click();
                 retVal = true;
             }
