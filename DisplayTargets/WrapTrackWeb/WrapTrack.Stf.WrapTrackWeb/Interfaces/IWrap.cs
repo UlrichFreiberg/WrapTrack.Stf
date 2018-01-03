@@ -36,6 +36,11 @@ namespace WrapTrack.Stf.WrapTrackWeb.Interfaces
         string WtId { get; }
 
         /// <summary>
+        /// Gets or sets the num of private pictures.
+        /// </summary>
+        int NumPictures { get; set; }
+
+        /// <summary>
         /// Pass on wrap to user v's collection
         /// </summary>
         /// <param name="nameOfReciever">
@@ -45,5 +50,16 @@ namespace WrapTrack.Stf.WrapTrackWeb.Interfaces
         /// Indocation of success
         /// </returns>
         bool PassOn(string nameOfReciever);
+
+        /// <summary>
+        /// Upload users own pictures of the wrap
+        /// </summary>
+        /// <param name="clientSideFilePat">
+        /// The client Side File Pat.
+        /// </param>
+        /// <returns>
+        /// True if upload was success
+        /// </returns>
+        bool UploadWrapImage(string clientSideFilePat); 
     }
 }

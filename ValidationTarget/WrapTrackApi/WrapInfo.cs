@@ -29,5 +29,11 @@ namespace WrapTrack.Stf.WrapTrackApi
         /// Gets or sets the size.
         /// </summary>
         public string Size { get; set; }
+
+        /// <summary>
+        /// Gets or sets number of private pictures related to the wrap
+        /// Uploaded by all users of the wrap
+        /// </summary>
+        public int NumPictures { get; set; }
     }
 }

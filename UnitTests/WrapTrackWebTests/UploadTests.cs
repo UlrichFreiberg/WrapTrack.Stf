@@ -16,6 +16,7 @@ namespace WrapTrackWebTests
 
     using Mir.Stf;
 
+    using WrapTrack.Stf.WrapTrackApi.Interfaces;
     using WrapTrack.Stf.WrapTrackWeb.Interfaces;
 
     /// <summary>
@@ -49,6 +50,49 @@ namespace WrapTrackWebTests
 
             StfLogger.LogInfo($"After upload found image [{newImage}] as actual Image");
             StfAssert.StringNotEquals("Got a new actual image", oldImage, newImage);
+        }
+
+        /// <summary>
+        /// The tc 008.
+        /// </summary>
+        [TestMethod]
+        [DeploymentItem(@"TestData\")]
+        public void Tc008()
+        {
+            var wrapTrackShell = Get<IWrapTrackWebShell>();
+            var pathToNewImage = GetNewImagePath();
+
+            wrapTrackShell.Login();
+            //TODO: Nedenstående skal generaliseres. Bruges også i Tc007 (function GetCurrentUserCollection)
+
+            var me = wrapTrackShell.Me();
+            var collection = me.GetCollection();
+
+            StfAssert.IsNotNull("Got a MeProfile", me);
+            StfAssert.IsNotNull("Got my collection", collection);
+
+            // Be sure there is a wrap in collection. 
+            if (collection.NumOfWraps() == 0)
+            {
+                collection.AddWrap("Ali Dover", "Hygge", "Blue");
+            }
+  
+            var myWrap = collection.GetRandomWrap();
+
+            // Find number of pictures before
+            var validationTarget = Get<IWtApi>();
+            var wtId = myWrap.WtId; // tracking-id
+            var wrapInfo = validationTarget.WrapInfo(wtId);
+            var before = wrapInfo.NumPictures;
+            
+            // Do upload
+            myWrap.UploadWrapImage(pathToNewImage);
+
+            // Find number of pictures after upload 
+            var after = wrapInfo.NumPictures;
+            var newNum = before + 1; 
+
+            StfAssert.AreEqual("One more picture uploaded", after, newNum);
         }
 
         /// <summary>

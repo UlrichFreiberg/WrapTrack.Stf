@@ -123,6 +123,7 @@
   </Choose>
   <ItemGroup>
     <Compile Include="Collection\TestCase006.cs" />
+    <Compile Include="Collection\TestCase011.cs" />
     <Compile Include="Collection\TestCase007.cs" />
     <Compile Include="MainPageTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

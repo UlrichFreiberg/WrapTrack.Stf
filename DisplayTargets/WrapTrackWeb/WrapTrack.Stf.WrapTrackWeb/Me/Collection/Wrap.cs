@@ -25,7 +25,7 @@ namespace WrapTrack.Stf.WrapTrackWeb.Me.Collection
         /// The wrap track web shell.
         /// </param>
         public Wrap(IWrapTrackWebShell wrapTrackWebShell)
-           : base(wrapTrackWebShell)
+            : base(wrapTrackWebShell)
         {
         }
 
@@ -61,6 +61,11 @@ namespace WrapTrack.Stf.WrapTrackWeb.Me.Collection
         }
 
         /// <summary>
+        /// Gets or sets number of private pictures uploaded and still valid
+        /// </summary>
+        public int NumPictures { get; set; }
+
+        /// <summary>
         /// Pass on the wrap to user 'username'
         /// </summary>
         /// <param name="username">
@@ -82,6 +87,7 @@ namespace WrapTrack.Stf.WrapTrackWeb.Me.Collection
                 return false;
             }
 
+
             // click the select user button
             if (!WebAdapter.ButtonClickById("but_selUser"))
             {
@@ -93,8 +99,37 @@ namespace WrapTrack.Stf.WrapTrackWeb.Me.Collection
             {
                 return false;
             }
-            
-            return true; 
+
+            return true;
+        }
+
+        /// <inheritdoc />
+        /// <summary>
+        /// The upload pic.
+        /// </summary>
+        /// <param name="clientSideFilePath">
+        /// The client Side File Path.
+        /// </param>
+        /// The client Side File Path.
+        /// <returns>
+        /// The <see cref="T:System.Boolean" />.
+        /// </returns>
+        public bool UploadWrapImage(string clientSideFilePath)
+        {
+            // click the button 'Administrate pictures' 
+            var nav = WebAdapter.FindElement(By.Id("but_adm_pic"));
+            nav.Click();
+
+            var element = WebAdapter.FindElement(By.Id("but_file"));
+
+            element.Clear();
+            element.SendKeys(clientSideFilePath);
+
+            var submitButton = WebAdapter.FindElement(By.Id("but_doupload"));
+
+            submitButton.Submit();
+
+            return true;
         }
     }
 }

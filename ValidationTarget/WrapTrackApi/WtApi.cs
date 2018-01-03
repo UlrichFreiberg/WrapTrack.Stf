@@ -11,6 +11,7 @@
 namespace WrapTrack.Stf.WrapTrackApi
 {
     using System;
+    using System.Linq;
     using System.Net.Http;
     using System.Threading.Tasks;
 
@@ -66,12 +67,15 @@ namespace WrapTrack.Stf.WrapTrackApi
         public WrapInfo WrapInfo(string wtWrapId)
         {
             var info = GetWrapRestInfo(wtWrapId).Result;
+            
+            
             var retVal = new WrapInfo
             {
                 OwnerId = info.SelectToken("ejerskab_bruger_id").ToString(),
                 OwnerName = info.SelectToken("ejerskab_bruger_navn").ToString(),
-                Size = info.SelectToken("stoerrelse").ToString()
-            };
+                Size = info.SelectToken("stoerrelse").ToString(),
+                NumPictures = info["billeder"].Count()
+        };
 
             return retVal;
         }
@@ -87,8 +91,7 @@ namespace WrapTrack.Stf.WrapTrackApi
         /// </returns>
         protected async Task<JObject> GetWrapRestInfo(string wtWrapId)
         {
-
-            var uri = $"{WtApiConfiguration.Url}/vikle/null/plus_ejerskab_nuv/{wtWrapId.Trim()}";
+            var uri = $"{WtApiConfiguration.Url}/vikle/null/plus_ejerskab_nuv+plus_ejerskaber+plus_billeder/{wtWrapId.Trim()}";
             var client = new HttpClient();
 
             client.DefaultRequestHeaders.Add("Accept", "application/json");
