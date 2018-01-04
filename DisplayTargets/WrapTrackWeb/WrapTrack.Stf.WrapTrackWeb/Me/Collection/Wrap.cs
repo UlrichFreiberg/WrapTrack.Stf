@@ -117,17 +117,9 @@ namespace WrapTrack.Stf.WrapTrackWeb.Me.Collection
         public bool UploadWrapImage(string clientSideFilePath)
         {
             // click the button 'Administrate pictures' 
-            var nav = WebAdapter.FindElement(By.Id("but_adm_pic"));
-            nav.Click();
-
-            var element = WebAdapter.FindElement(By.Id("but_file"));
-
-            element.Clear();
-            element.SendKeys(clientSideFilePath);
-
-            var submitButton = WebAdapter.FindElement(By.Id("but_doupload"));
-
-            submitButton.Submit();
+            WebAdapter.ButtonClickById("but_adm_pic");
+            WebAdapter.TextboxSetTextById("but_file", clientSideFilePath);
+            WebAdapter.ButtonClickById("but_doupload");
 
             return true;
         }
