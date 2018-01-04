@@ -16,29 +16,30 @@ namespace WrapTrackWebTests
 
     using Mir.Stf;
 
+    using WrapTrack.Stf.Adapters.WebAdapter;
     using WrapTrack.Stf.WrapTrackApi;
     using WrapTrack.Stf.WrapTrackApi.Interfaces;
     using WrapTrack.Stf.WrapTrackWeb.Interfaces;
 
     /// <summary>
-    /// Tests of diff kinds of upload pictures.
+    /// Tests if user can delete own pictures
     /// </summary>
     [TestClass]
-    public class TestCase008 : WrapTrackTestScriptBase
+    public class TestCase009 : WrapTrackTestScriptBase
     {
         /// <summary>
-        /// The tc 008.
+        /// The tc 009.
         /// </summary>
         [TestMethod]
         [DeploymentItem(@"TestData\")]
-        public void Tc008()
+        public void Tc009()
         {
             var wrapTrackShell = Get<IWrapTrackWebShell>();
             var pathToNewImage = GetNewImagePath();
 
             wrapTrackShell.Login();
 
-            var collection = GetCurrentUserCollection(wrapTrackShell);
+            var collection = GetCurrentUserCollection(wrapTrackShell, true);
             var myWrap = collection.GetRandomWrap();
 
             // Find number of pictures before
@@ -46,14 +47,18 @@ namespace WrapTrackWebTests
             var wtId = myWrap.WtId; // tracking-id
             var before = GetNumberOfPictures(validationTarget, wtId);
 
-            // Do upload
+            // Do 3 * upload
+            myWrap.UploadWrapImage(pathToNewImage);
+            myWrap.UploadWrapImage(pathToNewImage);
             myWrap.UploadWrapImage(pathToNewImage);
 
             // Find number of pictures after upload 
             var after = GetNumberOfPictures(validationTarget, wtId);
-            var newNum = before + 1; 
+            var newNum = before + 3; 
 
-            StfAssert.AreEqual("One more picture uploaded", after, newNum);
+            StfAssert.AreEqual("3 more picture uploaded", after, newNum);
+
+
         }
 
         /// <summary>

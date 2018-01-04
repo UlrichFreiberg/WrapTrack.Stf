@@ -66,7 +66,7 @@ namespace WrapTrack.Stf.WrapTrackApi
         /// </returns>
         public WrapInfo WrapInfo(string wtWrapId)
         {
-            var info = GetWrapRestInfo(wtWrapId).Result;
+            var info = GetWrapRestInfo(wtWrapId)?.Result;
             
             
             var retVal = new WrapInfo

@@ -13,7 +13,6 @@ namespace WrapTrackWebTests
     using System;
 
     using Mir.Stf;
-    using System.Windows;
 
     using WrapTrack.Stf.WrapTrackApi.Interfaces;
     using WrapTrack.Stf.WrapTrackWeb.Interfaces;
@@ -30,10 +29,15 @@ namespace WrapTrackWebTests
         /// <param name="wrapTrackShell">
         /// The wrap track shell.
         /// </param>
+        /// <param name="addIfNone">
+        /// The add If None.
+        /// </param>
         /// <returns>
         /// The <see cref="bool"/>.
         /// </returns>
-        protected ICollection GetCurrentUserCollection(IWrapTrackWebShell wrapTrackShell)
+        protected ICollection GetCurrentUserCollection(
+            IWrapTrackWebShell wrapTrackShell,
+            bool addIfNone = false)
         {
             var me = wrapTrackShell.Me();
             var collection = me.GetCollection();
@@ -41,8 +45,8 @@ namespace WrapTrackWebTests
             StfAssert.IsNotNull("Got a MeProfile", me);
             StfAssert.IsNotNull("Got my collection", collection);
 
-            // Be sure there is a wrap in collection. 
-            if (collection.NumOfWraps() == 0)
+            // Be sure there is a wrap in collection. If requested
+            if (addIfNone && collection.NumOfWraps() == 0)
             {
                 collection.AddWrap("Ali Dover", "Hygge", "Blue");
             }
@@ -79,11 +83,31 @@ namespace WrapTrackWebTests
         /// <returns>
         /// The <see cref="bool"/>.
         /// </returns>
-        public bool Wait(TimeSpan duration)
+        protected bool Wait(TimeSpan duration)
         {
             System.Threading.Thread.Sleep(duration);
 
             return true;
+        }
+
+        /// <summary>
+        /// The date plus days.
+        /// </summary>
+        /// <param name="days">
+        /// The days.
+        /// </param>
+        /// <param name="format">
+        /// The format.
+        /// </param>
+        /// <returns>
+        /// The <see cref="DateTime"/>.
+        /// </returns>
+        protected string TodayPlusDays(int days, string format = "yyyyMMdd")
+        {
+            var date = DateTime.Today + TimeSpan.FromDays(days);
+            var retVal = date.ToString(format);
+
+            return retVal;
         }
     }
 }
