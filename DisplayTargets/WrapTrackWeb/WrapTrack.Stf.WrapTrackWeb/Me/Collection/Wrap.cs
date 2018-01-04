@@ -87,7 +87,6 @@ namespace WrapTrack.Stf.WrapTrackWeb.Me.Collection
                 return false;
             }
 
-
             // click the select user button
             if (!WebAdapter.ButtonClickById("but_selUser"))
             {
