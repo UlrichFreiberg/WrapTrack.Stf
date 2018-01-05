@@ -57,9 +57,12 @@ namespace WrapTrack.Stf.WrapTrackWeb.Interfaces
         /// <param name="clientSideFilePat">
         /// The client Side File Pat.
         /// </param>
+        /// <param name="numUploads">
+        /// The num of uploads of this picture is going to be performed.
+        /// </param>
         /// <returns>
         /// True if upload was success
         /// </returns>
-        bool UploadWrapImage(string clientSideFilePat); 
+        bool UploadWrapImage(string clientSideFilePat, int numUploads = 1); 
     }
 }

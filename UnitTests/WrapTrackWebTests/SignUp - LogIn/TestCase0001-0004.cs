@@ -54,7 +54,7 @@ namespace WrapTrackWebTests
         }
 
         /// <summary>
-        /// The test learn more.
+        /// The log in test.
         /// </summary>
         /// <remarks>
         /// After log in it's possible to acess 'MeProfile-page'
@@ -74,7 +74,7 @@ namespace WrapTrackWebTests
         }
 
         /// <summary>
-        /// The test learn more.
+        /// The test of system validates log in information.
         /// </summary>
         /// <remarks>
         /// After log in it's possible to acess 'MeProfile-page'
@@ -103,7 +103,7 @@ namespace WrapTrackWebTests
         }
 
         /// <summary>
-        /// The test learn more.
+        /// The test of log off.
         /// </summary>
         /// <remarks>
         /// After log out it's not possible to acess 'MeProfile-page'

@@ -53,8 +53,7 @@ namespace WrapTrack.Stf.WrapTrackWeb.Me
         /// </returns>
         public ICollection GetCollection()
         {
-            var nav = WebAdapter.FindElement(By.Id("nav_collection"));
-          nav.Click();
+            WebAdapter.ButtonClickById("nav_collection");
             var retVal = StfContainer.Get<ICollection>();
             return retVal; 
         }

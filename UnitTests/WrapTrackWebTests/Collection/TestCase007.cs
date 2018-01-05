@@ -19,7 +19,8 @@ namespace WrapTrackWebTests.Collection
     using WrapTrack.Stf.WrapTrackWeb.Interfaces.Me;
 
     /// <summary>
-    /// The collection tests.
+    /// Test of letting a wrap pass on from one user to another. 
+    /// The owner  initiatives this action.
     /// </summary>
     [TestClass]
     public class TestCase007 : StfTestScriptBase
@@ -43,7 +44,7 @@ namespace WrapTrackWebTests.Collection
         {
             CurrentUser = "Ida88";
             WrapTrackShell = Get<IWrapTrackWebShell>();
-            WrapTrackShell.Login(CurrentUser); // default user
+            WrapTrackShell.Login(CurrentUser); 
         }
 
         /// <summary>

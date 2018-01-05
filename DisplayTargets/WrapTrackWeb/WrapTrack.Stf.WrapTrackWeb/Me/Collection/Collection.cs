@@ -81,6 +81,12 @@ namespace WrapTrack.Stf.WrapTrackWeb.Me.Collection
         {
             ClickById("but_addwrap");
             ClickById("lin_newwrap");
+            if (brand == null)
+            {
+                brand = "Didymos";
+                pattern = "Nino";
+                model = "Balu"; 
+            }
 
             SelectDropdownByIdAndText("sel_brand", brand);
             SelectDropdownByIdAndText("sel_pattern", pattern);
