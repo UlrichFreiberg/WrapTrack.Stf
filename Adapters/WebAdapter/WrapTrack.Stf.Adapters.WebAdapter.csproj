@@ -108,6 +108,7 @@
     <Compile Include="IWebAdapter.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="WebAdapterButton.cs" />
+    <Compile Include="WebAdapterNativeDialogHandler.cs" />
     <Compile Include="WebAdapterTextbox.cs" />
     <Compile Include="WebAdapterWait.cs" />
     <Compile Include="WebAdapterSelectElement.cs" />

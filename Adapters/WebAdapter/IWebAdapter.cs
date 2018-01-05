@@ -200,5 +200,19 @@ namespace WrapTrack.Stf.Adapters.WebAdapter
         /// The <see cref="bool"/>.
         /// </returns>
         bool TextboxSetTextByXpath(string xpath, string textToEnter);
+
+        /// <summary>
+        /// The native dialog file upload.
+        /// </summary>
+        /// <param name="by">
+        /// The by.
+        /// </param>
+        /// <param name="clientSideFilePath">
+        /// The client side file path.
+        /// </param>
+        /// <returns>
+        /// The <see cref="bool"/>.
+        /// </returns>
+        bool NativeDialogFileUpload(By by, string clientSideFilePath);
     }
 }
