@@ -109,16 +109,22 @@ namespace WrapTrack.Stf.WrapTrackWeb.Me.Collection
         /// <param name="clientSideFilePath">
         /// The client Side File Path.
         /// </param>
-        /// The client Side File Path.
+        /// <param name="numUploads">
+        /// Number of times the image in path clientSideFilePath will be uploaded
+        /// </param>
         /// <returns>
         /// The <see cref="T:System.Boolean" />.
         /// </returns>
-        public bool UploadWrapImage(string clientSideFilePath)
+        public bool UploadWrapImage(string clientSideFilePath, int numUploads)
         {
             // click the button 'Administrate pictures' 
             WebAdapter.ButtonClickById("but_adm_pic");
-            WebAdapter.TextboxSetTextById("but_file", clientSideFilePath);
-            WebAdapter.ButtonClickById("but_doupload");
+
+            for (var i = 0; i < numUploads; i++)
+            {
+                WebAdapter.TextboxSetTextById("but_file", clientSideFilePath);
+                WebAdapter.ButtonClickById("but_doupload");
+            }
 
             return true;
         }

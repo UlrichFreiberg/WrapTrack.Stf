@@ -28,36 +28,54 @@ namespace WrapTrackWebTests
     public class TestCase009 : WrapTrackTestScriptBase
     {
         /// <summary>
+        /// Gets or sets the wrap track shell.
+        /// </summary>
+        private IWrapTrackWebShell WrapTrackShell { get; set; }
+
+        /// <summary>
+        /// The test initialize.
+        /// </summary>
+        [TestInitialize]
+        public void TestInitialize()
+        {
+            //TODO: Move initialization here. 
+            //I tried but lost connection to the objects in the main test
+        }
+
+        /// <summary>
         /// The tc 009.
         /// </summary>
         [TestMethod]
         [DeploymentItem(@"TestData\")]
         public void Tc009()
         {
-            var wrapTrackShell = Get<IWrapTrackWebShell>();
+            WrapTrackShell = Get<IWrapTrackWebShell>();
+            WrapTrackShell.SignUp(); // new user - empty collection
+            var me = WrapTrackShell.Me();
+            StfAssert.IsNotNull("We got a me - a brand new user", me);
+
+            var collection = me.GetCollection();
+            collection.AddWrap(); // precise 1 wrap in collection
+
+            var theOneAndOnlyWrap = collection.GetRandomWrap();
+
             var pathToNewImage = GetNewImagePath();
-
-            wrapTrackShell.Login();
-
-            var collection = GetCurrentUserCollection(wrapTrackShell, true);
-            var myWrap = collection.GetRandomWrap();
 
             // Find number of pictures before
             var validationTarget = Get<IWtApi>();
-            var wtId = myWrap.WtId; // tracking-id
+            var wtId = theOneAndOnlyWrap.WtId; // tracking-id
             var before = GetNumberOfPictures(validationTarget, wtId);
+            StfAssert.AreEqual("0 pictures before upload", before, 0);
 
             // Do 3 * upload
-            myWrap.UploadWrapImage(pathToNewImage);
-            myWrap.UploadWrapImage(pathToNewImage);
-            myWrap.UploadWrapImage(pathToNewImage);
+            theOneAndOnlyWrap.UploadWrapImage(pathToNewImage, 3);
 
             // Find number of pictures after upload 
             var after = GetNumberOfPictures(validationTarget, wtId);
-            var newNum = before + 3; 
 
-            StfAssert.AreEqual("3 more picture uploaded", after, newNum);
+            StfAssert.AreEqual("3 pictures after upload", after, 3);
 
+            //TODO: Remove two pictures and assert there is 1 picture left
 
         }
 
