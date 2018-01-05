@@ -117,7 +117,11 @@ namespace WrapTrack.Stf.WrapTrackWeb.Me.Collection
         {
             // click the button 'Administrate pictures' 
             WebAdapter.ButtonClickById("but_adm_pic");
-            WebAdapter.TextboxSetTextById("but_file", clientSideFilePath);
+
+            // handle the File Upload Dialog
+            WebAdapter.NativeDialogFileUpload(By.Id("but_file"), clientSideFilePath);
+
+            // Press upload the image
             WebAdapter.ButtonClickById("but_doupload");
 
             return true;
