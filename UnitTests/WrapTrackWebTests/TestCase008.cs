@@ -14,9 +14,6 @@ namespace WrapTrackWebTests
 
     using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-    using Mir.Stf;
-
-    using WrapTrack.Stf.WrapTrackApi;
     using WrapTrack.Stf.WrapTrackApi.Interfaces;
     using WrapTrack.Stf.WrapTrackWeb.Interfaces;
 
