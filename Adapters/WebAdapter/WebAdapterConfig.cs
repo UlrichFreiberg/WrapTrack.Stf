@@ -71,6 +71,12 @@ namespace WrapTrack.Stf.Adapters.WebAdapter
             return retVal;
         }
 
+        /// <summary>
+        /// The get chrome options options.
+        /// </summary>
+        /// <returns>
+        /// The <see cref="ChromeOptions"/>.
+        /// </returns>
         private ChromeOptions GetChromeOptionsOptions()
         {
             var retVal = new ChromeOptions();

@@ -14,10 +14,6 @@ namespace WrapTrackWebTests
 
     using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-    using Mir.Stf;
-
-    using WrapTrack.Stf.Adapters.WebAdapter;
-    using WrapTrack.Stf.WrapTrackApi;
     using WrapTrack.Stf.WrapTrackApi.Interfaces;
     using WrapTrack.Stf.WrapTrackWeb.Interfaces;
 
@@ -39,7 +35,7 @@ namespace WrapTrackWebTests
 
             wrapTrackShell.Login();
 
-            var collection = GetCurrentUserCollection(wrapTrackShell, true);
+            var collection = GetCurrentUserCollection(wrapTrackShell);
             var myWrap = collection.GetRandomWrap();
 
             // Find number of pictures before

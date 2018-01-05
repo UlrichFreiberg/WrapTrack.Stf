@@ -10,22 +10,12 @@
 
 namespace WrapTrack.Stf.Adapters.WebAdapter
 {
-    using System;
-    using System.Diagnostics;
-    using System.IO;
-    using System.Linq;
-    using System.Threading;
-
-    using Mir.Stf.Utilities;
-
     using OpenQA.Selenium;
-    using OpenQA.Selenium.Chrome;
-    using OpenQA.Selenium.IE;
 
     /// <summary>
     /// The web adapter.
     /// </summary>
-    public partial class WebAdapter : StfAdapterBase, IWebAdapter
+    public partial class WebAdapter
     {
         /// <summary>
         /// The button click by xpath.
