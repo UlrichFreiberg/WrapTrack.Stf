@@ -154,11 +154,10 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="_TestData\Pictures\wraptrack-user-6-10.jpg">
+    <Content Include="TestData\Pictures\wraptrack-user-6-10.jpg">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
-  <ItemGroup />
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">
       <ItemGroup>
