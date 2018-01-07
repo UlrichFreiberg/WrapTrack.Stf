@@ -94,13 +94,18 @@ namespace WrapTrack.Stf.WrapTrackWeb
             // Create (semi) random username
             var uniquePart = Guid.NewGuid().ToString().Replace("-", string.Empty).Substring(1, 15);
             var newUsername = $"TEST-{uniquePart}";
+            const string Password = "123456";
 
             WebAdapter.ButtonClickById("nav_login");
             WebAdapter.TextboxSetTextById("input_newuser", newUsername);
-            WebAdapter.TextboxSetTextById("input_newPW", "123456");
+            WebAdapter.TextboxSetTextById("input_newPW", Password);
             WebAdapter.TextboxSetTextById("input_email", newUsername + "@mitsite.org");
             WebAdapter.ButtonClickById("check_cond");
             WebAdapter.ButtonClickById("OpretProfilKnap");
+
+            // when debugging, we probably want to get to the signed up user 
+            StfLogger.LogKeyValue("SignUpUserName", newUsername, "SignUpUserName");
+            StfLogger.LogKeyValue("SignUpPassword", Password, "SignUpPassword");
 
             return true;
         }

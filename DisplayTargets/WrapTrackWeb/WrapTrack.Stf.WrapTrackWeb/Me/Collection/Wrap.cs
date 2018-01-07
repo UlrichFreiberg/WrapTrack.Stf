@@ -10,6 +10,8 @@
 
 namespace WrapTrack.Stf.WrapTrackWeb.Me.Collection
 {
+    using System.Linq;
+
     using OpenQA.Selenium;
     using WrapTrack.Stf.WrapTrackWeb.Interfaces;
 
@@ -115,18 +117,48 @@ namespace WrapTrack.Stf.WrapTrackWeb.Me.Collection
         /// <returns>
         /// The <see cref="T:System.Boolean" />.
         /// </returns>
-        public bool UploadWrapImage(string clientSideFilePath, int numUploads)
+        public bool UploadWrapImage(string clientSideFilePath, int numUploads = 1)
         {
             // click the button 'Administrate pictures' 
             WebAdapter.ButtonClickById("but_adm_pic");
-            for (var i = 0; i < numUploads; i++)
+
+            for (var i = 1; i <= numUploads; i++)
             {
+                WebAdapter.WaitForComplete(3);
+
                 // handle the File Upload Dialog
                 WebAdapter.NativeDialogFileUpload(By.Id("but_file"), clientSideFilePath);
+
+                WebAdapter.WaitForComplete(3);
 
                 // Press upload the image
                 WebAdapter.ButtonClickById("but_doupload");
             }
+
+            return true;
+        }
+
+        /// <summary>
+        /// The remove ONE wrap image. 
+        /// </summary>
+        /// <param name="imageIndex">
+        /// The index of the image to delete - if 1 then the image listed in the top
+        /// </param>
+        /// <returns>
+        /// The <see cref="bool"/>.
+        /// </returns>
+        public bool RemoveWrapImage(int imageIndex = 1)
+        {
+            var buttons = WebAdapter.FindElements(By.Id("but_deleteprivateimg"));
+
+            if (buttons == null || buttons.Count == 0)
+            {
+                return false;
+            }
+
+            var buttonToClick = buttons.First();
+
+            buttonToClick.Click();
 
             return true;
         }

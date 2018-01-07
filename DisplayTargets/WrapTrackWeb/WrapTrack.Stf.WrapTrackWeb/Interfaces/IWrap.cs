@@ -63,6 +63,17 @@ namespace WrapTrack.Stf.WrapTrackWeb.Interfaces
         /// <returns>
         /// True if upload was success
         /// </returns>
-        bool UploadWrapImage(string clientSideFilePat, int numUploads = 1); 
+        bool UploadWrapImage(string clientSideFilePat, int numUploads = 1);
+
+        /// <summary>
+        /// The remove ONE wrap image. 
+        /// </summary>
+        /// <param name="imageIndex">
+        /// The index of the image to delete - if 1 then the image listed in the top
+        /// </param>
+        /// <returns>
+        /// The <see cref="bool"/>.
+        /// </returns>
+        bool RemoveWrapImage(int imageIndex = 1);
     }
 }
