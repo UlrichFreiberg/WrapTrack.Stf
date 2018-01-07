@@ -8,7 +8,7 @@
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace WrapTrackWebTests
+namespace WrapTrackWebTests.Upload_Pictures
 {
     using System.IO;
 
@@ -27,7 +27,6 @@ namespace WrapTrackWebTests
         /// The tc 008.
         /// </summary>
         [TestMethod]
-        [DeploymentItem(@"TestData\")]
         public void Tc008()
         {
             var wrapTrackShell = Get<IWrapTrackWebShell>();
