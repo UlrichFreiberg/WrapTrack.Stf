@@ -35,5 +35,10 @@ namespace WrapTrack.Stf.WrapTrackApi
         /// Uploaded by all users of the wrap
         /// </summary>
         public int NumPictures { get; set; }
+
+        /// <summary>
+        /// Gets or sets the wrap status.
+        /// </summary>
+        public string Status { get; set;  }
     }
 }

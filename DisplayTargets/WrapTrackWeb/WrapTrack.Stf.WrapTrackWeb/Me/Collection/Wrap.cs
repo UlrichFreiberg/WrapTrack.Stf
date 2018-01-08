@@ -10,6 +10,7 @@
 
 namespace WrapTrack.Stf.WrapTrackWeb.Me.Collection
 {
+    using System;
     using System.Linq;
 
     using OpenQA.Selenium;
@@ -161,6 +162,87 @@ namespace WrapTrack.Stf.WrapTrackWeb.Me.Collection
             buttonToClick.Click();
 
             return true;
+        }
+
+        /// <summary>
+        /// Remove a wrap from collection
+        /// </summary>
+        /// <param name="deleteOption">
+        /// There is more than one reason why the wrap should 
+        /// not be part of the user collecting more
+        /// </param>
+        /// <returns>
+        /// True if sucsess else False
+        /// </returns>
+        public bool Remove(string deleteOption)
+        {
+            var optIdent = string.Empty;
+            var nextButton = string.Empty; 
+            ClickById("but_remove");
+           
+            if (deleteOption == "soldToStranger")
+            {
+                optIdent = "opt2";
+                nextButton = "but_fortsaet2"; 
+            }
+
+            if (deleteOption == "lostWrap")
+            {
+                optIdent = "opt3";
+                nextButton = "but_ok3";
+            }
+
+            if (deleteOption == "brokenWrap")
+            {
+                optIdent = "opt4";
+                nextButton = "but_ok4";
+            }
+            
+            // var myChoise = WebAdapter.FindElement(By.Name(optIdent));
+            var myChoise = WebAdapter.FindElement(By.Id(optIdent));
+            myChoise.Click();
+            Wait(TimeSpan.FromSeconds(1)); // wait for button to appear
+            var next = WebAdapter.FindElement(By.Id(nextButton));
+            next.Click();
+
+            return true;
+        }
+
+        /// <summary>
+        /// The wait.
+        /// </summary>
+        /// <param name="duration">
+        /// The duration.
+        /// </param>
+        /// <returns>
+        /// The <see cref="bool"/>.
+        /// </returns>
+        protected bool Wait(TimeSpan duration)
+        {
+            System.Threading.Thread.Sleep(duration);
+
+            return true;
+        }
+
+        /// <summary>
+        /// The click by id.
+        /// </summary>
+        /// <param name="id">
+        /// The id.
+        /// </param>
+        private void ClickById(string id)
+        {
+            var elem = WebAdapter.FindElement(By.Id(id));
+
+            try
+            {
+                elem.Click();
+            }
+            catch
+            {
+                WebAdapter.MoveToElement(elem);
+                elem.Click();
+            }
         }
     }
 }

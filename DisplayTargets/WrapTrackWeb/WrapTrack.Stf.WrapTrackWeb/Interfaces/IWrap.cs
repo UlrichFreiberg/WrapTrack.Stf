@@ -75,5 +75,18 @@ namespace WrapTrack.Stf.WrapTrackWeb.Interfaces
         /// The <see cref="bool"/>.
         /// </returns>
         bool RemoveWrapImage(int imageIndex = 1);
+
+        /// <summary>
+        /// Remove a wrap from collection
+        /// </summary>
+        /// <param name="deleteOption">
+        /// There is more than one reason why 
+        /// the wrap should be deleted. WT treats some of the 
+        /// possiblities differently
+        /// </param>
+        /// <returns>
+        /// True if sucess else false
+        /// </returns>
+        bool Remove(string deleteOption);
     }
 }

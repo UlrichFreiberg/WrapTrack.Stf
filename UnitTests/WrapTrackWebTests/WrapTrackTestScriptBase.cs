@@ -37,7 +37,7 @@ namespace WrapTrackWebTests
         /// </returns>
         protected ICollection GetCurrentUserCollection(
             IWrapTrackWebShell wrapTrackShell,
-            bool addIfNone = false)
+            bool addIfNone = true)
         {
             var me = wrapTrackShell.Me();
             var collection = me.GetCollection();

@@ -66,16 +66,16 @@ namespace WrapTrack.Stf.WrapTrackApi
         /// </returns>
         public WrapInfo WrapInfo(string wtWrapId)
         {
-            var info = GetWrapRestInfo(wtWrapId)?.Result;
-            
-            
+            var info = GetWrapRestInfo(wtWrapId).Result;
+     
             var retVal = new WrapInfo
             {
                 OwnerId = info.SelectToken("ejerskab_bruger_id").ToString(),
                 OwnerName = info.SelectToken("ejerskab_bruger_navn").ToString(),
                 Size = info.SelectToken("stoerrelse").ToString(),
-                NumPictures = info["billeder"].Count()
-        };
+                NumPictures = info["billeder"].Count(), 
+                Status = info.SelectToken("status").ToString()
+            };
 
             return retVal;
         }
