@@ -10,6 +10,8 @@
 
 namespace WrapTrack.Stf.WrapTrackWeb.Interfaces
 {
+    using WrapTrack.Stf.WrapTrackWeb.Me.Collection;
+
     /// <summary>
     /// The Wrap interface.
     /// </summary>
@@ -87,6 +89,6 @@ namespace WrapTrack.Stf.WrapTrackWeb.Interfaces
         /// <returns>
         /// True if sucess else false
         /// </returns>
-        bool Remove(string deleteOption);
+        bool Remove(DeleteWrapOption deleteOption);
     }
 }

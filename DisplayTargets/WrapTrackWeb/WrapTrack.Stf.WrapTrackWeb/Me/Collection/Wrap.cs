@@ -174,38 +174,46 @@ namespace WrapTrack.Stf.WrapTrackWeb.Me.Collection
         /// <returns>
         /// True if sucsess else False
         /// </returns>
-        public bool Remove(string deleteOption)
+        public bool Remove(DeleteWrapOption deleteOption)
         {
-            var optIdent = string.Empty;
-            var nextButton = string.Empty; 
+            string optIdentId;
+            string nextButtonId;
+
             ClickById("but_remove");
-           
-            if (deleteOption == "soldToStranger")
-            {
-                optIdent = "opt2";
-                nextButton = "but_fortsaet2"; 
-            }
 
-            if (deleteOption == "lostWrap")
+            switch (deleteOption)
             {
-                optIdent = "opt3";
-                nextButton = "but_ok3";
-            }
-
-            if (deleteOption == "brokenWrap")
-            {
-                optIdent = "opt4";
-                nextButton = "but_ok4";
+                case DeleteWrapOption.SoldToStranger:
+                    optIdentId = "opt2";
+                    nextButtonId = "but_fortsaet2";
+                    break;
+                case DeleteWrapOption.LostWrap:
+                    optIdentId = "opt3";
+                    nextButtonId = "but_ok3";
+                    break;
+                case DeleteWrapOption.BrokenWrap:
+                    optIdentId = "opt4";
+                    nextButtonId = "but_ok4";
+                    break;
+                default:
+                    return false;
             }
             
             // var myChoise = WebAdapter.FindElement(By.Name(optIdent));
-            var myChoise = WebAdapter.FindElement(By.Id(optIdent));
-            myChoise.Click();
-            Wait(TimeSpan.FromSeconds(1)); // wait for button to appear
-            var next = WebAdapter.FindElement(By.Id(nextButton));
-            next.Click();
+            var myChoise = WebAdapter.ButtonClickById(optIdentId);
 
-            return true;
+            if (!myChoise)
+            {
+                return false;
+            }
+
+            // wait for button to appear
+            Wait(TimeSpan.FromSeconds(1)); 
+
+            var next = WebAdapter.ButtonClickById(nextButtonId);
+            
+            // if we manage to press Next, then we are good:-)
+            return next;
         }
 
         /// <summary>

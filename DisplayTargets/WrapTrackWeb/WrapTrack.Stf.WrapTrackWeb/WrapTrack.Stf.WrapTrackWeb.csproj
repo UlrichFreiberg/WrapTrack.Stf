@@ -115,6 +115,7 @@
     <Compile Include="Interfaces\Me\IMeReviews.cs" />
     <Compile Include="Interfaces\Me\IMeSettings.cs" />
     <Compile Include="MenuManager.cs" />
+    <Compile Include="Me\Collection\DeleteWrapOption.cs" />
     <Compile Include="Me\Collection\Wrap.cs" />
     <Compile Include="Me\MeInbox.cs" />
     <Compile Include="Me\MeReviews.cs" />
