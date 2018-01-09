@@ -1,5 +1,5 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="TestCase007.cs" company="Mir Software">
+// <copyright file="TestCase011.cs" company="Mir Software">
 //   Copyright governed by Artistic license as described here:
 //          http://www.perlfoundation.org/artistic_license_2_0
 // </copyright>
@@ -14,11 +14,10 @@ namespace WrapTrackWebTests.Collection
 
     using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-    using Mir.Stf;
-
     using WrapTrack.Stf.WrapTrackApi.Interfaces;
     using WrapTrack.Stf.WrapTrackWeb.Interfaces;
     using WrapTrack.Stf.WrapTrackWeb.Interfaces.Me;
+    using WrapTrack.Stf.WrapTrackWeb.Me.Collection;
 
     /// <summary>
     /// Deleting wraps...
@@ -52,38 +51,37 @@ namespace WrapTrackWebTests.Collection
         /// There is more than one reason why the wrap should not be part of 
         /// the user collection any more.
         /// This is test of lost wrap
-        ///  
         /// </summary>
         [TestMethod]
         public void Tc011()
         {
-
             // Test initialize - be sure we have a least 1 wraps
             var collection = GetCurrentUserCollection();
   
             // Find a random wrap
             var ranWrap = collection.GetRandomWrap();
             var wtId = ranWrap.WtId;
+
             StfAssert.IsNotNull("Got a random wrap", ranWrap);
 
             // Status of wrap before
             var validationTarget = Get<IWtApi>();
             var wrapInfo = validationTarget.WrapInfo(wtId);
             var statusBefore = wrapInfo.Status;
+
             StfAssert.AreEqual("Status before deleting is 0", statusBefore, "0");
 
             // Delete wrap
-            ranWrap.Remove("lostWrap");
+            ranWrap.Remove(DeleteWrapOption.LostWrap);
             Wait(TimeSpan.FromSeconds(2));
 
-            //Status of wrap after
+            // Status of wrap after
             var validationTarget2 = Get<IWtApi>();
             var wrapInfo2 = validationTarget2.WrapInfo(wtId);
             var statusAfter = wrapInfo2.Status;
+
             StfAssert.AreEqual("Status after deleting is 1", statusAfter, "1");
-
         }
-
 
         /// <summary>
         /// The get current user collection. If none, then one is added
