@@ -1,5 +1,5 @@
-﻿// -----------------------------------------!---------------------------------------------------------------------------
-// <copyright file="UploadTests.cs" company="Mir Software">
+﻿// --------------------------------------------------------------------------------------------------------------------
+// <copyright file="TestCase005.cs" company="Mir Software">
 //   Copyright governed by Artistic license as described here:
 //          http://www.perlfoundation.org/artistic_license_2_0
 // </copyright>
@@ -8,16 +8,14 @@
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace WrapTrackWebTests
+namespace WrapTrackWebTests.Upload_Pictures
 {
-    using System;
     using System.IO;
 
     using Microsoft.VisualStudio.TestTools.UnitTesting;
 
     using Mir.Stf;
 
-    using WrapTrack.Stf.WrapTrackApi.Interfaces;
     using WrapTrack.Stf.WrapTrackWeb.Interfaces;
 
     /// <summary>
