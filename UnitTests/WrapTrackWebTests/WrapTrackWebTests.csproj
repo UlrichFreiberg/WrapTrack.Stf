@@ -131,7 +131,8 @@
     <Compile Include="SignUp - LogIn\TestCase0001-0004.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Upload Pictures\TestCase009.cs" />
-    <Compile Include="_Developer tests\MenuTests.cs" />
+    <Compile Include="ZDeveloperTests\DataDrivenTests.cs" />
+    <Compile Include="ZDeveloperTests\MenuTests.cs" />
     <Compile Include="Upload Pictures\TestCase008.cs" />
     <Compile Include="Upload Pictures\TestCase005.cs" />
     <Compile Include="WrapTrackTestScriptBase.cs" />
@@ -140,6 +141,9 @@
   <ItemGroup>
     <None Include="packages.config">
       <SubType>Designer</SubType>
+    </None>
+    <None Include="TestData\ZDeveloperTests\DataDrivenBob.xlsx">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
   </ItemGroup>
   <ItemGroup>
@@ -161,6 +165,7 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
+  <ItemGroup />
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">
       <ItemGroup>

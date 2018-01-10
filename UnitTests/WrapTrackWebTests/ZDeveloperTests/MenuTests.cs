@@ -8,10 +8,10 @@
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
 
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-
-namespace WrapTrackWebTests
+namespace WrapTrackWebTests.ZDeveloperTests
 {
+    using Microsoft.VisualStudio.TestTools.UnitTesting;
+
     using Mir.Stf;
 
     using WrapTrack.Stf.WrapTrackWeb;
