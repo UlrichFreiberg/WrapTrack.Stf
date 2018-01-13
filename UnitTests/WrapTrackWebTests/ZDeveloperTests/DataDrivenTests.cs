@@ -15,6 +15,9 @@ namespace WrapTrackWebTests.ZDeveloperTests
     using Microsoft.VisualStudio.TestTools.UnitTesting;
 
     using Mir.Stf;
+    using Mir.Stf.Utilities;
+
+    using WrapTrack.Stf.WrapTrackWeb.Me.Collection;
 
     /// <summary>
     /// The menu tests.
@@ -55,6 +58,7 @@ namespace WrapTrackWebTests.ZDeveloperTests
             StfLogger.LogInfo($"First = {testdata.First}");
             StfLogger.LogInfo($"Second = {testdata.Second}");
             StfLogger.LogInfo($"Third = {testdata.Third}");
+            StfLogger.LogInfo($"Third = {testdata.DeleteWrapOption}");
         }
     }
 
@@ -78,5 +82,11 @@ namespace WrapTrackWebTests.ZDeveloperTests
         /// Gets or sets the third.
         /// </summary>
         public string Third { get; set; }
+
+        /// <summary>
+        /// Gets or sets the delete wrap option.
+        /// </summary>
+        [StfTestData("Gurli")]
+        public DeleteWrapOption DeleteWrapOption { get; set; }
     }
 }

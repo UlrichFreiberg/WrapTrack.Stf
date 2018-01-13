@@ -15,6 +15,12 @@ namespace WrapTrack.Stf.WrapTrackWeb.Me.Collection
     /// </summary>
     public enum DeleteWrapOption
     {
+
+        /// <summary>
+        /// The sold to stranger.
+        /// </summary>
+        SoldToAnotherUser,
+        
         /// <summary>
         /// The sold to stranger.
         /// </summary>
@@ -29,5 +35,16 @@ namespace WrapTrack.Stf.WrapTrackWeb.Me.Collection
         /// The broken wrap.
         /// </summary>
         BrokenWrap,
+
+        /// <summary>
+        /// The converted wrap.
+        /// </summary>
+        ConvertedNonWrap,
+
+        /// <summary>
+        /// The registred-as-an-error wrap
+        /// </summary>
+        WasAnError,
+        Converted
     }
 }

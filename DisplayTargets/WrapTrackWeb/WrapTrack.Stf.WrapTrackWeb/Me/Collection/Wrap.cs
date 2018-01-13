@@ -176,13 +176,16 @@ namespace WrapTrack.Stf.WrapTrackWeb.Me.Collection
         /// </returns>
         public bool Remove(DeleteWrapOption deleteOption)
         {
-            string optIdentId;
-            string nextButtonId;
+            string optIdentId = null;
+            string nextButtonId = null;
 
             ClickById("but_remove");
 
             switch (deleteOption)
             {
+                case DeleteWrapOption.SoldToAnotherUser:
+                    return true; 
+
                 case DeleteWrapOption.SoldToStranger:
                     optIdentId = "opt2";
                     nextButtonId = "but_fortsaet2";
@@ -195,17 +198,24 @@ namespace WrapTrack.Stf.WrapTrackWeb.Me.Collection
                     optIdentId = "opt4";
                     nextButtonId = "but_ok4";
                     break;
+                case DeleteWrapOption.WasAnError:
+                    optIdentId = "opt5";
+                    nextButtonId = "but_ok5";
+                    break;
+                case DeleteWrapOption.Converted:
+                    optIdentId = "opt4";
+                    nextButtonId = "but_ok4";
+                    break;
+                case DeleteWrapOption.ConvertedNonWrap:
+                    optIdentId = "opt7";
+                    nextButtonId = "but_ok7";
+                    break;
                 default:
-                    return false;
+                    return false; 
             }
-            
-            // var myChoise = WebAdapter.FindElement(By.Name(optIdent));
-            var myChoise = WebAdapter.ButtonClickById(optIdentId);
 
-            if (!myChoise)
-            {
-                return false;
-            }
+            //var myChoise = WebAdapter.FindElement(By.Name(optIdentId));
+            WebAdapter.ButtonClickById(optIdentId);
 
             // wait for button to appear
             Wait(TimeSpan.FromSeconds(1)); 
