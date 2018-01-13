@@ -37,7 +37,7 @@ namespace WrapTrack.Stf.WrapTrackWeb.Me.Collection
         BrokenWrap,
 
         /// <summary>
-        /// The converted wrap.
+        /// The converted wrap - is no longer a wrap
         /// </summary>
         ConvertedNonWrap,
 
@@ -45,6 +45,10 @@ namespace WrapTrack.Stf.WrapTrackWeb.Me.Collection
         /// The registred-as-an-error wrap
         /// </summary>
         WasAnError,
+
+        /// <summary>
+        /// The converted wrap
+        /// </summary>
         Converted
     }
 }
