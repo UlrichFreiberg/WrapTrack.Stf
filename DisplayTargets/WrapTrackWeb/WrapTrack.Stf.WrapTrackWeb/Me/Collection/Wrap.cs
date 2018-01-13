@@ -74,10 +74,14 @@ namespace WrapTrack.Stf.WrapTrackWeb.Me.Collection
         /// <param name="username">
         /// The username.
         /// </param>
+        /// <param name="ownershipStart">
+        /// The ownership Start.
+        /// If not set, default date is used
+        /// </param>
         /// <returns>
         /// The <see cref="bool"/>.
         /// </returns>
-        public bool PassOn(string username)
+        public bool PassOn(string username, string ownershipStart = null)
         {
             // click the Pass On Button in the menu
             if (!WebAdapter.ButtonClickByXpath("//knap_videregivvikle/div[1]/knap_basis/button/p/span[2]/span"))
@@ -94,6 +98,17 @@ namespace WrapTrack.Stf.WrapTrackWeb.Me.Collection
             if (!WebAdapter.ButtonClickById("but_selUser"))
             {
                 return false;
+            }
+
+            // Choose a date for ownership-start
+            if (ownershipStart != null)
+            {
+                Wait(TimeSpan.FromSeconds(1));
+                if (!WebAdapter.TextboxSetTextById("inp_datePassOn", ownershipStart))
+                {
+                    StfLogger.LogInfo("Date for ownership not changed");
+                    return false;
+                }
             }
 
             // answer the R U sure

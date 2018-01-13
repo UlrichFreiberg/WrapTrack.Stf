@@ -48,10 +48,13 @@ namespace WrapTrack.Stf.WrapTrackWeb.Interfaces
         /// <param name="nameOfReciever">
         /// The name of the recieving user.
         /// </param>
+        /// <param name="ownershipStart">
+        /// The ownership Start. If not set the default date is used.
+        /// </param>
         /// <returns>
         /// Indocation of success
         /// </returns>
-        bool PassOn(string nameOfReciever);
+        bool PassOn(string nameOfReciever, string ownershipStart = null);
 
         /// <summary>
         /// Upload users own pictures of the wrap
