@@ -58,13 +58,12 @@ namespace WrapTrack.Stf.Core
         /// <summary>
         /// Gets the current environment.
         /// </summary>
-        public string CurrentEnvironment
-        {
-            get
-            {
-                return StfConfiguration.DefaultEnvironment;
-            }
-        }
+        public string CurrentEnvironment => StfConfiguration.DefaultEnvironment;
+
+        /// <summary>
+        /// Gets or sets the current Windows User in user. 
+        /// </summary>
+        public string CurrentUser { get; set; }
 
         /// <summary>
         /// Gets the stf configuration.
@@ -76,11 +75,6 @@ namespace WrapTrack.Stf.Core
                 return configuration ?? (configuration = StfContainer.Get<StfConfiguration>());
             }
         }
-
-        /// <summary>
-        /// Gets or sets the current user.
-        /// </summary>
-        protected string CurrentUser { get; set; }
 
         /// <summary>
         /// The set config.

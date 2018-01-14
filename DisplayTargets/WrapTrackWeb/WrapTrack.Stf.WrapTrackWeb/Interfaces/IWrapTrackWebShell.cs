@@ -36,6 +36,16 @@ namespace WrapTrack.Stf.WrapTrackWeb.Interfaces
         IWebAdapter WebAdapter { get; set; }
 
         /// <summary>
+        /// Gets or sets the current Windows User in user. 
+        /// </summary>
+        string CurrentUser { get; set; }
+
+        /// <summary>
+        /// Gets or sets the current logged in user.
+        /// </summary>
+        string CurrentLoggedInUser { get; set; }
+
+        /// <summary>
         /// The learn more.
         /// </summary>
         /// <returns>
