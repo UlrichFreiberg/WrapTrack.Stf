@@ -23,24 +23,8 @@ namespace WrapTrackWebTests.ZDeveloperTests
     /// The menu tests.
     /// </summary>
     [TestClass]
-    public class DataDrivenTests : StfTestScriptBase
+    public class DataDrivenTests : WrapTrackTestScriptBase
     {
-        /// <summary>
-        /// The test initialize.
-        /// </summary>
-        [TestInitialize]
-        public void TestInitialize()
-        {
-        }
-
-        /// <summary>
-        /// The test cleanup.
-        /// </summary>
-        [TestCleanup]
-        public void TestCleanup()
-        {
-        }
-
         /*   
          *    "System.Data.OleDb",
          *    @"Provider=Microsoft.ACE.OLEDB.12.0;Data Source=ZDeveloperTests\DataDrivenBob.xlsx;Persist Security Info=False;Extended Properties=""Excel 12.0 Xml;HDR=YES""", 

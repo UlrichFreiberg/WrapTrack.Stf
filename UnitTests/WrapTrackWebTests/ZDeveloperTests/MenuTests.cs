@@ -21,7 +21,7 @@ namespace WrapTrackWebTests.ZDeveloperTests
     /// The menu tests.
     /// </summary>
     [TestClass]
-    public class MenuTests : StfTestScriptBase
+    public class MenuTests : WrapTrackTestScriptBase
     {
         /// <summary>
         /// The wrap track shell.
@@ -41,15 +41,6 @@ namespace WrapTrackWebTests.ZDeveloperTests
         {
             wrapTrackShell = Get<IWrapTrackWebShell>();
             menuMananger = new MenuManager(wrapTrackShell.WebAdapter);
-        }
-
-        /// <summary>
-        /// The test cleanup.
-        /// </summary>
-        [TestCleanup]
-        public void TestCleanup()
-        {
-            wrapTrackShell?.Logout(false);
         }
 
         /// <summary>

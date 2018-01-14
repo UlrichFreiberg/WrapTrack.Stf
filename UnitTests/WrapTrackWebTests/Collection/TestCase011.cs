@@ -12,8 +12,6 @@ namespace WrapTrackWebTests.Collection
 {
     using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-    using Mir.Stf;
-
     using WrapTrack.Stf.WrapTrackApi.Interfaces;
     using WrapTrack.Stf.WrapTrackWeb.Interfaces;
     using WrapTrack.Stf.WrapTrackWeb.Interfaces.Me;
@@ -25,17 +23,6 @@ namespace WrapTrackWebTests.Collection
     [TestClass]
     public class TestCase011 : WrapTrackTestScriptBase
     {    
-        /// <summary>
-        /// Gets or sets the wrap track shell.
-        /// </summary>
-        private IWrapTrackWebShell WrapTrackShell { get; set; }
-
-        /// <summary>
-        /// Gets or sets the current user. 
-        /// TODO: Make CurrentUser as a property to WtShell
-        /// </summary>
-        private string CurrentUser { get; set; }
-
         /// <summary>
         /// The test initialize.
         /// </summary>
@@ -60,7 +47,7 @@ namespace WrapTrackWebTests.Collection
 
             StfAssert.IsNotNull("Got a random wrap", wrapToGo);
 
-            var anotherUser = GetAnotherUser();
+            var anotherUser = GetAnotherUser(WrapTrackShell);
             var ownershipStart = TodayPlusDays(2, "yyyy-MM-dd"); 
             var x = wrapToGo.PassOn(anotherUser, ownershipStart);
 
@@ -82,7 +69,6 @@ namespace WrapTrackWebTests.Collection
         /// </returns>
         private bool ValidatePassOn(string wrapToGo, string anotherUsername)
         {
-
             var validationTarget = Get<IWtApi>();
             var wrapInfo = validationTarget.WrapInfo(wrapToGo);
             var retVal = wrapInfo.OwnerName == anotherUsername;
@@ -111,19 +97,6 @@ namespace WrapTrackWebTests.Collection
             }
 
             return collection;
-        }
-
-        /// <summary>
-        /// The get another user.
-        /// </summary>
-        /// <returns>
-        /// The <see cref="string"/>.
-        /// </returns>
-        private string GetAnotherUser()
-        {
-            var retVal = CurrentUser == "Ida88" ? "Mie88" : "Ida88";
-
-            return retVal;
         }
     }
 }

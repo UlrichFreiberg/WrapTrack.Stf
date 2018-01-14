@@ -31,17 +31,6 @@ namespace WrapTrackWebTests.Collection
     public class TestCase010 : WrapTrackTestScriptBase
     {
         /// <summary>
-        /// Gets or sets the wrap track shell.
-        /// </summary>
-        private IWrapTrackWebShell WrapTrackShell { get; set; }
-
-        /// <summary>
-        /// Gets or sets the current user. 
-        /// TODO: Make CurrentUser as a property to WtShell
-        /// </summary>
-        private string CurrentUser { get; set; }
-
-        /// <summary>
         /// Gets or sets the collection.
         /// </summary>
         private ICollection Collection { get; set; }
@@ -53,7 +42,7 @@ namespace WrapTrackWebTests.Collection
         public void TestInitialize()
         {
             WrapTrackShell = Get<IWrapTrackWebShell>();
-            WrapTrackShell.Login(CurrentUser);
+            WrapTrackShell.Login();
 
             // Be sure we have enough wraps for all test instances
             Collection = GetCurrentUserCollection(WrapTrackShell);

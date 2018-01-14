@@ -1,5 +1,5 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="MainPageTests.cs" company="Mir Software">
+// <copyright file="TestCase0001-0004.cs" company="Mir Software">
 //   Copyright governed by Artistic license as described here:
 //          http://www.perlfoundation.org/artistic_license_2_0
 // </copyright>
@@ -12,8 +12,6 @@ namespace WrapTrackWebTests
 {
     using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-    using Mir.Stf;
-
     using WrapTrack.Stf.WrapTrackWeb.Interfaces;
 
     using WrapTrack.Stf.WrapTrackWeb.Interfaces.Me;
@@ -22,7 +20,7 @@ namespace WrapTrackWebTests
     /// The main page tests.
     /// </summary>
     [TestClass]
-    public class MainPageTests : StfTestScriptBase
+    public class MainPageTests : WrapTrackTestScriptBase
     {
         /// <summary>
         /// The wt testscript utils.
@@ -42,15 +40,6 @@ namespace WrapTrackWebTests
         {
             wrapTrackShell = Get<IWrapTrackWebShell>();
             wtTestscriptUtils = new WtTestscriptUtils(StfLogger);
-        }
-
-        /// <summary>
-        /// The test cleanup.
-        /// </summary>
-        [TestCleanup]
-        public void TestCleanup()
-        {
-            wrapTrackShell?.CloseDown();
         }
 
         /// <summary>

@@ -10,6 +10,8 @@
 
 namespace WrapTrackWebTests.Collection
 {
+    using System;
+
     using Microsoft.VisualStudio.TestTools.UnitTesting;
 
     using Mir.Stf;
@@ -24,28 +26,16 @@ namespace WrapTrackWebTests.Collection
     /// Default date.
     /// </summary>
     [TestClass]
-    public class TestCase007 : StfTestScriptBase
+    public class TestCase007 : WrapTrackTestScriptBase
     {
-        /// <summary>
-        /// Gets or sets the wrap track shell.
-        /// </summary>
-        private IWrapTrackWebShell WrapTrackShell { get; set; }
-
-        /// <summary>
-        /// Gets or sets the current user. 
-        /// TODO: Make CurrentUser as a property to WtShell
-        /// </summary>
-        private string CurrentUser { get; set; }
-
         /// <summary>
         /// The test initialize.
         /// </summary>
         [TestInitialize]
         public void TestInitialize()
         {
-            CurrentUser = "Ida88";
             WrapTrackShell = Get<IWrapTrackWebShell>();
-            WrapTrackShell.Login(CurrentUser); 
+            WrapTrackShell.Login(); 
         }
 
         /// <summary>
@@ -62,7 +52,7 @@ namespace WrapTrackWebTests.Collection
 
             StfAssert.IsNotNull("Got a random wrap", wrapToGo);
 
-            var anotherUser = GetAnotherUser();
+            var anotherUser = GetAnotherUser(WrapTrackShell);
             var x = wrapToGo.PassOn(anotherUser);
 
             StfAssert.IsTrue("PassedOn", x);
@@ -83,7 +73,6 @@ namespace WrapTrackWebTests.Collection
         /// </returns>
         private bool ValidatePassOn(string wrapToGo, string anotherUsername)
         {
-
             var validationTarget = Get<IWtApi>();
             var wrapInfo = validationTarget.WrapInfo(wrapToGo);
             var retVal = wrapInfo.OwnerName == anotherUsername;
@@ -112,19 +101,6 @@ namespace WrapTrackWebTests.Collection
             }
 
             return collection;
-        }
-
-        /// <summary>
-        /// The get another user.
-        /// </summary>
-        /// <returns>
-        /// The <see cref="string"/>.
-        /// </returns>
-        private string GetAnotherUser()
-        {            
-            var retVal = CurrentUser == "Ida88" ? "Mie88" : "Ida88";
-
-            return retVal;
         }
     }
 }
