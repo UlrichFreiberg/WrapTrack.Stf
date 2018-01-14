@@ -1,8 +1,8 @@
-DeleteOption,StatusAfter
-SoldToAnotherUser, 0
-SoldToStranger,1
-LostWrap,1
-BrokenWrap,2
-WasAnError,3
-Converted,2
-ConvertedNonWrap,2
+DeleteOption,StatusAfter,PageAfter
+SoldToAnotherUser, 0,wrap
+SoldToStranger,1,wrap
+LostWrap,1,wrap
+BrokenWrap,2,wrap
+WasAnError,3,news
+Converted,2,wrap
+ConvertedNonWrap,2,wrap
