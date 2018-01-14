@@ -97,6 +97,20 @@ namespace WrapTrackWebTests.ZDeveloperTests
         }
 
         /// <summary>
+        /// The test get to wrap.
+        /// </summary>
+        [TestMethod]
+        public void TestGetToWrap()
+        {
+            wrapTrackShell.Login();
+
+            var goneToWrap = wrapTrackShell.GetToWrap(8737);
+            var wtWrapId = goneToWrap.WtId;
+
+            StfAssert.AreEqual("Gone to the right Wrap", wtWrapId, "xoxxp5f");
+        }
+
+        /// <summary>
         /// The go top menu.
         /// </summary>
         /// <param name="topMenu">

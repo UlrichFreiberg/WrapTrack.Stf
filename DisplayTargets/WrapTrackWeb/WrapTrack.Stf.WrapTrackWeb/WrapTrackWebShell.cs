@@ -229,6 +229,27 @@ namespace WrapTrack.Stf.WrapTrackWeb
         }
 
         /// <summary>
+        /// The get to wrap.
+        /// </summary>
+        /// <param name="wrapId">
+        /// The wrap id.
+        /// </param>
+        /// <returns>
+        /// The <see cref="IWrap"/>.
+        /// </returns>
+        public IWrap GetToWrap(int wrapId)
+        {
+            var baseUrl = WtConfiguration.Url;
+            var wrapIdUrl = $"{baseUrl}Collection/wrap/{wrapId}";
+
+            WebAdapter.OpenUrl(wrapIdUrl);
+
+            var retVal = StfContainer.Get<IWrap>();
+
+            return retVal;
+        }
+
+        /// <summary>
         /// Logout and Close down the web adapter
         /// </summary>
         public void CloseDown()
