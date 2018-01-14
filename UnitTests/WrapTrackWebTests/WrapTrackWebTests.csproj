@@ -127,8 +127,11 @@
     <Compile Include="Collection\TestCase011.cs" />
     <Compile Include="Collection\TestCase006.cs" />
     <Compile Include="Collection\TestCase007.cs" />
-    <Compile Include="SignUp - LogIn\TestCase0001-0004.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SignUp - LogIn\TestCase001.cs" />
+    <Compile Include="SignUp - LogIn\TestCase002.cs" />
+    <Compile Include="SignUp - LogIn\TestCase003.cs" />
+    <Compile Include="SignUp - LogIn\TestCase004.cs" />
     <Compile Include="Upload Pictures\TestCase009.cs" />
     <Compile Include="ZDeveloperTests\DataDrivenTests.cs" />
     <Compile Include="ZDeveloperTests\MenuTests.cs" />
