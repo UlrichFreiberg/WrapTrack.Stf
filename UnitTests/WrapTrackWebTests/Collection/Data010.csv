@@ -1,0 +1,8 @@
+DeleteOption,StatusAfter
+SoldToAnotherUser, 0
+SoldToStranger,1
+LostWrap,1
+BrokenWrap,2
+WasAnError,3
+Converted,2
+ConvertedNonWrap,2

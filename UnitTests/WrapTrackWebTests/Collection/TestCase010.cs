@@ -11,8 +11,12 @@
 namespace WrapTrackWebTests.Collection
 {
     using System;
+    using System.CodeDom;
+    using System.Diagnostics.CodeAnalysis;
 
     using Microsoft.VisualStudio.TestTools.UnitTesting;
+
+    using Mir.Stf;
 
     using WrapTrack.Stf.WrapTrackApi.Interfaces;
     using WrapTrack.Stf.WrapTrackWeb.Interfaces;
@@ -20,7 +24,9 @@ namespace WrapTrackWebTests.Collection
     using WrapTrack.Stf.WrapTrackWeb.Me.Collection;
 
     /// <summary>
-    /// Deleting wraps...
+    /// Deleting wraps. Tests the possibility of deleting a wrap from users collection.
+    /// There is more than one reason why the wrap should not be part of 
+    /// the users collection any more.
     /// </summary>
     [TestClass]
     public class TestCase010 : WrapTrackTestScriptBase
@@ -37,6 +43,11 @@ namespace WrapTrackWebTests.Collection
         private string CurrentUser { get; set; }
 
         /// <summary>
+        /// Gets or sets the collection.
+        /// </summary>
+        private ICollection Collection { get; set; }
+
+        /// <summary>
         /// The test initialize.
         /// </summary>
         [TestInitialize]
@@ -44,22 +55,33 @@ namespace WrapTrackWebTests.Collection
         {
             WrapTrackShell = Get<IWrapTrackWebShell>();
             WrapTrackShell.Login(CurrentUser);
+
+            // Be sure we have enough wraps for all test instances
+            Collection = GetCurrentUserCollection(WrapTrackShell);
+            var numOfWraps = Collection.NumOfWraps(); 
+            if (numOfWraps == 0)
+            {
+                Collection.AddWrap(); 
+            }
         }
 
-        /// <summary>
-        /// Test the possibility of deleting a wrap from users collection.
-        /// There is more than one reason why the wrap should not be part of 
-        /// the users collection any more.
-        /// This is test of lost track of wrap
-        /// </summary>
-        [TestMethod]
+        // [DataSource(
+        //    "System.Data.OleDb",
+        //    @"Provider=Microsoft.ACE.OLEDB.12.0;Data Source=ZDeveloperTests\DataDrivenBob.xlsx;Persist Security Info=False;Extended Properties=""Excel 12.0 Xml;HDR=YES""", 
+        //    "Ark1$", 
+        //    DataAccessMethod.Sequential)]
+        // TODO: Hardcoded path must be relative
+        [DataSource(
+            "Microsoft.VisualStudio.TestTools.DataSource.CSV",
+            "D:\\Projects\\WrapTrack.Stf\\UnitTests\\WrapTrackWebTests\\Collection\\Data010.csv",
+             "Data010#csv",
+             dataAccessMethod: DataAccessMethod.Sequential), TestMethod]
         public void Tc010()
         {
-            // Test initialize - be sure we have a least 1 wraps
-            var collection = GetCurrentUserCollection();
- 
+            var testdata = InitTestData<Params>();
+
             // Find a random wrap
-            var ranWrap = collection.GetRandomWrap();
+            var ranWrap = Collection.GetRandomWrap();
             var wtId = ranWrap.WtId;
 
             StfAssert.IsNotNull("Got a random wrap", ranWrap);
@@ -69,39 +91,44 @@ namespace WrapTrackWebTests.Collection
             var wrapInfo = validationTarget.WrapInfo(wtId);
             var statusBefore = wrapInfo.Status;
 
-            StfAssert.AreEqual("Status before deleting is 0", statusBefore, "0"); 
-           
+            StfAssert.AreEqual("Status before deleting is 0", statusBefore, "0");
+
             // Delete wrap
-            ranWrap.Remove(DeleteWrapOption.SoldToStranger);
-            Wait(TimeSpan.FromSeconds(2));
+            StfLogger.LogInfo($"Option = {testdata.Option}");
 
-            // Status of wrap after
-            wrapInfo = validationTarget.WrapInfo(wtId);
+            var deleted = ranWrap.Remove(testdata.Option);
+            if (!deleted)
+            {
+                StfLogger.LogInfo("The Wrap was not deleted - this test iteration stops");
+            }
+            else
+            {
+                Wait(TimeSpan.FromSeconds(2));
 
-            StfAssert.AreEqual("Status after deleting is 1", wrapInfo.Status, "1");
+                // Status of wrap after
+                StfLogger.LogInfo($"StatusAfter = {testdata.StatusAfter}");
+                wrapInfo = validationTarget.WrapInfo(wtId);
+                StfAssert.AreEqual("Correct status after deleting", wrapInfo.Status, testdata.StatusAfter);
+            }
+
+            WrapTrackShell.Logout(); 
         }
 
         /// <summary>
-        /// The get current user collection. If none, then one is added
+        /// Gets data for datadriven test.
         /// </summary>
-        /// <returns>
-        /// The <see cref="ICollection"/>.
-        /// </returns>
-        private ICollection GetCurrentUserCollection()
+        [SuppressMessage("StyleCop.CSharp.MaintainabilityRules", "SA1402:FileMayOnlyContainASingleClass", Justification = "Reviewed. Suppression is OK here.")]
+        public class Params : StfTestDataBase
         {
-            var me = WrapTrackShell.Me();
-            var collection = me.GetCollection();
+            /// <summary>
+            /// Gets or sets the first.
+            /// </summary>
+            public string StatusAfter { get; set; }
 
-            StfAssert.IsNotNull("Got a MeProfile", me);
-            StfAssert.IsNotNull("Got my collection", collection);
-
-            // Be sure there is a wrap in collection. 
-            if (collection.NumOfWraps() == 0)
-            {
-                collection.AddWrap("Ali Dover", "Hygge", "White");
-            }
-
-            return collection;
+            /// <summary>
+            /// Gets or sets the delete wrap option.
+            /// </summary>
+            public DeleteWrapOption Option { get; set; }
         }
     }
 }

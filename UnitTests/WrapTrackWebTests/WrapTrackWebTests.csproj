@@ -124,7 +124,6 @@
   </Choose>
   <ItemGroup>
     <Compile Include="Collection\TestCase010.cs" />
-    <Compile Include="Collection\TestCase012.cs" />
     <Compile Include="Collection\TestCase011.cs" />
     <Compile Include="Collection\TestCase006.cs" />
     <Compile Include="Collection\TestCase007.cs" />
@@ -139,8 +138,12 @@
     <Compile Include="WtTestscriptUtils.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Collection\Data010.csv" />
     <None Include="packages.config">
       <SubType>Designer</SubType>
+    </None>
+    <None Include="TestData\ZDeveloperTests\DataDrivenBob.csv">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="TestData\ZDeveloperTests\DataDrivenBob.xlsx">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>

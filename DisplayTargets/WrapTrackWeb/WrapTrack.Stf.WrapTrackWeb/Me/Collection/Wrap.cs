@@ -74,10 +74,14 @@ namespace WrapTrack.Stf.WrapTrackWeb.Me.Collection
         /// <param name="username">
         /// The username.
         /// </param>
+        /// <param name="ownershipStart">
+        /// The ownership Start.
+        /// If not set, default date is used
+        /// </param>
         /// <returns>
         /// The <see cref="bool"/>.
         /// </returns>
-        public bool PassOn(string username)
+        public bool PassOn(string username, string ownershipStart = null)
         {
             // click the Pass On Button in the menu
             if (!WebAdapter.ButtonClickByXpath("//knap_videregivvikle/div[1]/knap_basis/button/p/span[2]/span"))
@@ -94,6 +98,17 @@ namespace WrapTrack.Stf.WrapTrackWeb.Me.Collection
             if (!WebAdapter.ButtonClickById("but_selUser"))
             {
                 return false;
+            }
+
+            // Choose a date for ownership-start
+            if (ownershipStart != null)
+            {
+                Wait(TimeSpan.FromSeconds(1));
+                if (!WebAdapter.TextboxSetTextById("inp_datePassOn", ownershipStart))
+                {
+                    StfLogger.LogInfo("Date for ownership not changed");
+                    return false;
+                }
             }
 
             // answer the R U sure
@@ -176,13 +191,16 @@ namespace WrapTrack.Stf.WrapTrackWeb.Me.Collection
         /// </returns>
         public bool Remove(DeleteWrapOption deleteOption)
         {
-            string optIdentId;
-            string nextButtonId;
+            string optIdentId = null;
+            string nextButtonId = null;
 
             ClickById("but_remove");
 
             switch (deleteOption)
             {
+                case DeleteWrapOption.SoldToAnotherUser:
+                    return true; 
+
                 case DeleteWrapOption.SoldToStranger:
                     optIdentId = "opt2";
                     nextButtonId = "but_fortsaet2";
@@ -195,17 +213,24 @@ namespace WrapTrack.Stf.WrapTrackWeb.Me.Collection
                     optIdentId = "opt4";
                     nextButtonId = "but_ok4";
                     break;
+                case DeleteWrapOption.WasAnError:
+                    optIdentId = "opt5";
+                    nextButtonId = "but_ok5";
+                    break;
+                case DeleteWrapOption.Converted:
+                    optIdentId = "opt4";
+                    nextButtonId = "but_ok4";
+                    break;
+                case DeleteWrapOption.ConvertedNonWrap:
+                    optIdentId = "opt7";
+                    nextButtonId = "but_ok7";
+                    break;
                 default:
-                    return false;
+                    return false; 
             }
-            
-            // var myChoise = WebAdapter.FindElement(By.Name(optIdent));
-            var myChoise = WebAdapter.ButtonClickById(optIdentId);
 
-            if (!myChoise)
-            {
-                return false;
-            }
+            //var myChoise = WebAdapter.FindElement(By.Name(optIdentId));
+            WebAdapter.ButtonClickById(optIdentId);
 
             // wait for button to appear
             Wait(TimeSpan.FromSeconds(1)); 

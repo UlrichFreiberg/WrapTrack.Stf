@@ -21,6 +21,7 @@ namespace WrapTrackWebTests.Collection
     /// <summary>
     /// Test of letting a wrap pass on from one user to another. 
     /// The owner  initiatives this action.
+    /// Default date.
     /// </summary>
     [TestClass]
     public class TestCase007 : StfTestScriptBase
