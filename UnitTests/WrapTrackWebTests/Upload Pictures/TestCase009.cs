@@ -25,11 +25,6 @@ namespace WrapTrackWebTests.Upload_Pictures
     public class TestCase009 : WrapTrackTestScriptBase
     {
         /// <summary>
-        /// Gets or sets the wrap track shell.
-        /// </summary>
-        private IWrapTrackWebShell WrapTrackShell { get; set; }
-
-        /// <summary>
         /// The tc 009.
         /// </summary>
         [TestMethod]

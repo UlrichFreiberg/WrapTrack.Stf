@@ -14,6 +14,7 @@ namespace WrapTrack.Stf.WrapTrackWeb.Interfaces
     using Mir.Stf.Utilities;
     using Mir.Stf.Utilities.Attributes;
 
+    using WrapTrack.Stf.WrapTrackWeb.Configuration;
     using WrapTrack.Stf.WrapTrackWeb.Interfaces.Explore;
     using WrapTrack.Stf.WrapTrackWeb.Interfaces.FaqContact;
     using WrapTrack.Stf.WrapTrackWeb.Interfaces.Me;
@@ -25,9 +26,24 @@ namespace WrapTrack.Stf.WrapTrackWeb.Interfaces
     public interface IWrapTrackWebShell : IStfPlugin
     {
         /// <summary>
+        /// Gets or sets the wt configuration.
+        /// </summary>
+        WtConfiguration WtConfiguration { get; set; }
+
+        /// <summary>
         /// Gets or sets the web adapter.
         /// </summary>
         IWebAdapter WebAdapter { get; set; }
+
+        /// <summary>
+        /// Gets or sets the current Windows User in user. 
+        /// </summary>
+        string CurrentUser { get; set; }
+
+        /// <summary>
+        /// Gets or sets the current logged in user.
+        /// </summary>
+        string CurrentLoggedInUser { get; set; }
 
         /// <summary>
         /// The learn more.
@@ -118,5 +134,16 @@ namespace WrapTrack.Stf.WrapTrackWeb.Interfaces
         /// Logout and Close down the web adapter
         /// </summary>
         void CloseDown();
+
+        /// <summary>
+        /// The get to wrap.
+        /// </summary>
+        /// <param name="wrapId">
+        /// The wrap id.
+        /// </param>
+        /// <returns>
+        /// The <see cref="IWrap"/>.
+        /// </returns>
+        IWrap GetToWrap(int wrapId);
     }
 }

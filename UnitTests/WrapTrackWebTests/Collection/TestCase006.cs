@@ -20,7 +20,7 @@ namespace WrapTrackWebTests.Collection
     /// The collection tests.
     /// </summary>
     [TestClass]
-    public class TestCase006 : StfTestScriptBase
+    public class TestCase006 : WrapTrackTestScriptBase
     {
         /// <summary>
         /// The t c 006.

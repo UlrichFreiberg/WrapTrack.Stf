@@ -22,7 +22,7 @@ namespace WrapTrackWebTests.Upload_Pictures
     /// Tests of upload pictures.
     /// </summary>
     [TestClass]
-    public class TestCase005 : StfTestScriptBase
+    public class TestCase005 : WrapTrackTestScriptBase
     {
         /// <summary>
         /// Test of uploade users profile picture

@@ -12,6 +12,8 @@ namespace WrapTrackWebTests
 {
     using System;
 
+    using Microsoft.VisualStudio.TestTools.UnitTesting;
+
     using Mir.Stf;
 
     using WrapTrack.Stf.WrapTrackApi.Interfaces;
@@ -23,6 +25,21 @@ namespace WrapTrackWebTests
     /// </summary>
     public abstract class WrapTrackTestScriptBase : StfTestScriptBase
     {
+        /// <summary>
+        /// Gets or sets the wrap track shell.
+        /// </summary>
+        protected IWrapTrackWebShell WrapTrackShell { get; set; }
+
+        /// <summary>
+        /// The test cleanup.
+        /// </summary>
+        [TestCleanup]
+        public void TestCleanup()
+        {
+            // ensure to logout and to close down the web adapter
+            WrapTrackShell?.CloseDown();
+        }
+
         /// <summary>
         /// The get current user collection.
         /// </summary>
@@ -70,6 +87,28 @@ namespace WrapTrackWebTests
         {
             var wrapInfo = validationTarget.WrapInfo(wtId);
             var retVal = wrapInfo.NumPictures;
+
+            return retVal;
+        }
+
+        /// <summary>
+        /// The get another user.
+        /// </summary>
+        /// <param name="wrapTrackWebShell">
+        /// The wrap Track Web Shell.
+        /// </param>
+        /// <returns>
+        /// The <see cref="string"/>.
+        /// </returns>
+        protected string GetAnotherUser(IWrapTrackWebShell wrapTrackWebShell)
+        {
+            var currentUser = wrapTrackWebShell.CurrentLoggedInUser;
+            var retVal = "Ida88";
+
+            if (currentUser.Equals("Ida88", StringComparison.InvariantCultureIgnoreCase))
+            {
+                retVal = "Mie88";
+            }
 
             return retVal;
         }

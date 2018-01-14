@@ -11,7 +11,6 @@
 namespace WrapTrackWebTests.Collection
 {
     using System;
-    using System.CodeDom;
     using System.Diagnostics.CodeAnalysis;
 
     using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -32,17 +31,6 @@ namespace WrapTrackWebTests.Collection
     public class TestCase010 : WrapTrackTestScriptBase
     {
         /// <summary>
-        /// Gets or sets the wrap track shell.
-        /// </summary>
-        private IWrapTrackWebShell WrapTrackShell { get; set; }
-
-        /// <summary>
-        /// Gets or sets the current user. 
-        /// TODO: Make CurrentUser as a property to WtShell
-        /// </summary>
-        private string CurrentUser { get; set; }
-
-        /// <summary>
         /// Gets or sets the collection.
         /// </summary>
         private ICollection Collection { get; set; }
@@ -54,23 +42,31 @@ namespace WrapTrackWebTests.Collection
         public void TestInitialize()
         {
             WrapTrackShell = Get<IWrapTrackWebShell>();
-            WrapTrackShell.Login(CurrentUser);
+            WrapTrackShell.Login();
 
             // Be sure we have enough wraps for all test instances
             Collection = GetCurrentUserCollection(WrapTrackShell);
+
             var numOfWraps = Collection.NumOfWraps(); 
+
             if (numOfWraps == 0)
             {
                 Collection.AddWrap(); 
             }
         }
 
-        // [DataSource(
+        /*
+         * [DataSource(
         //    "System.Data.OleDb",
         //    @"Provider=Microsoft.ACE.OLEDB.12.0;Data Source=ZDeveloperTests\DataDrivenBob.xlsx;Persist Security Info=False;Extended Properties=""Excel 12.0 Xml;HDR=YES""", 
         //    "Ark1$", 
         //    DataAccessMethod.Sequential)]
         // TODO: Hardcoded path must be relative
+        */
+
+        /// <summary>
+        /// The tc 010.
+        /// </summary>
         [DataSource(
             "Microsoft.VisualStudio.TestTools.DataSource.CSV",
             "D:\\Projects\\WrapTrack.Stf\\UnitTests\\WrapTrackWebTests\\Collection\\Data010.csv",

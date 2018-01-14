@@ -21,7 +21,7 @@ namespace WrapTrackWebTests.ZDeveloperTests
     /// The menu tests.
     /// </summary>
     [TestClass]
-    public class MenuTests : StfTestScriptBase
+    public class MenuTests : WrapTrackTestScriptBase
     {
         /// <summary>
         /// The wrap track shell.
@@ -41,15 +41,6 @@ namespace WrapTrackWebTests.ZDeveloperTests
         {
             wrapTrackShell = Get<IWrapTrackWebShell>();
             menuMananger = new MenuManager(wrapTrackShell.WebAdapter);
-        }
-
-        /// <summary>
-        /// The test cleanup.
-        /// </summary>
-        [TestCleanup]
-        public void TestCleanup()
-        {
-            wrapTrackShell?.Logout(false);
         }
 
         /// <summary>
@@ -94,6 +85,20 @@ namespace WrapTrackWebTests.ZDeveloperTests
             GoMenu(ExploreMenu.Patterns);
             GoMenu(ExploreMenu.Models);
             GoMenu(ExploreMenu.BirthWraps);
+        }
+
+        /// <summary>
+        /// The test get to wrap.
+        /// </summary>
+        [TestMethod]
+        public void TestGetToWrap()
+        {
+            wrapTrackShell.Login();
+
+            var goneToWrap = wrapTrackShell.GetToWrap(8737);
+            var wtWrapId = goneToWrap.WtId;
+
+            StfAssert.AreEqual("Gone to the right Wrap", wtWrapId, "xoxxp5f");
         }
 
         /// <summary>

@@ -50,6 +50,11 @@ namespace WrapTrack.Stf.WrapTrackWeb
         public IWebAdapter WebAdapter { get; set; }
 
         /// <summary>
+        /// Gets or sets the current logged in user.
+        /// </summary>
+        public string CurrentLoggedInUser { get; set; }
+
+        /// <summary>
         /// The learn more.
         /// </summary>
         /// <returns>
@@ -79,6 +84,9 @@ namespace WrapTrack.Stf.WrapTrackWeb
 
             // Click tab page Login
             WebAdapter.ButtonClickById("nav_");
+
+            // Reember the last logged in user
+            CurrentLoggedInUser = userName;
 
             return true;
         }
@@ -226,6 +234,27 @@ namespace WrapTrack.Stf.WrapTrackWeb
             {
                 return false;
             }
+        }
+
+        /// <summary>
+        /// The get to wrap.
+        /// </summary>
+        /// <param name="wrapId">
+        /// The wrap id.
+        /// </param>
+        /// <returns>
+        /// The <see cref="IWrap"/>.
+        /// </returns>
+        public IWrap GetToWrap(int wrapId)
+        {
+            var baseUrl = WtConfiguration.Url;
+            var wrapIdUrl = $"{baseUrl}Collection/wrap/{wrapId}";
+
+            WebAdapter.OpenUrl(wrapIdUrl);
+
+            var retVal = StfContainer.Get<IWrap>();
+
+            return retVal;
         }
 
         /// <summary>

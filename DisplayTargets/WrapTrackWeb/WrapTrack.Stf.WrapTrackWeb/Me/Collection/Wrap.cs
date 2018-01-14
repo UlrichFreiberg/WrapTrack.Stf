@@ -104,6 +104,7 @@ namespace WrapTrack.Stf.WrapTrackWeb.Me.Collection
             if (ownershipStart != null)
             {
                 Wait(TimeSpan.FromSeconds(1));
+
                 if (!WebAdapter.TextboxSetTextById("inp_datePassOn", ownershipStart))
                 {
                     StfLogger.LogInfo("Date for ownership not changed");
@@ -191,8 +192,8 @@ namespace WrapTrack.Stf.WrapTrackWeb.Me.Collection
         /// </returns>
         public bool Remove(DeleteWrapOption deleteOption)
         {
-            string optIdentId = null;
-            string nextButtonId = null;
+            string optIdentId;
+            string nextButtonId;
 
             ClickById("but_remove");
 
@@ -229,7 +230,7 @@ namespace WrapTrack.Stf.WrapTrackWeb.Me.Collection
                     return false; 
             }
 
-            //var myChoise = WebAdapter.FindElement(By.Name(optIdentId));
+            // var myChoise = WebAdapter.FindElement(By.Name(optIdentId));
             WebAdapter.ButtonClickById(optIdentId);
 
             // wait for button to appear
