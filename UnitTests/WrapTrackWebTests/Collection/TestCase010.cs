@@ -11,7 +11,6 @@
 namespace WrapTrackWebTests.Collection
 {
     using System;
-    using System.CodeDom;
     using System.Diagnostics.CodeAnalysis;
 
     using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -58,19 +57,27 @@ namespace WrapTrackWebTests.Collection
 
             // Be sure we have enough wraps for all test instances
             Collection = GetCurrentUserCollection(WrapTrackShell);
+
             var numOfWraps = Collection.NumOfWraps(); 
+
             if (numOfWraps == 0)
             {
                 Collection.AddWrap(); 
             }
         }
 
-        // [DataSource(
+        /*
+         * [DataSource(
         //    "System.Data.OleDb",
         //    @"Provider=Microsoft.ACE.OLEDB.12.0;Data Source=ZDeveloperTests\DataDrivenBob.xlsx;Persist Security Info=False;Extended Properties=""Excel 12.0 Xml;HDR=YES""", 
         //    "Ark1$", 
         //    DataAccessMethod.Sequential)]
         // TODO: Hardcoded path must be relative
+        */
+
+        /// <summary>
+        /// The tc 010.
+        /// </summary>
         [DataSource(
             "Microsoft.VisualStudio.TestTools.DataSource.CSV",
             "D:\\Projects\\WrapTrack.Stf\\UnitTests\\WrapTrackWebTests\\Collection\\Data010.csv",

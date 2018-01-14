@@ -61,7 +61,7 @@ namespace WrapTrackWebTests.Collection
             StfAssert.IsNotNull("Got a random wrap", wrapToGo);
 
             var anotherUser = GetAnotherUser();
-            var ownershipStart = TodayPlusDays(2); 
+            var ownershipStart = TodayPlusDays(2, "yyyy-MM-dd"); 
             var x = wrapToGo.PassOn(anotherUser, ownershipStart);
 
             StfAssert.IsTrue("PassedOn", x);
