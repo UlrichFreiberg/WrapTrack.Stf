@@ -66,17 +66,17 @@ namespace WrapTrack.Stf.WrapTrackApi
         /// </returns>
         public WrapInfo WrapInfo(string wtWrapId)
         {
-            var info = GetWrapRestInfo(wtWrapId).Result;
-     
+            var info = GetWrapRestInfoByWrapId(wtWrapId).Result;
+
             var retVal = new WrapInfo
             {
-                InternalId = info.SelectToken("id").ToString(),
-                OwnerId = info.SelectToken("ejerskab_bruger_id").ToString(),
-                //OwnerName = info.SelectToken("ejerskab_bruger_navn").ToString(),
-                OwnerName = info["ejerskab_nuv"].SelectToken("Bruger_navn").ToString(),
-                NumPictures = info["billeder"].Count(),
+                OwnerId = info["ejerskab_nuv"].SelectToken("bruger_id").ToString(),
+                OwnerName = info["ejerskab_nuv"].SelectToken("bruger_navn").ToString(),
+                InternalId = info["ejerskab_nuv"].SelectToken("id").ToString(),
+
                 Size = info.SelectToken("stoerrelse").ToString(),
-                Status = info.SelectToken("status").ToString()
+                NumPictures = info["billeder"].Count(),
+                Status = info.SelectToken("status").ToString(),
             };
 
             return retVal;
@@ -91,9 +91,30 @@ namespace WrapTrack.Stf.WrapTrackApi
         /// <returns>
         /// The <see cref="string"/>.
         /// </returns>
-        protected async Task<JObject> GetWrapRestInfo(string wtWrapId)
+        protected async Task<JObject> GetWrapRestInfoByWrapId(string wtWrapId)
         {
-            // var uri = $"{WtApiConfiguration.Url}/vikle/null/plus_ejerskab_nuv+plus_ejerskaber+plus_billeder/{wtWrapId.Trim()}";
+            var uri = $"{WtApiConfiguration.Url}/wrap/{wtWrapId.Trim()}/0";
+            var client = new HttpClient();
+
+            client.DefaultRequestHeaders.Add("Accept", "application/json");
+
+            var response = await client.GetStringAsync(uri);
+            var retVal = JObject.Parse(response);
+
+            return retVal;
+        }
+
+        /// <summary>
+        /// The get wrap rest info.
+        /// </summary>
+        /// <param name="wtWrapId">
+        /// The wt wrap id.
+        /// </param>
+        /// <returns>
+        /// The <see cref="string"/>.
+        /// </returns>
+        protected async Task<JObject> GetWrapRestInfoByInternalId(string wtWrapId)
+        {
             var uri = $"{WtApiConfiguration.Url}/wrap/0/{wtWrapId.Trim()}";
             var client = new HttpClient();
 
