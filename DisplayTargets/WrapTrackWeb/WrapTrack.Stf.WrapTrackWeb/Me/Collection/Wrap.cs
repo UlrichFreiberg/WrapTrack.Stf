@@ -14,6 +14,8 @@ namespace WrapTrack.Stf.WrapTrackWeb.Me.Collection
     using System.Linq;
 
     using OpenQA.Selenium;
+
+    using WrapTrack.Stf.WrapTrackApi.Interfaces;
     using WrapTrack.Stf.WrapTrackWeb.Interfaces;
 
     /// <summary>
@@ -58,6 +60,22 @@ namespace WrapTrack.Stf.WrapTrackWeb.Me.Collection
                 var retVal = WebAdapter.GetText(By.XPath(Xpath));
 
                 retVal = retVal.Trim();
+
+                return retVal;
+            }
+        }
+
+        /// <summary>
+        /// Gets the internal id of wrap
+        /// </summary>
+        public string InternalId
+        {
+            get
+            {
+
+                var validationTarget = Get<IWtApi>();
+                var wrapInfo = validationTarget.WrapInfo(WtId);
+                var retVal = wrapInfo.InternalId;
 
                 return retVal;
             }

@@ -40,5 +40,10 @@ namespace WrapTrack.Stf.WrapTrackApi
         /// Gets or sets the wrap status.
         /// </summary>
         public string Status { get; set;  }
+
+        /// <summary>
+        /// Gets or sets the WT internal id.
+        /// </summary>
+        public string InternalId { get; set; }
     }
 }

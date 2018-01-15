@@ -144,6 +144,10 @@
       <Project>{dd71247b-dd57-46a8-9b8e-07c0041a5ee0}</Project>
       <Name>WrapTrack.Stf.Adapters.WebAdapter</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\..\ValidationTarget\WrapTrackApi\WrapTrackApi.csproj">
+      <Project>{5CC4B250-6779-4FE4-8E17-3435AC8846AF}</Project>
+      <Name>WrapTrackApi</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\..\WrapTrack.Stf.Core\WrapTrack.Stf.Core.csproj">
       <Project>{31C88D4B-F626-4F49-B408-CD71563C9098}</Project>
       <Name>WrapTrack.Stf.Core</Name>
