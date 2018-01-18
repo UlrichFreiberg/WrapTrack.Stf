@@ -85,7 +85,7 @@ namespace WrapTrackWebTests
         /// </returns>
         protected int GetNumberOfPictures(IWtApi validationTarget, string wtId)
         {
-            var wrapInfo = validationTarget.WrapInfo(wtId);
+            var wrapInfo = validationTarget.WrapInfoByTrackId(wtId);
             var retVal = wrapInfo.NumPictures;
 
             return retVal;

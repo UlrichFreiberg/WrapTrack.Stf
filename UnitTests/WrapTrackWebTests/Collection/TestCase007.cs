@@ -10,11 +10,7 @@
 
 namespace WrapTrackWebTests.Collection
 {
-    using System;
-
     using Microsoft.VisualStudio.TestTools.UnitTesting;
-
-    using Mir.Stf;
 
     using WrapTrack.Stf.WrapTrackApi.Interfaces;
     using WrapTrack.Stf.WrapTrackWeb.Interfaces;
@@ -74,7 +70,7 @@ namespace WrapTrackWebTests.Collection
         private bool ValidatePassOn(string wrapToGo, string anotherUsername)
         {
             var validationTarget = Get<IWtApi>();
-            var wrapInfo = validationTarget.WrapInfo(wrapToGo);
+            var wrapInfo = validationTarget.WrapInfoByTrackId(wrapToGo);
             var retVal = wrapInfo.OwnerName == anotherUsername;
 
             return retVal;

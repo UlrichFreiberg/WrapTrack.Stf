@@ -72,9 +72,8 @@ namespace WrapTrack.Stf.WrapTrackWeb.Me.Collection
         {
             get
             {
-
                 var validationTarget = Get<IWtApi>();
-                var wrapInfo = validationTarget.WrapInfo(WtId);
+                var wrapInfo = validationTarget.WrapInfoByInternalId(WtId);
                 var retVal = wrapInfo.InternalId;
 
                 return retVal;

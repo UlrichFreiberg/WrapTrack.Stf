@@ -84,7 +84,7 @@ namespace WrapTrackWebTests.Collection
 
             // Status of wrap before
             var validationTarget = Get<IWtApi>();
-            var wrapInfo = validationTarget.WrapInfo(wtId);
+            var wrapInfo = validationTarget.WrapInfoByTrackId(wtId);
             var statusBefore = wrapInfo.Status;
 
             StfAssert.AreEqual("Status before deleting is 0", statusBefore, "0");
@@ -103,7 +103,7 @@ namespace WrapTrackWebTests.Collection
 
                 // Status of wrap after
                 StfLogger.LogInfo($"StatusAfter = {testdata.StatusAfter}");
-                wrapInfo = validationTarget.WrapInfo(wtId);
+                wrapInfo = validationTarget.WrapInfoByTrackId(wtId);
                 StfAssert.AreEqual("Correct status after deleting", wrapInfo.Status, testdata.StatusAfter);
             }
 

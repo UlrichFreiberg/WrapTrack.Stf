@@ -25,10 +25,23 @@ namespace WrapTrackApiTests
         /// The test basic wrap info.
         /// </summary>
         [TestMethod]
-        public void TestBasicWrapInfo()
+        public void TestBasicWrapInfoByInteralId()
         {
             var wtApi = Get<IWtApi>();
-            var wrapInfo = wtApi.WrapInfo("13639");
+            var wrapInfo = wtApi.WrapInfoByInternalId("13639");
+
+            StfAssert.AreEqual("13639 owner", "Beinta.klein", wrapInfo.OwnerName);
+            StfAssert.AreEqual("13639 id", "1603", wrapInfo.OwnerId);
+        }
+
+        /// <summary>
+        /// The test basic wrap info by track id.
+        /// </summary>
+        [TestMethod]
+        public void TestBasicWrapInfoByTrackId()
+        {
+            var wtApi = Get<IWtApi>();
+            var wrapInfo = wtApi.WrapInfoByTrackId("ks0etu1");
 
             StfAssert.AreEqual("13639 owner", "Beinta.klein", wrapInfo.OwnerName);
             StfAssert.AreEqual("13639 id", "1603", wrapInfo.OwnerId);

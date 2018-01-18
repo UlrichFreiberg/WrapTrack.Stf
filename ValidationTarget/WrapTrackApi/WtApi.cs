@@ -56,7 +56,24 @@ namespace WrapTrack.Stf.WrapTrackApi
         }
 
         /// <summary>
-        /// The wrap info.
+        /// The wrap info by internal id.
+        /// </summary>
+        /// <param name="internalId">
+        /// The internal id.
+        /// </param>
+        /// <returns>
+        /// The <see cref="WrapInfo"/>.
+        /// </returns>
+        public WrapInfo WrapInfoByInternalId(string internalId)
+        {
+            var info = this.GetWrapRestInfoByInternalId(internalId);
+            var retVal = WrapInfoMapper(info.Result);
+
+            return retVal;
+        }
+
+        /// <summary>
+        /// The wrap info by track id.
         /// </summary>
         /// <param name="wtWrapId">
         /// The wt wrap id.
@@ -64,20 +81,10 @@ namespace WrapTrack.Stf.WrapTrackApi
         /// <returns>
         /// The <see cref="WrapInfo"/>.
         /// </returns>
-        public WrapInfo WrapInfo(string wtWrapId)
+        public WrapInfo WrapInfoByTrackId(string wtWrapId)
         {
-            var info = GetWrapRestInfoByWrapId(wtWrapId).Result;
-
-            var retVal = new WrapInfo
-            {
-                OwnerId = info["ejerskab_nuv"].SelectToken("bruger_id").ToString(),
-                OwnerName = info["ejerskab_nuv"].SelectToken("bruger_navn").ToString(),
-                InternalId = info["ejerskab_nuv"].SelectToken("id").ToString(),
-
-                Size = info.SelectToken("stoerrelse").ToString(),
-                NumPictures = info["billeder"].Count(),
-                Status = info.SelectToken("status").ToString(),
-            };
+            var info = GetWrapRestInfoByTrackId(wtWrapId);
+            var retVal = WrapInfoMapper(info.Result);
 
             return retVal;
         }
@@ -91,9 +98,9 @@ namespace WrapTrack.Stf.WrapTrackApi
         /// <returns>
         /// The <see cref="string"/>.
         /// </returns>
-        protected async Task<JObject> GetWrapRestInfoByWrapId(string wtWrapId)
+        protected async Task<JObject> GetWrapRestInfoByTrackId(string wtWrapId)
         {
-            var uri = $"{WtApiConfiguration.Url}/wrap/{wtWrapId.Trim()}/0";
+            var uri = $"{WtApiConfiguration.Url}/wrap/0/{wtWrapId.Trim()}";
             var client = new HttpClient();
 
             client.DefaultRequestHeaders.Add("Accept", "application/json");
@@ -115,13 +122,38 @@ namespace WrapTrack.Stf.WrapTrackApi
         /// </returns>
         protected async Task<JObject> GetWrapRestInfoByInternalId(string wtWrapId)
         {
-            var uri = $"{WtApiConfiguration.Url}/wrap/0/{wtWrapId.Trim()}";
+            var uri = $"{WtApiConfiguration.Url}/wrap/{wtWrapId.Trim()}/0";
             var client = new HttpClient();
 
             client.DefaultRequestHeaders.Add("Accept", "application/json");
 
             var response = await client.GetStringAsync(uri);
             var retVal = JObject.Parse(response);
+
+            return retVal;
+        }
+
+        /// <summary>
+        /// The wrap info.
+        /// </summary>
+        /// <param name="info">
+        /// The info.
+        /// </param>
+        /// <returns>
+        /// The <see cref="WrapInfo"/>.
+        /// </returns>
+        private WrapInfo WrapInfoMapper(JObject info)
+        {
+            var retVal = new WrapInfo
+            {
+                OwnerId = info["ejerskab_nuv"].SelectToken("bruger_id").ToString(),
+                OwnerName = info["ejerskab_nuv"].SelectToken("bruger_navn").ToString(),
+                InternalId = info.SelectToken("id").ToString(),
+
+                Size = info.SelectToken("stoerrelse").ToString(),
+                NumPictures = info["billeder"].Count(),
+                Status = info.SelectToken("status").ToString(),
+            };
 
             return retVal;
         }

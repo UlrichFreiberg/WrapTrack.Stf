@@ -18,14 +18,25 @@ namespace WrapTrack.Stf.WrapTrackApi.Interfaces
     public interface IWtApi : IStfPlugin
     {
         /// <summary>
-        /// The wrap info.
+        /// The wrap info by interal id.
         /// </summary>
-        /// <param name="wtWrapId">
-        /// The wt wrap id.
+        /// <param name="s">
+        /// The s.
         /// </param>
         /// <returns>
-        /// The <see cref="string"/>.
+        /// The <see cref="WrapInfo"/>.
         /// </returns>
-        WrapInfo WrapInfo(string wtWrapId);
+        WrapInfo WrapInfoByInternalId(string s);
+
+        /// <summary>
+        /// The wrap info by track id.
+        /// </summary>
+        /// <param name="trackId">
+        /// The ks 0 etu 1.
+        /// </param>
+        /// <returns>
+        /// The <see cref="WrapInfo"/>.
+        /// </returns>
+        WrapInfo WrapInfoByTrackId(string trackId);
     }
 }

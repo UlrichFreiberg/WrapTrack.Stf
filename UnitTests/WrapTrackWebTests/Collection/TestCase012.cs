@@ -12,8 +12,6 @@ namespace WrapTrackWebTests.Collection
 {
     using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-    using Mir.Stf;
-
     using WrapTrack.Stf.WrapTrackApi.Interfaces;
     using WrapTrack.Stf.WrapTrackWeb.Interfaces;
     using WrapTrack.Stf.WrapTrackWeb.Interfaces.Me;
@@ -26,27 +24,16 @@ namespace WrapTrackWebTests.Collection
     [TestClass]
     public class TestCase012 : WrapTrackTestScriptBase
     {
-        private object wrapToGo;
-
-        /// <summary>
-        /// Gets or sets the wrap track shell.
-        /// </summary>
-        private IWrapTrackWebShell WrapTrackShell { get; set; }
-
-        /// <summary>
-        /// Gets or sets the current user. 
-        /// TODO: Make CurrentUser as a property to WtShell
-        /// </summary>
-        private string CurrentUser { get; set; }
-
         /// <summary>
         /// The test initialize.
         /// </summary>
         [TestInitialize]
         public void TestInitialize()
         {
+            // Find a random wrap
             WrapTrackShell = Get<IWrapTrackWebShell>();
-            WrapTrackShell.SignUp();
+
+            WrapTrackShell.Login(); // Default user
             var collection = GetCurrentUserCollection();
 
             // Find a random wrap
@@ -56,18 +43,17 @@ namespace WrapTrackWebTests.Collection
         }
 
         /// <summary>
-        /// The TC007.
+        /// The TC012.
         /// </summary>
         [TestMethod]
         public void Tc012()
         {
+            var anotherUser = GetAnotherUser(WrapTrackShell);
 
-            WrapTrackShell.Login(); // Default user != newUser
- 
-            StfAssert.IsNotNull("Got a random wrap", wrapToGo);
+            WrapTrackShell.Login(anotherUser);
 
-            
-            //var x = wrapToGo.PassOn(anotherUser);
+            // StfAssert.IsNotNull("Got a random wrap", wrapToGo);
+            // var x = wrapToGo.PassOn(anotherUser);
 
            // StfAssert.IsTrue("PassedOn", x);
            // StfAssert.IsTrue("PassedOn Validated", ValidatePassOn(wtId, anotherUser));
@@ -87,9 +73,8 @@ namespace WrapTrackWebTests.Collection
         /// </returns>
         private bool ValidatePassOn(string wrapToGo, string anotherUsername)
         {
-
             var validationTarget = Get<IWtApi>();
-            var wrapInfo = validationTarget.WrapInfo(wrapToGo);
+            var wrapInfo = validationTarget.WrapInfoByTrackId(wrapToGo);
             var retVal = wrapInfo.OwnerName == anotherUsername;
 
             return retVal;
