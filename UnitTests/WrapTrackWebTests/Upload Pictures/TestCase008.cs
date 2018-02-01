@@ -37,19 +37,26 @@ namespace WrapTrackWebTests.Upload_Pictures
             var collection = GetCurrentUserCollection(wrapTrackShell);
             var myWrap = collection.GetRandomWrap();
 
-            // Find number of pictures before
+            // Find number of pictures before (to wrap and to ownership)
             var validationTarget = Get<IWtApi>();
             var wtId = myWrap.WtId; // tracking-id
-            var before = GetNumberOfPictures(validationTarget, wtId);
+            var before_wrap_pic = GetNumberOfPictures(validationTarget, wtId);
+            var before_ownership_pic = GetNumberOfOwnershipPic(validationTarget, wtId);
 
             // Do upload
             myWrap.UploadWrapImage(pathToNewImage);
 
             // Find number of pictures after upload 
-            var after = GetNumberOfPictures(validationTarget, wtId);
-            var newNum = before + 1; 
+            var after_wrap_pic = GetNumberOfPictures(validationTarget, wtId);
+            var newNum_wrap_pic = before_wrap_pic + 1;
 
-            StfAssert.AreEqual("One more picture uploaded", after, newNum);
+            StfAssert.AreEqual("One more picture related to wrap", after_wrap_pic, newNum_wrap_pic);
+
+            var after_ownership_pic = GetNumberOfOwnershipPic(validationTarget, wtId);
+            var newNum_ownership_pic = before_ownership_pic + 1;
+
+            //StfAssert.AreEqual("One more picture related to ownership", after_ownership_pic, newNum_ownership_pic);
+
         }
 
         /// <summary>
@@ -61,7 +68,6 @@ namespace WrapTrackWebTests.Upload_Pictures
         private string GetNewImagePath()
         {
             var retVal = Path.Combine(TestContext.TestDeploymentDir, @"Pictures\wraptrack-user-6-10.jpg");
-
             return retVal;
         }
     }

@@ -15,6 +15,8 @@ namespace WrapTrack.Stf.WrapTrackApi
     /// </summary>
     public class WrapInfo
     {
+        internal string OwnershipNumber;
+
         /// <summary>
         /// Gets or sets the id of the owner.
         /// </summary>
@@ -34,7 +36,7 @@ namespace WrapTrack.Stf.WrapTrackApi
         /// Gets or sets number of private pictures related to the wrap
         /// Uploaded by all users of the wrap
         /// </summary>
-        public int NumPictures { get; set; }
+        public int NumOfPictures { get; set; }
 
         /// <summary>
         /// Gets or sets the wrap status.
@@ -45,5 +47,6 @@ namespace WrapTrack.Stf.WrapTrackApi
         /// Gets or sets the WT internal id.
         /// </summary>
         public string InternalId { get; set; }
+        public string NumOfOwnershipPic { get; set; }
     }
 }

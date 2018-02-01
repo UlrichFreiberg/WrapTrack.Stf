@@ -151,7 +151,9 @@ namespace WrapTrack.Stf.WrapTrackApi
                 InternalId = info.SelectToken("id").ToString(),
 
                 Size = info.SelectToken("stoerrelse").ToString(),
-                NumPictures = info["billeder"].Count(),
+                NumOfPictures = info["billeder"].Count(),
+                NumOfOwnershipPic = info["ejerskab_nuv"].SelectToken("private_billeder").ToString(),
+                OwnershipNumber = info["ejerskab_nuv"].SelectToken("nr").ToString(),
                 Status = info.SelectToken("status").ToString(),
             };
 
