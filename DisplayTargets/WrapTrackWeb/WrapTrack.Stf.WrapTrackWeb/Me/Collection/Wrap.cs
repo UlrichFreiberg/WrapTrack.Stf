@@ -101,7 +101,7 @@ namespace WrapTrack.Stf.WrapTrackWeb.Me.Collection
         public bool PassOn(string username, string ownershipStart = null)
         {
             // click the Pass On Button in the menu
-            if (!WebAdapter.ButtonClickByXpath("//knap_videregivvikle/div[1]/knap_basis/button/p/span[2]/span"))
+            if(!WebAdapter.ButtonClickById("but_passon"))
             {
                 return false;
             }
