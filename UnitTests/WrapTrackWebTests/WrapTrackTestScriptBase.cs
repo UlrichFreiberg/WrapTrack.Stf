@@ -86,7 +86,27 @@ namespace WrapTrackWebTests
         protected int GetNumberOfPictures(IWtApi validationTarget, string wtId)
         {
             var wrapInfo = validationTarget.WrapInfoByTrackId(wtId);
-            var retVal = wrapInfo.NumPictures;
+            var retVal = wrapInfo.NumOfPictures;
+
+            return retVal;
+        }
+
+        /// <summary>
+        /// The get number of ownership pic.
+        /// </summary>
+        /// <param name="validationTarget">
+        /// The validation target.
+        /// </param>
+        /// <param name="wtId">
+        /// The wt id.
+        /// </param>
+        /// <returns>
+        /// The <see cref="int"/>.
+        /// </returns>
+        protected int GetNumberOfOwnershipPic(IWtApi validationTarget, string wtId)
+        {
+            var wrapInfo = validationTarget.WrapInfoByTrackId(wtId);
+            var retVal = wrapInfo.NumOfOwnershipPic;
 
             return retVal;
         }

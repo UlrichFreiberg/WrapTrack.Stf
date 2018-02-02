@@ -149,13 +149,19 @@ namespace WrapTrack.Stf.WrapTrackApi
                 OwnerId = info["ejerskab_nuv"].SelectToken("bruger_id").ToString(),
                 OwnerName = info["ejerskab_nuv"].SelectToken("bruger_navn").ToString(),
                 InternalId = info.SelectToken("id").ToString(),
-
                 Size = info.SelectToken("stoerrelse").ToString(),
                 NumOfPictures = info["billeder"].Count(),
-                NumOfOwnershipPic = info["ejerskab_nuv"].SelectToken("private_billeder").ToString(),
                 OwnershipNumber = info["ejerskab_nuv"].SelectToken("nr").ToString(),
                 Status = info.SelectToken("status").ToString(),
             };
+
+            var numOfOwnershipPic = info["ejerskab_nuv"].SelectToken("private_billeder").ToString();
+            int number;
+
+            if (int.TryParse(numOfOwnershipPic, out number))
+            {
+                retVal.NumOfOwnershipPic = number;
+            }
 
             return retVal;
         }

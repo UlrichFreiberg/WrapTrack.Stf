@@ -47,6 +47,10 @@ namespace WrapTrack.Stf.WrapTrackApi
         /// Gets or sets the WT internal id.
         /// </summary>
         public string InternalId { get; set; }
-        public string NumOfOwnershipPic { get; set; }
+
+        /// <summary>
+        /// Gets or sets the num of ownership pic.
+        /// </summary>
+        public int NumOfOwnershipPic { get; set; }
     }
 }
