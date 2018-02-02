@@ -52,23 +52,32 @@ namespace WrapTrackWebTests.Upload_Pictures
 
             StfAssert.AreEqual("0 pictures before upload", numberOfPictures, 0);
 
-            // Do 3 * upload
+            // Do 4 * upload
+            theOneAndOnlyWrap.UploadWrapImage(pathToNewImage, 4);
+            numberOfPictures = GetNumberOfPictures(validationTarget, wtId);
+            StfAssert.AreEqual("4 pictures after upload", numberOfPictures, 4);
+
+            // Remove two pictures and assert there is 2 picture left
+            theOneAndOnlyWrap.RemoveWrapImage();
+
+            // We have to wait a bit to get WT in sync
+            Wait(TimeSpan.FromSeconds(2));
+            theOneAndOnlyWrap.RemoveWrapImage();
+
+            // We have to wait a bit to get WT in sync
+            Wait(TimeSpan.FromSeconds(2));
+            numberOfPictures = GetNumberOfPictures(validationTarget, wtId);
+
+            StfAssert.AreEqual("2 picturse left", numberOfPictures, 2);
+
+            // After an issue in the system we need to be sure, if we delete the right pictures
+            var theSisterWrap = collection.AddWrap();
             theOneAndOnlyWrap.UploadWrapImage(pathToNewImage, 3);
-            numberOfPictures = GetNumberOfPictures(validationTarget, wtId);
-            StfAssert.AreEqual("3 pictures after upload", numberOfPictures, 3);
 
-            // Remove two pictures and assert there is 1 picture left
-            theOneAndOnlyWrap.RemoveWrapImage();
 
-            // We have to wait a bit to get WT in sync
-            Wait(TimeSpan.FromSeconds(2));
-            theOneAndOnlyWrap.RemoveWrapImage();
 
-            // We have to wait a bit to get WT in sync
-            Wait(TimeSpan.FromSeconds(2));
-            numberOfPictures = GetNumberOfPictures(validationTarget, wtId);
 
-            StfAssert.AreEqual("1 picture left", numberOfPictures, 1);
+
         }
 
         /// <summary>
