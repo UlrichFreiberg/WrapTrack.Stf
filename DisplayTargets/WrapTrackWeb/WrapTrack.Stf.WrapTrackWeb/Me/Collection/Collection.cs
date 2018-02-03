@@ -10,6 +10,8 @@
 
 namespace WrapTrack.Stf.WrapTrackWeb.Me.Collection
 {
+    using System;
+
     using OpenQA.Selenium;
 
     using WrapTrack.Stf.WrapTrackWeb.Interfaces;
@@ -48,13 +50,32 @@ namespace WrapTrack.Stf.WrapTrackWeb.Me.Collection
         /// <summary>
         /// Returns random wrap in collection.        
         /// </summary>
+        /// <param name="wtIdContraint">
+        /// Constrain the randomness to NOT return this wrap
+        /// </param>
         /// <returns>
         /// The <see cref="IWrap"/>.
         /// </returns>
-        public IWrap GetRandomWrap()
+        public IWrap GetRandomWrap(string wtIdContraint = null)
         {
-            var element = WebAdapter.FindElement(By.Id("lin_wrap"));
+            var wrapElements = WebAdapter.FindElements(By.Id("lin_wrap"));
+            var numberOfWraps = wrapElements.Count;
+            var random = new Random();
+            var wrapToChoose = random.Next(1, numberOfWraps + 1);
+            var xpath = $"(//a[@id='lin_wrap'])[{wrapToChoose}]";
+            var element = WebAdapter.FindElement(By.XPath(xpath));
+            var linWrapText = element.Text;
 
+            if (!string.IsNullOrEmpty(wtIdContraint)
+                && numberOfWraps > 1
+                && linWrapText.Equals(wtIdContraint, StringComparison.CurrentCultureIgnoreCase))
+            {
+                wrapToChoose = wrapToChoose == numberOfWraps ? 1 : wrapToChoose + 1;
+                xpath = $"(//a[@id='lin_wrap'])[{wrapToChoose}]";
+                element = WebAdapter.FindElement(By.XPath(xpath));
+            }
+
+            StfLogger.LogInfo($"We choose wrap number {wrapToChoose} (of {numberOfWraps}) - {linWrapText}");
             element.Click();
 
             var retVal = StfContainer.Get<IWrap>();
@@ -85,7 +106,7 @@ namespace WrapTrack.Stf.WrapTrackWeb.Me.Collection
             {
                 brand = "Didymos";
                 pattern = "Nino";
-                model = "Balu"; 
+                model = "Balu";
             }
 
             SelectDropdownByIdAndText("sel_brand", brand);

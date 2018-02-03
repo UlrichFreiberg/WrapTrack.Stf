@@ -43,9 +43,12 @@ namespace WrapTrack.Stf.WrapTrackWeb.Interfaces.Me
         /// <summary>
         /// Finds a random wrap in collection
         /// </summary>
+        /// <param name="wtIdContraint">
+        /// Constrain the randomness to NOT return this wrap
+        /// </param>
         /// <returns>
         /// The wrap 
-        /// </returns> 
-       IWrap GetRandomWrap();
+        /// </returns>
+       IWrap GetRandomWrap(string wtIdContraint = null);
     }
 }
