@@ -239,10 +239,6 @@ namespace WrapTrack.Stf.WrapTrackWeb.Me.Collection
                     optIdentId = "opt5";
                     nextButtonId = "but_ok5";
                     break;
-                case DeleteWrapOption.Converted:
-                    optIdentId = "opt4";
-                    nextButtonId = "but_ok4";
-                    break;
                 case DeleteWrapOption.ConvertedNonWrap:
                     optIdentId = "opt7";
                     nextButtonId = "but_ok7";

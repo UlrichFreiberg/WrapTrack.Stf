@@ -25,7 +25,7 @@ namespace WrapTrackWebTests.Collection
     /// <summary>
     /// Deleting wraps. Tests the possibility of deleting a wrap from users collection.
     /// There is more than one reason why the wrap should not be part of 
-    /// the users collection any more.
+    /// the users collection any more. All scenarios except converting to other wrap are included in test case.
     /// </summary>
     [TestClass]
     public class TestCase010 : WrapTrackTestScriptBase
@@ -103,9 +103,9 @@ namespace WrapTrackWebTests.Collection
                 Wait(TimeSpan.FromSeconds(2));
 
                 // Status of wrap after
-                StfLogger.LogInfo($"StatusAfter = {testdata.StatusAfter}");
+                StfLogger.LogInfo($"StatusAfter expeted = {testdata.StatusAfter}");
                 wrapInfo = validationTarget.WrapInfoByTrackId(wtId);
-                StfAssert.AreEqual("Correct status after deleting", wrapInfo.Status, testdata.StatusAfter);
+                StfAssert.AreEqual("Correct status after deleting",  testdata.StatusAfter, wrapInfo.Status);
             }
 
             WrapTrackShell.Logout(); 
