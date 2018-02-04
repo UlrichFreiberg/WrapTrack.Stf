@@ -58,9 +58,9 @@ namespace WrapTrackWebTests.Upload_Pictures
             StfAssert.AreEqual("4 pictures after upload", numberOfPictures, 4);
 
             // Remove two pictures and assert there is 1 picture left
-            RemovePicturesFromCollection(theOneAndOnlyWrap, 2);
+            RemovePicturesFromWrap(theOneAndOnlyWrap, 2);
             numberOfPictures = GetNumberOfPictures(validationTarget, wtId);
-            StfAssert.AreEqual("1 picture left", 1, numberOfPictures);
+            StfAssert.AreEqual("1 picture left", 2, numberOfPictures);
         }
 
         /// <summary>
@@ -80,7 +80,7 @@ namespace WrapTrackWebTests.Upload_Pictures
         /// </returns>
         // ReSharper disable once UnusedMethodReturnValue.Local 
         // - Okay - might make it as a general utils, and then we want it to return int
-        private int RemovePicturesFromCollection(
+        private int RemovePicturesFromWrap(
             IWrap wrap,
             int numberOfPictures,
             int secondsToWaitForWtSync = 2)
