@@ -49,9 +49,9 @@ namespace WrapTrackWebTests.Collection
             StfAssert.IsNotNull("Got a random wrap", wrapToGo);
 
             var anotherUser = GetAnotherUser(WrapTrackShell);
-            var x = wrapToGo.PassOn(anotherUser);
+            var passOn = wrapToGo.PassOn(anotherUser);
 
-            StfAssert.IsTrue("PassedOn", x);
+            StfAssert.IsTrue("PassedOn", passOn);
             StfAssert.IsTrue("PassedOn Validated", ValidatePassOn(wtId, anotherUser));
         }
 

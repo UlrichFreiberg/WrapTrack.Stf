@@ -101,19 +101,22 @@ namespace WrapTrack.Stf.WrapTrackWeb.Me.Collection
         public bool PassOn(string username, string ownershipStart = null)
         {
             // click the Pass On Button in the menu
-            if(!WebAdapter.ButtonClickById("but_passon"))
+            if (!WebAdapter.ButtonClickByXpath("//button[@id='but_passon']"))
             {
+                StfLogger.LogDebug("Couldn't press PassOn button");
                 return false;
             }
 
             if (!WebAdapter.TextboxSetTextById("inputBrugerSoeg", username))
             {
+                StfLogger.LogDebug("Couldn't set brugerSoeg text");
                 return false;
             }
 
             // click the select user button
             if (!WebAdapter.ButtonClickById("but_selUser"))
             {
+                StfLogger.LogDebug("Couldn't press SelectUser button");
                 return false;
             }
 
@@ -132,6 +135,7 @@ namespace WrapTrack.Stf.WrapTrackWeb.Me.Collection
             // answer the R U sure
             if (!WebAdapter.ButtonClickById("but_goPassOn"))
             {
+                StfLogger.LogDebug("Couldn't press R-U-Sure button");
                 return false;
             }
 
