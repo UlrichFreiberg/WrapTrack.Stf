@@ -50,25 +50,59 @@ namespace WrapTrackWebTests.Upload_Pictures
             var wtId = theOneAndOnlyWrap.WtId; // tracking-id
             var numberOfPictures = GetNumberOfPictures(validationTarget, wtId);
 
-            StfAssert.AreEqual("0 pictures before upload", numberOfPictures, 0);
+            StfAssert.AreEqual("0 pictures before upload", 0, numberOfPictures);
 
             // Do 3 * upload
             theOneAndOnlyWrap.UploadWrapImage(pathToNewImage, 3);
             numberOfPictures = GetNumberOfPictures(validationTarget, wtId);
-            StfAssert.AreEqual("3 pictures after upload", numberOfPictures, 3);
+            StfAssert.AreEqual("3 pictures after upload", 3, numberOfPictures);
 
             // Remove two pictures and assert there is 1 picture left
-            theOneAndOnlyWrap.RemoveWrapImage();
-
-            // We have to wait a bit to get WT in sync
-            Wait(TimeSpan.FromSeconds(2));
-            theOneAndOnlyWrap.RemoveWrapImage();
-
-            // We have to wait a bit to get WT in sync
-            Wait(TimeSpan.FromSeconds(2));
+            RemovePicturesFromCollection(theOneAndOnlyWrap, 2);
             numberOfPictures = GetNumberOfPictures(validationTarget, wtId);
+            StfAssert.AreEqual("1 picture left", 1, numberOfPictures);
+        }
 
-            StfAssert.AreEqual("1 picture left", numberOfPictures, 1);
+        /// <summary>
+        /// The remove number of pictures from colleciton.
+        /// </summary>
+        /// <param name="wrap">
+        /// The wrap.
+        /// </param>
+        /// <param name="numberOfPictures">
+        /// The number of pictures.
+        /// </param>
+        /// <param name="secondsToWaitForWtSync">
+        /// The seconds to wait for wt sync.
+        /// </param>
+        /// <returns>
+        /// The <see cref="int"/>.
+        /// </returns>
+        // ReSharper disable once UnusedMethodReturnValue.Local 
+        // - Okay - might make it as a general utils, and then we want it to return int
+        private int RemovePicturesFromCollection(
+            IWrap wrap,
+            int numberOfPictures,
+            int secondsToWaitForWtSync = 2)
+        {
+            for (var i = 0; i < numberOfPictures; i++)
+            {
+                var allsWell = wrap.RemoveWrapImage();
+
+                // We have to wait a bit to get WT in sync
+                allsWell = allsWell && Wait(TimeSpan.FromSeconds(secondsToWaitForWtSync));
+
+                if (allsWell)
+                {
+                    continue;
+                }
+
+                // Something went wrong - return the number of images removed so far
+                StfLogger.LogError($"Couldn't delete all images - failed at image number {i + 1}");
+                return i;
+            }
+
+            return numberOfPictures;
         }
 
         /// <summary>
