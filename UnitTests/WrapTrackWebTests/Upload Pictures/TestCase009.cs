@@ -102,16 +102,7 @@ namespace WrapTrackWebTests.Upload_Pictures
                 return i;
             }
 
-            StfAssert.AreEqual("2 picturse left", numberOfPictures, 2);
-
-            // After an issue in the system we need to be sure, if we delete the right pictures
-            var theSisterWrap = collection.AddWrap();
-            theOneAndOnlyWrap.UploadWrapImage(pathToNewImage, 3);
-
-
-
-
-
+            return numberOfPictures;
         }
 
         /// <summary>

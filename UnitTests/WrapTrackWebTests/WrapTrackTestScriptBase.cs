@@ -104,7 +104,7 @@ namespace WrapTrackWebTests
         /// <returns>
         /// The <see cref="int"/>.
         /// </returns>
-        protected string GetNumberOfOwnershipPic(IWtApi validationTarget, string wtId)
+        protected int GetNumberOfOwnershipPic(IWtApi validationTarget, string wtId)
         {
             var wrapInfo = validationTarget.WrapInfoByTrackId(wtId);
             var retVal = wrapInfo.NumOfOwnershipPic;
