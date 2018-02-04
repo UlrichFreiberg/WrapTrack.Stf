@@ -49,9 +49,9 @@ namespace WrapTrackWebTests.Collection
 
             var anotherUser = GetAnotherUser(WrapTrackShell);
             var ownershipStart = TodayPlusDays(2, "yyyy-MM-dd"); 
-            var x = wrapToGo.PassOn(anotherUser, ownershipStart);
+            var passOn = wrapToGo.PassOn(anotherUser, ownershipStart);
 
-            StfAssert.IsTrue("PassedOn", x);
+            StfAssert.IsTrue("PassedOn", passOn);
             StfAssert.IsTrue("PassedOn Validated", ValidatePassOn(wtId, anotherUser));
         }
 

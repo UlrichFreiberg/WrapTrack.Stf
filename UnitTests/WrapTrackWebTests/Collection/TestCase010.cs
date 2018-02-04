@@ -93,6 +93,7 @@ namespace WrapTrackWebTests.Collection
             StfLogger.LogInfo($"Option = {testdata.Option}");
 
             var deleted = ranWrap.Remove(testdata.Option);
+
             if (!deleted)
             {
                 StfLogger.LogInfo("The Wrap was not deleted - this test iteration stops");
