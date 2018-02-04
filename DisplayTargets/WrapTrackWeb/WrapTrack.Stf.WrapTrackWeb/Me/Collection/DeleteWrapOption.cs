@@ -17,7 +17,7 @@ namespace WrapTrack.Stf.WrapTrackWeb.Me.Collection
     {
 
         /// <summary>
-        /// The sold to stranger.
+        /// The sold to antoher WT-user.
         /// </summary>
         SoldToAnotherUser,
         
@@ -45,10 +45,5 @@ namespace WrapTrack.Stf.WrapTrackWeb.Me.Collection
         /// The registred-as-an-error wrap
         /// </summary>
         WasAnError,
-
-        /// <summary>
-        /// The converted wrap
-        /// </summary>
-        Converted
     }
 }
