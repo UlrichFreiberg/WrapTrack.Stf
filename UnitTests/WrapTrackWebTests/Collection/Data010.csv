@@ -1,7 +1,7 @@
-DeleteOption,StatusAfter,PageAfter
-SoldToAnotherUser, 0,wrap
-SoldToStranger,1,wrap
-LostWrap,1,wrap
-BrokenWrap,2,wrap
-WasAnError,3,news
-ConvertedNonWrap,2,wrap
+StfIgnoreRow, DeleteOption, StatusAfter, PageAfter
+true, SoldToAnotherUser, 0, wrap
+false, SoldToStranger, 1, wrap
+true, LostWrap, 1, wrap
+true, BrokenWrap, 2, wrap
+true, WasAnError, 3, news
+true, ConvertedNonWrap, 2, wrap

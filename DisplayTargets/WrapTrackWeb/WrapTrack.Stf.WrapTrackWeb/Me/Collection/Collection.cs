@@ -102,10 +102,11 @@ namespace WrapTrack.Stf.WrapTrackWeb.Me.Collection
         /// <returns>
         /// false if not possible
         /// </returns>
-        public bool AddWrap(string brand = null, string pattern = null, string model = null, int size = 6)
+        public IWrap AddWrap(string brand = null, string pattern = null, string model = null, int size = 6)
         {
             ClickById("but_addwrap");
             ClickById("lin_newwrap");
+
             if (brand == null)
             {
                 brand = "Didymos";
@@ -113,16 +114,20 @@ namespace WrapTrack.Stf.WrapTrackWeb.Me.Collection
                 model = "Balu";
             }
 
-
             SelectDropdownByIdAndText("sel_brand", brand);
             SelectDropdownByIdAndText("sel_pattern", pattern);
             SelectDropdownByIdAndText("sel_model", model);
             SelectDropdownByIdAndText("vaelg_str", size.ToString());
 
             // add And Exit
-            ClickById("opretvikle1knap");
+            if (!WebAdapter.ButtonClickById("opretvikle1knap"))
+            {
+                return null;
+            }
 
-            return true;
+            var retVal = StfContainer.Get<IWrap>();
+
+            return retVal;
         }
 
         /// <summary>

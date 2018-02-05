@@ -69,7 +69,7 @@ namespace WrapTrackWebTests.Collection
         /// </summary>
         [DataSource(
             "Microsoft.VisualStudio.TestTools.DataSource.CSV",
-            "D:\\Projects\\WrapTrack.Stf\\UnitTests\\WrapTrackWebTests\\Collection\\Data010.csv",
+            @"D:\Projects\WrapTrack.Stf\UnitTests\WrapTrackWebTests\Collection\Data010.csv",
              "Data010#csv",
              dataAccessMethod: DataAccessMethod.Sequential), TestMethod]
         public void Tc010()
@@ -90,9 +90,9 @@ namespace WrapTrackWebTests.Collection
             StfAssert.AreEqual("Status before deleting is 0", statusBefore, "0");
 
             // Delete wrap
-            StfLogger.LogInfo($"Option = {testdata.Option}");
+            StfLogger.LogInfo($"DeleteOption = {testdata.DeleteOption}");
 
-            var deleted = ranWrap.Remove(testdata.Option);
+            var deleted = ranWrap.Remove(testdata.DeleteOption);
 
             if (!deleted)
             {
@@ -125,7 +125,7 @@ namespace WrapTrackWebTests.Collection
             /// <summary>
             /// Gets or sets the delete wrap option.
             /// </summary>
-            public DeleteWrapOption Option { get; set; }
+            public DeleteWrapOption DeleteOption { get; set; }
         }
     }
 }

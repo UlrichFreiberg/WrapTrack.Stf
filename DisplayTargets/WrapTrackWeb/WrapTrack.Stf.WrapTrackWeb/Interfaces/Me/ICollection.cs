@@ -41,8 +41,7 @@ namespace WrapTrack.Stf.WrapTrackWeb.Interfaces.Me
         /// <param name="size">
         /// Size of wrap 
         /// </param>
-
-        bool AddWrap(string brand = null, string pattern = null, string model = null, int size = 6);
+        IWrap AddWrap(string brand = null, string pattern = null, string model = null, int size = 6);
 
         /// <summary>
         /// Finds a random wrap in collection

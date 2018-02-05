@@ -15,7 +15,6 @@ namespace WrapTrack.Stf.WrapTrackWeb.Me.Collection
     /// </summary>
     public enum DeleteWrapOption
     {
-
         /// <summary>
         /// The sold to antoher WT-user.
         /// </summary>
