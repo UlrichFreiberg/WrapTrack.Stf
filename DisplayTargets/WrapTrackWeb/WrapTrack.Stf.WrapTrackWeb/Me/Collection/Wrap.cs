@@ -216,13 +216,17 @@ namespace WrapTrack.Stf.WrapTrackWeb.Me.Collection
             string optIdentId;
             string nextButtonId;
 
-            ClickById("but_remove");
+            if (!WebAdapter.ButtonClickById("but_remove"))
+            {
+                return false; 
+            }
 
             switch (deleteOption)
             {
                 case DeleteWrapOption.SoldToAnotherUser:
-                    return true; 
-
+                    optIdentId = "opt1";
+                    nextButtonId = "but_cancel";
+                    break;
                 case DeleteWrapOption.SoldToStranger:
                     optIdentId = "opt2";
                     nextButtonId = "but_fortsaet2";
