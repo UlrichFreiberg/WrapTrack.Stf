@@ -144,16 +144,30 @@ namespace WrapTrack.Stf.WrapTrackApi
         /// </returns>
         private WrapInfo WrapInfoMapper(JObject info)
         {
-            var retVal = new WrapInfo
+            WrapInfo retVal;
+
+            StfLogger.LogDebug($"WrapInfoMapper: Got info = [{info}]");
+
+            try
             {
-                OwnerId = info["ejerskab_nuv"].SelectToken("bruger_id").ToString(),
-                OwnerName = info["ejerskab_nuv"].SelectToken("bruger_navn").ToString(),
-                InternalId = info.SelectToken("id").ToString(),
-                Size = info.SelectToken("stoerrelse").ToString(),
-                NumOfPictures = info["billeder"].Count(),
-                OwnershipNumber = info["ejerskab_nuv"].SelectToken("nr").ToString(),
-                Status = info.SelectToken("status").ToString(),
-            };
+                var bent = new WrapInfo
+                               {
+                                   OwnerId = info["ejerskab_nuv"].SelectToken("bruger_id").ToString(),
+                                   OwnerName = info["ejerskab_nuv"].SelectToken("bruger_navn").ToString(),
+                                   InternalId = info.SelectToken("id").ToString(),
+                                   Size = info.SelectToken("stoerrelse").ToString(),
+                                   NumOfPictures = info["billeder"].Count(),
+                                   OwnershipNumber = info["ejerskab_nuv"].SelectToken("nr").ToString(),
+                                   Status = info.SelectToken("status").ToString(),
+                               };
+
+                retVal = bent;
+            }
+            catch (Exception ex)
+            {
+                StfLogger.LogError($"WrapInfoMapper: Got ex = [{ex}]");
+                return null;
+            }
 
             var numOfOwnershipPic = info["ejerskab_nuv"].SelectToken("private_billeder").ToString();
             int number;
