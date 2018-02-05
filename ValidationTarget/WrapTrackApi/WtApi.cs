@@ -152,13 +152,12 @@ namespace WrapTrack.Stf.WrapTrackApi
             {
                 var bent = new WrapInfo
                                {
-                                   OwnerId = info["ejerskab_nuv"].SelectToken("bruger_id").ToString(),
-                                   OwnerName = info["ejerskab_nuv"].SelectToken("bruger_navn").ToString(),
-                                   InternalId = info.SelectToken("id").ToString(),
-                                   Size = info.SelectToken("stoerrelse").ToString(),
-                                   NumOfPictures = info["billeder"].Count(),
-                                   OwnershipNumber = info["ejerskab_nuv"].SelectToken("nr").ToString(),
-                                   Status = info.SelectToken("status").ToString(),
+                                   OwnerId = info["ejerskab_nuv"]?.SelectToken("bruger_id")?.ToString(),
+                                   OwnerName = info["ejerskab_nuv"]?.SelectToken("bruger_navn")?.ToString(),
+                                   InternalId = info.SelectToken("id")?.ToString(),
+                                   Size = info.SelectToken("id")?.ToString(),
+                                   OwnershipNumber = info["ejerskab_nuv"]?.SelectToken("nr")?.ToString(),
+                                   Status = info.SelectToken("status")?.ToString(),
                                };
 
                 retVal = bent;
@@ -169,13 +168,16 @@ namespace WrapTrack.Stf.WrapTrackApi
                 return null;
             }
 
-            var numOfOwnershipPic = info["ejerskab_nuv"].SelectToken("private_billeder").ToString();
+            var numOfOwnershipPic = info["ejerskab_nuv"]?.SelectToken("private_billeder")?.ToString();
             int number;
 
             if (int.TryParse(numOfOwnershipPic, out number))
             {
                 retVal.NumOfOwnershipPic = number;
             }
+
+            // sometime we dont have this node - if not, then the value is zero:-)
+            retVal.NumOfPictures = info["billeder"]?.Count() ?? 0; 
 
             return retVal;
         }
