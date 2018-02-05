@@ -11,6 +11,7 @@
 namespace WrapTrack.Stf.WrapTrackWeb.Me.Collection
 {
     using System;
+    using System.Drawing;
 
     using OpenQA.Selenium;
 
@@ -87,18 +88,21 @@ namespace WrapTrack.Stf.WrapTrackWeb.Me.Collection
         /// Add a wrap to users own collection
         /// </summary>
         /// <param name="brand">
-        /// The brand.
+        /// The brand fx 'Artipoppe'
         /// </param>
         /// <param name="pattern">
-        /// The pattern.
+        /// The pattern - fx 'Argus'
         /// </param>
         /// <param name="model">
-        /// The model.
+        /// The model - fx 'The Queen'
+        /// </param>
+        /// <param name="size">
+        /// The size of the wrap - fx 6
         /// </param>
         /// <returns>
         /// false if not possible
         /// </returns>
-        public bool AddWrap(string brand = null, string pattern = null, string model = null)
+        public bool AddWrap(string brand = null, string pattern = null, string model = null, int size = 6)
         {
             ClickById("but_addwrap");
             ClickById("lin_newwrap");
@@ -109,10 +113,11 @@ namespace WrapTrack.Stf.WrapTrackWeb.Me.Collection
                 model = "Balu";
             }
 
+
             SelectDropdownByIdAndText("sel_brand", brand);
             SelectDropdownByIdAndText("sel_pattern", pattern);
             SelectDropdownByIdAndText("sel_model", model);
-            SelectDropdownByIdAndText("vaelg_str", "2");
+            SelectDropdownByIdAndText("vaelg_str", size.ToString());
 
             // add And Exit
             ClickById("opretvikle1knap");

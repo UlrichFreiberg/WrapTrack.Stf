@@ -128,6 +128,7 @@
     <Compile Include="Collection\TestCase006.cs" />
     <Compile Include="Collection\TestCase007.cs" />
     <Compile Include="Collection\TestCase012.cs" />
+    <Compile Include="Collection\TestCase013.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SignUp - LogIn\TestCase001.cs" />
     <Compile Include="SignUp - LogIn\TestCase002.cs" />
