@@ -54,7 +54,9 @@ namespace WrapTrack.Stf.WrapTrackWeb.Me
         public ICollection GetCollection()
         {
             WebAdapter.ButtonClickById("nav_collection");
+
             var retVal = StfContainer.Get<ICollection>();
+
             return retVal; 
         }
 

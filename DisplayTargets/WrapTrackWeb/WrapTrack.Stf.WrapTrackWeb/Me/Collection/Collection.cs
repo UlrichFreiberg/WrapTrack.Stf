@@ -11,7 +11,6 @@
 namespace WrapTrack.Stf.WrapTrackWeb.Me.Collection
 {
     using System;
-    using System.Drawing;
 
     using OpenQA.Selenium;
 
@@ -104,7 +103,7 @@ namespace WrapTrack.Stf.WrapTrackWeb.Me.Collection
         /// </returns>
         public IWrap AddWrap(string brand = null, string pattern = null, string model = null, int size = 6)
         {
-            ClickById("but_addwrap");
+            WebAdapter.ButtonClickByXpath("//button[contains(@data-bind,'Collection/tilfoej_vikle')]");
             ClickById("lin_newwrap");
 
             if (brand == null)
