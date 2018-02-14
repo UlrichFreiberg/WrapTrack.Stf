@@ -83,6 +83,11 @@ namespace WrapTrack.Stf.WrapTrackApi
         /// </returns>
         public WrapInfo WrapInfoByTrackId(string wtWrapId)
         {
+            if (string.IsNullOrWhiteSpace(wtWrapId))
+            {
+                return null;
+            }
+
             var info = GetWrapRestInfoByTrackId(wtWrapId);
             var retVal = WrapInfoMapper(info.Result);
 
@@ -100,6 +105,11 @@ namespace WrapTrack.Stf.WrapTrackApi
         /// </returns>
         protected async Task<JObject> GetWrapRestInfoByTrackId(string wtWrapId)
         {
+            if (string.IsNullOrEmpty(wtWrapId))
+            {
+                return null;
+            }
+
             var uri = $"{WtApiConfiguration.Url}/wrap/0/{wtWrapId.Trim()}";
             var client = new HttpClient();
 

@@ -14,8 +14,6 @@ namespace WrapTrackWebTests.Upload_Pictures
 
     using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-    using Mir.Stf;
-
     using WrapTrack.Stf.WrapTrackWeb.Interfaces;
 
     /// <summary>
