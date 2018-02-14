@@ -41,7 +41,7 @@ namespace WrapTrack.Stf.WrapTrackWeb.Me.Collection
         /// </returns>
         public int NumOfWraps()
         {
-            var elements = WebAdapter.FindElements(By.Id("elem_wrap"));
+            var elements = WebAdapter.FindElements(By.Id("lin_wrap"));
             var retval = elements.Count;
 
             return retval;
