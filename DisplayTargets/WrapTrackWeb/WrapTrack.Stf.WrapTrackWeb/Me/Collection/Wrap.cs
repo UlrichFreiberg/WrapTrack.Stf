@@ -56,7 +56,7 @@ namespace WrapTrack.Stf.WrapTrackWeb.Me.Collection
         {
             get
             {
-                const string Xpath = "//p[starts-with(normalize-space(),'Wraptrack-ID')]/span";
+                const string Xpath = "//span[@class='font_wraptrack']/following-sibling::span";
                 var retVal = WebAdapter.GetText(By.XPath(Xpath));
 
                 retVal = retVal.Trim();
