@@ -14,7 +14,6 @@ namespace WrapTrackWebTests.Collection
 
     using WrapTrack.Stf.WrapTrackApi.Interfaces;
     using WrapTrack.Stf.WrapTrackWeb.Interfaces;
-    using WrapTrack.Stf.WrapTrackWeb.Interfaces.Me;
 
     /// <summary>
     /// Test of letting a wrap pass on from one user to another. 
@@ -74,29 +73,6 @@ namespace WrapTrackWebTests.Collection
             var retVal = wrapInfo.OwnerName == anotherUsername;
 
             return retVal;
-        }
-
-        /// <summary>
-        /// The get current user collection. If none, then one is added
-        /// </summary>
-        /// <returns>
-        /// The <see cref="ICollection"/>.
-        /// </returns>
-        private ICollection GetCurrentUserCollection()
-        {
-            var me = WrapTrackShell.Me();
-            var collection = me.GetCollection();
-
-            StfAssert.IsNotNull("Got a MeProfile", me);
-            StfAssert.IsNotNull("Got my collection", collection);
-
-            // Be sure there is a wrap in collection. 
-            if (collection.NumOfWraps() == 0)
-            {
-                collection.AddWrap("Ali Dover", "Hygge", "White");
-            }
-
-            return collection;
         }
     }
 }

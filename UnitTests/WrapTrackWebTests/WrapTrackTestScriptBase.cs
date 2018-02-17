@@ -151,23 +151,26 @@ namespace WrapTrackWebTests
         }
 
         /// <summary>
-        /// The date plus days.
+        /// The get current user collection. If none, then one is added
         /// </summary>
-        /// <param name="days">
-        /// The days.
-        /// </param>
-        /// <param name="format">
-        /// The format.
-        /// </param>
         /// <returns>
-        /// The <see cref="DateTime"/>.
+        /// The <see cref="ICollection"/>.
         /// </returns>
-        protected string TodayPlusDays(int days, string format = "yyyyMMdd")
+        protected ICollection GetCurrentUserCollection()
         {
-            var date = DateTime.Today + TimeSpan.FromDays(days);
-            var retVal = date.ToString(format);
+            var me = WrapTrackShell.Me();
+            var collection = me.GetCollection();
 
-            return retVal;
+            StfAssert.IsNotNull("Got a MeProfile", me);
+            StfAssert.IsNotNull("Got my collection", collection);
+
+            // Be sure there is a wrap in collection. 
+            if (collection.NumOfWraps() == 0)
+            {
+                collection.AddWrap("Ali Dover", "Hygge", "White");
+            }
+
+            return collection;
         }
     }
 }

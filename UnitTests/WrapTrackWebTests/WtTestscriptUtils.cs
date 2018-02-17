@@ -40,6 +40,26 @@ namespace WrapTrackWebTests
         public IStfLogger StfLogger { get; set; }
 
         /// <summary>
+        /// The date plus days.
+        /// </summary>
+        /// <param name="days">
+        /// The days.
+        /// </param>
+        /// <param name="format">
+        /// The format.
+        /// </param>
+        /// <returns>
+        /// The <see cref="DateTime"/>.
+        /// </returns>
+        public static string TodayPlusDays(int days, string format = "yyyyMMdd")
+        {
+            var date = DateTime.Today + TimeSpan.FromDays(days);
+            var retVal = date.ToString(format);
+
+            return retVal;
+        }
+
+        /// <summary>
         /// The php error free.
         /// </summary>
         /// <param name="webAdapter">
