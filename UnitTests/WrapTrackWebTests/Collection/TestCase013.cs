@@ -1,5 +1,5 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="TestCase010.cs" company="Mir Software">
+// <copyright file="TestCase013.cs" company="Mir Software">
 //   Copyright governed by Artistic license as described here:
 //          http://www.perlfoundation.org/artistic_license_2_0
 // </copyright>
@@ -10,18 +10,10 @@
 
 namespace WrapTrackWebTests.Collection
 {
-    using System;
-    using System.Diagnostics.CodeAnalysis;
-
     using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-    using Mir.Stf;
-
-    using WrapTrack.Stf.Adapters.WebAdapter;
-    using WrapTrack.Stf.WrapTrackApi.Interfaces;
     using WrapTrack.Stf.WrapTrackWeb.Interfaces;
     using WrapTrack.Stf.WrapTrackWeb.Interfaces.Me;
-    using WrapTrack.Stf.WrapTrackWeb.Me.Collection;
 
     /// <summary>
     /// Converting a wrap to two other wraps.
@@ -45,7 +37,6 @@ namespace WrapTrackWebTests.Collection
 
             // Be sure we have enough wraps for all test instances
             Collection = GetCurrentUserCollection(WrapTrackShell);
-
         }
 
         /// <summary>
@@ -55,7 +46,11 @@ namespace WrapTrackWebTests.Collection
         {
            // Create a wrap to convert
             var orgWrap = Collection.AddWrap("A love so rare", "Alta Lake", "Charcoal", 8);
+
             StfAssert.IsNotNull("Got the original wrap size 8", orgWrap);
+
+            // Mark the test script as InProgress
+            StfAssert.IsNotNull("TestCase NOT finished", null);
 
             // Status of original wrap before
             //TODO: We need to know the id of the wrap to validate status later on

@@ -14,7 +14,6 @@ namespace WrapTrackWebTests.Collection
 
     using WrapTrack.Stf.WrapTrackApi.Interfaces;
     using WrapTrack.Stf.WrapTrackWeb.Interfaces;
-    using WrapTrack.Stf.WrapTrackWeb.Interfaces.Me;
 
     /// <summary>
     /// When letting a wrap pass on from one user to another 
@@ -48,11 +47,11 @@ namespace WrapTrackWebTests.Collection
             StfAssert.IsNotNull("Got a random wrap", wrapToGo);
 
             var anotherUser = GetAnotherUser(WrapTrackShell);
-            var ownershipStart = TodayPlusDays(2, "yyyy-MM-dd"); 
+            var ownershipStart = WtTestscriptUtils.TodayPlusDays(2, "yyyy-MM-dd"); 
             var passOn = wrapToGo.PassOn(anotherUser, ownershipStart);
 
-            // Waiting for WT bug #24 - script is ok
-            // StfAssert.IsTrue("PassedOn Validated", ValidatePassOn(wtId, anotherUser));
+            StfAssert.IsTrue("PassedOn", passOn);
+            StfAssert.IsTrue("PassedOn Validated", ValidatePassOn(wtId, anotherUser));
             StfAssert.IsTrue("Dummy (waiting for bug #24)", true);
         }
 
@@ -75,29 +74,6 @@ namespace WrapTrackWebTests.Collection
             var retVal = wrapInfo.OwnerName == anotherUsername;
 
             return retVal;
-        }
-
-        /// <summary>
-        /// The get current user collection. If none, then one is added
-        /// </summary>
-        /// <returns>
-        /// The <see cref="ICollection"/>.
-        /// </returns>
-        private ICollection GetCurrentUserCollection()
-        {
-            var me = WrapTrackShell.Me();
-            var collection = me.GetCollection();
-
-            StfAssert.IsNotNull("Got a MeProfile", me);
-            StfAssert.IsNotNull("Got my collection", collection);
-
-            // Be sure there is a wrap in collection. 
-            if (collection.NumOfWraps() == 0)
-            {
-                collection.AddWrap("Ali Dover", "Hygge", "White");
-            }
-
-            return collection;
         }
     }
 }
