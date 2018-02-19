@@ -165,7 +165,7 @@ namespace WrapTrack.Stf.WrapTrackWeb.Me.Collection
                 WebAdapter.WaitForComplete(3);
 
                 // handle the File Upload Dialog
-                WebAdapter.NativeDialogFileUpload(By.Id("but_file"), clientSideFilePath);
+                WebAdapter.NativeDialogFileUpload(By.Id("userfile"), clientSideFilePath);
 
                 WebAdapter.WaitForComplete(3);
 
