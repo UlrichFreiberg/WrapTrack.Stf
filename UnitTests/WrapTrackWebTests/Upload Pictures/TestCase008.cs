@@ -10,6 +10,7 @@
 
 namespace WrapTrackWebTests.Upload_Pictures
 {
+    using System;
     using System.IO;
 
     using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -47,10 +48,11 @@ namespace WrapTrackWebTests.Upload_Pictures
             myWrap.UploadWrapImage(pathToNewImage);
 
             // Find number of pictures after upload 
+            Wait(TimeSpan.FromSeconds(5));
             var afterWrapPic = GetNumberOfPictures(validationTarget, wtId);
             var newNumWrapPic = beforeWrapPic + 1;
 
-            StfAssert.AreEqual("One more picture related to wrap", afterWrapPic, newNumWrapPic);
+            StfAssert.AreEqual("One more picture related to wrap", newNumWrapPic, afterWrapPic);
 
             var afterOwnershipPic = GetNumberOfOwnershipPic(validationTarget, wtId);
             var newNumOwnershipPic = beforeOwnershipPic + 1;
