@@ -144,6 +144,14 @@ namespace WrapTrack.Stf.Adapters.WebAdapter
         void WaitForComplete(int seconds);
 
         /// <summary>
+        /// Overload for The wait for complete.
+        /// </summary>
+        /// <param name="timeSpan">
+        /// The time span.
+        /// </param>
+        void WaitForComplete(TimeSpan timeSpan);
+
+        /// <summary>
         /// The move to element.
         /// </summary>
         /// <param name="elem">

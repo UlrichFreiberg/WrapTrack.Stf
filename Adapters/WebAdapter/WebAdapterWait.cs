@@ -64,5 +64,16 @@ namespace WrapTrack.Stf.Adapters.WebAdapter
         {
             Thread.Sleep(seconds * 1000);
         }
-   }
+
+        /// <summary>
+        /// Overload for The wait for complete.
+        /// </summary>
+        /// <param name="timeSpan">
+        /// The time span.
+        /// </param>
+        public void WaitForComplete(TimeSpan timeSpan)
+        {
+            WaitForComplete((int)timeSpan.TotalSeconds);
+        }
+    }
 }

@@ -123,7 +123,7 @@ namespace WrapTrack.Stf.WrapTrackWeb.Me.Collection
             // Choose a date for ownership-start
             if (ownershipStart != null)
             {
-                Wait(TimeSpan.FromSeconds(1));
+                WebAdapter.WaitForComplete(TimeSpan.FromSeconds(1));
 
                 if (!WebAdapter.TextboxSetTextById("inp_datePassOn", ownershipStart))
                 {
@@ -255,49 +255,12 @@ namespace WrapTrack.Stf.WrapTrackWeb.Me.Collection
             WebAdapter.ButtonClickById(optIdentId);
 
             // wait for button to appear
-            Wait(TimeSpan.FromSeconds(1)); 
+            WebAdapter.WaitForComplete(1); 
 
             var next = WebAdapter.ButtonClickById(nextButtonId);
             
-            // if we manage to press Next, then we are good:-)
+            // if we managed to press Next, then we are good:-)
             return next;
-        }
-
-        /// <summary>
-        /// The wait.
-        /// </summary>
-        /// <param name="duration">
-        /// The duration.
-        /// </param>
-        /// <returns>
-        /// The <see cref="bool"/>.
-        /// </returns>
-        protected bool Wait(TimeSpan duration)
-        {
-            System.Threading.Thread.Sleep(duration);
-
-            return true;
-        }
-
-        /// <summary>
-        /// The click by id.
-        /// </summary>
-        /// <param name="id">
-        /// The id.
-        /// </param>
-        private void ClickById(string id)
-        {
-            var elem = WebAdapter.FindElement(By.Id(id));
-
-            try
-            {
-                elem.Click();
-            }
-            catch
-            {
-                WebAdapter.MoveToElement(elem);
-                elem.Click();
-            }
         }
     }
 }
