@@ -172,5 +172,26 @@ namespace WrapTrackWebTests
 
             return collection;
         }
+
+        /// <summary>
+        /// The validate pass on.
+        /// </summary>
+        /// <param name="wrapToGo">
+        /// The wrap to go.
+        /// </param>
+        /// <param name="anotherUsername">
+        /// The another username.
+        /// </param>
+        /// <returns>
+        /// The <see cref="bool"/>.
+        /// </returns>
+        protected bool ValidatePassOn(string wrapToGo, string anotherUsername)
+        {
+            var validationTarget = Get<IWtApi>();
+            var wrapInfo = validationTarget.WrapInfoByTrackId(wrapToGo);
+            var retVal = wrapInfo.OwnerName == anotherUsername;
+
+            return retVal;
+        }
     }
 }

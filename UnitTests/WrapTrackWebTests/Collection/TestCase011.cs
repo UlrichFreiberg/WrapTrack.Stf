@@ -12,7 +12,6 @@ namespace WrapTrackWebTests.Collection
 {
     using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-    using WrapTrack.Stf.WrapTrackApi.Interfaces;
     using WrapTrack.Stf.WrapTrackWeb.Interfaces;
 
     /// <summary>
@@ -53,27 +52,6 @@ namespace WrapTrackWebTests.Collection
             StfAssert.IsTrue("PassedOn", passOn);
             StfAssert.IsTrue("PassedOn Validated", ValidatePassOn(wtId, anotherUser));
             StfAssert.IsTrue("Dummy (waiting for bug #24)", true);
-        }
-
-        /// <summary>
-        /// The validate pass on.
-        /// </summary>
-        /// <param name="wrapToGo">
-        /// The wrap to go.
-        /// </param>
-        /// <param name="anotherUsername">
-        /// The another username.
-        /// </param>
-        /// <returns>
-        /// The <see cref="bool"/>.
-        /// </returns>
-        private bool ValidatePassOn(string wrapToGo, string anotherUsername)
-        {
-            var validationTarget = Get<IWtApi>();
-            var wrapInfo = validationTarget.WrapInfoByTrackId(wrapToGo);
-            var retVal = wrapInfo.OwnerName == anotherUsername;
-
-            return retVal;
         }
     }
 }
