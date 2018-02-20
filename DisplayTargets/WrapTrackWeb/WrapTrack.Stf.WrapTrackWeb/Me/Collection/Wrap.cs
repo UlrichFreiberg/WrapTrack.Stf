@@ -187,7 +187,7 @@ namespace WrapTrack.Stf.WrapTrackWeb.Me.Collection
         /// </returns>
         public bool RemoveWrapImage(int imageIndex = 1)
         {
-            var buttons = WebAdapter.FindElements(By.Id("but_deleteprivateimg"));
+            var buttons = WebAdapter.FindElements(By.Id("but_delete"));
 
             if (buttons == null || buttons.Count == 0)
             {
