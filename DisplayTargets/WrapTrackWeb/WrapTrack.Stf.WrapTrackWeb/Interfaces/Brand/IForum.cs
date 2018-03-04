@@ -1,19 +1,19 @@
 // --------------------------------------------------------------------------------------------------------------------
-// <copyright file="IExploreWraps.cs" company="Mir Software">
+// <copyright file="IForum.cs" company="Mir Software">
 //   Copyright governed by Artistic license as described here:
 //          http://www.perlfoundation.org/artistic_license_2_0
 // </copyright>
 // <summary>
-//   Defines the IExploreWraps type.
+//   The Forum interface.
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
 
-    namespace WrapTrack.Stf.WrapTrackWeb.Interfaces.Explore
+namespace WrapTrack.Stf.WrapTrackWeb.Interfaces.Brand
 {
     /// <summary>
-    /// The ExploreWraps interface.
+    /// The Forum interface.
     /// </summary>
-    public interface IExploreWraps
+    public interface IForum
     {
     }
 }

@@ -8,7 +8,7 @@
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace WrapTrack.Stf.WrapTrackWeb.Me.Collection
+namespace WrapTrack.Stf.WrapTrackWeb
 {
     using System;
     using System.Linq;
@@ -17,6 +17,7 @@ namespace WrapTrack.Stf.WrapTrackWeb.Me.Collection
 
     using WrapTrack.Stf.WrapTrackApi.Interfaces;
     using WrapTrack.Stf.WrapTrackWeb.Interfaces;
+    using WrapTrack.Stf.WrapTrackWeb.Me.Collection;
 
     /// <summary>
     /// The learn more.
@@ -173,6 +174,8 @@ namespace WrapTrack.Stf.WrapTrackWeb.Me.Collection
                 WebAdapter.ButtonClickById("but_doupload");
             }
 
+            WebAdapter.WaitForComplete(3);
+
             return true;
         }
 
@@ -187,7 +190,7 @@ namespace WrapTrack.Stf.WrapTrackWeb.Me.Collection
         /// </returns>
         public bool RemoveWrapImage(int imageIndex = 1)
         {
-            var buttons = WebAdapter.FindElements(By.Id("but_deleteprivateimg"));
+            var buttons = WebAdapter.FindElements(By.Id("but_delete"));
 
             if (buttons == null || buttons.Count == 0)
             {
@@ -197,6 +200,9 @@ namespace WrapTrack.Stf.WrapTrackWeb.Me.Collection
             var buttonToClick = buttons.First();
 
             buttonToClick.Click();
+
+            // We have to wait a bit to get WT in sync
+            WebAdapter.WaitForComplete(3);
 
             return true;
         }

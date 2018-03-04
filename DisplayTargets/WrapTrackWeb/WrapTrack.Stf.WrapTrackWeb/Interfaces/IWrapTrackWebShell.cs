@@ -65,9 +65,9 @@ namespace WrapTrack.Stf.WrapTrackWeb.Interfaces
         /// The explorer.
         /// </summary>
         /// <returns>
-        /// The <see cref="IExploreWraps"/>.
+        /// The <see cref="IExplore"/>.
         /// </returns>
-        IExploreWraps Explorer();
+        IExplore Explore();
 
         /// <summary>
         /// The market.

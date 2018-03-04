@@ -1,30 +1,30 @@
 // --------------------------------------------------------------------------------------------------------------------
-// <copyright file="ExploreBrands.cs" company="Mir Software">
+// <copyright file="Wraps.cs" company="Mir Software">
 //   Copyright governed by Artistic license as described here:
 //          http://www.perlfoundation.org/artistic_license_2_0
 // </copyright>
 // <summary>
-//   Defines the IExplorerWraps type.
+//   Defines the Wraps type.
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
 
-    namespace WrapTrack.Stf.WrapTrackWeb.Explore
+namespace WrapTrack.Stf.WrapTrackWeb.Brand
 {
     using WrapTrack.Stf.WrapTrackWeb.Interfaces;
-    using WrapTrack.Stf.WrapTrackWeb.Interfaces.Explore;
+    using WrapTrack.Stf.WrapTrackWeb.Interfaces.Brand;
 
     /// <summary>
-    /// The explore brands.
+    /// The wraps.
     /// </summary>
-    public class ExploreBrands : WrapTrackWebShellModelBase, IExploreBrands
+    public class Wraps : WrapTrackWebShellModelBase, IWraps
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="ExploreBrands"/> class.
+        /// Initializes a new instance of the <see cref="Wraps"/> class.
         /// </summary>
         /// <param name="wrapTrackWebShell">
         /// The wrap track web shell.
         /// </param>
-        public ExploreBrands(IWrapTrackWebShell wrapTrackWebShell)
+        public Wraps(IWrapTrackWebShell wrapTrackWebShell)
             : base(wrapTrackWebShell)
         {
         }

@@ -1,19 +1,19 @@
 // --------------------------------------------------------------------------------------------------------------------
-// <copyright file="IExploreBrands.cs" company="Mir Software">
+// <copyright file="IPatterns.cs" company="Mir Software">
 //   Copyright governed by Artistic license as described here:
 //          http://www.perlfoundation.org/artistic_license_2_0
 // </copyright>
 // <summary>
-//   Defines the IExploreBrands type.
+//   The Brand interface.
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace WrapTrack.Stf.WrapTrackWeb.Interfaces.Explore
+namespace WrapTrack.Stf.WrapTrackWeb.Interfaces.Brand
 {
     /// <summary>
-    /// The ExploreBrands interface.
+    /// The Patterns interface.
     /// </summary>
-    public interface IExploreBrands
+    public interface IPatterns
     {
     }
 }
