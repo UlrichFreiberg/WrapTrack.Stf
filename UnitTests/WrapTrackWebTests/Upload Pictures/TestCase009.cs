@@ -54,11 +54,13 @@ namespace WrapTrackWebTests.Upload_Pictures
 
             // Do 4 * upload
             theOneAndOnlyWrap.UploadWrapImage(pathToNewImage, 4);
+            Wait(TimeSpan.FromSeconds(3));
             numberOfPictures = GetNumberOfPictures(validationTarget, wtId);
             StfAssert.AreEqual("4 pictures after upload", numberOfPictures, 4);
 
             // Remove two pictures and assert there is 2 picture left
             RemovePicturesFromWrap(theOneAndOnlyWrap, 2);
+            Wait(TimeSpan.FromSeconds(3));
             numberOfPictures = GetNumberOfPictures(validationTarget, wtId);
             StfAssert.AreEqual("2 picture left", 2, numberOfPictures);
         }
