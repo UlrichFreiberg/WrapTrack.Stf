@@ -210,6 +210,92 @@ namespace WrapTrack.Stf.Adapters.WebAdapter
         bool TextboxSetTextByXpath(string xpath, string textToEnter);
 
         /// <summary>
+        /// The check box.
+        /// </summary>
+        /// <param name="by">
+        /// The by.
+        /// </param>
+        /// <returns>
+        /// The <see cref="IWebElement"/>.
+        /// </returns>
+        IWebElement CheckBox(By by);
+
+        /// <summary>
+        /// The check box get value by id.
+        /// </summary>
+        /// <param name="id">
+        /// The id.
+        /// </param>
+        /// <returns>
+        /// The <see cref="bool"/>.
+        /// </returns>
+        bool CheckBoxGetValueById(string id);
+
+        /// <summary>
+        /// The check box get value by xpath.
+        /// </summary>
+        /// <param name="xpath">
+        /// The xpath.
+        /// </param>
+        /// <returns>
+        /// The <see cref="bool"/>.
+        /// </returns>
+        bool CheckBoxGetValueByXpath(string xpath);
+
+        /// <summary>
+        /// The check box get value.
+        /// </summary>
+        /// <param name="by">
+        /// The by.
+        /// </param>
+        /// <returns>
+        /// The <see cref="bool"/>.
+        /// </returns>
+        bool CheckBoxGetValue(By by);
+
+        /// <summary>
+        /// The check box set value by id.
+        /// </summary>
+        /// <param name="id">
+        /// The id.
+        /// </param>
+        /// <param name="selectValue">
+        /// The select value.
+        /// </param>
+        /// <returns>
+        /// The <see cref="bool"/>.
+        /// </returns>
+        bool CheckBoxSetValueById(string id, bool selectValue);
+
+        /// <summary>
+        /// The check box set value by xpath.
+        /// </summary>
+        /// <param name="xpath">
+        /// The xpath.
+        /// </param>
+        /// <param name="selectValue">
+        /// The select value.
+        /// </param>
+        /// <returns>
+        /// The <see cref="bool"/>.
+        /// </returns>
+        bool CheckBoxSetValueByXpath(string xpath, bool selectValue);
+
+        /// <summary>
+        /// The check box set value.
+        /// </summary>
+        /// <param name="by">
+        /// The by.
+        /// </param>
+        /// <param name="selectValue">
+        /// The select value.
+        /// </param>
+        /// <returns>
+        /// The <see cref="bool"/>.
+        /// </returns>
+        bool CheckBoxSetValue(By by, bool selectValue);
+
+        /// <summary>
         /// The native dialog file upload.
         /// </summary>
         /// <param name="by">
