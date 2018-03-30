@@ -46,5 +46,27 @@ namespace WrapTrack.Stf.WrapTrackWeb.Interfaces.Brand
         /// The <see cref="IForum"/>.
         /// </returns>
         IForum Forum();
+
+        /// <summary>
+        /// Add pattern to the brand.
+        /// </summary>
+        /// <param name="patternName">
+        /// The pattern name.
+        /// </param>
+        /// <returns>
+        /// The <see cref="bool"/>.
+        /// </returns>
+        bool AddPattern(string patternName);
+
+        /// <summary>
+        /// The delete pattern.
+        /// </summary>
+        /// <param name="patternNameToDelete">
+        /// The pattern name to delete.
+        /// </param>
+        /// <returns>
+        /// The <see cref="bool"/>.
+        /// </returns>
+        bool DeletePattern(string patternNameToDelete);
     }
 }

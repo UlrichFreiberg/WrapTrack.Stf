@@ -29,5 +29,16 @@ namespace WrapTrack.Stf.WrapTrackWeb.Interfaces.Explore.Brands
         /// The <see cref="IBrand"/>.
         /// </returns>
         IBrand Save();
+
+        /// <summary>
+        /// Open a registered brand.
+        /// </summary>
+        /// <param name="brandName">
+        /// The brand name.
+        /// </param>
+        /// <returns>
+        /// The <see cref="IBrand"/>.
+        /// </returns>
+        IBrand OpenRegisteredBrand(string brandName);
     }
 }

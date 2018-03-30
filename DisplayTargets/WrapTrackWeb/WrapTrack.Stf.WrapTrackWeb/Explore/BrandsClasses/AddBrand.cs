@@ -33,6 +33,24 @@ namespace WrapTrack.Stf.WrapTrackWeb.Explore.BrandsClasses
         }
 
         /// <summary>
+        /// Open a registered brand.
+        /// </summary>
+        /// <param name="brandName">
+        /// The brand name.
+        /// </param>
+        /// <returns>
+        /// The <see cref="IBrand"/>.
+        /// </returns>
+        public IBrand OpenRegisteredBrand(string brandName)
+        {
+            var xPath = $"//a[text()='{brandName}']";
+            var clicked = WebAdapter.Click(By.XPath(xPath));
+            var retVal = clicked ? Get<IBrand>() : default(IBrand);
+
+            return retVal;
+        }
+
+        /// <summary>
         /// Gets or sets the new brand name.
         /// </summary>
         public string NewBrandName

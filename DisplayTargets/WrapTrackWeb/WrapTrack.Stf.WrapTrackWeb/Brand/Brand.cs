@@ -10,6 +10,8 @@
 
 namespace WrapTrack.Stf.WrapTrackWeb.Brand
 {
+    using Mir.Stf.Utilities;
+
     using WrapTrack.Stf.WrapTrackWeb.Interfaces;
     using WrapTrack.Stf.WrapTrackWeb.Interfaces.Brand;
 
@@ -79,6 +81,55 @@ namespace WrapTrack.Stf.WrapTrackWeb.Brand
             var retVal = Get<IForum>();
 
             return retVal;
+        }
+
+        /// <summary>
+        /// Add pattern to the brand.
+        /// </summary>
+        /// <param name="patternName">
+        /// The pattern name.
+        /// </param>
+        /// <returns>
+        /// The <see cref="bool"/>.
+        /// </returns>
+        public bool AddPattern(string patternName)
+        {
+            const string AddPatternXpath = "//span/span[text()='Add pattern']";
+            var retVal = WebAdapter.ButtonClickByXpath(AddPatternXpath);
+
+            const string PatternNameXpath = "//p/input";
+            retVal = WebAdapter.TextboxSetTextByXpath(PatternNameXpath, patternName);
+
+            if (!retVal)
+            {
+                return false;
+            }
+
+            retVal = WebAdapter.ButtonClickById("create");
+
+            if (!retVal)
+            {
+                return false;
+            }
+
+            retVal = WebAdapter.ButtonClickById("Done");
+
+            return retVal;
+        }
+
+        /// <summary>
+        /// The delete pattern.
+        /// </summary>
+        /// <param name="patternNameToDelete">
+        /// The pattern name to delete.
+        /// </param>
+        /// <returns>
+        /// The <see cref="bool"/>.
+        /// </returns>
+        public bool DeletePattern(string patternNameToDelete)
+        {
+            // TODO: Seems not to exist in the admin interface
+            return false;
         }
     }
 }
