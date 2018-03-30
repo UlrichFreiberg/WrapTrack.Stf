@@ -101,6 +101,21 @@ namespace WrapTrack.Stf.WrapTrackWeb.Interfaces
         bool Login(string userName = null, string password = null);
 
         /// <summary>
+        /// The login as admin. 
+        /// Using the same Login routine as a normal login, but with different username password
+        /// </summary>
+        /// <param name="userName">
+        /// The user name.
+        /// </param>
+        /// <param name="password">
+        /// The password.
+        /// </param>
+        /// <returns>
+        /// The <see cref="bool"/>.
+        /// </returns>
+        bool LoginAsAdmin(string userName = null, string password = null);
+
+        /// <summary>
         /// The logout.
         /// </summary>
         /// <returns>

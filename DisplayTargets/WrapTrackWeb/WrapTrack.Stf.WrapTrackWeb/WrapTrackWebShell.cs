@@ -51,6 +51,30 @@ namespace WrapTrack.Stf.WrapTrackWeb
         public string CurrentLoggedInUser { get; set; }
 
         /// <summary>
+        /// The login as admin. 
+        /// Using the same Login routine as a normal login, but with different username password
+        /// </summary>
+        /// <param name="userName">
+        /// The user name.
+        /// </param>
+        /// <param name="password">
+        /// The password.
+        /// </param>
+        /// <returns>
+        /// The <see cref="bool"/>.
+        /// </returns>
+        public bool LoginAsAdmin(string userName = null, string password = null)
+        {
+            // Handle defaults for username password
+            userName = HandleDefault(userName, WtConfiguration.AdminUserName);
+            password = HandleDefault(password, WtConfiguration.AdminPassword);
+
+            var retVal = Login(userName, password);
+
+            return retVal;
+        }
+
+        /// <summary>
         /// The learn more.
         /// </summary>
         /// <returns>

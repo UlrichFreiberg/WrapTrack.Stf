@@ -40,5 +40,17 @@ namespace WrapTrack.Stf.WrapTrackWeb.Configuration
         /// </summary>
         [StfConfiguration("DisplayTargets.WrapTrackWeb.Users.Password")]
         public string Password { get; set; }
+
+        /// <summary>
+        /// Gets or sets the Admin user name.
+        /// </summary>
+        [StfConfiguration("DisplayTargets.WrapTrackWeb.AdminUsers.UserName")]
+        public string AdminUserName { get; set; }
+
+        /// <summary>
+        /// Gets or sets the Admin password.
+        /// </summary>
+        [StfConfiguration("DisplayTargets.WrapTrackWeb.AdminUsers.Password")]
+        public string AdminPassword { get; set; }
     }
 }
