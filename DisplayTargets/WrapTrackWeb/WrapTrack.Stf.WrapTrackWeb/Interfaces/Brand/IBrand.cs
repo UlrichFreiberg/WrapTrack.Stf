@@ -68,5 +68,30 @@ namespace WrapTrack.Stf.WrapTrackWeb.Interfaces.Brand
         /// The <see cref="bool"/>.
         /// </returns>
         bool DeletePattern(string patternNameToDelete);
+
+        /// <summary>
+        /// The add model.
+        /// </summary>
+        /// <param name="modelName">
+        /// The model name.
+        /// </param>
+        /// <param name="pattern">
+        /// The pattern.
+        /// </param>
+        /// <returns>
+        /// The <see cref="bool"/>.
+        /// </returns>
+        bool AddModel(string modelName, string pattern = null);
+
+        /// <summary>
+        /// The delete model.
+        /// </summary>
+        /// <param name="modelNameToDelete">
+        /// The model name to delete.
+        /// </param>
+        /// <returns>
+        /// The <see cref="bool"/>.
+        /// </returns>
+        bool DeleteModel(string modelNameToDelete);
     }
 }
