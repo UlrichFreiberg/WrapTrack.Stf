@@ -19,6 +19,7 @@ namespace WrapTrack.Stf.Adapters.WebAdapter
     using Mir.Stf.Utilities.Attributes;
 
     using OpenQA.Selenium;
+    using OpenQA.Selenium.Support.UI;
 
     /// <summary>
     /// The WebAdapter interface.
@@ -295,6 +296,42 @@ namespace WrapTrack.Stf.Adapters.WebAdapter
         /// </returns>
         bool CheckBoxSetValue(By by, bool selectValue);
 
+        /// <summary>
+        /// The select element.
+        /// </summary>
+        /// <param name="by">
+        /// The by.
+        /// </param>
+        /// <returns>
+        /// The <see cref="SelectElement"/>.
+        /// </returns>
+        SelectElement SelectElement(By by);
+
+        /// <summary>
+        /// Get the text for a SelectElement
+        /// </summary>
+        /// <param name="by">
+        /// The By
+        /// </param>
+        /// <returns>
+        /// The text
+        /// </returns>
+        string SelectElementGetText(By by);
+
+        /// <summary>
+        /// Sets a selectElement using a text/string
+        /// </summary>
+        /// <param name="by">
+        /// the By
+        /// </param>
+        /// <param name="value">
+        /// The option text
+        /// </param>
+        /// <returns>
+        /// indication whether if went well or not
+        /// </returns>
+        bool SelectElementSetText(By by, string value);
+        
         /// <summary>
         /// The native dialog file upload.
         /// </summary>

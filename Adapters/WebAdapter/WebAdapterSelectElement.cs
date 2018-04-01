@@ -52,7 +52,7 @@ namespace WrapTrack.Stf.Adapters.WebAdapter
         public string SelectElementGetText(By by)
         {
             var elem = SelectElement(by);
-            var retVal = elem != null ? elem.ToString() : string.Empty;
+            var retVal = elem?.ToString() ?? string.Empty;
 
             return retVal;
         }
