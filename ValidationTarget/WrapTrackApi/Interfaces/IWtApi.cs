@@ -18,15 +18,26 @@ namespace WrapTrack.Stf.WrapTrackApi.Interfaces
     public interface IWtApi : IStfPlugin
     {
         /// <summary>
+        /// The brand info by brand id.
+        /// </summary>
+        /// <param name="brandId">
+        /// The brand id.
+        /// </param>
+        /// <returns>
+        /// The <see cref="BrandInfo"/>.
+        /// </returns>
+        BrandInfo BrandInfoByBrandId(string brandId);
+
+        /// <summary>
         /// The wrap info by interal id.
         /// </summary>
-        /// <param name="s">
-        /// The s.
+        /// <param name="internalId">
+        /// The internal Id.
         /// </param>
         /// <returns>
         /// The <see cref="WrapInfo"/>.
         /// </returns>
-        WrapInfo WrapInfoByInternalId(string s);
+        WrapInfo WrapInfoByInternalId(string internalId);
 
         /// <summary>
         /// The wrap info by track id.
@@ -38,5 +49,16 @@ namespace WrapTrack.Stf.WrapTrackApi.Interfaces
         /// The <see cref="WrapInfo"/>.
         /// </returns>
         WrapInfo WrapInfoByTrackId(string trackId);
+
+        /// <summary>
+        /// The number of patterns for brand.
+        /// </summary>
+        /// <param name="brandId">
+        /// The brand id.
+        /// </param>
+        /// <returns>
+        /// The <see cref="int"/>.
+        /// </returns>
+        int BrandNumberOfPatterns(string brandId);
     }
 }
