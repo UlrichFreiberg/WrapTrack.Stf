@@ -1,5 +1,5 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="TestCase015.cs" company="Mir Software">
+// <copyright file="TestCase016.cs" company="Mir Software">
 //   Copyright governed by Artistic license as described here:
 //          http://www.perlfoundation.org/artistic_license_2_0
 // </copyright>
@@ -20,7 +20,7 @@ namespace WrapTrackWebTests.Explore.Brands
     /// The main page tests.
     /// </summary>
     [TestClass]
-    public class TestCase015 : WrapTrackTestScriptBase
+    public class TestCase016 : WrapTrackTestScriptBase
     {
         /// <summary>
         /// The brand id. Should NOT be hardcoded - randomBrand is not that random;-)
@@ -49,26 +49,26 @@ namespace WrapTrackWebTests.Explore.Brands
         /// After log in it's possible to acess 'MeProfile-page'
         /// </remarks>
         [TestMethod]
-        public void Tc015()
+        public void Tc016()
         {
             // Use default user
             WrapTrackShell.LoginAsAdmin();
             StfAssert.IsNotNull("wrapTrackShell", WrapTrackShell);
 
             var randomBrand = GetRandomBrand();
-            var newPatternName = WtUtils.GetRandomString("StfPattern");
-            var baseLineNumberOfPatterns = wtApi.BrandNumberOfPatterns(BrandId);
-            var patternAdded = randomBrand.AddPattern(newPatternName);
-            var numberOfPatterns = wtApi.BrandNumberOfPatterns(BrandId);
+            var newModelName = WtUtils.GetRandomString("StfModel");
+            var baseLineNumberOfModels = wtApi.BrandNumberOfPatterns(BrandId);
+            var modelAdded = randomBrand.AddModel(newModelName);
+            var numberOfModels = wtApi.BrandNumberOfModels(BrandId);
 
-            StfAssert.IsTrue($"Pattern {newPatternName} Added", patternAdded);
-            StfAssert.GreaterThan("Number of patterns for brand up by one", numberOfPatterns, baseLineNumberOfPatterns);
+            StfAssert.IsTrue($"Model {newModelName} Added", modelAdded);
+            StfAssert.GreaterThan("Number of models for brand up by one", numberOfModels, baseLineNumberOfModels);
 
-            var patternDeleted = randomBrand.DeletePattern(newPatternName);
+            var patternDeleted = randomBrand.DeleteModel(newModelName);
 
-            numberOfPatterns = wtApi.BrandNumberOfPatterns(BrandId);
-            StfAssert.IsTrue($"Pattern {newPatternName} Deleted", patternDeleted);
-            StfAssert.AreEqual($"Number of patterns for brand as baseline", numberOfPatterns, baseLineNumberOfPatterns);
+            numberOfModels = wtApi.BrandNumberOfModels(BrandId);
+            StfAssert.IsTrue($"Model {newModelName} Deleted", patternDeleted);
+            StfAssert.AreEqual($"Number of models for brand as baseline", numberOfModels, baseLineNumberOfModels);
         }
     }
 }
