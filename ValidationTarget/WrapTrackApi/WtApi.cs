@@ -119,6 +119,23 @@ namespace WrapTrack.Stf.WrapTrackApi
         }
 
         /// <summary>
+        /// The brand number of models.
+        /// </summary>
+        /// <param name="brandId">
+        /// The brand id.
+        /// </param>
+        /// <returns>
+        /// The <see cref="int"/>.
+        /// </returns>
+        public int BrandNumberOfModels(string brandId)
+        {
+            var brandInfo = BrandInfoByBrandId(brandId);
+            var retVal = brandInfo?.NumOfModels ?? -42;
+
+            return retVal;
+        }
+
+        /// <summary>
         /// The register my needed types.
         /// </summary>
         private void RegisterMyNeededTypes()

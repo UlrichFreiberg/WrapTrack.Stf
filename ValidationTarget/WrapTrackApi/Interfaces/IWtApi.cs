@@ -60,5 +60,16 @@ namespace WrapTrack.Stf.WrapTrackApi.Interfaces
         /// The <see cref="int"/>.
         /// </returns>
         int BrandNumberOfPatterns(string brandId);
+
+        /// <summary>
+        /// The brand number of models.
+        /// </summary>
+        /// <param name="brandId">
+        /// The brand id.
+        /// </param>
+        /// <returns>
+        /// The <see cref="int"/>.
+        /// </returns>
+        int BrandNumberOfModels(string brandId);
     }
 }
