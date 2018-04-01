@@ -110,20 +110,20 @@ namespace WrapTrack.Stf.WrapTrackApi
         /// <summary>
         /// The get wrap rest info by internal id uri.
         /// </summary>
-        /// <param name="wtWrapId">
+        /// <param name="internalId">
         /// The wt wrap id.
         /// </param>
         /// <returns>
         /// The <see cref="string"/>.
         /// </returns>
-        private string GetWrapRestInfoByInternalIdUri(string wtWrapId)
+        private string GetWrapRestInfoByInternalIdUri(string internalId)
         {
-            if (string.IsNullOrEmpty(wtWrapId))
+            if (string.IsNullOrEmpty(internalId))
             {
                 return null;
             }
 
-            var retVal = $"wrap/{wtWrapId.Trim()}/0";
+            var retVal = $"wrap/{internalId.Trim()}/0";
 
             return retVal;
         }
