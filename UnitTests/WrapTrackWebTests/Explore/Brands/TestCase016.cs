@@ -57,12 +57,12 @@ namespace WrapTrackWebTests.Explore.Brands
 
             var randomBrand = GetRandomBrand();
             var newModelName = WtUtils.GetRandomString("StfModel");
-            var baseLineNumberOfModels = wtApi.BrandNumberOfPatterns(BrandId);
+            var baseLineNumberOfModels = wtApi.BrandNumberOfModels(BrandId);
             var modelAdded = randomBrand.AddModel(newModelName);
             var numberOfModels = wtApi.BrandNumberOfModels(BrandId);
 
             StfAssert.IsTrue($"Model {newModelName} Added", modelAdded);
-            StfAssert.GreaterThan("Number of models for brand up by one", numberOfModels, baseLineNumberOfModels);
+            StfAssert.AreEqual("Number of models for brand up by one", numberOfModels, baseLineNumberOfModels + 1);
 
             var patternDeleted = randomBrand.DeleteModel(newModelName);
 
