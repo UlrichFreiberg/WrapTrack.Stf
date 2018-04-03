@@ -154,11 +154,11 @@ namespace WrapTrack.Stf.WrapTrackWeb.Interfaces
         /// The get to wrap.
         /// </summary>
         /// <param name="wrapId">
-        /// The wrap id.
+        ///     The wrap id.
         /// </param>
         /// <returns>
         /// The <see cref="IWrap"/>.
         /// </returns>
-        IWrap GetToWrap(int wrapId);
+        IWrap GetToWrap(string wrapId);
     }
 }

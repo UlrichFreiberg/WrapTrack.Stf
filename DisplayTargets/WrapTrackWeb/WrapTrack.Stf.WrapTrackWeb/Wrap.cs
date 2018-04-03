@@ -87,7 +87,7 @@ namespace WrapTrack.Stf.WrapTrackWeb
         public int NumPictures { get; set; }
 
         /// <summary>
-        /// Pass on the wrap to user 'username'
+        /// Pass on the wrap to user 'username' (only possible for owner of wrap)
         /// </summary>
         /// <param name="username">
         /// The username.
@@ -141,6 +141,30 @@ namespace WrapTrack.Stf.WrapTrackWeb
             }
 
             return true;
+        }
+
+        /// <summary>
+        /// Ask for the wrap (only possible for not-owner of wrap)
+        /// </summary>
+        /// <returns>
+        /// The <see cref="bool"/>.
+        /// </returns>
+        public bool AskFor()
+        {
+
+            if (!WebAdapter.ButtonClickById("but_please"))
+            {
+                StfLogger.LogDebug("Couldn't press 'Request wrap'");
+                return false;
+            }
+
+            if (!WebAdapter.ButtonClickById("but-ReqWrapOK"))
+            {
+                StfLogger.LogDebug("Couldn't press 'Request wrap sec time'");
+                return false;
+            }
+
+            return true; 
         }
 
         /// <inheritdoc />

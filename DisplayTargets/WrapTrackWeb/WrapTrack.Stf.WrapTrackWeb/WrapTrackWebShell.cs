@@ -275,10 +275,10 @@ namespace WrapTrack.Stf.WrapTrackWeb
         /// <returns>
         /// The <see cref="IWrap"/>.
         /// </returns>
-        public IWrap GetToWrap(int wrapId)
+        public IWrap GetToWrap(string wrapId)
         {
             var baseUrl = WtConfiguration.Url;
-            var wrapIdUrl = $"{baseUrl}Collection/wrap/{wrapId}";
+            var wrapIdUrl = $"{baseUrl}wrap/{wrapId}";
 
             WebAdapter.OpenUrl(wrapIdUrl);
 

@@ -23,42 +23,43 @@ namespace WrapTrackWebTests.Collection
     public class TestCase012 : WrapTrackTestScriptBase
     {
         /// <summary>
-        /// The test initialize.
+        /// The TC012.
         /// </summary>
-        [TestInitialize]
-        public void TestInitialize()
+        [TestMethod]
+        public void Tc012()
         {
-            // Find a random wrap
+
+            // User #1: Add a wrap
             WrapTrackShell = Get<IWrapTrackWebShell>();
 
             WrapTrackShell.Login(); // Default user
             var collection = GetCurrentUserCollection();
 
             // Find a random wrap
-            var wrapToGo = collection.GetRandomWrap();
+            var wrapToGo = collection.GetRandomWrap(); 
             var wtId = wrapToGo.WtId;
 
-            WrapTrackShell.Logout(); 
-        }
+            WrapTrackShell.Logout();
 
-        /// <summary>
-        /// The TC012.
-        /// </summary>
-        [TestMethod]
-        public void Tc012()
-        {
+            // user #2 want the wrap
             var anotherUser = GetAnotherUser(WrapTrackShell);
 
             WrapTrackShell.Login(anotherUser);
 
-            // Mark the test script as InProgress
-            StfAssert.IsNotNull("TestCase NOT finished", null);
+            var DesiredWrap = WrapTrackShell.GetToWrap(wtId);
+            DesiredWrap.AskFor();
 
-            // StfAssert.IsNotNull("Got a random wrap", wrapToGo);
-            // var x = wrapToGo.PassOn(anotherUser);
+            WrapTrackShell.Logout();
 
-            // StfAssert.IsTrue("PassedOn", x);
-            // StfAssert.IsTrue("PassedOn Validated", ValidatePassOn(wtId, anotherUser));
+            // User #1: Lets wrap go
+            WrapTrackShell = Get<IWrapTrackWebShell>();
+            WrapTrackShell.Login(); // Default user
+
+            // Assert: Der er en anmodning på nyhedssiden, hvor man lander efter login 
+            // Vises ved link med teksten 'You have 1 pending request' (evt X pending requests)
+
+            // Bruger klikker og kommer til request side, hvor hun godkender reqest fra bruger #2
+
         }
     }
 }
