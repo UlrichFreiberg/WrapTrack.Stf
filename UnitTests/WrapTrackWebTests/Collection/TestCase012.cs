@@ -23,16 +23,31 @@ namespace WrapTrackWebTests.Collection
     public class TestCase012 : WrapTrackTestScriptBase
     {
         /// <summary>
+        /// The test initialize.
+        /// </summary>
+        [TestInitialize]
+        public void TestInitialize()
+        {
+            WrapTrackShell = Get<IWrapTrackWebShell>();
+            WrapTrackShell.Login();
+        }
+
+        /// <summary>
+        /// The test clean up.
+        /// </summary>
+        [TestCleanup]
+        public void TestCleanUp()
+        {
+            WrapTrackShell?.CloseDown();
+        }
+
+        /// <summary>
         /// The TC012.
         /// </summary>
         [TestMethod]
         public void Tc012()
         {
-
             // User #1: Add a wrap
-            WrapTrackShell = Get<IWrapTrackWebShell>();
-
-            WrapTrackShell.Login(); // Default user
             var collection = GetCurrentUserCollection();
 
             // Find a random wrap
@@ -46,20 +61,18 @@ namespace WrapTrackWebTests.Collection
 
             WrapTrackShell.Login(anotherUser);
 
-            var DesiredWrap = WrapTrackShell.GetToWrap(wtId);
-            DesiredWrap.AskFor();
+            var desiredWrap = WrapTrackShell.GetToWrap(wtId);
 
+            desiredWrap.AskFor();
             WrapTrackShell.Logout();
 
             // User #1: Lets wrap go
-            WrapTrackShell = Get<IWrapTrackWebShell>();
             WrapTrackShell.Login(); // Default user
 
-            // Assert: Der er en anmodning på nyhedssiden, hvor man lander efter login 
-            // Vises ved link med teksten 'You have 1 pending request' (evt X pending requests)
+            // TODO:Assert: Der er en anmodning på nyhedssiden, hvor man lander efter login 
+            // TODO:Vises ved link med teksten 'You have 1 pending request' (evt X pending requests)
 
-            // Bruger klikker og kommer til request side, hvor hun godkender reqest fra bruger #2
-
+            // TODO:Bruger klikker og kommer til request side, hvor hun godkender reqest fra bruger #2
         }
     }
 }

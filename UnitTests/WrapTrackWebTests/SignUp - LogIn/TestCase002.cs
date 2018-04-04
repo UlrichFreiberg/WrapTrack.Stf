@@ -23,17 +23,21 @@ namespace WrapTrackWebTests
     public class TestCase002 : WrapTrackTestScriptBase
     {
         /// <summary>
-        /// The wrap track shell.
-        /// </summary>
-        private IWrapTrackWebShell wrapTrackShell;
-
-        /// <summary>
         /// The test initialize.
         /// </summary>
         [TestInitialize]
         public void TestInitialize()
         {
-            wrapTrackShell = Get<IWrapTrackWebShell>();
+            WrapTrackShell = Get<IWrapTrackWebShell>();
+        }
+
+        /// <summary>
+        /// The test clean up.
+        /// </summary>
+        [TestCleanup]
+        public void TestCleanUp()
+        {
+            WrapTrackShell?.CloseDown();
         }
 
         /// <summary>
@@ -46,25 +50,25 @@ namespace WrapTrackWebTests
         public void Tc002()
         {
             // Make sure login is possible
-            wrapTrackShell.Login();
+            WrapTrackShell.Login();
 
-            var me = wrapTrackShell.Me();
+            var me = WrapTrackShell.Me();
 
-            StfAssert.IsNotNull("wrapTrackShell", wrapTrackShell);
+            StfAssert.IsNotNull("wrapTrackShell", WrapTrackShell);
             StfAssert.IsInstanceOfType("me", me, typeof(IMeProfile));
 
             // try wrong pw
-            wrapTrackShell.Logout();
-            wrapTrackShell.Login("mie88", "1234");
+            WrapTrackShell.Logout();
+            WrapTrackShell.Login("mie88", "1234");
 
-            var feedback = wrapTrackShell.InfoText("mes_loginerror");
+            var feedback = WrapTrackShell.InfoText("mes_loginerror");
 
             StfAssert.IsTrue("User got feedback: 'wrong username/pw'", feedback);
 
             // try unkown username
-            wrapTrackShell.Login("detvillemanadrigkaldesig", "wraptrack4ever");
+            WrapTrackShell.Login("detvillemanadrigkaldesig", "wraptrack4ever");
 
-            var feedback2 = wrapTrackShell.InfoText("mes_loginerror");
+            var feedback2 = WrapTrackShell.InfoText("mes_loginerror");
 
             StfAssert.IsTrue("User got feedback: 'wrong username/pw'", feedback2);
         }

@@ -28,18 +28,22 @@ namespace WrapTrackWebTests
         private WtTestscriptUtils wtTestscriptUtils;
 
         /// <summary>
-        /// The wrap track shell.
-        /// </summary>
-        private IWrapTrackWebShell wrapTrackShell;
-
-        /// <summary>
         /// The test initialize.
         /// </summary>
         [TestInitialize]
         public void TestInitialize()
         {
-            wrapTrackShell = Get<IWrapTrackWebShell>();
+            WrapTrackShell = Get<IWrapTrackWebShell>();
             wtTestscriptUtils = new WtTestscriptUtils(StfLogger);
+        }
+
+        /// <summary>
+        /// The test clean up.
+        /// </summary>
+        [TestCleanup]
+        public void TestCleanUp()
+        {
+            WrapTrackShell?.CloseDown();
         }
 
         /// <summary>
@@ -52,13 +56,13 @@ namespace WrapTrackWebTests
         public void Tc001()
         {
             // Use default user
-            wrapTrackShell.Login(); 
-            StfAssert.IsTrue("No php errors", wtTestscriptUtils.PhpErrorFree(wrapTrackShell.WebAdapter));
+            WrapTrackShell.Login(); 
+            StfAssert.IsTrue("No php errors", wtTestscriptUtils.PhpErrorFree(WrapTrackShell.WebAdapter));
 
             // And the result....
-            var me = wrapTrackShell.Me();
+            var me = WrapTrackShell.Me();
 
-            StfAssert.IsNotNull("wrapTrackShell", wrapTrackShell);
+            StfAssert.IsNotNull("wrapTrackShell", WrapTrackShell);
             StfAssert.IsInstanceOfType("me", me, typeof(IMeProfile));
         }
     }

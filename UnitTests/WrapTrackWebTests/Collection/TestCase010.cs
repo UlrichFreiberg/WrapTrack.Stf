@@ -55,6 +55,15 @@ namespace WrapTrackWebTests.Collection
             }
         }
 
+        /// <summary>
+        /// The test clean up.
+        /// </summary>
+        [TestCleanup]
+        public void TestCleanUp()
+        {
+            WrapTrackShell?.CloseDown();
+        }
+
         /*
          * [DataSource(
         //    "System.Data.OleDb",

@@ -21,16 +21,32 @@ namespace WrapTrackWebTests.Collection
     public class TestCase006 : WrapTrackTestScriptBase
     {
         /// <summary>
+        /// The test initialize.
+        /// </summary>
+        [TestInitialize]
+        public void TestInitialize()
+        {
+            WrapTrackShell = Get<IWrapTrackWebShell>();
+        }
+
+        /// <summary>
+        /// The test clean up.
+        /// </summary>
+        [TestCleanup]
+        public void TestCleanUp()
+        {
+            WrapTrackShell?.CloseDown();
+        }
+
+        /// <summary>
         /// The t c 006.
         /// </summary>
         [TestMethod]
         public void Tc006()
         {
-            var wrapTrackShell = Get<IWrapTrackWebShell>();
+            WrapTrackShell.Login();
 
-            wrapTrackShell.Login();
-
-            var me = wrapTrackShell.Me();
+            var me = WrapTrackShell.Me();
             var collection = me.GetCollection();
 
             StfAssert.IsNotNull("Got a MeProfile", me);

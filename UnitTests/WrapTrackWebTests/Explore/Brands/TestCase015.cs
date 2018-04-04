@@ -43,6 +43,15 @@ namespace WrapTrackWebTests.Explore.Brands
         }
 
         /// <summary>
+        /// The test clean up.
+        /// </summary>
+        [TestCleanup]
+        public void TestCleanUp()
+        {
+            WrapTrackShell?.CloseDown();
+        }
+
+        /// <summary>
         /// The log in test.
         /// </summary>
         /// <remarks>

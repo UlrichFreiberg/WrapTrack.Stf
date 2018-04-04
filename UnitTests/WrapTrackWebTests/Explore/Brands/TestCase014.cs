@@ -34,6 +34,18 @@ namespace WrapTrackWebTests.Explore.Brands
         public void TestInitialize()
         {
             wrapTrackShell = Get<IWrapTrackWebShell>();
+
+            // Use default user
+            wrapTrackShell.Login();
+        }
+
+        /// <summary>
+        /// The test clean up.
+        /// </summary>
+        [TestCleanup]
+        public void TestCleanUp()
+        {
+            WrapTrackShell?.CloseDown();
         }
 
         /// <summary>
@@ -45,8 +57,6 @@ namespace WrapTrackWebTests.Explore.Brands
         [TestMethod]
         public void Tc014()
         {
-            // Use default user
-            wrapTrackShell.Login();
             StfAssert.IsNotNull("wrapTrackShell", wrapTrackShell);
 
             var explorer = wrapTrackShell.Explore();

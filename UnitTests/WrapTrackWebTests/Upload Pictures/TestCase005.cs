@@ -23,18 +23,33 @@ namespace WrapTrackWebTests.Upload_Pictures
     public class TestCase005 : WrapTrackTestScriptBase
     {
         /// <summary>
+        /// The test initialize.
+        /// </summary>
+        [TestInitialize]
+        public void TestInitialize()
+        {
+            WrapTrackShell = Get<IWrapTrackWebShell>();
+            WrapTrackShell.Login();
+        }
+
+        /// <summary>
+        /// The test clean up.
+        /// </summary>
+        [TestCleanup]
+        public void TestCleanUp()
+        {
+            WrapTrackShell?.CloseDown();
+        }
+
+        /// <summary>
         /// Test of uploade users profile picture
         /// </summary>
         [TestMethod]
         [DeploymentItem(@"TestData\")]
         public void Tc005()
         {
-            var wrapTrackShell = Get<IWrapTrackWebShell>();
             var pathToNewImage = GetNewImagePath();
-
-            wrapTrackShell.Login();
-
-            var me = wrapTrackShell.Me();
+            var me = WrapTrackShell.Me();
 
             StfAssert.IsNotNull("Got a MeProfile", me);
 

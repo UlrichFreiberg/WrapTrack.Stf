@@ -25,17 +25,32 @@ namespace WrapTrackWebTests.Upload_Pictures
     public class TestCase008 : WrapTrackTestScriptBase
     {
         /// <summary>
+        /// The test initialize.
+        /// </summary>
+        [TestInitialize]
+        public void TestInitialize()
+        {
+            WrapTrackShell = Get<IWrapTrackWebShell>();
+            WrapTrackShell.Login();
+        }
+
+        /// <summary>
+        /// The test clean up.
+        /// </summary>
+        [TestCleanup]
+        public void TestCleanUp()
+        {
+            WrapTrackShell?.CloseDown();
+        }
+
+        /// <summary>
         /// The tc 008.
         /// </summary>
         [TestMethod]
         public void Tc008()
         {
-            var wrapTrackShell = Get<IWrapTrackWebShell>();
             var pathToNewImage = GetNewImagePath();
-
-            wrapTrackShell.Login();
-
-            var collection = GetCurrentUserCollection(wrapTrackShell);
+            var collection = GetCurrentUserCollection(WrapTrackShell);
             var myWrap = collection.GetRandomWrap();
 
             // Find number of pictures before (to wrap and to ownership)

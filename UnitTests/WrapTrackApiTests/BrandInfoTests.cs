@@ -45,7 +45,7 @@ namespace WrapTrackApiTests
             var info = wtApi.BrandInfoByBrandId("34");
 
             StfAssert.AreEqual("Name", "Ali Dover", info.Name);
-            StfAssert.AreEqual("NumOfWraps", 106, info.NumOfWraps);
+            StfAssert.AreEqual("NumOfWraps", 117, info.NumOfWraps);
             StfAssert.AreEqual("NumOfModels", 33, info.NumOfModels);
             StfAssert.AreEqual("NumOfPatterns", 3, info.NumOfPatterns);
             StfAssert.AreEqual("NumOfReviews", 1, info.NumOfReviews);

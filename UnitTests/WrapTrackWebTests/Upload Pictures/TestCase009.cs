@@ -25,13 +25,30 @@ namespace WrapTrackWebTests.Upload_Pictures
     public class TestCase009 : WrapTrackTestScriptBase
     {
         /// <summary>
+        /// The test initialize.
+        /// </summary>
+        [TestInitialize]
+        public void TestInitialize()
+        {
+            WrapTrackShell = Get<IWrapTrackWebShell>();
+        }
+
+        /// <summary>
+        /// The test clean up.
+        /// </summary>
+        [TestCleanup]
+        public void TestCleanUp()
+        {
+            WrapTrackShell?.CloseDown();
+        }
+
+        /// <summary>
         /// The tc 009.
         /// </summary>
         [TestMethod]
         [DeploymentItem(@"TestData\")]
         public void Tc009()
         {
-            WrapTrackShell = Get<IWrapTrackWebShell>();
             WrapTrackShell.SignUp(); // new user - empty collection
 
             var me = WrapTrackShell.Me();
