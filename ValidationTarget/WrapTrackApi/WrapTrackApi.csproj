@@ -92,14 +92,18 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="BrandInfo.cs" />
+    <Compile Include="Brand\BrandInfo.cs" />
     <Compile Include="Configuration\WtApiConfiguration.cs" />
     <Compile Include="InfoHandlerBase.cs" />
     <Compile Include="Interfaces\IWtApi.cs" />
+    <Compile Include="Model\ModelInfo.cs" />
+    <Compile Include="Model\ModelInfoHandler.cs" />
+    <Compile Include="Pattern\PatternInfo.cs" />
+    <Compile Include="Pattern\PatternInfoHandler.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="WrapInfo.cs" />
-    <Compile Include="BrandInfoHandler.cs" />
-    <Compile Include="WrapInfoHandler.cs" />
+    <Compile Include="Wrap\WrapInfo.cs" />
+    <Compile Include="Brand\BrandInfoHandler.cs" />
+    <Compile Include="Wrap\WrapInfoHandler.cs" />
     <Compile Include="WtApi.cs" />
   </ItemGroup>
   <ItemGroup>

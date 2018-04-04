@@ -13,8 +13,12 @@ namespace WrapTrack.Stf.WrapTrackApi
     using System;
 
     using WrapTrack.Stf.Core;
+    using WrapTrack.Stf.WrapTrackApi.Brand;
     using WrapTrack.Stf.WrapTrackApi.Configuration;
     using WrapTrack.Stf.WrapTrackApi.Interfaces;
+    using WrapTrack.Stf.WrapTrackApi.Model;
+    using WrapTrack.Stf.WrapTrackApi.Pattern;
+    using WrapTrack.Stf.WrapTrackApi.Wrap;
 
     // using https://www.newtonsoft.com/json/help/html/QueryJsonSelectTokenWithLinq.htm
 
@@ -63,6 +67,40 @@ namespace WrapTrack.Stf.WrapTrackApi
         {
             var handler = new BrandInfoHandler(StfLogger, WtApiConfiguration);
             var retVal = handler.BrandInfoByBrandId(brandId);
+
+            return retVal;
+        }
+
+        /// <summary>
+        /// The pattern info by pattern id.
+        /// </summary>
+        /// <param name="patternId">
+        /// The pattern id.
+        /// </param>
+        /// <returns>
+        /// The <see cref="PatternInfo"/>.
+        /// </returns>
+        public PatternInfo PatternInfoByPatternId(string patternId)
+        {
+            var handler = new PatternInfoHandler(StfLogger, WtApiConfiguration);
+            var retVal = handler.PatternInfoByPatternId(patternId);
+
+            return retVal;
+        }
+
+        /// <summary>
+        /// The model info by model id.
+        /// </summary>
+        /// <param name="modelId">
+        /// The model id.
+        /// </param>
+        /// <returns>
+        /// The <see cref="ModelInfo"/>.
+        /// </returns>
+        public ModelInfo ModelInfoByModelId(string modelId)
+        {
+            var handler = new ModelInfoHandler(StfLogger, WtApiConfiguration);
+            var retVal = handler.ModelInfoByModelId(modelId);
 
             return retVal;
         }

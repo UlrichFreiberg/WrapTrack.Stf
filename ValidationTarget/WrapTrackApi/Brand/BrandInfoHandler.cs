@@ -8,7 +8,7 @@
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace WrapTrack.Stf.WrapTrackApi
+namespace WrapTrack.Stf.WrapTrackApi.Brand
 {
     using System;
 
@@ -17,6 +17,7 @@ namespace WrapTrack.Stf.WrapTrackApi
     using Newtonsoft.Json.Linq;
 
     using WrapTrack.Stf.WrapTrackApi.Configuration;
+    using WrapTrack.Stf.WrapTrackApi.Wrap;
 
     // using https://www.newtonsoft.com/json/help/html/QueryJsonSelectTokenWithLinq.htm
 
@@ -102,6 +103,7 @@ namespace WrapTrack.Stf.WrapTrackApi
             {
                 var bent = new BrandInfo
                 {
+                    Name = info["name"]?.ToString(),
                     NumOfWraps = GetInteger(info["numOfWraps"]?.ToString()),
                     NumOfModels = GetInteger(info["numOfModels"]?.ToString()),
                     NumOfPatterns = GetInteger(info["numOfPatterns"]?.ToString()),

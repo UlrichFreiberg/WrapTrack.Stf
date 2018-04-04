@@ -8,7 +8,7 @@
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace WrapTrack.Stf.WrapTrackApi
+namespace WrapTrack.Stf.WrapTrackApi.Wrap
 {
     using System;
     using System.Linq;

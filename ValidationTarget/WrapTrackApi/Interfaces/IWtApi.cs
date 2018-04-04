@@ -12,6 +12,11 @@ namespace WrapTrack.Stf.WrapTrackApi.Interfaces
 {
     using Mir.Stf.Utilities;
 
+    using WrapTrack.Stf.WrapTrackApi.Brand;
+    using WrapTrack.Stf.WrapTrackApi.Model;
+    using WrapTrack.Stf.WrapTrackApi.Pattern;
+    using WrapTrack.Stf.WrapTrackApi.Wrap;
+
     /// <summary>
     /// The WtApi interface. For the WT REST API 
     /// </summary>
@@ -29,10 +34,32 @@ namespace WrapTrack.Stf.WrapTrackApi.Interfaces
         BrandInfo BrandInfoByBrandId(string brandId);
 
         /// <summary>
-        /// The wrap info by interal id.
+        /// The pattern info by pattern id.
+        /// </summary>
+        /// <param name="patternId">
+        /// The pattern id.
+        /// </param>
+        /// <returns>
+        /// The <see cref="PatternInfo"/>.
+        /// </returns>
+        PatternInfo PatternInfoByPatternId(string patternId);
+
+        /// <summary>
+        /// The model info by model id.
+        /// </summary>
+        /// <param name="modelId">
+        /// The model id.
+        /// </param>
+        /// <returns>
+        /// The <see cref="ModelInfo"/>.
+        /// </returns>
+        ModelInfo ModelInfoByModelId(string modelId);
+
+        /// <summary>
+        /// The wrap info by internal id.
         /// </summary>
         /// <param name="internalId">
-        /// The internal Id.
+        /// The internal id.
         /// </param>
         /// <returns>
         /// The <see cref="WrapInfo"/>.
@@ -42,13 +69,13 @@ namespace WrapTrack.Stf.WrapTrackApi.Interfaces
         /// <summary>
         /// The wrap info by track id.
         /// </summary>
-        /// <param name="trackId">
-        /// The ks 0 etu 1.
+        /// <param name="wtWrapId">
+        /// The wt wrap id.
         /// </param>
         /// <returns>
         /// The <see cref="WrapInfo"/>.
         /// </returns>
-        WrapInfo WrapInfoByTrackId(string trackId);
+        WrapInfo WrapInfoByTrackId(string wtWrapId);
 
         /// <summary>
         /// The number of patterns for brand.

@@ -8,13 +8,18 @@
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace WrapTrack.Stf.WrapTrackApi
+namespace WrapTrack.Stf.WrapTrackApi.Brand
 {
     /// <summary>
     /// The brand info.
     /// </summary>
     public class BrandInfo
     {
+        /// <summary>
+        /// Gets or sets the name.
+        /// </summary>
+        public string Name { get; set; }
+
         /// <summary>
         /// Gets or sets the num of patterns.
         /// </summary>

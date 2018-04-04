@@ -8,14 +8,14 @@
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace WrapTrack.Stf.WrapTrackApi
+namespace WrapTrack.Stf.WrapTrackApi.Wrap
 {
     /// <summary>
     /// The wrap info.
     /// </summary>
     public class WrapInfo
     {
-        internal string OwnershipNumber;
+        public string OwnershipNumber;
 
         /// <summary>
         /// Gets or sets the id of the owner.
