@@ -97,6 +97,11 @@ namespace WrapTrack.Stf.WrapTrackApi.Brand
         {
             BrandInfo retVal;
 
+            if (info == null)
+            {
+                return null;
+            }
+
             StfLogger.LogDebug($"BrandInfoMapper: Got info = [{info}]");
 
             try

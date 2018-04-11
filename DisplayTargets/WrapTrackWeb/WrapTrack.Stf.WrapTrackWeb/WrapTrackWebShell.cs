@@ -105,7 +105,7 @@ namespace WrapTrack.Stf.WrapTrackWeb
             // Click tab page Login
             WebAdapter.ButtonClickById("nav_");
 
-            // Reember the last logged in user
+            // Remember the last logged in user
             CurrentLoggedInUser = userName;
 
             return true;

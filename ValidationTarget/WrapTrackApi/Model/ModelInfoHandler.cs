@@ -96,6 +96,11 @@ namespace WrapTrack.Stf.WrapTrackApi.Model
         {
             ModelInfo retVal;
 
+            if (info == null)
+            {
+                return null;
+            }
+
             StfLogger.LogDebug($"ModelInfoMapper: Got info = [{info}]");
 
             try
