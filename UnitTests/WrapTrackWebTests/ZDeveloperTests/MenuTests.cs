@@ -95,7 +95,7 @@ namespace WrapTrackWebTests.ZDeveloperTests
         {
             wrapTrackShell.Login();
 
-            var goneToWrap = wrapTrackShell.GetToWrap(8737);
+            var goneToWrap = wrapTrackShell.GetToWrap("xoxxp5f");
             var wtWrapId = goneToWrap.WtId;
 
             StfAssert.AreEqual("Gone to the right Wrap", wtWrapId, "xoxxp5f");

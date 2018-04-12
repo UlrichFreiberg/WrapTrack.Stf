@@ -56,6 +56,15 @@ namespace WrapTrack.Stf.WrapTrackWeb.Interfaces
         /// </returns>
         bool PassOn(string nameOfReciever, string ownershipStart = null);
 
+
+        /// <summary>
+        /// Ask for the wrap (only possible for not-owner of wrap)
+        /// </summary>
+        /// <returns>
+        /// The <see cref="bool"/>.
+        /// </returns>
+        bool AskFor();
+
         /// <summary>
         /// Upload users own pictures of the wrap
         /// </summary>

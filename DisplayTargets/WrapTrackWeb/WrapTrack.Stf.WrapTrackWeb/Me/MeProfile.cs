@@ -72,14 +72,10 @@ namespace WrapTrack.Stf.WrapTrackWeb.Me
         public bool UploadProfileImage(string clientSideFilePath)
         {
             // Visit upload page
-            var nav = WebAdapter.FindElement(By.Id("nav_upload_profile"));
+            WebAdapter.ButtonClickById("nav_upload_profile");
 
-            nav.Click();
-
-            var element = WebAdapter.FindElement(By.Name("userfile"));
-
-            element.Clear();
-            element.SendKeys(clientSideFilePath);
+            // handle the File Upload Dialog
+            WebAdapter.NativeDialogFileUpload(By.Name("userfile"), clientSideFilePath);
 
             var submitButton = WebAdapter.FindElement(By.Id("but_upl_profile"));
 

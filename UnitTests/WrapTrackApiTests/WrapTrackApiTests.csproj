@@ -98,7 +98,11 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
+    <Compile Include="WrapInfoTests.cs" />
+    <Compile Include="ModelInfoTests.cs" />
+    <Compile Include="PatternInfoTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="BrandInfoTests.cs" />
     <Compile Include="WtApiTests.cs" />
   </ItemGroup>
   <ItemGroup>

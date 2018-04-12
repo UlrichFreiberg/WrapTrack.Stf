@@ -96,32 +96,49 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Brand\Brand.cs" />
+    <Compile Include="Brand\Forum.cs" />
+    <Compile Include="Brand\Models.cs" />
+    <Compile Include="Brand\Patterns.cs" />
+    <Compile Include="Brand\Wraps.cs" />
     <Compile Include="Configuration\User.cs" />
     <Compile Include="Configuration\WtConfiguration.cs" />
+    <Compile Include="Explore\Brands.cs" />
+    <Compile Include="Explore\BrandsClasses\AddBrand.cs" />
+    <Compile Include="Explore\BrandsClasses\AllBrands.cs" />
     <Compile Include="Explore\ExploreBirthWraps.cs" />
-    <Compile Include="Explore\ExploreBrands.cs" />
     <Compile Include="Explore\ExploreModels.cs" />
     <Compile Include="Explore\ExplorePatterns.cs" />
     <Compile Include="Explore\ExploreUsers.cs" />
-    <Compile Include="Explore\ExploreWraps.cs" />
+    <Compile Include="Explore\Explore.cs" />
+    <Compile Include="Explore\Wraps\Wraps.cs" />
+    <Compile Include="Interfaces\Brand\IPatterns.cs" />
+    <Compile Include="Interfaces\Brand\IForum.cs" />
+    <Compile Include="Interfaces\Brand\IWraps.cs" />
+    <Compile Include="Interfaces\Brand\IModels.cs" />
+    <Compile Include="Interfaces\Explore\Brands\IAllBrands.cs" />
+    <Compile Include="Interfaces\Explore\Brands\IAddBrand.cs" />
     <Compile Include="FaqContact\Faq.cs" />
+    <Compile Include="Interfaces\Brand\IBrand.cs" />
     <Compile Include="Interfaces\Explore\IExploreBirthWraps.cs" />
-    <Compile Include="Interfaces\Explore\IExploreBrands.cs" />
     <Compile Include="Interfaces\Explore\IExploreModels.cs" />
     <Compile Include="Interfaces\Explore\IExplorePatterns.cs" />
     <Compile Include="Interfaces\Explore\IExploreUsers.cs" />
+    <Compile Include="Interfaces\Explore\IBrands.cs" />
+    <Compile Include="Interfaces\Explore\IExplore.cs" />
     <Compile Include="Interfaces\IWrap.cs" />
     <Compile Include="Interfaces\Me\IMeInbox.cs" />
     <Compile Include="Interfaces\Me\IMeReviews.cs" />
     <Compile Include="Interfaces\Me\IMeSettings.cs" />
     <Compile Include="MenuManager.cs" />
     <Compile Include="Me\Collection\DeleteWrapOption.cs" />
-    <Compile Include="Me\Collection\Wrap.cs" />
+    <Compile Include="Wrap.cs" />
     <Compile Include="Me\MeInbox.cs" />
     <Compile Include="Me\MeReviews.cs" />
     <Compile Include="Me\MeSettings.cs" />
+    <Compile Include="RegisterMyNeededTypes.cs" />
     <Compile Include="WrapTrackWebShellModelBase.cs" />
-    <Compile Include="Interfaces\Explore\IExploreWraps.cs" />
+    <Compile Include="Interfaces\Explore\Wraps\IWraps.cs" />
     <Compile Include="Interfaces\FaqContact\IFaq.cs" />
     <Compile Include="Interfaces\IMarket.cs" />
     <Compile Include="Interfaces\Me\ICollection.cs" />
@@ -133,6 +150,7 @@
     <Compile Include="Me\MeProfile.cs" />
     <Compile Include="WrapTrackWebShell.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="WtUtils.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config">

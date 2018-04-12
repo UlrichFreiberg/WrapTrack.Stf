@@ -22,29 +22,17 @@ namespace WrapTrackApiTests
     public class WtApiTests : StfTestScriptBase
     {
         /// <summary>
-        /// The test basic wrap info.
+        /// The wt api.
         /// </summary>
-        [TestMethod]
-        public void TestBasicWrapInfoByInteralId()
-        {
-            var wtApi = Get<IWtApi>();
-            var wrapInfo = wtApi.WrapInfoByInternalId("13639");
-
-            StfAssert.AreEqual("13639 owner", "Beinta.klein", wrapInfo.OwnerName);
-            StfAssert.AreEqual("13639 id", "1603", wrapInfo.OwnerId);
-        }
+        private IWtApi wtApi;
 
         /// <summary>
-        /// The test basic wrap info by track id.
+        /// The test initialize.
         /// </summary>
-        [TestMethod]
-        public void TestBasicWrapInfoByTrackId()
+        [TestInitialize]
+        public void TestInitialize()
         {
-            var wtApi = Get<IWtApi>();
-            var wrapInfo = wtApi.WrapInfoByTrackId("ks0etu1");
-
-            StfAssert.AreEqual("13639 owner", "Beinta.klein", wrapInfo.OwnerName);
-            StfAssert.AreEqual("13639 id", "1603", wrapInfo.OwnerId);
+            wtApi = Get<IWtApi>();
         }
     }
 }

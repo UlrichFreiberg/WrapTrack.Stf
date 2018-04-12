@@ -1,0 +1,16 @@
+// ================================
+//
+// More Models for one BlabB
+// ================================
+
+#include "...\Includes\ConfigMaster.txt"
+
+Pattern_ButterFly_Master
+
+// Two models for Pattern Butterfly
+Model_Yellow_ButterFly
+Model_Blue_ButterFly
+
+Wrap_1_Yellow
+Wrap_2_Yellow
+Wrap_3_Blue

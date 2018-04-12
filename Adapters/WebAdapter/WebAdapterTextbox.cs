@@ -52,7 +52,7 @@ namespace WrapTrack.Stf.Adapters.WebAdapter
         /// </returns>
         public bool TextboxSetTextByXpath(string xpath, string textToEnter)
         {
-            var retVal = TextboxSetTextBy(By.Id(xpath), textToEnter);
+            var retVal = TextboxSetTextBy(By.XPath(xpath), textToEnter);
 
             return retVal;
         }

@@ -65,9 +65,9 @@ namespace WrapTrack.Stf.WrapTrackWeb.Interfaces
         /// The explorer.
         /// </summary>
         /// <returns>
-        /// The <see cref="IExploreWraps"/>.
+        /// The <see cref="IExplore"/>.
         /// </returns>
-        IExploreWraps Explorer();
+        IExplore Explore();
 
         /// <summary>
         /// The market.
@@ -99,6 +99,21 @@ namespace WrapTrack.Stf.WrapTrackWeb.Interfaces
         /// Password of the user
         /// </param>
         bool Login(string userName = null, string password = null);
+
+        /// <summary>
+        /// The login as admin. 
+        /// Using the same Login routine as a normal login, but with different username password
+        /// </summary>
+        /// <param name="userName">
+        /// The user name.
+        /// </param>
+        /// <param name="password">
+        /// The password.
+        /// </param>
+        /// <returns>
+        /// The <see cref="bool"/>.
+        /// </returns>
+        bool LoginAsAdmin(string userName = null, string password = null);
 
         /// <summary>
         /// The logout.
@@ -139,11 +154,11 @@ namespace WrapTrack.Stf.WrapTrackWeb.Interfaces
         /// The get to wrap.
         /// </summary>
         /// <param name="wrapId">
-        /// The wrap id.
+        ///     The wrap id.
         /// </param>
         /// <returns>
         /// The <see cref="IWrap"/>.
         /// </returns>
-        IWrap GetToWrap(int wrapId);
+        IWrap GetToWrap(string wrapId);
     }
 }

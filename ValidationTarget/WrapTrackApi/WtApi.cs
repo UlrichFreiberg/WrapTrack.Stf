@@ -11,15 +11,14 @@
 namespace WrapTrack.Stf.WrapTrackApi
 {
     using System;
-    using System.Linq;
-    using System.Net.Http;
-    using System.Threading.Tasks;
-
-    using Newtonsoft.Json.Linq;
 
     using WrapTrack.Stf.Core;
+    using WrapTrack.Stf.WrapTrackApi.Brand;
     using WrapTrack.Stf.WrapTrackApi.Configuration;
     using WrapTrack.Stf.WrapTrackApi.Interfaces;
+    using WrapTrack.Stf.WrapTrackApi.Model;
+    using WrapTrack.Stf.WrapTrackApi.Pattern;
+    using WrapTrack.Stf.WrapTrackApi.Wrap;
 
     // using https://www.newtonsoft.com/json/help/html/QueryJsonSelectTokenWithLinq.htm
 
@@ -56,6 +55,57 @@ namespace WrapTrack.Stf.WrapTrackApi
         }
 
         /// <summary>
+        /// The brand info by brand id.
+        /// </summary>
+        /// <param name="brandId">
+        /// The brand id.
+        /// </param>
+        /// <returns>
+        /// The <see cref="BrandInfo"/>.
+        /// </returns>
+        public BrandInfo BrandInfoByBrandId(string brandId)
+        {
+            var handler = new BrandInfoHandler(StfLogger, WtApiConfiguration);
+            var retVal = handler.BrandInfoByBrandId(brandId);
+
+            return retVal;
+        }
+
+        /// <summary>
+        /// The pattern info by pattern id.
+        /// </summary>
+        /// <param name="patternId">
+        /// The pattern id.
+        /// </param>
+        /// <returns>
+        /// The <see cref="PatternInfo"/>.
+        /// </returns>
+        public PatternInfo PatternInfoByPatternId(string patternId)
+        {
+            var handler = new PatternInfoHandler(StfLogger, WtApiConfiguration);
+            var retVal = handler.PatternInfoByPatternId(patternId);
+
+            return retVal;
+        }
+
+        /// <summary>
+        /// The model info by model id.
+        /// </summary>
+        /// <param name="modelId">
+        /// The model id.
+        /// </param>
+        /// <returns>
+        /// The <see cref="ModelInfo"/>.
+        /// </returns>
+        public ModelInfo ModelInfoByModelId(string modelId)
+        {
+            var handler = new ModelInfoHandler(StfLogger, WtApiConfiguration);
+            var retVal = handler.ModelInfoByModelId(modelId);
+
+            return retVal;
+        }
+
+        /// <summary>
         /// The wrap info by internal id.
         /// </summary>
         /// <param name="internalId">
@@ -66,8 +116,8 @@ namespace WrapTrack.Stf.WrapTrackApi
         /// </returns>
         public WrapInfo WrapInfoByInternalId(string internalId)
         {
-            var info = this.GetWrapRestInfoByInternalId(internalId);
-            var retVal = WrapInfoMapper(info.Result);
+            var handler = new WrapInfoHandler(StfLogger, WtApiConfiguration);
+            var retVal = handler.WrapInfoByInternalId(internalId);
 
             return retVal;
         }
@@ -83,111 +133,42 @@ namespace WrapTrack.Stf.WrapTrackApi
         /// </returns>
         public WrapInfo WrapInfoByTrackId(string wtWrapId)
         {
-            if (string.IsNullOrWhiteSpace(wtWrapId))
-            {
-                return null;
-            }
-
-            var info = GetWrapRestInfoByTrackId(wtWrapId);
-            var retVal = WrapInfoMapper(info.Result);
+            var handler = new WrapInfoHandler(StfLogger, WtApiConfiguration);
+            var retVal = handler.WrapInfoByTrackId(wtWrapId);
 
             return retVal;
         }
 
         /// <summary>
-        /// The get wrap rest info.
+        /// The number of patterns for brand.
         /// </summary>
-        /// <param name="wtWrapId">
-        /// The wt wrap id.
+        /// <param name="brandId">
+        /// The brand id.
         /// </param>
         /// <returns>
-        /// The <see cref="string"/>.
+        /// The <see cref="int"/>.
         /// </returns>
-        protected async Task<JObject> GetWrapRestInfoByTrackId(string wtWrapId)
+        public int BrandNumberOfPatterns(string brandId)
         {
-            if (string.IsNullOrEmpty(wtWrapId))
-            {
-                return null;
-            }
-
-            var uri = $"{WtApiConfiguration.Url}/wrap/0/{wtWrapId.Trim()}";
-            var client = new HttpClient();
-
-            client.DefaultRequestHeaders.Add("Accept", "application/json");
-
-            var response = await client.GetStringAsync(uri);
-            var retVal = JObject.Parse(response);
+            var brandInfo = BrandInfoByBrandId(brandId);
+            var retVal = brandInfo?.NumOfPatterns ?? -42;
 
             return retVal;
         }
 
         /// <summary>
-        /// The get wrap rest info.
+        /// The brand number of models.
         /// </summary>
-        /// <param name="wtWrapId">
-        /// The wt wrap id.
+        /// <param name="brandId">
+        /// The brand id.
         /// </param>
         /// <returns>
-        /// The <see cref="string"/>.
+        /// The <see cref="int"/>.
         /// </returns>
-        protected async Task<JObject> GetWrapRestInfoByInternalId(string wtWrapId)
+        public int BrandNumberOfModels(string brandId)
         {
-            var uri = $"{WtApiConfiguration.Url}/wrap/{wtWrapId.Trim()}/0";
-            var client = new HttpClient();
-
-            client.DefaultRequestHeaders.Add("Accept", "application/json");
-
-            var response = await client.GetStringAsync(uri);
-            var retVal = JObject.Parse(response);
-
-            return retVal;
-        }
-
-        /// <summary>
-        /// The wrap info.
-        /// </summary>
-        /// <param name="info">
-        /// The info.
-        /// </param>
-        /// <returns>
-        /// The <see cref="WrapInfo"/>.
-        /// </returns>
-        private WrapInfo WrapInfoMapper(JObject info)
-        {
-            WrapInfo retVal;
-
-            StfLogger.LogDebug($"WrapInfoMapper: Got info = [{info}]");
-
-            try
-            {
-                var bent = new WrapInfo
-                               {
-                                   OwnerId = info["ejerskab_nuv"]?.SelectToken("bruger_id")?.ToString(),
-                                   OwnerName = info["ejerskab_nuv"]?.SelectToken("bruger_navn")?.ToString(),
-                                   InternalId = info.SelectToken("id")?.ToString(),
-                                   Size = info.SelectToken("id")?.ToString(),
-                                   OwnershipNumber = info["ejerskab_nuv"]?.SelectToken("nr")?.ToString(),
-                                   Status = info.SelectToken("status")?.ToString(),
-                               };
-
-                retVal = bent;
-            }
-            catch (Exception ex)
-            {
-                StfLogger.LogError($"WrapInfoMapper: Got ex = [{ex}]");
-                return null;
-            }
-
-            var numOfOwnershipPic = info["ejerskab_nuv"]?.SelectToken("private_billeder")?.ToString();
-            int number;
-
-            if (int.TryParse(numOfOwnershipPic, out number))
-            {
-                retVal.NumOfOwnershipPic = number;
-            }
-
-            // sometime we dont have this node - if not, then the value is zero:-)
-            retVal.NumOfPictures = info["billeder"]?.Count() ?? 0; 
+            var brandInfo = BrandInfoByBrandId(brandId);
+            var retVal = brandInfo?.NumOfModels ?? -42;
 
             return retVal;
         }

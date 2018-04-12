@@ -18,6 +18,8 @@ namespace WrapTrackWebTests
 
     using WrapTrack.Stf.WrapTrackApi.Interfaces;
     using WrapTrack.Stf.WrapTrackWeb.Interfaces;
+    using WrapTrack.Stf.WrapTrackWeb.Interfaces.Brand;
+    using WrapTrack.Stf.WrapTrackWeb.Interfaces.Explore;
     using WrapTrack.Stf.WrapTrackWeb.Interfaces.Me;
 
     /// <summary>
@@ -192,6 +194,27 @@ namespace WrapTrackWebTests
             var retVal = wrapInfo.OwnerName == anotherUsername;
 
             return retVal;
+        }
+
+        /// <summary>
+        /// The get random brand.
+        /// </summary>
+        /// <returns>
+        /// The <see cref="IBrand"/>.
+        /// </returns>
+        protected IBrand GetRandomBrand()
+        {
+            var explorer = WrapTrackShell.Explore();
+
+            StfAssert.IsInstanceOfType("explorer", explorer, typeof(IExplore));
+
+            var brands = explorer.Brands();
+            var addBrand = brands.AddBrand();
+
+            // TODO: Right now we are not really random :-)
+            var randomBrand = addBrand.OpenRegisteredBrand("Beloved");
+
+            return randomBrand;
         }
     }
 }

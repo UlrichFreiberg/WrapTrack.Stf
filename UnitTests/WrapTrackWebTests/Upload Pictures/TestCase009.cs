@@ -25,13 +25,30 @@ namespace WrapTrackWebTests.Upload_Pictures
     public class TestCase009 : WrapTrackTestScriptBase
     {
         /// <summary>
+        /// The test initialize.
+        /// </summary>
+        [TestInitialize]
+        public void TestInitialize()
+        {
+            WrapTrackShell = Get<IWrapTrackWebShell>();
+        }
+
+        /// <summary>
+        /// The test clean up.
+        /// </summary>
+        [TestCleanup]
+        public void TestCleanUp()
+        {
+            WrapTrackShell?.CloseDown();
+        }
+
+        /// <summary>
         /// The tc 009.
         /// </summary>
         [TestMethod]
         [DeploymentItem(@"TestData\")]
         public void Tc009()
         {
-            WrapTrackShell = Get<IWrapTrackWebShell>();
             WrapTrackShell.SignUp(); // new user - empty collection
 
             var me = WrapTrackShell.Me();
@@ -58,11 +75,11 @@ namespace WrapTrackWebTests.Upload_Pictures
             numberOfPictures = GetNumberOfPictures(validationTarget, wtId);
             StfAssert.AreEqual("4 pictures after upload", numberOfPictures, 4);
 
-            // Remove two pictures and assert there is 1 picture left
+            // Remove two pictures and assert there is 2 picture left
             RemovePicturesFromWrap(theOneAndOnlyWrap, 2);
             Wait(TimeSpan.FromSeconds(3));
             numberOfPictures = GetNumberOfPictures(validationTarget, wtId);
-            StfAssert.AreEqual("1 picture left", 2, numberOfPictures);
+            StfAssert.AreEqual("2 picture left", 2, numberOfPictures);
         }
 
         /// <summary>
@@ -91,17 +108,13 @@ namespace WrapTrackWebTests.Upload_Pictures
             {
                 var allsWell = wrap.RemoveWrapImage();
 
-                // We have to wait a bit to get WT in sync
-                allsWell = allsWell && Wait(TimeSpan.FromSeconds(secondsToWaitForWtSync));
-
-                if (allsWell)
+                if (!allsWell)
                 {
-                    continue;
-                }
+                    // Something went wrong - return the number of images removed so far
+                    StfLogger.LogError($"Couldn't delete all images - failed at image number {i + 1}");
 
-                // Something went wrong - return the number of images removed so far
-                StfLogger.LogError($"Couldn't delete all images - failed at image number {i + 1}");
-                return i;
+                    return i;
+                }
             }
 
             return numberOfPictures;

@@ -28,17 +28,17 @@ namespace WrapTrackWebTests.Collection
         [TestInitialize]
         public void TestInitialize()
         {
-            // Find a random wrap
             WrapTrackShell = Get<IWrapTrackWebShell>();
+            WrapTrackShell.Login();
+        }
 
-            WrapTrackShell.Login(); // Default user
-            var collection = GetCurrentUserCollection();
-
-            // Find a random wrap
-            var wrapToGo = collection.GetRandomWrap();
-            var wtId = wrapToGo.WtId;
-
-            WrapTrackShell.Logout(); 
+        /// <summary>
+        /// The test clean up.
+        /// </summary>
+        [TestCleanup]
+        public void TestCleanUp()
+        {
+            WrapTrackShell?.CloseDown();
         }
 
         /// <summary>
@@ -47,18 +47,32 @@ namespace WrapTrackWebTests.Collection
         [TestMethod]
         public void Tc012()
         {
+            // User #1: Add a wrap
+            var collection = GetCurrentUserCollection();
+
+            // Find a random wrap
+            var wrapToGo = collection.GetRandomWrap(); 
+            var wtId = wrapToGo.WtId;
+
+            WrapTrackShell.Logout();
+
+            // user #2 want the wrap
             var anotherUser = GetAnotherUser(WrapTrackShell);
 
             WrapTrackShell.Login(anotherUser);
 
-            // Mark the test script as InProgress
-            StfAssert.IsNotNull("TestCase NOT finished", null);
+            var desiredWrap = WrapTrackShell.GetToWrap(wtId);
 
-            // StfAssert.IsNotNull("Got a random wrap", wrapToGo);
-            // var x = wrapToGo.PassOn(anotherUser);
+            desiredWrap.AskFor();
+            WrapTrackShell.Logout();
 
-            // StfAssert.IsTrue("PassedOn", x);
-            // StfAssert.IsTrue("PassedOn Validated", ValidatePassOn(wtId, anotherUser));
+            // User #1: Lets wrap go
+            WrapTrackShell.Login(); // Default user
+
+            // TODO:Assert: Der er en anmodning på nyhedssiden, hvor man lander efter login 
+            // TODO:Vises ved link med teksten 'You have 1 pending request' (evt X pending requests)
+
+            // TODO:Bruger klikker og kommer til request side, hvor hun godkender reqest fra bruger #2
         }
     }
 }

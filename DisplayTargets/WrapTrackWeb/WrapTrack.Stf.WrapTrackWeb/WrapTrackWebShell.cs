@@ -16,14 +16,10 @@ namespace WrapTrack.Stf.WrapTrackWeb
     using WrapTrack.Stf.Adapters.WebAdapter;
     using WrapTrack.Stf.Core;
     using WrapTrack.Stf.WrapTrackWeb.Configuration;
-    using WrapTrack.Stf.WrapTrackWeb.Explore;
-    using WrapTrack.Stf.WrapTrackWeb.FaqContact;
     using WrapTrack.Stf.WrapTrackWeb.Interfaces;
     using WrapTrack.Stf.WrapTrackWeb.Interfaces.Explore;
     using WrapTrack.Stf.WrapTrackWeb.Interfaces.FaqContact;
     using WrapTrack.Stf.WrapTrackWeb.Interfaces.Me;
-    using WrapTrack.Stf.WrapTrackWeb.Me;
-    using WrapTrack.Stf.WrapTrackWeb.Me.Collection;
 
     /// <summary>
     /// The demo corp web shell.
@@ -53,6 +49,30 @@ namespace WrapTrack.Stf.WrapTrackWeb
         /// Gets or sets the current logged in user.
         /// </summary>
         public string CurrentLoggedInUser { get; set; }
+
+        /// <summary>
+        /// The login as admin. 
+        /// Using the same Login routine as a normal login, but with different username password
+        /// </summary>
+        /// <param name="userName">
+        /// The user name.
+        /// </param>
+        /// <param name="password">
+        /// The password.
+        /// </param>
+        /// <returns>
+        /// The <see cref="bool"/>.
+        /// </returns>
+        public bool LoginAsAdmin(string userName = null, string password = null)
+        {
+            // Handle defaults for username password
+            userName = HandleDefault(userName, WtConfiguration.AdminUserName);
+            password = HandleDefault(password, WtConfiguration.AdminPassword);
+
+            var retVal = Login(userName, password);
+
+            return retVal;
+        }
 
         /// <summary>
         /// The learn more.
@@ -85,7 +105,7 @@ namespace WrapTrack.Stf.WrapTrackWeb
             // Click tab page Login
             WebAdapter.ButtonClickById("nav_");
 
-            // Reember the last logged in user
+            // Remember the last logged in user
             CurrentLoggedInUser = userName;
 
             return true;
@@ -99,16 +119,14 @@ namespace WrapTrack.Stf.WrapTrackWeb
         /// </returns>
         public bool SignUp()
         {
-            // Create (semi) random username
-            var uniquePart = Guid.NewGuid().ToString().Replace("-", string.Empty).Substring(1, 15);
-            var newUsername = $"TEST-{uniquePart}";
             const string Password = "123456";
+            var newUsername = WtUtils.GetRandomUsername();
 
             WebAdapter.ButtonClickById("nav_login");
             WebAdapter.TextboxSetTextById("input_newuser", newUsername);
             WebAdapter.TextboxSetTextById("input_newPW", Password);
             WebAdapter.TextboxSetTextById("input_email", newUsername + "@mitsite.org");
-            WebAdapter.ButtonClickById("check_cond");
+            WebAdapter.CheckBoxSetValueById("check_cond", true);
             WebAdapter.ButtonClickById("OpretProfilKnap");
 
             // when debugging, we probably want to get to the signed up user 
@@ -164,13 +182,15 @@ namespace WrapTrack.Stf.WrapTrackWeb
         /// The explorer.
         /// </summary>
         /// <returns>
-        /// The <see cref="IExploreWraps"/>.
+        /// The <see cref="IExplore"/>.
         /// </returns>
-        public IExploreWraps Explorer()
+        public IExplore Explore()
         {
-            WebAdapter.Click(By.Id("nav_expl"));
-
-            var retVal = StfContainer.Get<IExploreWraps>();
+            // WebAdapter.Click(By.Id("nav_expl"));
+            var clicked = WebAdapter.ButtonClickByXpath("//a[normalize-space()='Explore']");
+            var retVal = clicked 
+                       ? StfContainer.Get<IExplore>()
+                       : null;
 
             return retVal;
         }
@@ -255,10 +275,10 @@ namespace WrapTrack.Stf.WrapTrackWeb
         /// <returns>
         /// The <see cref="IWrap"/>.
         /// </returns>
-        public IWrap GetToWrap(int wrapId)
+        public IWrap GetToWrap(string wrapId)
         {
             var baseUrl = WtConfiguration.Url;
-            var wrapIdUrl = $"{baseUrl}Collection/wrap/{wrapId}";
+            var wrapIdUrl = $"{baseUrl}wrap/{wrapId}";
 
             WebAdapter.OpenUrl(wrapIdUrl);
 
@@ -284,8 +304,10 @@ namespace WrapTrack.Stf.WrapTrackWeb
         /// </returns>
         public bool Init()
         {
+            var registerMyNeededTypes = new RegisterMyNeededTypes(this);
+
+            registerMyNeededTypes.Register();
             WtConfiguration = SetConfig<WtConfiguration>();
-            RegisterMyNeededTypes();
 
             // get what I need - a WebAdapter:-)
             WebAdapter = StfContainer.Get<IWebAdapter>();
@@ -296,31 +318,6 @@ namespace WrapTrack.Stf.WrapTrackWeb
 
             StfLogger.LogKeyValue("Current Directory", currentDomainBaseDirectory, "Current Directory");
             return true;
-        }
-
-        /// <summary>
-        /// The register my needed types.
-        /// </summary>
-        private void RegisterMyNeededTypes()
-        {
-            // Me classes
-            StfContainer.RegisterType<IMeInbox, MeInbox>();
-            StfContainer.RegisterType<IMeReviews, MeReviews>();
-            StfContainer.RegisterType<IMeSettings, MeSettings>();
-            StfContainer.RegisterType<ICollection, Collection>();
-            StfContainer.RegisterType<IMeProfile, MeProfile>();
-            StfContainer.RegisterType<IWrap, Wrap>();
-
-            // Explorer
-            StfContainer.RegisterType<IExploreBirthWraps, ExploreBirthWraps>();
-            StfContainer.RegisterType<IExploreBrands, ExploreBrands>();
-            StfContainer.RegisterType<IExploreModels, ExploreModels>();
-            StfContainer.RegisterType<IExplorePatterns, ExplorePatterns>();
-            StfContainer.RegisterType<IExploreUsers, ExploreUsers>();
-            StfContainer.RegisterType<IExploreWraps, ExploreWraps>();
-
-            // FAQ and contact classes
-            StfContainer.RegisterType<IFaq, Faq>();
         }
 
         /// <summary>

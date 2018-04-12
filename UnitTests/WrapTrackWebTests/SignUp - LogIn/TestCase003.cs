@@ -21,17 +21,21 @@ namespace WrapTrackWebTests
     public class TestCase003 : WrapTrackTestScriptBase
     {
         /// <summary>
-        /// The wrap track shell.
-        /// </summary>
-        private IWrapTrackWebShell wrapTrackShell;
-
-        /// <summary>
         /// The test initialize.
         /// </summary>
         [TestInitialize]
         public void TestInitialize()
         {
-            wrapTrackShell = Get<IWrapTrackWebShell>();
+            WrapTrackShell = Get<IWrapTrackWebShell>();
+        }
+
+        /// <summary>
+        /// The test clean up.
+        /// </summary>
+        [TestCleanup]
+        public void TestCleanUp()
+        {
+            WrapTrackShell?.CloseDown();
         }
 
         /// <summary>
@@ -43,11 +47,11 @@ namespace WrapTrackWebTests
         [TestMethod]
         public void Tc003()
         {
-            wrapTrackShell.Login();
-            wrapTrackShell.Logout();
+            WrapTrackShell.Login();
+            WrapTrackShell.Logout();
 
             // And the result....
-            var me = wrapTrackShell.Me();
+            var me = WrapTrackShell.Me();
 
             StfAssert.IsNull("me", me);
         }

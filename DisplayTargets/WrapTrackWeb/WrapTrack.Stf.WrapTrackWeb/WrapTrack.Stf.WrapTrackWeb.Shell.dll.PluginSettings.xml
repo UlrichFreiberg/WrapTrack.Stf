@@ -40,6 +40,17 @@
             </section>
           </section>
 
+          <section name="AdminUsers" defaultsection="%USERNAME%">
+            <section name="Ulrich">
+              <key name="UserNameAdmin" value="UlrichAdmin" />
+              <key name="PasswordAdmin" value="Password1234Admin" />
+            </section>
+            <section name="Pernille">
+              <key name="UserNameAdmin" value="PernilleAdmin" />
+              <key name="PasswordAdmin" value="Password1234Admin" />
+            </section>
+          </section>
+
         </section>
       </section>
     </section>
