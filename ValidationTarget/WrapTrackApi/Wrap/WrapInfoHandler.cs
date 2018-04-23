@@ -141,6 +141,11 @@ namespace WrapTrack.Stf.WrapTrackApi.Wrap
         {
             WrapInfo retVal;
 
+            if (info == null)
+            {
+                return null;
+            }
+
             StfLogger.LogDebug($"WrapInfoMapper: Got info = [{info}]");
 
             try

@@ -12,6 +12,7 @@ using System.Threading.Tasks;
 
 namespace WrapTrack.Stf.WrapTrackApi
 {
+    using System;
     using System.Net.Http;
 
     using Mir.Stf.Utilities.Interfaces;
@@ -62,12 +63,25 @@ namespace WrapTrack.Stf.WrapTrackApi
         protected async Task<JObject> GetWrapRestInfo(string uri)
         {
             var client = new HttpClient();
+            JObject retVal;
 
             client.DefaultRequestHeaders.Add("Accept", "application/json");
 
             var fullUri = $"{WtApiConfiguration.Url}/{uri}";
             var response = await client.GetStringAsync(fullUri);
-            var retVal = JObject.Parse(response);
+
+            StfLogger.LogInfo($"GetWrapRestInfo: Called [{fullUri}]");
+            StfLogger.LogInfo($"GetWrapRestInfo: Got response [{response}]");
+
+            try
+            {
+                retVal = JObject.Parse(response);
+            }
+            catch (Exception ex)
+            {
+                StfLogger.LogError($"GetWrapRestInfo: While parsing the repsonse something went wrong [{ex}]");
+                retVal = default(JObject);
+            }
 
             return retVal;
         }

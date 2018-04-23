@@ -96,6 +96,11 @@ namespace WrapTrack.Stf.WrapTrackApi.Pattern
         {
             PatternInfo retVal;
 
+            if (info == null)
+            {
+                return null;
+            }
+
             StfLogger.LogDebug($"PatternInfoMapper: Got info = [{info}]");
 
             try

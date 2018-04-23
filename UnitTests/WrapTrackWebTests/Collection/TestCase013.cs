@@ -12,6 +12,7 @@ namespace WrapTrackWebTests.Collection
 {
     using Microsoft.VisualStudio.TestTools.UnitTesting;
 
+    using WrapTrack.Stf.WrapTrackApi.Interfaces;
     using WrapTrack.Stf.WrapTrackWeb.Interfaces;
     using WrapTrack.Stf.WrapTrackWeb.Interfaces.Me;
 
@@ -42,33 +43,34 @@ namespace WrapTrackWebTests.Collection
         /// <summary>
         /// The tc 013.
         /// </summary>
+        [TestMethod]
         public void Tc013()
         {
            // Create a wrap to convert
             var orgWrap = Collection.AddWrap("A love so rare", "Alta Lake", "Charcoal", 8);
+            var wtId = orgWrap.WtId;
 
             StfAssert.IsNotNull("Got the original wrap size 8", orgWrap);
+
+            // Status of original wrap before
+            var validationTarget = Get<IWtApi>();
+            var wrapInfo = validationTarget.WrapInfoByTrackId(wtId);
+            var statusBefore = wrapInfo.Status;
+
+            StfAssert.AreEqual("Status before deleting is 0", statusBefore, "0");
+
+            // Create two small wraps
+            var smallWrap1 = Collection.AddWrap("A love so rare", "Alta Lake", "Charcoal", 2);
+            var smallWrap2 = Collection.AddWrap("A love so rare", "Alta Lake", "Charcoal", 2);
+
+            StfAssert.IsNotNull("Got one small wrap size 2", smallWrap1);
+            StfAssert.IsNotNull("Got one more small wrap size 2", smallWrap2);
 
             // Mark the test script as InProgress
             StfAssert.IsNotNull("TestCase NOT finished", null);
 
-            // Status of original wrap before
-            //TODO: We need to know the id of the wrap to validate status later on
-            //var validationTarget = Get<IWtApi>();
-            //var wrapInfo = validationTarget.WrapInfoByTrackId(wtId);
-            //var statusBefore = wrapInfo.Status;
-            //StfAssert.AreEqual("Status before deleting is 0", statusBefore, "0");
-
-            // Create two small wraps
-            var smallWrap1 = Collection.AddWrap("A love so rare", "Alta Lake", "Charcoal", 2);
-            StfAssert.IsNotNull("Got one small wrap size 2", smallWrap1);
-
-            var smallWrap2 = Collection.AddWrap("A love so rare", "Alta Lake", "Charcoal", 2);
-            StfAssert.IsNotNull("Got one more small wrap size 2", smallWrap2);
-
             //TODO: Again we need orgWrap to be a IWrap
             //orgWrap.Convert(smallWrap1); // Not implemented
-
             //orgWrap.extraConvention(smallWrap2); // Not implemented
         }
     }
