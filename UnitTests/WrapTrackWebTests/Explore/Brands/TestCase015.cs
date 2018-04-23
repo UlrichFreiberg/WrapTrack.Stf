@@ -52,11 +52,8 @@ namespace WrapTrackWebTests.Explore.Brands
         }
 
         /// <summary>
-        /// The log in test.
+        /// Test of creating new pattern.
         /// </summary>
-        /// <remarks>
-        /// After log in it's possible to acess 'MeProfile-page'
-        /// </remarks>
         [TestMethod]
         public void Tc015()
         {

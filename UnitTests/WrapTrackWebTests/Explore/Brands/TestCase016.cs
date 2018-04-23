@@ -52,11 +52,8 @@ namespace WrapTrackWebTests.Explore.Brands
         }
 
         /// <summary>
-        /// The log in test.
+        /// Create and delete a model (model related to pattern)
         /// </summary>
-        /// <remarks>
-        /// After log in it's possible to acess 'MeProfile-page'
-        /// </remarks>
         [TestMethod]
         public void Tc016()
         {
