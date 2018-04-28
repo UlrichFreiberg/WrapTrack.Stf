@@ -52,5 +52,7 @@ namespace WrapTrack.Stf.WrapTrackApi.Wrap
         /// Gets or sets the num of ownership pic.
         /// </summary>
         public int NumOfOwnershipPic { get; set; }
+
+        public bool OnHoliday { get; set; }
     }
 }

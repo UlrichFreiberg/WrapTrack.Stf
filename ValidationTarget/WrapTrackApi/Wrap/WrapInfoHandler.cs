@@ -157,7 +157,7 @@ namespace WrapTrack.Stf.WrapTrackApi.Wrap
                     InternalId = info.SelectToken("id")?.ToString(),
                     Size = info.SelectToken("id")?.ToString(),
                     OwnershipNumber = info["ejerskab_nuv"]?.SelectToken("nr")?.ToString(),
-                    Status = info.SelectToken("status")?.ToString(),
+                    Status = info.SelectToken("status")?.ToString(),                    
                 };
 
                 retVal = bent;
@@ -178,6 +178,11 @@ namespace WrapTrack.Stf.WrapTrackApi.Wrap
 
             // sometime we dont have this node - if not, then the value is zero:-)
             retVal.NumOfPictures = info["billeder"]?.Count() ?? 0;
+
+            // get the holiday status
+            var holidayStatus = info["besoeg_nuv"]?.SelectToken("type")?.ToString();
+
+            retVal.OnHoliday = string.Equals(holidayStatus, "ferie", StringComparison.CurrentCultureIgnoreCase);
 
             return retVal;
         }
