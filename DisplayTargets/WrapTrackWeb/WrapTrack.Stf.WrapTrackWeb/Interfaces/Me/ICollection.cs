@@ -10,6 +10,8 @@
 
 namespace WrapTrack.Stf.WrapTrackWeb.Interfaces.Me
 {
+    using System.Collections.Generic;
+
     /// <summary>
     /// The Collection interface.
     /// </summary>
@@ -41,7 +43,7 @@ namespace WrapTrack.Stf.WrapTrackWeb.Interfaces.Me
         /// <param name="size">
         /// Size of wrap 
         /// </param>
-        IWrap AddWrap(string brand = null, string pattern = null, string model = null, int size = 6);
+        string AddWrap(string brand = null, string pattern = null, string model = null, int size = 6);
 
         /// <summary>
         /// Finds a random wrap in collection
@@ -52,6 +54,35 @@ namespace WrapTrack.Stf.WrapTrackWeb.Interfaces.Me
         /// <returns>
         /// The wrap 
         /// </returns>
-       IWrap GetRandomWrap(string wtIdContraint = null);
+        IWrap GetRandomWrap(string wtIdContraint = null);
+
+        /// <summary>
+        /// Find a wrap by criteria
+        /// </summary>
+        /// <param name="finderCriteria">
+        /// The status criteria for the finder
+        /// </param>
+        /// <returns>a wrap that meets the criteria or null if no match</returns>
+        IWrap FindBy(FinderCriteria finderCriteria);
+
+        /// <summary>
+        /// Find a wrap by a boolean criteria
+        /// </summary>
+        /// <param name="finderCriteria">
+        /// The boolean status criteria for the finder
+        /// </param>
+        /// <param name="value">
+        /// The boolean value for the finder
+        /// </param>
+        /// <returns>a wrap that meets the criteria or null if no match</returns>
+        IWrap FindBy(FinderCriteria finderCriteria, bool value);
+
+        /// <summary>
+        /// The get list of wt ids.
+        /// </summary>
+        /// <returns>
+        /// List of WtId as strings
+        /// </returns>
+        List<string> GetListOfWtIds();
     }
 }
