@@ -157,7 +157,8 @@ namespace WrapTrack.Stf.WrapTrackApi.Wrap
                     InternalId = info.SelectToken("id")?.ToString(),
                     Size = info.SelectToken("id")?.ToString(),
                     OwnershipNumber = info["ejerskab_nuv"]?.SelectToken("nr")?.ToString(),
-                    Status = info.SelectToken("status")?.ToString(),                    
+                    Status = info.SelectToken("status")?.ToString(),
+                    VisitingUserId = info["besoeg_nuv"]?.SelectToken("besoeg_bruger_id")?.ToString()
                 };
 
                 retVal = bent;

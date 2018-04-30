@@ -15,7 +15,10 @@ namespace WrapTrack.Stf.WrapTrackApi.Wrap
     /// </summary>
     public class WrapInfo
     {
-        public string OwnershipNumber;
+        /// <summary>
+        /// Gets or sets the ownership number.
+        /// </summary>
+        public string OwnershipNumber { get; set; }
 
         /// <summary>
         /// Gets or sets the id of the owner.
@@ -53,6 +56,14 @@ namespace WrapTrack.Stf.WrapTrackApi.Wrap
         /// </summary>
         public int NumOfOwnershipPic { get; set; }
 
+        /// <summary>
+        /// Gets or sets a value indicating whether on holiday.
+        /// </summary>
         public bool OnHoliday { get; set; }
+
+        /// <summary>
+        /// Gets or sets the id of the user who the wrap is visiting.
+        /// </summary>
+        public string VisitingUserId { get; set; }
     }
 }
