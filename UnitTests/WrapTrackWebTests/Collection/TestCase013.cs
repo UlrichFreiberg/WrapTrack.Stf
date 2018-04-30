@@ -47,10 +47,9 @@ namespace WrapTrackWebTests.Collection
         public void Tc013()
         {
            // Create a wrap to convert
-            var orgWrap = Collection.AddWrap("A love so rare", "Alta Lake", "Charcoal", 8);
-            var wtId = orgWrap.WtId;
+            var wtId = Collection.AddWrap("A love so rare", "Alta Lake", "Charcoal", 8);
 
-            StfAssert.IsNotNull("Got the original wrap size 8", orgWrap);
+            StfAssert.IsNotNull("Got the original wrap size 8", wtId);
 
             // Status of original wrap before
             var validationTarget = Get<IWtApi>();
