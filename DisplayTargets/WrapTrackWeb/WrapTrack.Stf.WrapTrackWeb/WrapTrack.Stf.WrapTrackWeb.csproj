@@ -94,6 +94,7 @@
       <HintPath>..\..\..\packages\Selenium.WebDriver.3.8.0\lib\net45\WebDriver.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="WebDriver.Support, Version=3.8.0.0, Culture=neutral, PublicKeyToken=null" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Brand\Brand.cs" />

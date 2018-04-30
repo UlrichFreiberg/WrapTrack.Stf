@@ -8,9 +8,59 @@
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
 
+using System;
+
 namespace WrapTrack.Stf.WrapTrackWeb.Interfaces
 {
     using WrapTrack.Stf.WrapTrackWeb.Me.Collection;
+
+    /// <summary>
+    /// Status used for Finding by status
+    /// </summary>
+    [Flags]
+    public enum FinderCriteria
+    {
+        /// <summary>
+        /// Status is unknown
+        /// </summary>
+        Unknown = 1 << 0,
+
+        /// <summary>
+        /// Used when requesting a random wrap
+        /// </summary>
+        Random = 1 << 1,
+
+        /// <summary>
+        /// Wrap is on holiday
+        /// </summary>
+        OnHoliday = 1 << 2,
+
+        /// <summary>
+        /// Number of pictures for the Wrap
+        /// </summary>
+        Pictures = 1 << 3
+    }
+
+    /// <summary>
+    /// The send away reason.
+    /// </summary>
+    public enum SendAwayReason
+    {
+        /// <summary>
+        /// The holiday.
+        /// </summary>
+        Holiday,
+
+        /// <summary>
+        /// The tester.
+        /// </summary>
+        Tester,
+
+        /// <summary>
+        /// The rent.
+        /// </summary>
+        Rent
+    }
 
     /// <summary>
     /// The Wrap interface.
@@ -102,5 +152,19 @@ namespace WrapTrack.Stf.WrapTrackWeb.Interfaces
         /// True if sucess else false
         /// </returns>
         bool Remove(DeleteWrapOption deleteOption);
+
+        /// <summary>
+        /// The send away temporarily.
+        /// </summary>
+        /// <param name="sendAwayReason">
+        /// The send away reason.
+        /// </param>
+        /// <param name="recipient">
+        /// The recipient.
+        /// </param>
+        /// <returns>
+        /// The <see cref="bool"/>.
+        /// </returns>
+        bool SendAwayTemporarily(SendAwayReason sendAwayReason, string recipient);
     }
 }
