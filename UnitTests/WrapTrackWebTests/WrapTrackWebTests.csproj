@@ -144,6 +144,7 @@
     <Compile Include="Upload Pictures\TestCase005.cs" />
     <Compile Include="WrapTrackTestScriptBase.cs" />
     <Compile Include="WtTestscriptUtils.cs" />
+    <Compile Include="Collection\TestCase024.cs" />
     <Compile Include="ZDeveloperTests\XBRO\TestCaseXB001.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -170,6 +171,10 @@
     <ProjectReference Include="..\..\ValidationTarget\WrapTrackApi\WrapTrackApi.csproj">
       <Project>{5cc4b250-6779-4fe4-8e17-3435ac8846af}</Project>
       <Name>WrapTrackApi</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\WrapTrack.Stf.Core\WrapTrack.Stf.Core.csproj">
+      <Project>{31C88D4B-F626-4F49-B408-CD71563C9098}</Project>
+      <Name>WrapTrack.Stf.Core</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
