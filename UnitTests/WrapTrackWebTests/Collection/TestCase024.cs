@@ -1,5 +1,5 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="TestCase040.cs" company="Mir Software">
+// <copyright file="TestCase024.cs" company="Mir Software">
 //   Copyright governed by Artistic license as described here:
 //          http://www.perlfoundation.org/artistic_license_2_0
 // </copyright>
@@ -33,8 +33,8 @@ namespace WrapTrackWebTests.Collection
         [TestInitialize]
         public void TestInitialize()
         {
-            this.WrapTrackShell = this.Get<IWrapTrackWebShell>();
-            this.wtTestscriptUtils = new WtTestscriptUtils(this.StfLogger);
+            WrapTrackShell = this.Get<IWrapTrackWebShell>();
+            wtTestscriptUtils = new WtTestscriptUtils(StfLogger);
         }
 
         /// <summary>
@@ -43,7 +43,7 @@ namespace WrapTrackWebTests.Collection
         [TestCleanup]
         public void TestCleanUp()
         {
-            this.WrapTrackShell?.CloseDown();
+            WrapTrackShell?.CloseDown();
         }
 
         /// <summary>
@@ -56,23 +56,23 @@ namespace WrapTrackWebTests.Collection
         /// Find the wrap again and check if its on holiday 
         /// </remarks>
         [TestMethod]
-        public void Tc040()
+        public void Tc024()
         {
             // Set up user context for actual test
             // Use default user
-            this.WrapTrackShell.Login();
+            WrapTrackShell.Login();
 
-            var me = this.WrapTrackShell.Me();
+            var me = WrapTrackShell.Me();
 
-            this.StfAssert.IsNotNull("WrapTrackShell", this.WrapTrackShell);
-            this.StfAssert.IsInstanceOfType("me", me, typeof(IMeProfile));
+            StfAssert.IsNotNull("WrapTrackShell", this.WrapTrackShell);
+            StfAssert.IsInstanceOfType("me", me, typeof(IMeProfile));
 
             // Actual test 
 
             // Create a new wrap
             var wrapCollection = me.GetCollection();
 
-            this.StfAssert.IsNotNull("check if me.GetCollection null", wrapCollection);
+            StfAssert.IsNotNull("check if me.GetCollection null", wrapCollection);
 
             var newWrapWtId = wrapCollection.AddWrap();
 
@@ -87,8 +87,8 @@ namespace WrapTrackWebTests.Collection
             var wtApi = this.Get<IWtApi>();
             var wrapInfo = wtApi.WrapInfoByTrackId(newWrapWtId);
 
-            this.StfLogger.LogInfo("The recipient user name attempted is {0} and userid from wrapInfo API is {1}", recipient, wrapInfo.VisitingUserId);
-            this.StfAssert.IsTrue("Wrap is on holiday", wrapInfo.OnHoliday);
+            StfLogger.LogInfo("The recipient user name attempted is {0} and userid from wrapInfo API is {1}", recipient, wrapInfo.VisitingUserId);
+            StfAssert.IsTrue("Wrap is on holiday", wrapInfo.OnHoliday);
         }
     }
 }
