@@ -123,9 +123,10 @@ namespace WrapTrackWebTests
         /// <returns>
         /// The <see cref="string"/>.
         /// </returns>
-        protected string GetAnotherUser(IWrapTrackWebShell wrapTrackWebShell)
+        protected string GetAnotherUser(IWrapTrackWebShell wrapTrackWebShell = null)
         {
-            var currentUser = wrapTrackWebShell.CurrentLoggedInUser;
+            var currentShell = wrapTrackWebShell ?? WrapTrackShell;
+            var currentUser = currentShell.CurrentLoggedInUser;
             var retVal = "Ida88";
 
             if (currentUser.Equals("Ida88", StringComparison.InvariantCultureIgnoreCase))

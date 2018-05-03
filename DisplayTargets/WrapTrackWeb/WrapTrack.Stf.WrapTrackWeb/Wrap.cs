@@ -144,6 +144,54 @@ namespace WrapTrack.Stf.WrapTrackWeb
         }
 
         /// <summary>
+        /// The send away temporarily.
+        /// </summary>
+        /// <param name="sendAwayReason">
+        /// The send away reason.
+        /// </param>
+        /// <param name="recipient">
+        /// The recipient.
+        /// </param>
+        /// <returns>
+        /// The <see cref="bool"/>.
+        /// </returns>
+        public bool SendAwayTemporarily(SendAwayReason sendAwayReason, string recipient)
+        {
+            string inputValue;
+            
+            // click the SendAwayTemp button
+            WebAdapter.ButtonClickById("but_sendonholiday");
+
+            switch (sendAwayReason)
+            {
+                case SendAwayReason.Holiday:
+                    inputValue = "ferie";
+                    break;
+                case SendAwayReason.Tester:
+                    inputValue = "test";
+                    break;
+                case SendAwayReason.Rent:
+                    inputValue = "udlejning";
+                    break;
+                default:
+                    throw new ArgumentOutOfRangeException(nameof(sendAwayReason), sendAwayReason, null);
+            }
+
+            var xPath = $"//input[@value='{inputValue}']";
+
+            WebAdapter.ButtonClickByXpath(xPath);
+
+            // now chose the recipient
+            WebAdapter.TextboxSetTextById("inputBrugerSoeg_ferievikle", recipient);
+            WebAdapter.ButtonClickById("but_chooseUser");
+
+            // press ok
+            var retVal = WebAdapter.ButtonClickById("but_ok1_vaelg");
+
+            return retVal;
+        }
+
+        /// <summary>
         /// Ask for the wrap (only possible for not-owner of wrap)
         /// </summary>
         /// <returns>
@@ -151,7 +199,6 @@ namespace WrapTrack.Stf.WrapTrackWeb
         /// </returns>
         public bool AskFor()
         {
-
             if (!WebAdapter.ButtonClickById("but_please"))
             {
                 StfLogger.LogDebug("Couldn't press 'Request wrap'");

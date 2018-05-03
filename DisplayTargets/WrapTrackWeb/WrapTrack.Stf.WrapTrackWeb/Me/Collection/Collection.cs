@@ -8,6 +8,11 @@
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
 
+using System.Collections.Generic;
+using System.Linq;
+
+using WrapTrack.Stf.WrapTrackApi.Interfaces;
+
 namespace WrapTrack.Stf.WrapTrackWeb.Me.Collection
 {
     using System;
@@ -84,6 +89,36 @@ namespace WrapTrack.Stf.WrapTrackWeb.Me.Collection
         }
 
         /// <summary>
+        /// The get list of wt ids.
+        /// </summary>
+        /// <returns>
+        /// List of WtId as strings
+        /// </returns>
+        public List<string> GetListOfWtIds()
+        {
+            var retVal = new List<string>();
+            var wrapElements = WebAdapter.FindElements(By.Id("lin_wrap"));
+
+            // Nothing for us - lets leave...
+            if (wrapElements == null || !wrapElements.Any())
+            {
+                return retVal;
+            }
+
+            foreach (var wrapElement in wrapElements)
+            {
+                var wtId = wrapElement.Text;
+
+                if (!string.IsNullOrEmpty(wtId) && !retVal.Contains(wtId))
+                {
+                    retVal.Add(wtId);
+                }
+            }
+
+            return retVal;
+        }
+
+        /// <summary>
         /// Add a wrap to users own collection
         /// </summary>
         /// <param name="brand">
@@ -101,8 +136,10 @@ namespace WrapTrack.Stf.WrapTrackWeb.Me.Collection
         /// <returns>
         /// false if not possible
         /// </returns>
-        public IWrap AddWrap(string brand = null, string pattern = null, string model = null, int size = 6)
+        public string AddWrap(string brand = null, string pattern = null, string model = null, int size = 6)
         {
+            var existingListOfWtIds = GetListOfWtIds();
+
             WebAdapter.ButtonClickByXpath("//button[contains(@data-bind,'Collection/tilfoej_vikle')]");
             ClickById("lin_newwrap");
 
@@ -124,7 +161,107 @@ namespace WrapTrack.Stf.WrapTrackWeb.Me.Collection
                 return null;
             }
 
-            var retVal = StfContainer.Get<IWrap>();
+            var newListOfWtIds = this.GetListOfWtIds();
+            var diffList = newListOfWtIds.Except(existingListOfWtIds);
+            var enumerable = diffList as string[] ?? diffList.ToArray();
+
+            // Return the wrap just added or null
+            return enumerable.Length == 1 ? enumerable.First() : null;
+        }
+
+        /// <summary>
+        /// Find a wrap by criteria. 
+        /// Not Yet Implemented
+        /// </summary>
+        /// <param name="finderCriteria">
+        /// The status criteria for the finder
+        /// </param>
+        /// <returns>a wrap that meets the criteria or null if no match</returns>
+        /// <exception cref="NotImplementedException">
+        /// Thrown as not yet implemented
+        /// </exception>
+        public IWrap FindBy(FinderCriteria finderCriteria)
+        {
+            throw new NotImplementedException();
+        }
+
+        /// <summary>
+        /// Find by a wrap status with a specific value.
+        /// Only implemented for OnHoliday true or false
+        /// </summary>
+        /// <param name="finderCriteria">
+        /// The status field to Find By
+        /// </param>
+        /// <param name="argument">
+        /// The value of the content of the status field
+        /// </param>
+        /// <returns>
+        /// The Wrap matching the search criteria
+        /// </returns>
+        /// <exception cref="ArgumentOutOfRangeException">
+        /// Thrown in case of unknown value for argument
+        /// </exception>
+        public IWrap FindBy(FinderCriteria finderCriteria, bool argument)
+        {
+            var retVal = default(IWrap);
+
+            switch (finderCriteria)
+            {
+                case FinderCriteria.Unknown:
+                    break;
+                case FinderCriteria.Random:
+                    retVal = GetRandomWrap();
+                    break;
+                case FinderCriteria.OnHoliday:
+                    retVal = FindWrapByOnHoliday(argument);
+                    break;
+                case FinderCriteria.Pictures:
+                    break;
+                default:
+                    throw new ArgumentOutOfRangeException(nameof(finderCriteria), finderCriteria, null);
+            }
+
+            return retVal;
+        }
+
+        /// <summary>
+        /// Find a wrap in this collection that 
+        /// is either on holiday or not depending on argument 
+        /// </summary>
+        /// <param name="argument">
+        /// true is on holiday, false is not on holiday
+        /// </param>
+        /// <returns>a wrap that meets the criteria or null if no match</returns>
+        private IWrap FindWrapByOnHoliday(bool argument)
+        {
+            var retVal = default(IWrap);
+
+            var wrapElements = WebAdapter.FindElements(By.Id("lin_wrap"));
+
+            if (wrapElements == null)
+            {
+                return null;
+            }
+
+            // Loop through all the items in the collection until 
+            // find one whose OnHoliday status matches the argument
+            var numberOfWraps = wrapElements.Count;
+
+            for (var i = 1; i <= numberOfWraps; i++)
+            {
+                var xpath = $"(//a[@id='lin_wrap'])[{i}]";
+                var element = WebAdapter.FindElement(By.XPath(xpath));
+                var linWrapText = element.Text;
+                var wtApi = Get<IWtApi>();
+                var wrapInfo = wtApi.WrapInfoByTrackId(linWrapText);
+
+                if (wrapInfo.OnHoliday == argument)
+                {
+                    element.Click();
+                    retVal = StfContainer.Get<IWrap>();
+                    break;
+                }
+            }
 
             return retVal;
         }
