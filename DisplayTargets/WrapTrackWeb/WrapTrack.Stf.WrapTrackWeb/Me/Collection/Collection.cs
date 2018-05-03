@@ -161,7 +161,7 @@ namespace WrapTrack.Stf.WrapTrackWeb.Me.Collection
                 return null;
             }
 
-            var newListOfWtIds = this.GetListOfWtIds();
+            var newListOfWtIds = GetListOfWtIds();
             var diffList = newListOfWtIds.Except(existingListOfWtIds);
             var enumerable = diffList as string[] ?? diffList.ToArray();
 
