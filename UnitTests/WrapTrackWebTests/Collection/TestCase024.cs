@@ -74,15 +74,21 @@ namespace WrapTrackWebTests.Collection
             var wrapToSendOnHoliday = WrapTrackShell.GetToWrap(newWrapWtId);
             var recipient = GetAnotherUser();
 
-            // Send warp away on holiday
+            // Send wrap away on holiday
             wrapToSendOnHoliday.SendAwayTemporarily(SendAwayReason.Holiday, recipient);
 
             // Validate the the wrap indeed is on holiday
             var wtApi = Get<IWtApi>();
-            var wrapInfo = wtApi.WrapInfoByTrackId(newWrapWtId);
 
-            StfLogger.LogInfo("The recipient user name attempted is {0} and userid from wrapInfo API is {1}", recipient, wrapInfo.VisitingUserId);
+            StfAssert.IsNotNull("wtApi is not null", wtApi);
+
+            var wrapInfo = wtApi.WrapInfoByTrackId(newWrapWtId);
+            var userId = wtApi.UserId(recipient);
+
+            StfLogger.LogInfo("The recipient user name, user id attempted is {0},{1} and userid from wrapInfo API is {1}", recipient, userId, wrapInfo.VisitingUserId);
+
             StfAssert.IsTrue("Wrap is on holiday", wrapInfo.OnHoliday);
+            StfAssert.AreEqual("recipient userid is same as VisitingUserId in wrap", userId, wrapInfo.VisitingUserId);
         }
     }
 }
