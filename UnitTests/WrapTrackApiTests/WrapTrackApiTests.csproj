@@ -98,6 +98,13 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
+    <Compile Include="Collection\TestCase006.cs" />
+    <Compile Include="Collection\TestCase007.cs" />
+    <Compile Include="Collection\TestCase010.cs" />
+    <Compile Include="Collection\TestCase011.cs" />
+    <Compile Include="Collection\TestCase012.cs" />
+    <Compile Include="Collection\TestCase013.cs" />
+    <Compile Include="Collection\TestCase024.cs" />
     <Compile Include="WrapInfoTests.cs" />
     <Compile Include="ModelInfoTests.cs" />
     <Compile Include="PatternInfoTests.cs" />
@@ -106,6 +113,7 @@
     <Compile Include="WtApiTests.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Collection\Data010.csv" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
@@ -116,6 +124,10 @@
     <ProjectReference Include="..\..\ValidationTarget\WrapTrackApi\WrapTrackApi.csproj">
       <Project>{5CC4B250-6779-4FE4-8E17-3435AC8846AF}</Project>
       <Name>WrapTrackApi</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\WrapTrackWebTests\WrapTrackWebTests.csproj">
+      <Project>{4C59FC05-88B5-4B18-B19E-205BBEB88340}</Project>
+      <Name>WrapTrackWebTests</Name>
     </ProjectReference>
   </ItemGroup>
   <Choose>
