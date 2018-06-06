@@ -161,7 +161,8 @@ namespace WrapTrack.Stf.WrapTrackWeb.Me.Collection
                 return null;
             }
 
-            // gotta fix that new landing for Adding is the wrap and not the wrap itself
+            // gotta fix that after adding a wrap the wrap itself is shown
+            // not the collection as it used to
             var me = WrapTrackWebShell.Me();
             var collection = me.GetCollection();
             var newListOfWtIds = GetListOfWtIds();
