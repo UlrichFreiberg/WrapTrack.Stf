@@ -68,6 +68,10 @@ namespace WrapTrackWebTests
             if (addIfNone && collection.NumOfWraps() == 0)
             {
                 collection.AddWrap("Ali Dover", "Hygge", "Blue");
+
+                // ensure we always are at Collection when done - as we would if not adding a wrap
+                me = wrapTrackShell.Me();
+                collection = me.GetCollection();
             }
 
             return collection;

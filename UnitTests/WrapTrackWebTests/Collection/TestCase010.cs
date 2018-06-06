@@ -44,15 +44,9 @@ namespace WrapTrackWebTests.Collection
             WrapTrackShell = Get<IWrapTrackWebShell>();
             WrapTrackShell.Login();
 
-            // Be sure we have enough wraps for all test instances
+            // GetCurrentUserCollection will add one wrap if none found
+            // Ensure we have enough wraps for all test instances
             Collection = GetCurrentUserCollection(WrapTrackShell);
-
-            var numOfWraps = Collection.NumOfWraps(); 
-
-            if (numOfWraps == 0)
-            {
-                Collection.AddWrap(); 
-            }
         }
 
         /// <summary>

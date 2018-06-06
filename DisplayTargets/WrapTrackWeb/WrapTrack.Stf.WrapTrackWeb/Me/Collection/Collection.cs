@@ -161,6 +161,9 @@ namespace WrapTrack.Stf.WrapTrackWeb.Me.Collection
                 return null;
             }
 
+            // gotta fix that new landing for Adding is the wrap and not the wrap itself
+            var me = WrapTrackWebShell.Me();
+            var collection = me.GetCollection();
             var newListOfWtIds = GetListOfWtIds();
             var diffList = newListOfWtIds.Except(existingListOfWtIds);
             var enumerable = diffList as string[] ?? diffList.ToArray();
