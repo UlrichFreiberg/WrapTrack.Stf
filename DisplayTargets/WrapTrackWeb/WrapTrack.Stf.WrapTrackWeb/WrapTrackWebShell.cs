@@ -288,6 +288,27 @@ namespace WrapTrack.Stf.WrapTrackWeb
         }
 
         /// <summary>
+        /// The get to model.
+        /// </summary>
+        /// <param name="modelId">
+        /// The model id.
+        /// </param>
+        /// <returns>
+        /// The <see cref="IModel"/>.
+        /// </returns>
+        public IModel GetToModel(string modelId)
+        {
+            var baseUrl = WtConfiguration.Url;
+            var modelIdUrl = $"{baseUrl}Catalog/model/{modelId}";
+
+            WebAdapter.OpenUrl(modelIdUrl);
+
+            var retVal = StfContainer.Get<IModel>();
+
+            return retVal;
+        }
+
+        /// <summary>
         /// Logout and Close down the web adapter
         /// </summary>
         public void CloseDown()
