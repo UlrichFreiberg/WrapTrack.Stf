@@ -129,6 +129,7 @@
     <Compile Include="Collection\TestCase007.cs" />
     <Compile Include="Collection\TestCase012.cs" />
     <Compile Include="Collection\TestCase013.cs" />
+    <Compile Include="Collection\TestCase024.cs" />
     <Compile Include="Explore\Brands\TestCase014.cs" />
     <Compile Include="Explore\Brands\TestCase016.cs" />
     <Compile Include="Explore\Brands\TestCase015.cs" />
@@ -144,8 +145,7 @@
     <Compile Include="Upload Pictures\TestCase005.cs" />
     <Compile Include="WrapTrackTestScriptBase.cs" />
     <Compile Include="WtTestscriptUtils.cs" />
-    <Compile Include="Collection\TestCase024.cs" />
-    <Compile Include="ZDeveloperTests\XBRO\TestCaseXB001.cs" />
+    <Compile Include="Collection\TestCase020.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Collection\Data010.csv" />
@@ -182,7 +182,9 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="ZDeveloperTests\XBRO\" />
+  </ItemGroup>
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">
       <ItemGroup>
