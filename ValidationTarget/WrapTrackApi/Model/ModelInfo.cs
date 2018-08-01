@@ -39,5 +39,11 @@ namespace WrapTrack.Stf.WrapTrackApi.Model
         /// Gets or sets the prim images id.
         /// </summary>
         public string PrimImagesId { get; set; }
+
+        /// <summary>
+        /// Gets or sets the num of images.
+        /// </summary>
+        public int NumOfImages { get; set; }
+
     }
 }

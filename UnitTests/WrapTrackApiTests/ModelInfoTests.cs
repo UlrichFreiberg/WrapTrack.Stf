@@ -44,12 +44,13 @@ namespace WrapTrackApiTests
         {
             var info = wtApi.ModelInfoByModelId("34");
 
-            // { "name":"Sacher","brand":"Linuschka","numOfWraps":"2","numOfReviews":"0","primImagesId":"26773"}
+            // { "name":"Sacher","brand":"Linuschka","numOfWraps":"2","numOfReviews":"0","primImagesId":"26773","numOfImages":"1"}
             StfAssert.AreEqual("Name", "Sacher", info.Name);
             StfAssert.AreEqual("Brand", "Linuschka", info.Brand);
             StfAssert.AreEqual("NumOfWraps", 2, info.NumOfWraps);
             StfAssert.AreEqual("NumOfReviews", 0, info.NumOfReviews);
             StfAssert.AreEqual("PrimImagesId", "26773", info.PrimImagesId);
+            StfAssert.AreEqual("NumOfImages", 1, info.NumOfImages);
         }
     }
 }

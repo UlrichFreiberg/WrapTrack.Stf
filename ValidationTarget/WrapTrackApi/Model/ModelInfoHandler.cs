@@ -111,7 +111,8 @@ namespace WrapTrack.Stf.WrapTrackApi.Model
                     Brand = info["brand"]?.ToString(),
                     NumOfWraps = GetInteger(info["numOfWraps"]?.ToString()),
                     NumOfReviews = GetInteger(info["numOfReviews"]?.ToString()),
-                    PrimImagesId = info["primImagesId"]?.ToString()
+                    PrimImagesId = info["primImagesId"]?.ToString(),
+                    NumOfImages = GetInteger(info["numOfImages"]?.ToString())
                 };
 
                 retVal = bent;
