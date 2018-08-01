@@ -52,13 +52,14 @@ namespace WrapTrackWebTests.Collection
         }
 
         /// <summary>
-        /// Wrap Visits Test. Send a wrap on holiday that is not álready on holiday 
+        /// Upload Model Picture
         /// </summary>
         /// <remarks>
-        /// Create a new wrap. 
-        /// Search for this wrap
-        /// Send it on Holiday
-        /// Find the wrap again and check if its on holiday 
+        /// Login 
+        /// Find a random model 
+        /// Upload a picture
+        /// one more image is related to the model
+        /// one more image is related to the brand  
         /// </remarks>
         [TestMethod]
         public void Tc020()
