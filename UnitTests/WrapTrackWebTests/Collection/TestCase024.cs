@@ -12,12 +12,12 @@ namespace WrapTrackWebTests.Collection
 {
     using Microsoft.VisualStudio.TestTools.UnitTesting;
 
+    using WrapTrack.Stf.WrapTrackApi.Interfaces;
     using WrapTrack.Stf.WrapTrackWeb.Interfaces;
     using WrapTrack.Stf.WrapTrackWeb.Interfaces.Me;
 
     /// <summary>
     /// The test case 024.
-    /// Upload a model picture
     /// </summary>
     [TestClass]
     public class TestCase024 : WrapTrackTestScriptBase
@@ -73,10 +73,25 @@ namespace WrapTrackWebTests.Collection
 
             StfAssert.IsNotNull("Check if wraptoSendOnVisit is null", wraptoSendOnVisit);
 
-            // press the top menu tab
-            var buttonClicked = WrapTrackShell.WebAdapter.ButtonClickById("but_adm_pic");
+            // Move to the new wrap
+            var wrapToSendOnHoliday = WrapTrackShell.GetToWrap(newWrapWtId);
+            var recipient = GetAnotherUser();
 
-            StfAssert.IsNotNull("check if but_adm_pic has been clicked", buttonClicked);
+            // Send wrap away on holiday
+            wrapToSendOnHoliday.SendAwayTemporarily(SendAwayReason.Holiday, recipient);
+
+            // Validate the the wrap indeed is on holiday
+            var wtApi = Get<IWtApi>();
+
+            StfAssert.IsNotNull("wtApi is not null", wtApi);
+
+            var wrapInfo = wtApi.WrapInfoByTrackId(newWrapWtId);
+            var userId = wtApi.UserId(recipient);
+
+            StfLogger.LogInfo("The recipient user name, user id attempted is {0},{1} and userid from wrapInfo API is {1}", recipient, userId, wrapInfo.VisitingUserId);
+
+            StfAssert.IsTrue("Wrap is on holiday", wrapInfo.OnHoliday);
+            StfAssert.AreEqual("recipient userid is same as VisitingUserId in wrap", userId, wrapInfo.VisitingUserId);
         }
     }
 }
