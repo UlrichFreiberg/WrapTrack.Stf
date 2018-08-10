@@ -82,9 +82,9 @@ namespace WrapTrackWebTests.Collection
             // Send wrap away on holiday
             wrapToSendOnHoliday.SendAwayTemporarily(SendAwayReason.Holiday, recipient);
 
-            var isNewsAbooutWrapSentOnHoliday = IsNewsAbooutWrapSentOnHoliday(newWrapWtId, WrapTrackShell.CurrentLoggedInUser, recipient);
+            var isNewsAboutWrapSentOnHoliday = IsNewsAboutWrapSentOnHoliday(newWrapWtId, WrapTrackShell.CurrentLoggedInUser, recipient);
 
-            StfAssert.IsTrue("Is there news that the wrap is sent on holiday", isNewsAbooutWrapSentOnHoliday);
+            StfAssert.IsTrue("Is there news that the wrap is sent on holiday", isNewsAboutWrapSentOnHoliday);
         }
 
         /// <summary>
@@ -102,7 +102,7 @@ namespace WrapTrackWebTests.Collection
         /// <returns>
         /// The <see cref="bool"/>.
         /// </returns>
-        private bool IsNewsAbooutWrapSentOnHoliday(string wrapWtId, string sender, string recipient)
+        private bool IsNewsAboutWrapSentOnHoliday(string wrapWtId, string sender, string recipient)
         {
             // set the profile context so we can navigate to the news page afterwards 
             // Not sure why, but if we dont have this call in here the buttonclickbyid below doesn't find the navigation item
