@@ -12,7 +12,10 @@ namespace WrapTrackWebTests.Collection
 {
     using Microsoft.VisualStudio.TestTools.UnitTesting;
 
+    using OpenQA.Selenium;
+
     using WrapTrack.Stf.WrapTrackWeb.Interfaces;
+    using WrapTrack.Stf.WrapTrackWeb.Interfaces.Me;
 
     /// <summary>
     /// The test case 025.
@@ -21,11 +24,6 @@ namespace WrapTrackWebTests.Collection
     [TestClass]
     public class TestCase025 : WrapTrackTestScriptBase
     {
-        /// <summary>
-        /// The number of news Items.
-        /// </summary>
-        private int numberOfNewsItems;
-
         /// <summary>
         /// The test initialize.
         /// </summary>
@@ -56,52 +54,76 @@ namespace WrapTrackWebTests.Collection
         [TestMethod]
         public void Tc025()
         {
-            StfAssert.IsNotNull("wrapTrackShell", WrapTrackShell);
+            // Set up user context for actual test
+            // Use default user
+            WrapTrackShell.Login();
 
-            var signUp = WrapTrackShell.SignUp();
+            // Add a new wrap and check for a news item
+            AddWrapAndCheckForNewsAboutNewWrap();
 
-            StfAssert.IsTrue("new user signed up", signUp);
-
-            var me = WrapTrackShell.Me();
-
-            StfAssert.IsNotNull("me", me);
-
-            var oldNumberOfNewsItems = this.GetNumberOfNewsItems();
-
-            var collection = me.GetCollection();
-
-            StfAssert.IsNotNull("Got my collection", collection);
-
-            var newWrapWtId1 = collection.AddWrap();
-
-            StfAssert.IsNotNull("new Wrap Id1 is not null", newWrapWtId1);
-
-            collection = me.GetCollection();
-
-            StfAssert.IsNotNull("Got my collection", collection);
-
-            var newWrapWtId2 = collection.AddWrap();
-
-            StfAssert.IsNotNull("new Wrap Id2 is not null", newWrapWtId2);
-
-            var newNumberOfNewsItems = this.GetNumberOfNewsItems();
-
-            StfAssert.AreEqual(
-                "difference in Number of news items must be 2",
-                newNumberOfNewsItems - oldNumberOfNewsItems,
-                2);
+            // Add another new wrap and check for a news item
+            AddWrapAndCheckForNewsAboutNewWrap();
         }
 
         /// <summary>
-        /// The get number of news items.
-        /// Goto News Tab and count number of entries 
+        /// The add wrap and check for news about new wrap.
         /// </summary>
-        /// <returns>
-        /// The <see cref="int"/>.
-        /// </returns>
-        private int GetNumberOfNewsItems()
+        private void AddWrapAndCheckForNewsAboutNewWrap()
         {
-            return numberOfNewsItems += 2;
+            var me = this.WrapTrackShell.Me();
+
+            this.StfAssert.IsNotNull("WrapTrackShell", this.WrapTrackShell);
+            this.StfAssert.IsInstanceOfType("me", me, typeof(IMeProfile));
+
+            var collection = me.GetCollection();
+
+            this.StfAssert.IsNotNull("Got my collection", collection);
+
+            var newWrapWtId = collection.AddWrap();
+
+            this.StfAssert.IsNotNull("new Wrap Id1 is not null", newWrapWtId);
+
+            var isNewsAboutNewWrap = this.IsNewsAboutNewWrap(newWrapWtId, this.WrapTrackShell.CurrentLoggedInUser);
+
+            this.StfAssert.IsTrue("Is there news that the wrap has been registered", isNewsAboutNewWrap);
+        }
+
+        /// <summary>
+        /// The is news about new wrap being registered
+        /// </summary>
+        /// <param name="wrapWtId">
+        /// The new wrap wt id.
+        /// </param>
+        /// <param name="registrar">
+        /// The registrar of the wrap
+        /// </param>
+        /// <returns>
+        /// The <see cref="bool"/>.
+        /// </returns>
+        private bool IsNewsAboutNewWrap(string wrapWtId, string registrar)
+        {
+            // set the profile context so we can navigate to the news page afterwards 
+            // Not sure why, but if we dont have this call in here the buttonclickbyid below doesn't find the navigation item
+            WrapTrackShell.Me();
+
+            // navigate to the news page 
+            // Click tab page News
+            WrapTrackShell.WebAdapter.ButtonClickById("nav_home");
+
+            var newsElements = WrapTrackShell.WebAdapter.FindElements(By.Id("vikle_oprettet"));
+
+            foreach (var newsElement in newsElements)
+            {
+                var newsAboutNewWrapText = newsElement.Text;
+                if (newsAboutNewWrapText.Contains(registrar)
+                    &&
+                    newsAboutNewWrapText.Contains(wrapWtId))
+                {
+                    return true;
+                }
+            }
+
+            return false;
         }
     }
 }
