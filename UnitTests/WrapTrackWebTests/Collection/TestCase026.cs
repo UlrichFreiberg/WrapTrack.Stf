@@ -12,6 +12,8 @@ namespace WrapTrackWebTests.Collection
 {
     using Microsoft.VisualStudio.TestTools.UnitTesting;
 
+    using OpenQA.Selenium;
+
     using WrapTrack.Stf.WrapTrackWeb.Interfaces;
     using WrapTrack.Stf.WrapTrackWeb.Interfaces.Me;
 
@@ -80,9 +82,9 @@ namespace WrapTrackWebTests.Collection
             // Send wrap away on holiday
             wrapToSendOnHoliday.SendAwayTemporarily(SendAwayReason.Holiday, recipient);
 
-            var bb = IsNewsAbooutWrapSentOnHoliday(newWrapWtId, recipient);
+            var isNewsAbooutWrapSentOnHoliday = IsNewsAbooutWrapSentOnHoliday(newWrapWtId, WrapTrackShell.CurrentLoggedInUser, recipient);
 
-            StfAssert.IsTrue("Is there news that the wrap is sent on holiday", bb);
+            StfAssert.IsTrue("Is there news that the wrap is sent on holiday", isNewsAbooutWrapSentOnHoliday);
         }
 
         /// <summary>
@@ -91,16 +93,41 @@ namespace WrapTrackWebTests.Collection
         /// <param name="wrapWtId">
         /// The new wrap wt id.
         /// </param>
+        /// <param name="sender">
+        /// The sender.
+        /// </param>
         /// <param name="recipient">
         /// The recipient.
         /// </param>
         /// <returns>
         /// The <see cref="bool"/>.
         /// </returns>
-        private bool IsNewsAbooutWrapSentOnHoliday(string wrapWtId, string recipient)
+        private bool IsNewsAbooutWrapSentOnHoliday(string wrapWtId, string sender, string recipient)
         {
-            // TODO: get news item that this wrap has been sent to the recipient 
-            return true;
+            // set the profile context so we can navigate to the news page afterwards 
+            // Not sure why, but if we dont have this call in here the buttonclickbyid below doesn't find the navigation item
+            WrapTrackShell.Me();
+
+            // navigate to the news page 
+            // Click tab page News
+            WrapTrackShell.WebAdapter.ButtonClickById("nav_home");
+
+            var newsElements = WrapTrackShell.WebAdapter.FindElements(By.Id("vikle_ferie"));
+
+            foreach (var newsElement in newsElements)
+            {
+                var newsHolidayText = newsElement.Text;
+                if (newsHolidayText.Contains(recipient)
+                    &&
+                    newsHolidayText.Contains(wrapWtId)
+                    &&
+                    newsHolidayText.Contains(sender))
+                {
+                    return true;
+                }
+            }
+
+            return false;
         }
     }
 }
