@@ -77,7 +77,7 @@ namespace WrapTrack.Stf.WrapTrackWeb.Me
             // handle the File Upload Dialog
             WebAdapter.NativeDialogFileUpload(By.Name("userfile"), clientSideFilePath);
 
-            var submitButton = WebAdapter.FindElement(By.Id("but_upl_profile"));
+            var submitButton = WebAdapter.FindElement(By.Id("but_doupload"));
 
             submitButton.Submit();
 
