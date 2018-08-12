@@ -18,6 +18,7 @@ namespace WrapTrack.Stf.WrapTrackApi
     using WrapTrack.Stf.WrapTrackApi.Interfaces;
     using WrapTrack.Stf.WrapTrackApi.Model;
     using WrapTrack.Stf.WrapTrackApi.Pattern;
+    using WrapTrack.Stf.WrapTrackApi.User;
     using WrapTrack.Stf.WrapTrackApi.Wrap;
 
     // using https://www.newtonsoft.com/json/help/html/QueryJsonSelectTokenWithLinq.htm
@@ -169,6 +170,42 @@ namespace WrapTrack.Stf.WrapTrackApi
         {
             var brandInfo = BrandInfoByBrandId(brandId);
             var retVal = brandInfo?.NumOfModels ?? -42;
+
+            return retVal;
+        }
+
+        /// <summary>
+        /// The user name.
+        /// </summary>
+        /// <param name="userId">
+        /// The user id.
+        /// </param>
+        /// <returns>
+        /// The <see cref="string"/>.
+        /// </returns>
+        public string UserName(string userId)
+        {
+            var handler = new UserInfoHandler(StfLogger, WtApiConfiguration);
+            var userInfo = handler.UserInfoById(userId);
+            var retVal = userInfo?.UserName ?? "Unknown userId";
+
+            return retVal;
+        }
+
+        /// <summary>
+        /// The user id.
+        /// </summary>
+        /// <param name="userName">
+        /// The user name.
+        /// </param>
+        /// <returns>
+        /// The <see cref="string"/>.
+        /// </returns>
+        public string UserId(string userName)
+        {
+            var handler = new UserInfoHandler(StfLogger, WtApiConfiguration);
+            var userInfo = handler.UserInfoByUserName(userName);
+            var retVal = userInfo?.UserId ?? "Unknown user name";
 
             return retVal;
         }

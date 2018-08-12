@@ -47,9 +47,11 @@ namespace WrapTrackWebTests.Collection
             WrapTrackShell.Login();
 
             var me = WrapTrackShell.Me();
-            var collection = me.GetCollection();
 
             StfAssert.IsNotNull("Got a MeProfile", me);
+
+            var collection = me.GetCollection();
+
             StfAssert.IsNotNull("Got my collection", collection);
 
             var numBefore = collection.NumOfWraps();

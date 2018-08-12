@@ -160,5 +160,17 @@ namespace WrapTrack.Stf.WrapTrackWeb.Interfaces
         /// The <see cref="IWrap"/>.
         /// </returns>
         IWrap GetToWrap(string wrapId);
+
+        /// <summary>
+        /// The get to model.
+        /// </summary>
+        /// <param name="modelId">
+        ///     The model id.
+        /// </param>
+        /// <returns>
+        /// The <see cref="IModel"/>.
+        /// </returns>
+        IModel GetToModel(string modelId);
+
     }
 }

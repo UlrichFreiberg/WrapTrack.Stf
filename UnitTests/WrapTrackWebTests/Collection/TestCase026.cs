@@ -1,5 +1,5 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="TestCase024.cs" company="Mir Software">
+// <copyright file="TestCase026.cs" company="Mir Software">
 //   Copyright governed by Artistic license as described here:
 //          http://www.perlfoundation.org/artistic_license_2_0
 // </copyright>
@@ -12,15 +12,17 @@ namespace WrapTrackWebTests.Collection
 {
     using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-    using WrapTrack.Stf.WrapTrackApi.Interfaces;
+    using OpenQA.Selenium;
+
     using WrapTrack.Stf.WrapTrackWeb.Interfaces;
     using WrapTrack.Stf.WrapTrackWeb.Interfaces.Me;
 
     /// <summary>
-    /// The test case 024.
+    /// The test case 026.
+    /// Upload a model picture
     /// </summary>
     [TestClass]
-    public class TestCase024 : WrapTrackTestScriptBase
+    public class TestCase026 : WrapTrackTestScriptBase
     {
         /// <summary>
         /// The test initialize.
@@ -47,10 +49,10 @@ namespace WrapTrackWebTests.Collection
         /// Create a new wrap. 
         /// Search for this wrap
         /// Send it on Holiday
-        /// Find the wrap again and check if its on holiday 
+        /// Check the news that a news item has been added abpout sending the wrap on visit
         /// </remarks>
         [TestMethod]
-        public void Tc024()
+        public void Tc026()
         {
             // Set up user context for actual test
             // Use default user
@@ -80,18 +82,52 @@ namespace WrapTrackWebTests.Collection
             // Send wrap away on holiday
             wrapToSendOnHoliday.SendAwayTemporarily(SendAwayReason.Holiday, recipient);
 
-            // Validate the the wrap indeed is on holiday
-            var wtApi = Get<IWtApi>();
+            var isNewsAboutWrapSentOnHoliday = IsNewsAboutWrapSentOnHoliday(newWrapWtId, WrapTrackShell.CurrentLoggedInUser, recipient);
 
-            StfAssert.IsNotNull("wtApi is not null", wtApi);
+            StfAssert.IsTrue("Is there news that the wrap is sent on holiday", isNewsAboutWrapSentOnHoliday);
+        }
 
-            var wrapInfo = wtApi.WrapInfoByTrackId(newWrapWtId);
-            var userId = wtApi.UserId(recipient);
+        /// <summary>
+        /// The is news aboout wrap sent on holiday.
+        /// </summary>
+        /// <param name="wrapWtId">
+        /// The new wrap wt id.
+        /// </param>
+        /// <param name="sender">
+        /// The sender.
+        /// </param>
+        /// <param name="recipient">
+        /// The recipient.
+        /// </param>
+        /// <returns>
+        /// The <see cref="bool"/>.
+        /// </returns>
+        private bool IsNewsAboutWrapSentOnHoliday(string wrapWtId, string sender, string recipient)
+        {
+            // set the profile context so we can navigate to the news page afterwards 
+            // Not sure why, but if we dont have this call in here the buttonclickbyid below doesn't find the navigation item
+            WrapTrackShell.Me();
 
-            StfLogger.LogInfo("The recipient user name, user id attempted is {0},{1} and userid from wrapInfo API is {1}", recipient, userId, wrapInfo.VisitingUserId);
+            // navigate to the news page 
+            // Click tab page News
+            WrapTrackShell.WebAdapter.ButtonClickById("nav_home");
 
-            StfAssert.IsTrue("Wrap is on holiday", wrapInfo.OnHoliday);
-            StfAssert.AreEqual("recipient userid is same as VisitingUserId in wrap", userId, wrapInfo.VisitingUserId);
+            var newsElements = WrapTrackShell.WebAdapter.FindElements(By.Id("vikle_ferie"));
+
+            foreach (var newsElement in newsElements)
+            {
+                var newsHolidayText = newsElement.Text;
+                if (newsHolidayText.Contains(recipient)
+                    &&
+                    newsHolidayText.Contains(wrapWtId)
+                    &&
+                    newsHolidayText.Contains(sender))
+                {
+                    return true;
+                }
+            }
+
+            return false;
         }
     }
 }

@@ -1,5 +1,5 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="ModelInfoTests.cs" company="Mir Software">
+// <copyright file="UserInfoTests.cs" company="Mir Software">
 //   Copyright governed by Artistic license as described here:
 //          http://www.perlfoundation.org/artistic_license_2_0
 // </copyright>
@@ -17,10 +17,10 @@ namespace WrapTrackApiTests
     using WrapTrack.Stf.WrapTrackApi.Interfaces;
 
     /// <summary>
-    /// The model info tests.
+    /// The wrap info tests.
     /// </summary>
     [TestClass]
-    public class ModelInfoTests : StfTestScriptBase
+    public class UserInfoTests : StfTestScriptBase
     {
         /// <summary>
         /// The wt api.
@@ -37,20 +37,25 @@ namespace WrapTrackApiTests
         }
 
         /// <summary>
-        /// The test basic model info by model id.
+        /// The test user id.
         /// </summary>
         [TestMethod]
-        public void TestBasicModelInfoByModelId()
+        public void TestUserId()
         {
-            var info = wtApi.ModelInfoByModelId("34");
+            var userId = wtApi.UserId("Ida88");
 
-            // { "name":"Sacher","brand":"Linuschka","numOfWraps":"2","numOfReviews":"0","primImagesId":"26773","numOfImages":"1"}
-            StfAssert.AreEqual("Name", "Sacher", info.Name);
-            StfAssert.AreEqual("Brand", "Linuschka", info.Brand);
-            StfAssert.AreEqual("NumOfWraps", 2, info.NumOfWraps);
-            StfAssert.AreEqual("NumOfReviews", 0, info.NumOfReviews);
-            StfAssert.AreEqual("PrimImagesId", "26773", info.PrimImagesId);
-            StfAssert.AreEqual("NumOfImages", 1, info.NumOfImages);
+            StfAssert.StringEqualsCi("Ida/1356", "1356", userId);
+        }
+
+        /// <summary>
+        /// The test user id.
+        /// </summary>
+        [TestMethod]
+        public void TestUserName()
+        {
+            var userName = wtApi.UserName("1356");
+
+            StfAssert.StringEqualsCi("Ida/1356", "Ida88", userName);
         }
     }
 }
