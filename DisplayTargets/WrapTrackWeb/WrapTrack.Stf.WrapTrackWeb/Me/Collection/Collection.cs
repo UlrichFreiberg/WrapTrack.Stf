@@ -140,8 +140,7 @@ namespace WrapTrack.Stf.WrapTrackWeb.Me.Collection
         {
             var existingListOfWtIds = GetListOfWtIds();
 
-            WebAdapter.ButtonClickByXpath("//button[contains(@data-bind,'Collection/tilfoej_vikle')]");
-            ClickById("lin_newwrap");
+            WebAdapter.ButtonClickById("but_add_carrier");
 
             if (brand == null)
             {
@@ -153,10 +152,10 @@ namespace WrapTrack.Stf.WrapTrackWeb.Me.Collection
             SelectDropdownByIdAndText("sel_brand", brand);
             SelectDropdownByIdAndText("sel_pattern", pattern);
             SelectDropdownByIdAndText("sel_model", model);
-            SelectDropdownByIdAndText("vaelg_str", size.ToString());
+            //TODO: MISSING SelectDropdownByIdAndText("vaelg_str", size.ToString());
 
-            // add And Exit
-            if (!WebAdapter.ButtonClickById("opretvikle1knap"))
+            // Button says save - we wanna add And Exit
+            if (!WebAdapter.ButtonClickById("but_add_wrap"))
             {
                 return null;
             }

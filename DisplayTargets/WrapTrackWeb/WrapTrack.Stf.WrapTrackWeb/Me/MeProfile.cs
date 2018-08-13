@@ -77,14 +77,22 @@ namespace WrapTrack.Stf.WrapTrackWeb.Me
             // handle the File Upload Dialog
             WebAdapter.NativeDialogFileUpload(By.Name("userfile"), clientSideFilePath);
 
-            var submitButton = WebAdapter.FindElement(By.Id("but_upl_profile"));
+            var submitButton = WebAdapter.FindElement(By.Id("but_doupload"));
 
-            submitButton.Submit();
+            if (submitButton == null)
+            {
+                StfLogger.LogError("Couldn't find the upload button");
+
+                return false;
+            }
+
+            submitButton.Click();
 
             // Back to me again
-            var navBack = WebAdapter.FindElement(By.Id("nav_back_profile"));
+            var navBack = WebAdapter.FindElement(By.XPath("//baggrund_upload_billede_tilbage_knap_lang/button"));
 
             navBack.Click();
+
             return true;
         }
     }
