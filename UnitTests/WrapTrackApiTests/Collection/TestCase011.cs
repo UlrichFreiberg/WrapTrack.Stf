@@ -1,5 +1,5 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="TestCase006.cs" company="Mir Software">
+// <copyright file="TestCase011.cs" company="Mir Software">
 //   Copyright governed by Artistic license as described here:
 //          http://www.perlfoundation.org/artistic_license_2_0
 // </copyright>
@@ -15,11 +15,12 @@ namespace WrapTrackWebTests.Collection
     using WrapTrack.Stf.WrapTrackWeb.Interfaces;
 
     /// <summary>
-    /// The collection tests.
+    /// When letting a wrap pass on from one user to another 
+    /// - is it possible to choose your own date?
     /// </summary>
     [TestClass]
-    public class TestCase006 : WrapTrackTestScriptBase
-    {
+    public class TestCase011 : WrapTrackTestScriptBase
+    {    
         /// <summary>
         /// The test initialize.
         /// </summary>
@@ -27,6 +28,7 @@ namespace WrapTrackWebTests.Collection
         public void TestInitialize()
         {
             WrapTrackShell = Get<IWrapTrackWebShell>();
+            WrapTrackShell.Login();
         }
 
         /// <summary>
@@ -39,28 +41,26 @@ namespace WrapTrackWebTests.Collection
         }
 
         /// <summary>
-        /// The t c 006.
+        /// The TC007.
         /// </summary>
         [TestMethod]
-        public void Tc006()
+        public void Tc011()
         {
-            WrapTrackShell.Login();
+            var collection = GetCurrentUserCollection();
 
-            var me = WrapTrackShell.Me();
+            // Find a random wrap
+            var wrapToGo = collection.GetRandomWrap();
+            var wtId = wrapToGo.WtId;
 
-            StfAssert.IsNotNull("Got a MeProfile", me);
+            StfAssert.IsNotNull("Got a random wrap", wrapToGo);
 
-            var collection = me.GetCollection();
+            var anotherUser = GetAnotherUser(WrapTrackShell);
+            var ownershipStart = WtTestscriptUtils.TodayPlusDays(2, "yyyy-MM-dd"); 
+            var passOn = wrapToGo.PassOn(anotherUser, ownershipStart);
 
-            StfAssert.IsNotNull("Got my collection", collection);
-
-            var numBefore = collection.NumOfWraps();
-
-            collection.AddWrap("Ali Dover", "Hygge", "blue");
-
-            var numAfter = collection.NumOfWraps();
-
-            StfAssert.AreEqual("One more wrap in collection", numBefore + 1, numAfter);
+            StfAssert.IsTrue("PassedOn", passOn);
+            StfAssert.IsTrue("PassedOn Validated", ValidatePassOn(wtId, anotherUser));
+            StfAssert.IsTrue("Dummy (waiting for bug #24)", true);
         }
     }
 }

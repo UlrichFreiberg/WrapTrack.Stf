@@ -106,7 +106,6 @@ namespace WrapTrack.Stf.WrapTrackWeb.Interfaces
         /// </returns>
         bool PassOn(string nameOfReciever, string ownershipStart = null);
 
-
         /// <summary>
         /// Ask for the wrap (only possible for not-owner of wrap)
         /// </summary>

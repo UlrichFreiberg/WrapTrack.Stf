@@ -48,6 +48,8 @@ namespace WrapTrack.Stf.WrapTrackWeb
             stfContainer.RegisterType<Interfaces.FaqContact.IFaq, FaqContact.Faq>();
 
             stfContainer.RegisterType<Interfaces.IWrap, Wrap>();
+
+            stfContainer.RegisterType<Interfaces.IModel, Model>();
         }
 
         /// <summary>
