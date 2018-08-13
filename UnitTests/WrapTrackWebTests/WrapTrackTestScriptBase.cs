@@ -59,9 +59,11 @@ namespace WrapTrackWebTests
             bool addIfNone = true)
         {
             var me = wrapTrackShell.Me();
-            var collection = me.GetCollection();
 
             StfAssert.IsNotNull("Got a MeProfile", me);
+
+            var collection = me.GetCollection();
+
             StfAssert.IsNotNull("Got my collection", collection);
 
             // Be sure there is a wrap in collection. If requested
