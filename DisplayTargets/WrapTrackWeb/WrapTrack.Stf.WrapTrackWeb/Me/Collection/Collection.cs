@@ -139,6 +139,7 @@ namespace WrapTrack.Stf.WrapTrackWeb.Me.Collection
         public string AddWrap(string brand = null, string pattern = null, string model = null, int size = 6)
         {
             var existingListOfWtIds = GetListOfWtIds();
+
             WebAdapter.ButtonClickById("but_add_carrier");
 
             if (brand == null)
@@ -151,8 +152,9 @@ namespace WrapTrack.Stf.WrapTrackWeb.Me.Collection
             SelectDropdownByIdAndText("sel_brand", brand);
             SelectDropdownByIdAndText("sel_pattern", pattern);
             SelectDropdownByIdAndText("sel_model", model);
+            //TODO: MISSING SelectDropdownByIdAndText("vaelg_str", size.ToString());
 
-            // add And Exit
+            // Button says save - we wanna add And Exit
             if (!WebAdapter.ButtonClickById("but_add_wrap"))
             {
                 return null;
