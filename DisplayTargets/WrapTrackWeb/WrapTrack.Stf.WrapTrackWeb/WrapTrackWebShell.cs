@@ -169,7 +169,8 @@ namespace WrapTrack.Stf.WrapTrackWeb
             }
 
             // press the second level top menu tab - called "profile"
-            buttonClicked = WebAdapter.ButtonClickByXpath("//a[contains(@href,'/Profile/vis_profil/')]");
+            
+            buttonClicked = WebAdapter.ButtonClickById("nav_profile");
 
             var retVal = buttonClicked 
                 ? StfContainer.Get<IMeProfile>() 
