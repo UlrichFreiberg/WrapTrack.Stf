@@ -161,7 +161,7 @@ namespace WrapTrack.Stf.WrapTrackWeb
         public IMeProfile Me()
         {
             // press the top menu tab
-            var buttonClicked = WebAdapter.ButtonClickById("nav_profile");
+            var buttonClicked = WebAdapter.ButtonClickById("nav_me");
 
             if (!buttonClicked)
             {

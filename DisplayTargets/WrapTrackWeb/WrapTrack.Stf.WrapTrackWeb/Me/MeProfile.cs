@@ -10,6 +10,8 @@
 
 namespace WrapTrack.Stf.WrapTrackWeb.Me
 {
+    using System.Threading;
+
     using OpenQA.Selenium;
 
     using WrapTrack.Stf.WrapTrackWeb.Interfaces;
@@ -89,7 +91,7 @@ namespace WrapTrack.Stf.WrapTrackWeb.Me
             submitButton.Click();
 
             // Back to me again
-            var navBack = WebAdapter.FindElement(By.XPath("//baggrund_upload_billede_tilbage_knap_lang/button"));
+            var navBack = WebAdapter.FindElement(By.Id("but_back"));
 
             navBack.Click();
 
