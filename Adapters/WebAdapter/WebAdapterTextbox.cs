@@ -28,12 +28,15 @@ namespace WrapTrack.Stf.Adapters.WebAdapter
         /// <param name="textToEnter">
         /// The text to enter.
         /// </param>
+        /// <param name="handlePopup">
+        /// Some text boxes have a search popup ... This switch is default false
+        /// </param>
         /// <returns>
         /// The <see cref="bool"/>.
         /// </returns>
-        public bool TextboxSetTextById(string id, string textToEnter)
+        public bool TextboxSetTextById(string id, string textToEnter, bool handlePopup = false)
         {
-            var retVal = TextboxSetTextBy(By.Id(id), textToEnter);
+            var retVal = TextboxSetTextBy(By.Id(id), textToEnter, handlePopup);
 
             return retVal;
         }
@@ -66,10 +69,13 @@ namespace WrapTrack.Stf.Adapters.WebAdapter
         /// <param name="textToEnter">
         /// The text to enter.
         /// </param>
+        /// <param name="handlePopup">
+        /// Some text boxes have a search popup ... This switch is default false
+        /// </param>        
         /// <returns>
         /// The <see cref="bool"/>.
         /// </returns>
-        private bool TextboxSetTextBy(By by, string textToEnter)
+        private bool TextboxSetTextBy(By by, string textToEnter, bool handlePopup = false)
         {
             StfLogger.LogDebug($"Textbox : Setting text [{textToEnter}] - by=[{by}]");
             WaitForComplete(1);
@@ -87,7 +93,24 @@ namespace WrapTrack.Stf.Adapters.WebAdapter
             {
                 element.Clear();
                 element.SendKeys(textToEnter);
-                element.SendKeys(Keys.Tab);
+
+                if (handlePopup)
+                {
+                    // handle the funky suggestion popup, by selecting the first in the list
+                    var popupFirstElement = FindElement(By.XPath("//li[@class='ui-menu-item'][1]"));
+
+                    if (popupFirstElement == null)
+                    {
+                        StfLogger.LogWarning("TextboxSetTextBy: Was instructed to handle popup - but no element was found");
+                        return false;
+                    }
+
+                    popupFirstElement.Click();
+                }
+                else
+                {
+                    element.SendKeys(Keys.Tab);
+                }
             }
             catch (Exception ex)
             {

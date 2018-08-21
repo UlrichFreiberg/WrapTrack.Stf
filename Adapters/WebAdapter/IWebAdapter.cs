@@ -191,10 +191,13 @@ namespace WrapTrack.Stf.Adapters.WebAdapter
         /// <param name="textToEnter">
         /// The text to enter.
         /// </param>
+        /// <param name="handlePopup">
+        /// Some text boxes have a search popup ... This switch is default false
+        /// </param>
         /// <returns>
         /// The <see cref="bool"/>.
         /// </returns>
-        bool TextboxSetTextById(string id, string textToEnter);
+        bool TextboxSetTextById(string id, string textToEnter, bool handlePopup = false);
 
         /// <summary>
         /// The textbox set text by xpath.
