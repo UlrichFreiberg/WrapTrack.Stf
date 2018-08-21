@@ -67,31 +67,30 @@ namespace WrapTrackWebTests.Collection
             StfAssert.IsNotNull("check if me.GetCollection null", wrapCollection);
 
             var newWrapWtId = wrapCollection.AddWrap();
+            var wtApi = Get<IWtApi>();
+            var wrapInfoBefore = wtApi.WrapInfoByTrackId(newWrapWtId);
+            var internalId = wrapInfoBefore.InternalId;
 
             // Move to the new wrap
-            //var wraptoSendOnVisit = WrapTrackShell.GetToWrap(newWrapWtId);
+            var wraptoSendOnVisit = WrapTrackShell.GetToWrap(internalId);
 
-            //StfAssert.IsNotNull("Check if wraptoSendOnVisit is null", wraptoSendOnVisit);
+           // StfAssert.IsNotNull("Check if wraptoSendOnVisit is null", wraptoSendOnVisit);
 
             // Move to the new wrap
-            var wrapToSendOnHoliday = Get<IWrap>();
+           // var wraptoSendOnVisit = WrapTrackShell.GetToWrap(newWrapWtId);
             var recipient = GetAnotherUser();
 
             // Send wrap away on holiday
-            wrapToSendOnHoliday.SendAwayTemporarily(SendAwayReason.Holiday, recipient);
+            wraptoSendOnVisit.SendAwayTemporarily(SendAwayReason.Holiday, recipient);
 
             // Validate the the wrap indeed is on holiday
-            var wtApi = Get<IWtApi>();
-
-            StfAssert.IsNotNull("wtApi is not null", wtApi);
-
-            var wrapInfo = wtApi.WrapInfoByTrackId(newWrapWtId);
+            var wrapInfoAfter = wtApi.WrapInfoByTrackId(newWrapWtId);
             var userId = wtApi.UserId(recipient);
 
-            StfLogger.LogInfo("The recipient user name, user id attempted is {0},{1} and userid from wrapInfo API is {1}", recipient, userId, wrapInfo.VisitingUserId);
+            StfLogger.LogInfo("The recipient user name, user id attempted is {0},{1} and userid from wrapInfo API is {1}", recipient, userId, wrapInfoAfter.VisitingUserId);
 
-            StfAssert.IsTrue("Wrap is on holiday", wrapInfo.OnHoliday);
-            StfAssert.AreEqual("recipient userid is same as VisitingUserId in wrap", userId, wrapInfo.VisitingUserId);
+            StfAssert.IsTrue("Wrap is on holiday", wrapInfoAfter.OnHoliday);
+            StfAssert.AreEqual("recipient userid is same as VisitingUserId in wrap", userId, wrapInfoAfter.VisitingUserId);
         }
     }
 }

@@ -108,12 +108,11 @@ namespace WrapTrack.Stf.WrapTrackWeb
                 return false;
             }
 
-            if (!WebAdapter.TextboxSetTextById("inputBrugerSoeg", username))
+            if (!WebAdapter.TextboxSetTextById("inputBrugerSoeg", username, true))
             {
                 StfLogger.LogDebug("Couldn't set brugerSoeg text");
                 return false;
             }
-
 
             // click the select user button
             if (!WebAdapter.ButtonClickById("but_selUser"))
@@ -183,7 +182,7 @@ namespace WrapTrack.Stf.WrapTrackWeb
             WebAdapter.ButtonClickByXpath(xPath);
 
             // now chose the recipient
-            WebAdapter.TextboxSetTextById("inputBrugerSoeg_ferievikle", recipient);
+            WebAdapter.TextboxSetTextById("inputBrugerSoeg_ferievikle", recipient, true);
             WebAdapter.ButtonClickById("but_chooseUser");
 
             // press ok

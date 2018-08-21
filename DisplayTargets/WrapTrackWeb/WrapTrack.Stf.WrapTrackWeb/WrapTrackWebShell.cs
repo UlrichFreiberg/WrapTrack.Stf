@@ -281,7 +281,7 @@ namespace WrapTrack.Stf.WrapTrackWeb
         public IWrap GetToWrap(string wrapId)
         {
             var baseUrl = WtConfiguration.Url;
-            var wrapIdUrl = $"{baseUrl}wrap/{wrapId}";
+            var wrapIdUrl = $"{baseUrl}Collection/wrap/{wrapId}";
 
             WebAdapter.OpenUrl(wrapIdUrl);
 
