@@ -168,8 +168,11 @@ namespace WrapTrack.Stf.WrapTrackWeb
                 return null;
             }
 
+            // when number of wraps is high, the rendering might take some time...
+            // TODO: Implement using Selenium Waiter
+            WebAdapter.WaitForComplete(5);
+
             // press the second level top menu tab - called "profile"
-            
             buttonClicked = WebAdapter.ButtonClickById("nav_profile");
 
             var retVal = buttonClicked 
@@ -187,8 +190,7 @@ namespace WrapTrack.Stf.WrapTrackWeb
         /// </returns>
         public IExplore Explore()
         {
-            // WebAdapter.Click(By.Id("nav_expl"));
-            var clicked = WebAdapter.ButtonClickByXpath("//a[normalize-space()='Explore']");
+            var clicked = WebAdapter.ButtonClickById("nav_explore");
             var retVal = clicked 
                        ? StfContainer.Get<IExplore>()
                        : null;

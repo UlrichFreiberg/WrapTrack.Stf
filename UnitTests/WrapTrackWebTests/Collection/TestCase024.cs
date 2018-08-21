@@ -69,12 +69,12 @@ namespace WrapTrackWebTests.Collection
             var newWrapWtId = wrapCollection.AddWrap();
 
             // Move to the new wrap
-            var wraptoSendOnVisit = WrapTrackShell.GetToWrap(newWrapWtId);
+            //var wraptoSendOnVisit = WrapTrackShell.GetToWrap(newWrapWtId);
 
-            StfAssert.IsNotNull("Check if wraptoSendOnVisit is null", wraptoSendOnVisit);
+            //StfAssert.IsNotNull("Check if wraptoSendOnVisit is null", wraptoSendOnVisit);
 
             // Move to the new wrap
-            var wrapToSendOnHoliday = WrapTrackShell.GetToWrap(newWrapWtId);
+            var wrapToSendOnHoliday = Get<IWrap>();
             var recipient = GetAnotherUser();
 
             // Send wrap away on holiday

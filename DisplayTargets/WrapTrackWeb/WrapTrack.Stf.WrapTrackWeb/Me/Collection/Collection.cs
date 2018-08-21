@@ -146,19 +146,23 @@ namespace WrapTrack.Stf.WrapTrackWeb.Me.Collection
             {
                 brand = "Didymos";
                 pattern = "Nino";
-                model = "Balu";
+                model = "Blau";
             }
 
             SelectDropdownByIdAndText("sel_brand", brand);
             SelectDropdownByIdAndText("sel_pattern", pattern);
             SelectDropdownByIdAndText("sel_model", model);
-            //TODO: MISSING SelectDropdownByIdAndText("vaelg_str", size.ToString());
+            SelectDropdownByIdAndText("selWrapSize", size.ToString());
 
             // Button says save - we wanna add And Exit
             if (!WebAdapter.ButtonClickById("but_add_wrap"))
             {
                 return null;
             }
+
+            // TODO: the insert of the wrap might take some time...
+            // TODO: Implement using Selenium Waiter
+            WebAdapter.WaitForComplete(3);
 
             // gotta fix that after adding a wrap the wrap itself is shown
             // not the collection as it used to

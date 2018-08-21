@@ -114,6 +114,7 @@ namespace WrapTrack.Stf.WrapTrackWeb
                 return false;
             }
 
+
             // click the select user button
             if (!WebAdapter.ButtonClickById("but_selUser"))
             {
@@ -134,7 +135,7 @@ namespace WrapTrack.Stf.WrapTrackWeb
             }
 
             // answer the R U sure
-            if (!WebAdapter.ButtonClickById("but_selUser"))
+            if (!WebAdapter.ButtonClickById("but_goPassOn"))
             {
                 StfLogger.LogDebug("Couldn't press R-U-Sure button");
                 return false;

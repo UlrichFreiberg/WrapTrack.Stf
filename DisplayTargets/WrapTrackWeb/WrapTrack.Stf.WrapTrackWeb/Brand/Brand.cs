@@ -94,16 +94,25 @@ namespace WrapTrack.Stf.WrapTrackWeb.Brand
         /// </returns>
         public bool AddPattern(string patternName)
         {
-            const string AddPatternXpath = "//span/span[text()='Add pattern']";
-            var retVal = WebAdapter.ButtonClickByXpath(AddPatternXpath);
+            //const string AddPatternXpath = "//span/span[text()='Add pattern']";
+            //var retVal = WebAdapter.ButtonClickByXpath(AddPatternXpath);
+            var retVal = WebAdapter.ButtonClickById("addPattern");
 
             if (!retVal)
             {
                 return false;
             }
 
-            const string PatternNameXpath = "//p/input";
-            retVal = WebAdapter.TextboxSetTextByXpath(PatternNameXpath, patternName);
+            //const string PatternNameXpath = "//p/input";
+            // retVal = WebAdapter.TextboxSetTextByXpath(PatternNameXpath, patternName);
+            retVal = WebAdapter.TextboxSetTextById("inNameNewPattern", patternName);
+
+            if (!retVal)
+            {
+                return false;
+            }
+
+            retVal = WebAdapter.ButtonClickById("add");
 
             if (!retVal)
             {
@@ -111,13 +120,6 @@ namespace WrapTrack.Stf.WrapTrackWeb.Brand
             }
 
             retVal = WebAdapter.ButtonClickById("create");
-
-            if (!retVal)
-            {
-                return false;
-            }
-
-            retVal = WebAdapter.ButtonClickById("Done");
 
             return retVal;
         }

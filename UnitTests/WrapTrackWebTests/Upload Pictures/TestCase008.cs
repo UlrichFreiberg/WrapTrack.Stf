@@ -63,7 +63,7 @@ namespace WrapTrackWebTests.Upload_Pictures
             myWrap.UploadWrapImage(pathToNewImage);
 
             // Find number of pictures after upload 
-            Wait(TimeSpan.FromSeconds(5));
+            Wait(TimeSpan.FromSeconds(3));
             var afterWrapPic = GetNumberOfPictures(validationTarget, wtId);
             var newNumWrapPic = beforeWrapPic + 1;
 

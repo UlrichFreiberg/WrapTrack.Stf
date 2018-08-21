@@ -38,7 +38,9 @@ namespace WrapTrack.Stf.WrapTrackWeb.Explore
         /// </returns>
         public IWraps Wraps()
         {
-            var gone = GoMenu("wraps");
+            //var gone = GoMenu("wraps");
+            WebAdapter.ButtonClickById("nav_explore"); 
+            var gone = WebAdapter.ButtonClickById("nav_wraps"); 
             var retVal = gone
                        ? Get<IWraps>()
                        : default(IWraps);
@@ -54,7 +56,9 @@ namespace WrapTrack.Stf.WrapTrackWeb.Explore
         /// </returns>
         public IBrands Brands()
         {
-            var gone = GoMenu("brands");
+            //var gone = GoMenu("brands");
+            WebAdapter.ButtonClickById("nav_explore");
+            var gone = WebAdapter.ButtonClickById("nav_brands");
             var retVal = gone
                        ? Get<IBrands>()
                        : default(IBrands);
