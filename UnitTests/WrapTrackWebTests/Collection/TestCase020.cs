@@ -12,6 +12,7 @@ namespace WrapTrackWebTests.Collection
 {
     using Microsoft.VisualStudio.TestTools.UnitTesting;
 
+    using WrapTrack.Stf.WrapTrackApi.Interfaces;
     using WrapTrack.Stf.WrapTrackWeb.Interfaces;
     using WrapTrack.Stf.WrapTrackWeb.Interfaces.Me;
 
@@ -21,25 +22,13 @@ namespace WrapTrackWebTests.Collection
     [TestClass]
     public class TestCase020 : WrapTrackTestScriptBase
     {
-        /// <summary>
-        /// The number of brand images.
-        /// </summary>
-        private int numberOfBrandImages;
-
-        /// <summary>
-        /// The number of model images.
-        /// </summary>
-        private int numberOfModelImages;
-
-        /// <summary>
+         /// <summary>
         /// The test initialize.
         /// </summary>
         [TestInitialize]
         public void TestInitialize()
         {
             WrapTrackShell = Get<IWrapTrackWebShell>();
-            numberOfBrandImages = 42;
-            numberOfModelImages = 17;
         }
 
         /// <summary>
@@ -74,6 +63,9 @@ namespace WrapTrackWebTests.Collection
             StfAssert.IsInstanceOfType("me", me, typeof(IMeProfile));
 
             var modelId = GetRandomModelId();
+            var wtApi = Get<IWtApi>();
+            var modelInfoBefore = wtApi.ModelInfoByModelId(modelId);
+            var oldNumberOfModelImages = modelInfoBefore.NumOfImages;
 
             // TODO: Check also for Empty String e.g.
             // StfAssert.IsEmptyString("modelId", modelId)
@@ -83,16 +75,15 @@ namespace WrapTrackWebTests.Collection
 
             StfAssert.IsNotNull("modelToGet", modelToGet);
 
-            var oldNumberOfModelImages = GetNumberOfModelImages(modelId);
-            var oldNumberOfBrandImages = GetNumberOfBrandImages(modelId);
-
             modelToGet.UploadPicture(@"C:\temp\Stf\Images\WT.jpg");
 
-            var newNmberOfModelImages = GetNumberOfModelImages(modelId);
-            var newNumberOfBrandImages = GetNumberOfBrandImages(modelId);
+            var modelInfoAfter = wtApi.ModelInfoByModelId(modelId);
+            var newNmberOfModelImages = modelInfoAfter.NumOfImages;
 
-            StfAssert.GreaterThan("Check if number of model images has increased", newNmberOfModelImages, oldNumberOfModelImages);
-            StfAssert.GreaterThan("Check if number of brand images has increased", newNumberOfBrandImages, oldNumberOfBrandImages);
+            StfAssert.AreEqual(
+                "Check if number of model images has increased",
+                oldNumberOfModelImages + 1,
+                newNmberOfModelImages);
         }
 
         /// <summary>
@@ -104,34 +95,6 @@ namespace WrapTrackWebTests.Collection
         private string GetRandomModelId()
         {
             return "15890";
-        }
-
-        /// <summary>
-        /// The get number of brand images.
-        /// </summary>
-        /// <param name="modelId">
-        /// The model id.
-        /// </param>
-        /// <returns>
-        /// The <see cref="int"/>.
-        /// </returns>
-        private int GetNumberOfBrandImages(string modelId)
-        {
-            return numberOfBrandImages++;
-        }
-
-        /// <summary>
-        /// The get number of model images.
-        /// </summary>
-        /// <param name="modelId">
-        /// The model id.
-        /// </param>
-        /// <returns>
-        /// The <see cref="int"/>.
-        /// </returns>
-        private int GetNumberOfModelImages(string modelId)
-        {
-            return numberOfModelImages++;
         }
     }
 }
