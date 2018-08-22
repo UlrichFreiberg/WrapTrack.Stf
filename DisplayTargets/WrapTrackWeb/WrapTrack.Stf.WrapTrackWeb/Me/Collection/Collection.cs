@@ -140,7 +140,10 @@ namespace WrapTrack.Stf.WrapTrackWeb.Me.Collection
         {
             var existingListOfWtIds = GetListOfWtIds();
 
-            WebAdapter.ButtonClickById("but_add_carrier");
+            // TODO: Is now related to English language
+            var typeCarrier = "woven wrap";
+
+            WebAdapter.ButtonClickById("but_add_carrier");           
 
             if (brand == null)
             {
@@ -149,6 +152,7 @@ namespace WrapTrack.Stf.WrapTrackWeb.Me.Collection
                 model = "Blau";
             }
 
+            SelectDropdownByIdAndText("selTypeCarrier", typeCarrier);
             SelectDropdownByIdAndText("sel_brand", brand);
             SelectDropdownByIdAndText("sel_pattern", pattern);
             SelectDropdownByIdAndText("sel_model", model);
@@ -167,7 +171,7 @@ namespace WrapTrack.Stf.WrapTrackWeb.Me.Collection
             // gotta fix that after adding a wrap the wrap itself is shown
             // not the collection as it used to
             var me = WrapTrackWebShell.Me();
-            var collection = me.GetCollection();
+            me.GetCollection();
             var newListOfWtIds = GetListOfWtIds();
             var diffList = newListOfWtIds.Except(existingListOfWtIds);
             var enumerable = diffList as string[] ?? diffList.ToArray();
@@ -271,27 +275,6 @@ namespace WrapTrack.Stf.WrapTrackWeb.Me.Collection
             }
 
             return retVal;
-        }
-
-        /// <summary>
-        /// The click by id.
-        /// </summary>
-        /// <param name="id">
-        /// The id.
-        /// </param>
-        private void ClickById(string id)
-        {
-            var elem = WebAdapter.FindElement(By.Id(id));
-
-            try
-            {
-                elem.Click();
-            }
-            catch
-            {
-                WebAdapter.MoveToElement(elem);
-                elem.Click();
-            }
         }
 
         /// <summary>
