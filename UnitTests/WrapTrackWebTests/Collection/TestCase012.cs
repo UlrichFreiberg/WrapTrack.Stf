@@ -12,6 +12,9 @@ namespace WrapTrackWebTests.Collection
 {
     using Microsoft.VisualStudio.TestTools.UnitTesting;
 
+    using OpenQA.Selenium;
+
+    using WrapTrack.Stf.WrapTrackApi.Interfaces;
     using WrapTrack.Stf.WrapTrackWeb.Interfaces;
 
     /// <summary>
@@ -51,28 +54,38 @@ namespace WrapTrackWebTests.Collection
             var collection = GetCurrentUserCollection();
 
             // Find a random wrap
-            var wrapToGo = collection.GetRandomWrap(); 
-            var wtId = wrapToGo.WtId;
+            var wrapToGo = collection.GetRandomWrap();
+            var wtId = wrapToGo.WtId; 
+            var wtApi = Get<IWtApi>();
+            var wrapInfo = wtApi.WrapInfoByTrackId(wtId);
+            var internalId = wrapInfo.InternalId;
 
             WrapTrackShell.Logout();
 
             // user #2 want the wrap
             var anotherUser = GetAnotherUser(WrapTrackShell);
+            
+            // TODO: pw should not be hardcoded
+            WrapTrackShell.Login(anotherUser, "wraptrack4ever");
 
-            WrapTrackShell.Login(anotherUser);
-
-            var desiredWrap = WrapTrackShell.GetToWrap(wtId);
+            // Move to the new wrap
+            var desiredWrap = WrapTrackShell.GetToWrap(internalId);
 
             desiredWrap.AskFor();
             WrapTrackShell.Logout();
 
             // User #1: Lets wrap go
             WrapTrackShell.Login(); // Default user
+            WrapTrackShell.Me();
 
-            // TODO:Assert: Der er en anmodning på nyhedssiden, hvor man lander efter login 
-            // TODO:Vises ved link med teksten 'You have 1 pending request' (evt X pending requests)
+            // navigate to the news page - and then to request page
+            WrapTrackShell.WebAdapter.ButtonClickById("nav_home");
+            WrapTrackShell.WebAdapter.ButtonClickById("navRequests");
 
-            // TODO:Bruger klikker og kommer til request side, hvor hun godkender reqest fra bruger #2
+            // TODO: Finish this scrip when Wraptrack fix bug
+            var testNoRequests = WrapTrackShell.WebAdapter.FindElement(By.Id("textNoRequests"));
+            var respons = testNoRequests.Displayed; 
+            StfAssert.IsFalse("Dont want to hear 'no pending requests'", respons);
         }
     }
 }
