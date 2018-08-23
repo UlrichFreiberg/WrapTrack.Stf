@@ -82,9 +82,10 @@ namespace WrapTrackWebTests.Collection
             WrapTrackShell.WebAdapter.ButtonClickById("nav_home");
             WrapTrackShell.WebAdapter.ButtonClickById("navRequests");
 
-            // TODO: Finish this scrip when Wraptrack fix bug
             var testNoRequests = WrapTrackShell.WebAdapter.FindElement(By.Id("textNoRequests"));
-            var respons = testNoRequests.Displayed; 
+            var respons = testNoRequests.Displayed;
+            
+            StfAssert.MissingImplementation("Finish this script when Wraptrack fix bug");
             StfAssert.IsFalse("Dont want to hear 'no pending requests'", respons);
         }
     }
