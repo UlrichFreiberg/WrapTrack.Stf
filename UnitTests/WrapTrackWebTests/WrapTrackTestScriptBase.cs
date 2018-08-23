@@ -133,11 +133,11 @@ namespace WrapTrackWebTests
         {
             var currentShell = wrapTrackWebShell ?? WrapTrackShell;
             var currentUser = currentShell.CurrentLoggedInUser;
-            var retVal = "pstadel";
+            var retVal = "mie88";
 
-            if (currentUser.Equals("pstadel", StringComparison.InvariantCultureIgnoreCase))
+            if (currentUser.Equals("mie88", StringComparison.InvariantCultureIgnoreCase))
             {
-                retVal = "pstadel";
+                retVal = "ida88";
             }
 
             return retVal;
