@@ -140,7 +140,7 @@ namespace WrapTrack.Stf.WrapTrackWeb.Me.Collection
         {
             var existingListOfWtIds = GetListOfWtIds();
 
-            // TODO: Is now related to English language
+            //TODO: Is now related to English language
             var typeCarrier = "woven wrap";
 
             WebAdapter.ButtonClickById("but_add_carrier");           

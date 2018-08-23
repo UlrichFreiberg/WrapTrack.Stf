@@ -133,6 +133,12 @@
     <Compile Include="Interfaces\Me\IMeReviews.cs" />
     <Compile Include="Interfaces\Me\IMeSettings.cs" />
     <Compile Include="MenuManager.cs" />
+    <Compile Include="Me\Collection\CarrierManagement\AddCarrier.cs" />
+    <Compile Include="Me\Collection\CarrierManagement\CarrierBaseClass.cs" />
+    <Compile Include="Me\Collection\CarrierManagement\RingSling.cs" />
+    <Compile Include="Me\Collection\CarrierManagement\Other.cs" />
+    <Compile Include="Me\Collection\CarrierManagement\WowenWrap.cs" />
+    <Compile Include="Me\Collection\CarrierManagement\StretchyWrap.cs" />
     <Compile Include="Me\Collection\DeleteWrapOption.cs" />
     <Compile Include="Model.cs" />
     <Compile Include="Wrap.cs" />
