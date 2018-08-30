@@ -18,7 +18,7 @@ namespace WrapTrack.Stf.WrapTrackWeb.Me.Collection.CarrierManagement
         /// <summary>
         /// Gets or sets a value indicating whether home made.
         /// </summary>
-        public bool HomeMade { get; set;
+        public bool HomeMade { get; set; }
 
         /// <summary>
         /// Gets or sets name of home made wrap.
