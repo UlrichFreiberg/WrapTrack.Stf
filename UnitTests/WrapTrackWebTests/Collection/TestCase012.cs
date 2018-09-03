@@ -10,6 +10,8 @@
 
 namespace WrapTrackWebTests.Collection
 {
+    using System;
+
     using Microsoft.VisualStudio.TestTools.UnitTesting;
 
     using OpenQA.Selenium;
@@ -87,14 +89,37 @@ namespace WrapTrackWebTests.Collection
             
             StfAssert.IsFalse("Dont want to hear 'no pending requests'", respons);
 
-            StfAssert.MissingImplementation("Finish: Steps below");
+            // On actual page: Find button id="butAcceptReq". But be sure it's the right button.  
+            var xPath = $"//a[text()='{wtId}']/../../../../../..//button[@id='butAcceptReq']";
+            var retVal = WrapTrackShell.WebAdapter.Click(By.XPath(xPath));
 
-            // On actual page: Find button id="butAcceptReq". But be sure it's the right button. Link above the button must be related to wrap named <wtId> (see text related to link 'lin_wrap'). 
+            if (!retVal)
+            {
+                StfAssert.IsFalse("Accept button not found", true);
+            }
+
+            // var xPath2 = "//button[@id='butDoReq']";
+            var xPath2 = $"//a[text()='{wtId}']/../../../../../..//button[@id='butDoReq']";
+            var retVal2 = WrapTrackShell.WebAdapter.Click(By.XPath(xPath2));
+
             // Click to accept the request
-            // Find button 'Are you sure?' (id="butDoRequest")
+            if (!retVal2)
+            {
+                StfAssert.IsFalse("Do-it button not found", true);
+            }
+
             // Assert: The link to <wtId> is gone (request handled)
-            // Log on as user #2 one more time: WrapTrackShell.Login(anotherUser, "wraptrack4ever");
-            // Assert: On laning page (users collection) is a link (id="lin_wrap") to  <wtId>  (user #2 is now the owner)
+            Wait(TimeSpan.FromSeconds(1));
+            var xPath3 = $"//a[text()='{wtId}']"; 
+            var retVal3 = WrapTrackShell.WebAdapter.FindElement(By.XPath(xPath3));
+            StfAssert.IsNull("Reqest is gone", retVal3);
+
+            // Assert: New owner is user#2
+            var validationTarget = Get<IWtApi>();
+            var wrapInfoAfter = validationTarget.WrapInfoByTrackId(wtId);
+            var newOwnerName = wrapInfoAfter.OwnerName;
+
+            StfAssert.AreEqual("User #2 is new owner", newOwnerName, anotherUser);
         }
     }
 }
