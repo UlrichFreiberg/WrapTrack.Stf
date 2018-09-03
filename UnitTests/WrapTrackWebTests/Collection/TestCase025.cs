@@ -110,7 +110,7 @@ namespace WrapTrackWebTests.Collection
             // Click tab page News
             WrapTrackShell.WebAdapter.ButtonClickById("nav_home");
 
-            var newsElements = WrapTrackShell.WebAdapter.FindElements(By.Id("vikle_oprettet"));
+            var newsElements = WrapTrackShell.WebAdapter.FindElements(By.Id("baereredskab_oprettet"));
 
             foreach (var newsElement in newsElements)
             {
