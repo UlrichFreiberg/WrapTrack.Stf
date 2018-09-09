@@ -1,5 +1,5 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="TestCase012.cs" company="Mir Software">
+// <copyright file="TestCase028.cs" company="Mir Software">
 //   Copyright governed by Artistic license as described here:
 //          http://www.perlfoundation.org/artistic_license_2_0
 // </copyright>
@@ -23,7 +23,7 @@ namespace WrapTrackWebTests.Collection
     /// Test of decline of a wrap request. 
     /// </summary>
     [TestClass]
-    public class TestCase012b : WrapTrackTestScriptBase
+    public class TestCase028 : WrapTrackTestScriptBase
     {
         /// <summary>
         /// The test initialize.
@@ -48,7 +48,7 @@ namespace WrapTrackWebTests.Collection
         /// The TC012.
         /// </summary>
         [TestMethod]
-        public void Tc012b()
+        public void Tc028()
         {
             // User #1: Add a wrap
             var collection = GetCurrentUserCollection();
@@ -87,7 +87,7 @@ namespace WrapTrackWebTests.Collection
 
             StfAssert.IsFalse("Dont want to hear 'no pending requests'", respons);
 
-            // On actual page: Find button id="butAcceptReq". But be sure it's the right button.  
+            // On actual page: Find button Decline 
             var xPath = $"//a[text()='{wtId}']/../../../../../..//button[@id='butDeclineReq']";
             var retVal = WrapTrackShell.WebAdapter.Click(By.XPath(xPath));
 
@@ -96,7 +96,7 @@ namespace WrapTrackWebTests.Collection
                 StfAssert.IsFalse("Decline button not found", true);
             }
 
-            // var xPath2 = "//button[@id='butDoReq']";
+            // Find the ''yes'Im-sure'
             var xPath2 = $"//a[text()='{wtId}']/../../../../../..//button[@id='butDoDecline']";
             var retVal2 = WrapTrackShell.WebAdapter.Click(By.XPath(xPath2));
 
