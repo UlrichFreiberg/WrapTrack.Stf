@@ -29,7 +29,7 @@ ECHO %EOTS_Command%
 ECHO.
 
 :: Ensure the result file can be created
-IF NOT EXIST "%EOTS_ResultsDirectory%" then mkdir "%EOTS_ResultsDirectory%"
+IF NOT EXIST "%EOTS_ResultsDirectory%" mkdir "%EOTS_ResultsDirectory%"
 
 CALL %EOTS_Command%
 echo find results here: [%EOTS_ResultsDirectory%]
