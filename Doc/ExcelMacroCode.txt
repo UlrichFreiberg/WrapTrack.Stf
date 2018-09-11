@@ -1,0 +1,139 @@
+Sub PrepareRun()
+    On Error Resume Next
+    Dim size As Integer
+    Dim printline As String
+    
+    size = Evaluate(ThisWorkbook.Names("SuiteRowCount").RefersTo)
+    
+    Dim fileName As String
+    Dim testScriptWrapper As String
+    Dim testCaseNumbers As String
+    
+    size = Range("G1").Value
+    fileName = Range("N3").Value
+    testScriptWrapper = Range("N4").Value
+
+    Open fileName For Output As #1
+    printline = "@Echo off"
+    Print #1, printline
+    
+    For Each c In Worksheets("Suite").Range("A2:A" & size)
+        If c.Value <> "" Then
+            testCaseNumbers = testCaseNumbers & " " & Range("B" & c.Row)
+        End If
+    Next c
+    
+    printline = "CALL " & testScriptWrapper & " " & testCaseNumbers
+    Print #1, printline
+    
+    Close #1
+End Sub
+
+Sub RefreshtestSuite()
+    Dim w As Worksheet
+    Dim wSuite As Worksheet
+    Dim i As Integer
+    Dim passed As Boolean
+    Dim testCaseNumber As String
+    Dim testCaseNumberPadded As String
+    
+    Set wSuite = Worksheets(1)
+    i = 2
+        
+    wSuite.Range("A2:C1000").Clear
+    
+    For Each w In Worksheets()
+        If w.Range("A1") = "TestCaseId" Then
+            testCaseNumber = w.Range("B1").Value
+            w.Name = "TC" & testCaseNumber
+            Sheets(wSuite.Name).Hyperlinks.Add wSuite.Range("B" & i), "", w.Name & "!A1", "", "" & w.Range("B1").Value & ""
+            wSuite.Range("C" & i) = w.Range("B2").Value
+            
+            testCaseNumberPadded = PaddTestCaseNumber(testCaseNumber)
+            testRunResult = GetPassForLastRun("c:\temp\stf\logs\" & testCaseNumberPadded & "\" & testCaseNumberPadded & ".html")
+            wSuite.Range("d" & i) = testRunResult
+            i = i + 1
+        End If
+    Next
+End Sub
+
+Sub AddTestCase()
+    Dim w As Worksheet
+    Dim wname As String
+    
+    wname = CStr(Int(10000000 * Rnd(1234567)))
+    Worksheets().Add(After:=Worksheets(Worksheets.Count)).name = wname
+    
+    Set w = Worksheets(wname)
+    w.Range("A1") = "TestCaseId"
+    w.Range("A2") = "Test Name"
+    w.Range("A4") = "Step"
+    w.Range("A5") = "1"
+    w.Range("A6") = "2"
+    w.Range("A7") = "3"
+    w.Range("B1") = FindMaxTCID + 1
+    w.Range("B4") = "Action"
+    w.Range("C4") = "Expected"
+End Sub
+
+Function PaddTestCaseNumber(testCaseNumber As String)
+    If (Len(testCaseNumber) = 1) Then
+        PaddTestCaseNumber = "tc00" & testCaseNumber
+        Exit Function
+    End If
+    
+    If (Len(testCaseNumber) = 2) Then
+        PaddTestCaseNumber = "tc0" & testCaseNumber
+        Exit Function
+    End If
+    
+    PaddTestCaseNumber = "tc" & testCaseNumber
+End Function
+
+Function GetPassForLastRun(logfileName As String)
+    Dim fso As New FileSystemObject
+    Dim RE As Object
+    Set RE = CreateObject("vbscript.regexp")
+
+    If (Not fso.FileExists(logfileName)) Then
+        GetPassForLastRun = "No run"
+        Exit Function
+    End If
+
+    RE.Pattern = "<div.*\s+failed=.0.\s+"
+    RE.Global = True
+    RE.IgnoreCase = True
+    
+    Dim txt As TextStream
+    Dim fileContent As String
+
+    Set txt = fso.OpenTextFile(logfileName)
+    fileContent = txt.ReadAll
+    txt.Close
+    Set allMatches = RE.Execute(fileContent)
+    
+    If (allMatches.Count = 1) Then
+        GetPassForLastRun = "Pass"
+    Else
+        GetPassForLastRun = "Fail"
+    End If
+    
+End Function
+
+Function FindMaxTCID() As Integer
+    Dim i As Integer
+    Dim w As Worksheet
+    
+    i = 0
+    
+    For Each w In Worksheets()
+        If w.Range("A1") = "TestCaseId" Then
+            If w.Range("B1") > i Then
+                i = w.Range("B1")
+            End If
+        End If
+    Next
+    
+    FindMaxTCID = i
+End Function
+
