@@ -12,8 +12,6 @@ namespace WrapTrack.Stf.WrapTrackWeb
 {
     using Mir.Stf.Utilities;
 
-    using WrapTrack.Stf.WrapTrackWeb.Interfaces;
-
     /// <summary>
     /// The demo corp web shell.
     /// </summary>
@@ -30,7 +28,7 @@ namespace WrapTrack.Stf.WrapTrackWeb
         /// <param name="wtShell">
         /// The wt shell.
         /// </param>
-        public RegisterMyNeededTypes(IWrapTrackWebShell wtShell)
+        public RegisterMyNeededTypes(Interfaces.IWrapTrackWebShell wtShell)
         {
             stfContainer = wtShell.StfContainer;
         }
@@ -75,6 +73,20 @@ namespace WrapTrack.Stf.WrapTrackWeb
             stfContainer.RegisterType<Interfaces.Me.IMeSettings, Me.MeSettings>();
             stfContainer.RegisterType<Interfaces.Me.ICollection, Me.Collection.Collection>();
             stfContainer.RegisterType<Interfaces.Me.IMeProfile, Me.MeProfile>();
+
+            RegisterCarrierManagementClasses();
+        }
+
+        /// <summary>
+        /// The register carrier management classes.
+        /// </summary>
+        private void RegisterCarrierManagementClasses()
+        {
+            // CarrierManagement classes
+            stfContainer.RegisterType<Interfaces.Me.Collection.CarrierManagement.IAddCarrier, Me.Collection.CarrierManagement.AddCarrier>();
+            stfContainer.RegisterType<Interfaces.Me.Collection.CarrierManagement.IRingSling, Me.Collection.CarrierManagement.RingSling>();
+            stfContainer.RegisterType<Interfaces.Me.Collection.CarrierManagement.IStretchyWrap, Me.Collection.CarrierManagement.StretchyWrap>();
+            stfContainer.RegisterType<Interfaces.Me.Collection.CarrierManagement.IWowenWrap, Me.Collection.CarrierManagement.WowenWrap>();
         }
 
         /// <summary>

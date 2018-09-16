@@ -82,6 +82,7 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Net.Http" />
@@ -129,11 +130,16 @@
     <Compile Include="Interfaces\Explore\IExplore.cs" />
     <Compile Include="Interfaces\IModel.cs" />
     <Compile Include="Interfaces\IWrap.cs" />
+    <Compile Include="Interfaces\Me\Collection\CarrierManagement\IAddCarrier.cs" />
+    <Compile Include="Interfaces\Me\Collection\CarrierManagement\IRingSling.cs" />
+    <Compile Include="Interfaces\Me\Collection\CarrierManagement\IStretchyWrap.cs" />
+    <Compile Include="Interfaces\Me\Collection\CarrierManagement\IWowenWrap.cs" />
     <Compile Include="Interfaces\Me\IMeInbox.cs" />
     <Compile Include="Interfaces\Me\IMeReviews.cs" />
     <Compile Include="Interfaces\Me\IMeSettings.cs" />
     <Compile Include="MenuManager.cs" />
     <Compile Include="Me\Collection\CarrierManagement\AddCarrier.cs" />
+    <Compile Include="Me\Collection\CarrierManagement\AddCarrierType.cs" />
     <Compile Include="Me\Collection\CarrierManagement\CarrierBaseClass.cs" />
     <Compile Include="Me\Collection\CarrierManagement\RingSling.cs" />
     <Compile Include="Me\Collection\CarrierManagement\Other.cs" />

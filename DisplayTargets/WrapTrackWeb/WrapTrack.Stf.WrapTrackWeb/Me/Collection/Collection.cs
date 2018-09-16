@@ -21,6 +21,7 @@ namespace WrapTrack.Stf.WrapTrackWeb.Me.Collection
 
     using WrapTrack.Stf.WrapTrackWeb.Interfaces;
     using WrapTrack.Stf.WrapTrackWeb.Interfaces.Me;
+    using WrapTrack.Stf.WrapTrackWeb.Me.Collection.CarrierManagement;
 
     /// <summary>
     /// The learn more.
@@ -178,6 +179,24 @@ namespace WrapTrack.Stf.WrapTrackWeb.Me.Collection
 
             // Return the wrap just added or null
             return enumerable.Length == 1 ? enumerable.First() : null;
+        }
+
+        /// <summary>
+        /// The add carrier.
+        /// </summary>
+        /// <typeparam name="T">
+        /// The interface for a carrier add
+        /// </typeparam>
+        /// <returns>
+        /// An instance of t
+        /// </returns>
+        public T AddCarrier<T>()
+        {
+            WebAdapter.ButtonClickById("but_add_carrier");
+
+            var retVal = Get<T>();
+
+            return retVal;
         }
 
         /// <summary>

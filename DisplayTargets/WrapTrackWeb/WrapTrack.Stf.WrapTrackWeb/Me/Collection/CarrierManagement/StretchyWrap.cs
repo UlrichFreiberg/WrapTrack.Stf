@@ -10,11 +10,25 @@
 
 namespace WrapTrack.Stf.WrapTrackWeb.Me.Collection.CarrierManagement
 {
+    using WrapTrack.Stf.WrapTrackWeb.Interfaces;
+    using WrapTrack.Stf.WrapTrackWeb.Interfaces.Me.Collection.CarrierManagement;
+
     /// <summary>
     /// The stretchy wrap.
     /// </summary>
-    public class StretchyWrap : CarrierBaseClass
+    public class StretchyWrap : CarrierBaseClass, IStretchyWrap
     {
+        /// <summary>
+        /// Initializes a new instance of the <see cref="StretchyWrap"/> class.
+        /// </summary>
+        /// <param name="wrapTrackWebShell">
+        /// The wrap track web shell.
+        /// </param>
+        public StretchyWrap(IWrapTrackWebShell wrapTrackWebShell)
+            : base(wrapTrackWebShell)
+        {
+        }
+
         /// <summary>
         /// Gets or sets a value indicating whether home made.
         /// </summary>

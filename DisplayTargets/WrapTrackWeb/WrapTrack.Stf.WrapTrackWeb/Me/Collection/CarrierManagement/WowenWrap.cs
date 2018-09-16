@@ -10,19 +10,61 @@
 
 namespace WrapTrack.Stf.WrapTrackWeb.Me.Collection.CarrierManagement
 {
+    using OpenQA.Selenium;
+
+    using WrapTrack.Stf.WrapTrackWeb.Interfaces;
+    using WrapTrack.Stf.WrapTrackWeb.Interfaces.Me.Collection.CarrierManagement;
+
     /// <summary>
     /// The stretchy wrap.
     /// </summary>
-    public class WowenWrap : CarrierBaseClass
+    public class WowenWrap : CarrierBaseClass, IWowenWrap
     {
+        /// <summary>
+        /// Initializes a new instance of the <see cref="WowenWrap"/> class.
+        /// </summary>
+        /// <param name="wrapTrackWebShell">
+        /// The wrap track web shell.
+        /// </param>
+        public WowenWrap(IWrapTrackWebShell wrapTrackWebShell)
+            : base(wrapTrackWebShell)
+        {
+        }
+
         /// <summary>
         /// Gets or sets a value indicating whether home made.
         /// </summary>
-        public bool HomeMade { get; set; }
+        public bool HomeMade
+        {
+            get
+            {
+                var retVal = WebAdapter.CheckBoxGetValueById("checkHomemade");
+
+                return retVal;
+            }
+
+            set
+            {
+                WebAdapter.CheckBoxSetValueById("checkHomemade", value);
+            }
+        }
 
         /// <summary>
-        /// Gets or sets a value indicating whether name.
+        /// Gets or sets the name.
         /// </summary>
-        public bool Name { get; set; }
+        public string Name
+        {
+            get
+            {
+                var retVal = WebAdapter.GetText(By.Id("inpNameHomemade"));
+
+                return retVal;
+            }
+
+            set
+            {
+                WebAdapter.TextboxSetTextById("inpNameHomemade", value);
+            }
+        }
     }
 }

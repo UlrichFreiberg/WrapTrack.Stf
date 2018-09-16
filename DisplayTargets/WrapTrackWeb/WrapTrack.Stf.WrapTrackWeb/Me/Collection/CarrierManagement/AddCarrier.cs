@@ -10,51 +10,62 @@
 
 namespace WrapTrack.Stf.WrapTrackWeb.Me.Collection.CarrierManagement
 {
+    using WrapTrack.Stf.WrapTrackWeb.Interfaces;
+    using WrapTrack.Stf.WrapTrackWeb.Interfaces.Me.Collection.CarrierManagement;
+
     /// <summary>
     /// The add carrier.
     /// </summary>
-    public class AddCarrier
+    public class AddCarrier : WrapTrackWebShellModelBase, IAddCarrier
     {
         /// <summary>
-        /// The add.
+        /// Initializes a new instance of the <see cref="AddCarrier"/> class.
         /// </summary>
-        /// <param name="wowenWrap">
-        /// The wowen wrap.
+        /// <param name="wrapTrackWebShell">
+        /// The wrap track web shell.
         /// </param>
-        /// <returns>
-        /// The <see cref="bool"/>.
-        /// </returns>
-        public bool Add(WowenWrap wowenWrap)
+        public AddCarrier(IWrapTrackWebShell wrapTrackWebShell)
+            : base(wrapTrackWebShell)
         {
-            return false;
         }
 
         /// <summary>
         /// The add.
         /// </summary>
-        /// <param name="stretchyWrap">
-        /// The stretchy wrap.
-        /// </param>
         /// <returns>
         /// The <see cref="bool"/>.
         /// </returns>
-        public bool Add(StretchyWrap stretchyWrap)
+        public IWowenWrap AddWowenWrap()
         {
-            return false;
+            var retVal = Get<IWowenWrap>();
+
+            return retVal;
         }
 
         /// <summary>
-        /// The add.
+        /// The add stretchy wrap.
         /// </summary>
-        /// <param name="ringSling">
-        /// The ring sling.
-        /// </param>
         /// <returns>
-        /// The <see cref="bool"/>.
+        /// The <see cref="StretchyWrap"/>.
         /// </returns>
-        public bool Add(RingSling ringSling)
+        public IStretchyWrap AddStretchyWrap()
         {
-            return false;
+            var retVal = Get<IStretchyWrap>();
+
+            return retVal;
+        }
+
+        /// <summary>
+        /// The add ring sling.
+        /// </summary>
+        /// <returns>
+        /// The <see cref="RingSling"/>.
+        /// </returns>
+        public IRingSling AddRingSling()
+        {
+            var retVal = Get<IRingSling>();
+
+            return retVal;
         }
     }
 }

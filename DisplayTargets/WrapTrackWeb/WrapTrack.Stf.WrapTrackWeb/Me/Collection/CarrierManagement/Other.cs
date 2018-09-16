@@ -10,11 +10,24 @@
 
 namespace WrapTrack.Stf.WrapTrackWeb.Me.Collection.CarrierManagement
 {
+    using WrapTrack.Stf.WrapTrackWeb.Interfaces;
+
     /// <summary>
     /// The stretchy wrap.
     /// </summary>
     public class Other : CarrierBaseClass
     {
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Other"/> class.
+        /// </summary>
+        /// <param name="wrapTrackWebShell">
+        /// The wrap track web shell.
+        /// </param>
+        public Other(IWrapTrackWebShell wrapTrackWebShell)
+            : base(wrapTrackWebShell)
+        {
+        }
+
         /// <summary>
         /// Gets or sets the carrier type.
         /// </summary>
