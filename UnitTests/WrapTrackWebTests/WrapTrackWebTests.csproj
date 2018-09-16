@@ -149,6 +149,8 @@
     <Compile Include="WrapTrackTestScriptBase.cs" />
     <Compile Include="WtTestscriptUtils.cs" />
     <Compile Include="Collection\TestCase020.cs" />
+    <Compile Include="ZDeveloperTests\Ulrich\AddWrapDataDriven.cs" />
+    <Compile Include="ZDeveloperTests\Ulrich\WovenTestData.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Collection\Data010.csv" />
