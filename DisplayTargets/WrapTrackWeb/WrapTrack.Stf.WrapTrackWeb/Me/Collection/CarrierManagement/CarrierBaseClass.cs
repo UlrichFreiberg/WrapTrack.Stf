@@ -111,14 +111,14 @@ namespace WrapTrack.Stf.WrapTrackWeb.Me.Collection.CarrierManagement
         {
             get
             {
-                var retVal = WebAdapter.CheckBoxGetValueById("selConvertType");
+                var retVal = WebAdapter.CheckBoxGetValueByXpath("//span[text()='Converted by a private person or sling converter']/../input");
 
                 return retVal;
             }
 
             set
             {
-                WebAdapter.CheckBoxSetValueById("selConvertType", value);
+                WebAdapter.CheckBoxSetValueByXpath("//span[text()='Converted by a private person or sling converter']/../input", value);
             }
         }
 
@@ -147,14 +147,15 @@ namespace WrapTrack.Stf.WrapTrackWeb.Me.Collection.CarrierManagement
         {
             get
             {
-                var retVal = WebAdapter.SelectElementGetText(By.Id("soegBruger"));
+                var retVal = WebAdapter.GetText(By.Id("soegBruger"));
 
                 return retVal;
             }
 
             set
             {
-                WebAdapter.SelectElementSetText(By.Id("soegBruger"), value);
+                WebAdapter.TextboxSetTextById("soegBruger", value);
+                WebAdapter.ButtonClickById("butThisConverter");
             }
         }
 
