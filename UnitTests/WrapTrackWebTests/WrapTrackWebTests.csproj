@@ -123,6 +123,7 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
+    <Compile Include="Collection\AddCarrier\TestCase029.cs" />
     <Compile Include="Collection\TestCase010.cs" />
     <Compile Include="Collection\TestCase011.cs" />
     <Compile Include="Collection\TestCase006.cs" />
@@ -153,6 +154,9 @@
     <Compile Include="ZDeveloperTests\Ulrich\WovenTestData.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Collection\AddCarrier\Testdata_add_woven_wrap.csv">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Include="Collection\Data010.csv" />
     <None Include="packages.config">
       <SubType>Designer</SubType>
