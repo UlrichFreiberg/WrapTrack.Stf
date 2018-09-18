@@ -85,6 +85,15 @@ namespace WrapTrack.Stf.WrapTrackApi.User
             return retVal;
         }
 
+        /// <summary>
+        /// The end user collection.
+        /// </summary>
+        /// <param name="userId">
+        /// The user id.
+        /// </param>
+        /// <returns>
+        /// The <see cref="bool"/>.
+        /// </returns>
         public bool EndUserCollection(int userId)
         {
             var uri = $"user/endcollection/{userId}";

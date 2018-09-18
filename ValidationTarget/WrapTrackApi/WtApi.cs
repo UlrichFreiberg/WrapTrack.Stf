@@ -210,10 +210,43 @@ namespace WrapTrack.Stf.WrapTrackApi
             return retVal;
         }
 
+        /// <summary>
+        /// The end user collection.
+        /// </summary>
+        /// <param name="userId">
+        /// The user id.
+        /// </param>
+        /// <returns>
+        /// The <see cref="bool"/>.
+        /// </returns>
         public bool EndUserCollection(int userId)
         {
             var handler = new UserInfoHandler(StfLogger, WtApiConfiguration);
             var retVal = handler.EndUserCollection(userId);
+
+            return retVal;
+        }
+
+        /// <summary>
+        /// The end user collection.
+        /// </summary>
+        /// <param name="userName">
+        /// The user name.
+        /// </param>
+        /// <returns>
+        /// The <see cref="bool"/>.
+        /// </returns>
+        public bool EndUserCollection(string userName)
+        {
+            var userIdString = UserId(userName);
+            int userId;
+
+            if (!int.TryParse(userIdString, out userId))
+            {
+                return false;
+            }
+
+            var retVal = EndUserCollection(userId);
 
             return retVal;
         }
