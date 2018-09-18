@@ -210,6 +210,14 @@ namespace WrapTrack.Stf.WrapTrackApi
             return retVal;
         }
 
+        public bool EndUserCollection(int userId)
+        {
+            var handler = new UserInfoHandler(StfLogger, WtApiConfiguration);
+            var retVal = handler.EndUserCollection(userId);
+
+            return retVal;
+        }
+
         /// <summary>
         /// The register my needed types.
         /// </summary>

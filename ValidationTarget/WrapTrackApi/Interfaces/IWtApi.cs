@@ -120,5 +120,7 @@ namespace WrapTrack.Stf.WrapTrackApi.Interfaces
         /// The <see cref="string"/>.
         /// </returns>
         string UserId(string userName);
+
+        bool EndUserCollection(int userId);
     }
 }

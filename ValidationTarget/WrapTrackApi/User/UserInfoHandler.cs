@@ -85,6 +85,14 @@ namespace WrapTrack.Stf.WrapTrackApi.User
             return retVal;
         }
 
+        public bool EndUserCollection(int userId)
+        {
+            var uri = $"user/endcollection/{userId}";
+            var retVal = PutWrapRestInfo(uri);
+
+            return true;
+        }
+
         /// <summary>
         /// The get user rest info by internal id uri.
         /// </summary>

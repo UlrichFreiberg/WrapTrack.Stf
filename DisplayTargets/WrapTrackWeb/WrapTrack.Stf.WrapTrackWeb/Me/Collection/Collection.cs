@@ -172,7 +172,9 @@ namespace WrapTrack.Stf.WrapTrackWeb.Me.Collection
             // gotta fix that after adding a wrap the wrap itself is shown
             // not the collection as it used to
             var me = WrapTrackWebShell.Me();
+            
             me.GetCollection();
+
             var newListOfWtIds = GetListOfWtIds();
             var diffList = newListOfWtIds.Except(existingListOfWtIds);
             var enumerable = diffList as string[] ?? diffList.ToArray();

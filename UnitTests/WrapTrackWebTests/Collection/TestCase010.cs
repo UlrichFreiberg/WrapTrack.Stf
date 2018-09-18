@@ -90,7 +90,8 @@ namespace WrapTrackWebTests.Collection
             var wrapInfo = validationTarget.WrapInfoByTrackId(wtId);
             var statusBefore = wrapInfo.Status;
 
-            StfAssert.AreEqual("Status before deleting is 0", statusBefore, "0");
+            // When created the status is zero (0)
+            StfAssert.AreEqual("Status", statusBefore, "0");
 
             // Delete wrap
             StfLogger.LogInfo($"DeleteOption = {testdata.DeleteOption}");
