@@ -86,6 +86,23 @@ namespace WrapTrack.Stf.WrapTrackApi.User
         }
 
         /// <summary>
+        /// The end user collection.
+        /// </summary>
+        /// <param name="userId">
+        /// The user id.
+        /// </param>
+        /// <returns>
+        /// The <see cref="bool"/>.
+        /// </returns>
+        public bool EndUserCollection(int userId)
+        {
+            var uri = $"user/endcollection/{userId}";
+            var retVal = PutWrapRestInfo(uri);
+
+            return true;
+        }
+
+        /// <summary>
         /// The get user rest info by internal id uri.
         /// </summary>
         /// <param name="internalId">

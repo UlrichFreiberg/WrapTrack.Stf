@@ -120,5 +120,27 @@ namespace WrapTrack.Stf.WrapTrackApi.Interfaces
         /// The <see cref="string"/>.
         /// </returns>
         string UserId(string userName);
+
+        /// <summary>
+        /// The end user collection. Reset the collection for a user - after this the count of entities are zero
+        /// </summary>
+        /// <param name="userId">
+        /// The user id.
+        /// </param>
+        /// <returns>
+        /// The <see cref="bool"/>.
+        /// </returns>
+        bool EndUserCollection(int userId);
+
+        /// <summary>
+        /// The end user collection. Reset the collection for a user - after this the count of entities are zero
+        /// </summary>
+        /// <param name="userName">
+        /// The user name.
+        /// </param>
+        /// <returns>
+        /// The <see cref="bool"/>.
+        /// </returns>
+        bool EndUserCollection(string userName);
     }
 }

@@ -57,5 +57,16 @@ namespace WrapTrackApiTests
 
             StfAssert.StringEqualsCi("Ida/1356", "Ida88", userName);
         }
+
+        /// <summary>
+        /// The test end user collection.
+        /// </summary>
+        [TestMethod]
+        public void TestEndUserCollection()
+        {
+            var retVal = wtApi.EndUserCollection(2102);
+
+            StfAssert.IsTrue("EndUserCollection(2102)", retVal);
+        }
     }
 }
