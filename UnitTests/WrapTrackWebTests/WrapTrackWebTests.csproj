@@ -134,6 +134,7 @@
     <Compile Include="Collection\TestCase026.cs" />
     <Compile Include="Collection\TestCase024.cs" />
     <Compile Include="Collection\TestCase025.cs" />
+    <Compile Include="Collection\TestCase030.cs" />
     <Compile Include="Explore\Brands\TestCase014.cs" />
     <Compile Include="Explore\Brands\TestCase016.cs" />
     <Compile Include="Explore\Brands\TestCase015.cs" />

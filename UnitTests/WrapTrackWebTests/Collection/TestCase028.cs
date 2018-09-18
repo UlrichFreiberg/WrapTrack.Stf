@@ -62,7 +62,7 @@ namespace WrapTrackWebTests.Collection
 
             WrapTrackShell.Logout();
 
-            // user #2 want both new wraps
+            // user #2 want the new wrap
             var anotherUser = GetAnotherUser(WrapTrackShell);
 
             // TODO: pw should not be hardcoded
