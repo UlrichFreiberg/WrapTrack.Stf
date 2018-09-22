@@ -1,10 +1,9 @@
-variantID,StfIgnoreRow,CarrierType,Brand,Pattern,Model,MadeOfWrap,Converted,ConvertType,ConvertName,Size,Grade,Acquired,HomeMade,Name,Comments
-1,TRUE,Woven wrap,,,,,,,,9,1,0,X,MyOwn_{TODAY}{NOW},
-2,TRUE,Woven wrap,Ali Dover,Hygge,Pop,,,,,8,2,-1,,,
-3,TRUE,Woven wrap,Ali Dover,Hygge,Pop,,,,,7,3,-2,,,
-4,TRUE,Woven wrap,Ali Dover,Hygge,Pop,,X,a sling converter,Vikleskrëdderiet,6,1,-3,,,
-5,TRUE,Woven wrap,Ali Dover,Hygge,Pop,,X,a Wraptrack User,Camomilla,5,2,1,,,
-6,FALSE,Woven wrap,Ali Dover,Hygge,Pop,X,,,,4,3,2,,,precondition: variant #2 must be passed
-7,TRUE,Woven wrap,Ali Dover,Hygge,Pop,X,X,a sling converter,Vikleskrëdderiet,3,1,3,,,precondition: variant #3 must be passed
-8,TRUE,Woven wrap,Ali Dover,Hygge,Pop,X,X,a Wraptrack User,Camomilla,2,2,-365,,,precondition: variant #4 must be passed
-9,TRUE,Woven wrap,Ali Dover,Hygge,Pop,,X,private,,1,3,-730,,,
+ÔªøvariantID;StfIgnoreRow;CarrierType;Brand;Pattern;Model;MadeOfWrap;Converted;ConvertType;ConvertName;Size;Grade;Acquired;HomeMade;Name;Comments
+1;TRUE;Woven wrap;;;;;;;;9;1;0;X;MyOwn_{TODAY}{NOW};
+2;TRUE;Woven wrap;Ali Dover;Hygge;Pop;;;;;8;2;-1;;;
+3;TRUE;Woven wrap;Ali Dover;Hygge;Pop;;;;;7;3;-2;;;
+4;TRUE;Woven wrap;Ali Dover;Hygge;Pop;;X;a sling converter;Vikleskr√¶dderiet;6;1;-3;;;
+5;TRUE;Woven wrap;Ali Dover;Hygge;Pop;;X;a Wraptrack User;Camomilla;5;2;1;;;
+6;FALSE;Woven wrap;Ali Dover;Hygge;Pop;;X;private;;4;3;2;;;
+7;TRUE;Woven wrap;Ali Dover;Hygge;Pop;X;X;a sling converter;Vikleskr√¶dderiet;3;1;3;;;precondition: one of variants #2 - #4 must be passed
+8;TRUE;Woven wrap;Ali Dover;Hygge;Pop;X;X;a Wraptrack User;Camomilla;2;2;-365;;;precondition: one of variants #5 - #6 must be passed
