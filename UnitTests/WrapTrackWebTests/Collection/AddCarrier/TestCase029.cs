@@ -49,6 +49,7 @@ namespace WrapTrackWebTests.Collection.AddCarrier
 
             StfAssert.IsTrue("HandleHomeMade", HandleHomeMade(addCarrier, testdata));
             StfAssert.IsTrue("HandleBrandPatternModel", HandleBrandPatternModel(addCarrier, testdata));
+            StfAssert.IsTrue("HandleMadeOfWrap", HandleMadeOfWrap(addCarrier, testdata));
             StfAssert.IsTrue("HandleConvertedConvertTypeConvertName", HandleConvertedConvertTypeConvertName(addCarrier, testdata));
             StfAssert.IsTrue("HandleSizeGradeAcquired", HandleSizeGradeAcquired(addCarrier, testdata));
             StfAssert.IsTrue("Save", addCarrier.Save(testdata.Brand));
@@ -56,6 +57,31 @@ namespace WrapTrackWebTests.Collection.AddCarrier
             // Log where we got redirected to - Page Safe is fine - Control is better:-)
             StfLogger.LogScreenshot(StfLogLevel.SubHeader, "After Pressed Save");
             wrapTrackWebShell.CloseDown();
+        }
+
+        /// <summary>
+        /// The handle made of wrap.
+        /// </summary>
+        /// <param name="addCarrier">
+        /// The add carrier.
+        /// </param>
+        /// <param name="testdata">
+        /// The testdata.
+        /// </param>
+        /// <returns>
+        /// The <see cref="bool"/>.
+        /// </returns>
+        private bool HandleMadeOfWrap(IWowenWrap addCarrier, WovenTestData testdata)
+        {
+            if (string.IsNullOrEmpty(testdata.MadeOfWrap))
+            {
+                // Mom I'm done!! - If not Converted...
+                return true;
+            }
+
+            var retVal = addCarrier.SelectMadeOfWrap();
+
+            return retVal;
         }
 
         /// <summary>

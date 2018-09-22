@@ -87,5 +87,16 @@ namespace WrapTrack.Stf.WrapTrackWeb.Interfaces.Me.Collection.CarrierManagement
         /// The <see cref="bool"/>.
         /// </returns>
         bool Save(string brandName = null);
+
+        /// <summary>
+        /// The select made of wrap.
+        /// </summary>
+        /// <param name="wrapName">
+        /// The wrap name. If null, then pick a random one in the list
+        /// </param>
+        /// <returns>
+        /// The <see cref="bool"/>.
+        /// </returns>
+        bool SelectMadeOfWrap(string wrapName = null);
     }
 }

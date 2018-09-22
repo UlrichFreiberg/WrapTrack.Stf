@@ -10,6 +10,8 @@
 
 namespace WrapTrack.Stf.WrapTrackWeb.Me.Collection.CarrierManagement
 {
+    using System;
+
     using OpenQA.Selenium;
 
     using WrapTrack.Stf.WrapTrackWeb.Interfaces;
@@ -65,6 +67,46 @@ namespace WrapTrack.Stf.WrapTrackWeb.Me.Collection.CarrierManagement
             {
                 WebAdapter.TextboxSetTextById("inpNameHomemade", value);
             }
+        }
+
+        /// <summary>
+        /// The select made of wrap.
+        /// </summary>
+        /// <param name="wrapName">
+        /// The wrap name. If null, then pick a random one in the list
+        /// </param>
+        /// <returns>
+        /// The <see cref="bool"/>.
+        /// </returns>
+        public bool SelectMadeOfWrap(string wrapName = null)
+        {
+            var wrapToChose = wrapName;
+            var selectElem = WebAdapter.FindElement(By.Id("selConvertSuggestions"));
+
+            if (selectElem == null)
+            {
+                return false;
+            }
+
+            if (string.IsNullOrEmpty(wrapToChose))
+            {
+                // Okay no name given - we will pick a random one...
+                var options = selectElem.FindElements(By.XPath("./option"));
+                var numberOfOptions = options.Count;
+
+                if (numberOfOptions < 1)
+                {
+                    return false;
+                }
+
+                var numberToChoose = new Random().Next(2, numberOfOptions);
+
+                wrapToChose = options[numberToChoose].Text.Trim();
+            }
+
+            var retVal = WebAdapter.SelectElementSetText(By.Id("selConvertSuggestions"), wrapToChose);
+
+            return retVal;
         }
     }
 }
