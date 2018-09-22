@@ -10,6 +10,8 @@
 
 namespace WrapTrackWebTests.Explore.Brands
 {
+    using System;
+
     using Microsoft.VisualStudio.TestTools.UnitTesting;
 
     using WrapTrack.Stf.WrapTrackApi.Interfaces;
@@ -65,6 +67,7 @@ namespace WrapTrackWebTests.Explore.Brands
             var newPatternName = WtUtils.GetRandomString("StfPattern");
             var baseLineNumberOfPatterns = wtApi.BrandNumberOfPatterns(BrandId);
             var patternAdded = randomBrand.AddPattern(newPatternName);
+            Wait(TimeSpan.FromSeconds(10));
             var numberOfPatterns = wtApi.BrandNumberOfPatterns(BrandId);
 
             StfAssert.IsTrue($"Pattern {newPatternName} Added", patternAdded);

@@ -196,6 +196,7 @@ namespace WrapTrackWebTests
         /// </returns>
         protected bool ValidatePassOn(string wrapToGo, string anotherUsername)
         {
+            Wait(TimeSpan.FromSeconds(10));
             var validationTarget = Get<IWtApi>();
             var wrapInfo = validationTarget.WrapInfoByTrackId(wrapToGo);
             var retVal = wrapInfo.OwnerName == anotherUsername;

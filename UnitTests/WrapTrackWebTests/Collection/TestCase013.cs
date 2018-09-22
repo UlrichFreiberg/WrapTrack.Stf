@@ -47,7 +47,7 @@ namespace WrapTrackWebTests.Collection
         public void Tc013()
         {
            // Create a wrap to convert
-            var wtId = Collection.AddWrap("A love so rare", "Alta Lake", "Charcoal", 8);
+            var wtId = Collection.AddWrap("Baie", "Duet", "En Bleu", 8);
 
             StfAssert.IsNotNull("Got the original wrap size 8", wtId);
 
@@ -59,8 +59,8 @@ namespace WrapTrackWebTests.Collection
             StfAssert.AreEqual("Status before deleting is 0", statusBefore, "0");
 
             // Create two small wraps
-            var smallWrap1 = Collection.AddWrap("A love so rare", "Alta Lake", "Charcoal", 2);
-            var smallWrap2 = Collection.AddWrap("A love so rare", "Alta Lake", "Charcoal", 2);
+            var smallWrap1 = Collection.AddWrap("Baie", "Duet", "En Bleu", 2);
+            var smallWrap2 = Collection.AddWrap("Baie", "Duet", "En Bleu", 2);
 
             StfAssert.IsNotNull("Got one small wrap size 2", smallWrap1);
             StfAssert.IsNotNull("Got one more small wrap size 2", smallWrap2);
@@ -68,9 +68,9 @@ namespace WrapTrackWebTests.Collection
             // Mark the test script as InProgress
             StfAssert.IsNotNull("TestCase NOT finished", null);
 
-            //TODO: Again we need orgWrap to be a IWrap
-            //orgWrap.Convert(smallWrap1); // Not implemented
-            //orgWrap.extraConvention(smallWrap2); // Not implemented
+            // TODO: Again we need orgWrap to be a IWrap
+            // orgWrap.Convert(smallWrap1); // Not implemented
+            // orgWrap.extraConvention(smallWrap2); // Not implemented
         }
     }
 }
