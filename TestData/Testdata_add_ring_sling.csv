@@ -1,0 +1,11 @@
+NoteStfIgnoreRow;CarrierType;Brand;Pattern;Model;MadeOfWrap;Converted;BrandProduced;WovenWrapFabric;ConvertName;Grade;Acquired;Home made;Name;Comments
+FALSE;Ring sling;Ali Dover;Hygge;Pop;;;No;X;;1;{TODAY};X;"""MyOwn_""+datoTid";Not BrandProduces means = Private person or sling converter
+FALSE;Ring sling;;;;;;No;;;2;{TODAY + 1 day};;MyOwn_{TODAY}{NOW};Not BrandProduces means = Private person or sling converter
+FALSE;Ring sling;Beloved;Stars;Nebula;;;Yes;X;;3;{TODAY - 2  day};;;
+FALSE;Ring sling;;;;;x;;;;1;{TODAY - 3  day};;;
+FALSE;Ring sling;;;;;;;;;2;{TODAY + 1 day};;;
+FALSE;Ring sling;;;;;;;;;3;{TODAY - 2  day};;;
+FALSE;Ring sling;;;;;;;;;1;{TODAY - 3  day};;;
+FALSE;Ring sling;;;;;;;;;2;{TODAY - 1 year};;;
+FALSE;Ring sling;;;;;;;;;3;{TODAY - 2 year};;;
+;;;;;;;;;;;;;;
