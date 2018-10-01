@@ -1,7 +1,7 @@
 StfIgnoreRow,CarrierType,BrandProduced,WrapFabric,Name,Brand,Pattern,Model,ConverterType,ConvertName,MadeOfWrap,Grade,Acquired,Note
-FALSE,Ring sling,No,X,,Ali Dover,Hygge,Pop,a sling converter,Vikleskr‘dderiet,,1,0,
-FALSE,Ring sling,No,X,,Ali Dover,Hygge,Pop,a sling converter,Vikleskr‘dderiet,X,2,1,Precondition: There must be a wrap in this brand/pattern/model in users collect. Run tc029
-FALSE,Ring sling,No,,SlingConverter_{TODAY}{NOW},,,,a sling converter,Vikleskr‘dderiet,,3,2,
+FALSE,Ring sling,No,X,,Ali Dover,Hygge,Pop,a sling converter,Skurkevikler ,,1,0,
+FALSE,Ring sling,No,X,,Ali Dover,Hygge,Pop,a sling converter,Skurkevikler ,X,2,1,Precondition: There must be a wrap in this brand/pattern/model in users collect. Run tc029
+FALSE,Ring sling,No,,SlingConverter_{TODAY}{NOW},,,,a sling converter,Skurkevikler ,,3,2,
 FALSE,Ring sling,No,X,,Ali Dover,Hygge,Pop,a Wraptrack user,Camomilla,,1,-1,
 FALSE,Ring sling,No,X,,Ali Dover,Hygge,Pop,a Wraptrack user,Camomilla,x,2,-2,Precondition: There must be a wrap in this brand/pattern/model in users collect. Run tc029
 FALSE,Ring sling,No,,wtUser_{TODAY}{NOW},,,,a Wraptrack user,Camomilla,,3,-3,
