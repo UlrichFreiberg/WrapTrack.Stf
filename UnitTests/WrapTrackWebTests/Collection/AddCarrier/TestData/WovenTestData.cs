@@ -8,7 +8,7 @@
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace WrapTrackWebTests.ZDeveloperTests.Ulrich
+namespace WrapTrackWebTests.Collection.AddCarrier.TestData
 {
     using Mir.Stf;
 

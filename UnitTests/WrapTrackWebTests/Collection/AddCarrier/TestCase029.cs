@@ -4,7 +4,7 @@
 //          http://www.perlfoundation.org/artistic_license_2_0
 // </copyright>
 // <summary>
-//   The menu tests.
+//   The Add Carrier - Woven tests.
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
 
@@ -19,10 +19,10 @@ namespace WrapTrackWebTests.Collection.AddCarrier
     using WrapTrack.Stf.WrapTrackWeb.Interfaces;
     using WrapTrack.Stf.WrapTrackWeb.Interfaces.Me.Collection.CarrierManagement;
 
-    using WrapTrackWebTests.ZDeveloperTests.Ulrich;
+    using WrapTrackWebTests.Collection.AddCarrier.TestData;
 
     /// <summary>
-    /// The menu tests.
+    /// The Add Carrier - Woven tests.
     /// </summary>
     [TestClass]
     public class TestCase029 : WrapTrackTestScriptBase
@@ -32,18 +32,19 @@ namespace WrapTrackWebTests.Collection.AddCarrier
         /// </summary>
         [DataSource(
             "Microsoft.VisualStudio.TestTools.DataSource.CSV",
-            @"D:\Projects\WrapTrack.Stf\UnitTests\WrapTrackWebTests\Collection\AddCarrier\Testdata_add_woven_wrap.csv",
+            @"D:\Projects\WrapTrack.Stf\UnitTests\WrapTrackWebTests\Collection\AddCarrier\TestData\Testdata_add_woven_wrap.csv",
             "Testdata_add_woven_wrap#csv", DataAccessMethod.Sequential)]
         [TestMethod]
         public void Tc029()
         {
             var testdata = InitTestData<WovenTestData>();
-            var wrapTrackWebShell = Get<IWrapTrackWebShell>();
+
+            WrapTrackShell = Get<IWrapTrackWebShell>();
 
             // Use default user
-            wrapTrackWebShell.Login();
+            WrapTrackShell.Login();
 
-            var me = wrapTrackWebShell.Me();
+            var me = WrapTrackShell.Me();
             var collection = me.GetCollection();
             var addCarrier = collection.AddCarrier<IWowenWrap>();
 
@@ -56,7 +57,6 @@ namespace WrapTrackWebTests.Collection.AddCarrier
 
             // Log where we got redirected to - Page Safe is fine - Control is better:-)
             StfLogger.LogScreenshot(StfLogLevel.SubHeader, "After Pressed Save");
-            wrapTrackWebShell.CloseDown();
         }
 
         /// <summary>
