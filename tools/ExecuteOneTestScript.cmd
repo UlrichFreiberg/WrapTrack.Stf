@@ -16,6 +16,7 @@ setlocal
 :: ==================================================================
 
 SET EOTS_ResultsDirectory=C:\temp\Stf\Results
+SET EOTS_StfLogDirectory=C:\Temp\Stf\Logs
 
 CALL :FindMsTest
 CALL :FindTheWrapTestContainer
@@ -33,6 +34,8 @@ IF NOT EXIST "%EOTS_ResultsDirectory%" mkdir "%EOTS_ResultsDirectory%"
 
 CALL %EOTS_Command%
 echo find results here: [%EOTS_ResultsDirectory%]
+echo.
+echo find log files here: [%EOTS_StfLogDirectory%]
 
 goto :EOF
 :: ==================================================================
@@ -84,7 +87,8 @@ goto :EOF
    FOR /f %%a in ('WMIC OS GET LocalDateTime ^| find "."') DO set DTS=%%a
    set CUR_DATE=%DTS:~0,4%-%DTS:~4,2%-%DTS:~6,2%
    set CUR_TIME=%DTS:~8,6%
-   SET EOTS_ResultFile=%EOTS_ResultsDirectory%\TestResult_%CUR_DATE%_%CUR_TIME%.trx   
+   SET EOTS_ResultFile=%EOTS_ResultsDirectory%\TestResult_%CUR_DATE%_%CUR_TIME%.trx
+   
    goto :EOF
 
    

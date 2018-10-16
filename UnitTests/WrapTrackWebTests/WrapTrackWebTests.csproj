@@ -124,7 +124,6 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
-    <Compile Include="Collection\AddCarrier\TestCase031.cs" />
     <Compile Include="Collection\AddCarrier\TestCase029.cs" />
     <Compile Include="Collection\AddCarrier\TestData\RingSlingTestData.cs" />
     <Compile Include="Collection\TestCase010.cs" />
@@ -154,7 +153,6 @@
     <Compile Include="WrapTrackTestScriptBase.cs" />
     <Compile Include="WtTestscriptUtils.cs" />
     <Compile Include="Collection\TestCase020.cs" />
-    <Compile Include="ZDeveloperTests\Ulrich\AddWrapDataDriven.cs" />
     <Compile Include="Collection\AddCarrier\TestData\WovenTestData.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -197,6 +195,7 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="ZDeveloperTests\Ulrich\" />
     <Folder Include="ZDeveloperTests\XBRO\" />
   </ItemGroup>
   <Choose>
