@@ -1,0 +1,13 @@
+CarrierType	
+BrandProduced	
+WrapFabric	
+Name	
+Brand	
+Pattern	
+Model	
+ConverterType	
+ConvertName	
+MadeOfWrap	
+Grade	
+Acquired	
+Note
