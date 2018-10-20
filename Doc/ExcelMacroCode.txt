@@ -36,25 +36,42 @@ Sub RefreshtestSuite()
     Dim passed As Boolean
     Dim testCaseNumber As String
     Dim testCaseNumberPadded As String
+    Dim stfResultLogFilename As String
     
     Set wSuite = Worksheets(1)
     i = 2
         
-    wSuite.Range("A2:C1000").Clear
+    wSuite.Range("A2:E1000").Clear
     
     For Each w In Worksheets()
         If w.Range("A1") = "TestCaseId" Then
             testCaseNumber = w.Range("B1").Value
+            testCaseNumberPadded = PaddTestCaseNumber(testCaseNumber)
+            stfResultLogFilename = "c:\temp\stf\logs\" & testCaseNumberPadded & "\" & testCaseNumberPadded & ".html"
+            testRunResult = GetPassForLastRun(stfResultLogFilename)
+            
             w.Name = "TC" & testCaseNumber
             Sheets(wSuite.Name).Hyperlinks.Add wSuite.Range("B" & i), "", w.Name & "!A1", "", "" & w.Range("B1").Value & ""
             wSuite.Range("C" & i) = w.Range("B2").Value
             
-            testCaseNumberPadded = PaddTestCaseNumber(testCaseNumber)
-            testRunResult = GetPassForLastRun("c:\temp\stf\logs\" & testCaseNumberPadded & "\" & testCaseNumberPadded & ".html")
-            wSuite.Range("d" & i) = testRunResult
+            Select Case testRunResult
+                Case Is = "Pass"
+                    Range("d" & i).Interior.Color = RGB(66, 244, 66)
+                    wSuite.Hyperlinks.Add Range("D" & i), stfResultLogFilename, "", "Click To Open The log file", testRunResult
+                Case Is = "Fail"
+                    Range("d" & i).Interior.Color = RGB(255, 66, 66)
+                    wSuite.Hyperlinks.Add Range("D" & i), stfResultLogFilename, "", "Click To Open The log file", testRunResult
+                Case Is = "No run"
+                    Range("d" & i).Interior.Color = RGB(65, 214, 244)
+                    wSuite.Range("d" & i) = testRunResult
+            End Select
+            
             i = i + 1
         End If
     Next
+    
+    wSuite.Range("B:B").HorizontalAlignment = xlCenter
+    wSuite.Range("D:D").HorizontalAlignment = xlCenter
 End Sub
 
 Sub AddTestCase()
@@ -62,7 +79,7 @@ Sub AddTestCase()
     Dim wname As String
     
     wname = CStr(Int(10000000 * Rnd(1234567)))
-    Worksheets().Add(After:=Worksheets(Worksheets.Count)).name = wname
+    Worksheets().Add(After:=Worksheets(Worksheets.Count)).Name = wname
     
     Set w = Worksheets(wname)
     w.Range("A1") = "TestCaseId"
@@ -136,4 +153,3 @@ Function FindMaxTCID() As Integer
     
     FindMaxTCID = i
 End Function
-
