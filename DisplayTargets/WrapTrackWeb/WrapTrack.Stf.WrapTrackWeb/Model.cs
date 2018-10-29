@@ -43,7 +43,7 @@ namespace WrapTrack.Stf.WrapTrackWeb
         {
             // click the button 'Administrate pictures' 
             // WebAdapter.ButtonClickById("admModelImages");
-            WebAdapter.ButtonClickByXpath("(//button[@id='admModelImages'])[1]");
+            WebAdapter.ButtonClickByXpath("(//button[@id='admModelImages'])[2]");
 
             WebAdapter.WaitForComplete(3);
 
