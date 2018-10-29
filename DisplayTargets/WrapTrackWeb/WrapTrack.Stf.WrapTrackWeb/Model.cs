@@ -42,7 +42,8 @@ namespace WrapTrack.Stf.WrapTrackWeb
         public bool UploadPicture(string localPathToImage)
         {
             // click the button 'Administrate pictures' 
-            WebAdapter.ButtonClickById("admModelImages");
+            // WebAdapter.ButtonClickById("admModelImages");
+            WebAdapter.ButtonClickByXpath("(//button[@id='admModelImages'])[1]");
 
             WebAdapter.WaitForComplete(3);
 
