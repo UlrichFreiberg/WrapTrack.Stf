@@ -119,7 +119,9 @@ namespace WrapTrackWebTests.Collection
             var wrapInfoAfter = validationTarget.WrapInfoByTrackId(wtId);
             var newOwnerName = wrapInfoAfter.OwnerName;
 
-            StfAssert.AreEqual("User #2 is new owner", newOwnerName, anotherUser);
+            StfAssert.IsTrue("PassedOn Validated", ValidatePassOn(wtId, newOwnerName));
+
+           // StfAssert.AreEqual("User #2 is new owner", newOwnerName, anotherUser);
         }
     }
 }
