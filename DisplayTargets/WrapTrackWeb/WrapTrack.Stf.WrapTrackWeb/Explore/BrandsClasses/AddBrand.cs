@@ -11,7 +11,7 @@
 namespace WrapTrack.Stf.WrapTrackWeb.Explore.BrandsClasses
 {
     using OpenQA.Selenium;
-
+    using System;
     using WrapTrack.Stf.WrapTrackWeb.Interfaces;
     using WrapTrack.Stf.WrapTrackWeb.Interfaces.Brand;
     using WrapTrack.Stf.WrapTrackWeb.Interfaces.Explore.Brands;
@@ -64,7 +64,13 @@ namespace WrapTrack.Stf.WrapTrackWeb.Explore.BrandsClasses
 
             set
             {
-                WebAdapter.TextboxSetTextByXpath("//input[@name='maerke']", value);
+                var results = WebAdapter.TextboxSetTextByXpath("//input[@name='maerke']", value);
+
+                if(!results)
+                {
+                    throw new Exception("New brand Name textbox is not found");
+                }
+
             }
         }
 

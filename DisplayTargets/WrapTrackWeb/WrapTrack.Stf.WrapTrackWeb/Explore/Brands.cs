@@ -36,7 +36,7 @@ namespace WrapTrack.Stf.WrapTrackWeb.Explore
         public IAllBrands All()
         {
             var clicked = WebAdapter.ButtonClickByXpath("//a[normalize-space()='all']");
-            var retVal = Get<IAllBrands>();
+            var retVal = clicked? Get<IAllBrands>() : null;
 
             return retVal;
         }
@@ -50,8 +50,8 @@ namespace WrapTrack.Stf.WrapTrackWeb.Explore
         public IAddBrand AddBrand()
         {
             var clicked = WebAdapter.ButtonClickByXpath("//a[normalize-space()='add brand']");
-            var retVal = Get<IAddBrand>();
-
+            var retVal = clicked ? Get<IAddBrand>() : null;
+            
             return retVal;
         }
     }

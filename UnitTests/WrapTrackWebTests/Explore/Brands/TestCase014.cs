@@ -62,6 +62,9 @@ namespace WrapTrackWebTests.Explore.Brands
 
             var brands = explorer.Brands();
             var addBrand = brands.AddBrand();
+
+            StfAssert.IsNotNull("Add brand", addBrand);
+
             var newBrandName = WtUtils.GetRandomString("StfBrand");
 
             addBrand.NewBrandName = newBrandName;
