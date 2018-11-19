@@ -68,7 +68,7 @@ namespace WrapTrack.Stf.WrapTrackWeb.Explore.BrandsClasses
 
                 if(!results)
                 {
-                    throw new Exception("New brand Name textbox is not found");
+                    throw new Exception("New brand Name textbox is not  found");
                 }
 
             }
