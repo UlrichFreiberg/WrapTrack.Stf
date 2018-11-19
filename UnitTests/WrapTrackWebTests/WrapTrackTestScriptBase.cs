@@ -199,7 +199,9 @@ namespace WrapTrackWebTests
             Wait(TimeSpan.FromSeconds(10));
             var validationTarget = Get<IWtApi>();
             var wrapInfo = validationTarget.WrapInfoByTrackId(wrapToGo);
-            var retVal = wrapInfo.OwnerName == anotherUsername;
+            var retVal = string.Compare(wrapInfo.OwnerName, anotherUsername, StringComparison.InvariantCultureIgnoreCase) == 0;
+
+            StfLogger.LogInfo($"ValidatePassOn: OwnerNow=[{wrapInfo.OwnerName}], anotherUser=[{anotherUsername}]");
 
             return retVal;
         }
