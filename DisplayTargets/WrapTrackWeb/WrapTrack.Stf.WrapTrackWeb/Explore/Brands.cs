@@ -11,6 +11,7 @@
 namespace WrapTrack.Stf.WrapTrackWeb.Explore
 {
     using WrapTrack.Stf.WrapTrackWeb.Interfaces;
+    using WrapTrack.Stf.WrapTrackWeb.Interfaces.Brand;
     using WrapTrack.Stf.WrapTrackWeb.Interfaces.Explore;
     using WrapTrack.Stf.WrapTrackWeb.Interfaces.Explore.Brands;
 
@@ -33,10 +34,13 @@ namespace WrapTrack.Stf.WrapTrackWeb.Explore
         /// <summary>
         /// Gets or sets the all.
         /// </summary>
+        /// <returns>
+        /// The <see cref="IAllBrands"/>.
+        /// </returns>
         public IAllBrands All()
         {
             var clicked = WebAdapter.ButtonClickByXpath("//a[normalize-space()='all']");
-            var retVal = clicked? Get<IAllBrands>() : null;
+            var retVal = clicked ? Get<IAllBrands>() : null;
 
             return retVal;
         }
@@ -51,8 +55,27 @@ namespace WrapTrack.Stf.WrapTrackWeb.Explore
         {
             var clicked = WebAdapter.ButtonClickByXpath("//a[normalize-space()='add brand']");
             var retVal = clicked ? Get<IAddBrand>() : null;
-            
+
             return retVal;
         }
+
+        /// <summary>
+        /// The select and open brand.
+        /// </summary>
+        /// <param name="brandName">
+        /// The brand name.
+        /// </param>
+        /// <returns>
+        /// The <see cref="IBrand"/>.
+        /// </returns>
+        public IBrand SelectAndOpenBrand(string brandName)
+        {
+            var xpath = $"//p[normalize-space()='{brandName.Trim()}']/../div";
+            var clicked = WebAdapter.ButtonClickByXpath(xpath);
+            var retVal = clicked ? Get<IBrand>() : null;
+
+            return retVal;
+        }
+
     }
 }

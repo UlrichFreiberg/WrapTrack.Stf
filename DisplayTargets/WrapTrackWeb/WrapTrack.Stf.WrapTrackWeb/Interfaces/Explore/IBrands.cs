@@ -10,6 +10,7 @@
 
 namespace WrapTrack.Stf.WrapTrackWeb.Interfaces.Explore
 {
+    using WrapTrack.Stf.WrapTrackWeb.Interfaces.Brand;
     using WrapTrack.Stf.WrapTrackWeb.Interfaces.Explore.Brands;
 
     /// <summary>
@@ -32,5 +33,16 @@ namespace WrapTrack.Stf.WrapTrackWeb.Interfaces.Explore
         /// The <see cref="IAddBrand"/>.
         /// </returns>
         IAddBrand AddBrand();
+
+        /// <summary>
+        /// The select and open brand.
+        /// </summary>
+        /// <param name="brandName">
+        /// The brand name.
+        /// </param>
+        /// <returns>
+        /// The <see cref="IBrand"/>.
+        /// </returns>
+        IBrand SelectAndOpenBrand(string brandName);
     }
 }
