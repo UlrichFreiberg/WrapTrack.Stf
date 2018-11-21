@@ -219,12 +219,9 @@ namespace WrapTrackWebTests
             StfAssert.IsInstanceOfType("explorer", explorer, typeof(IExplore));
 
             var brands = explorer.Brands();
-            var addBrand = brands.AddBrand();
+            var selectedBrand = brands.SelectAndOpenBrand("Agossie");
 
-            // TODO: Right now we are not really random :-)
-            var randomBrand = addBrand.OpenRegisteredBrand("Beloved");
-
-            return randomBrand;
+            return selectedBrand;
         }
     }
 }
