@@ -105,14 +105,14 @@ namespace WrapTrack.Stf.WrapTrackWeb.Brand
 
             //const string PatternNameXpath = "//p/input";
             // retVal = WebAdapter.TextboxSetTextByXpath(PatternNameXpath, patternName);
-            retVal = WebAdapter.TextboxSetTextById("inNameNewPattern", patternName);
+            retVal = WebAdapter.TextboxSetTextById("inNameNewElement", patternName);
 
             if (!retVal)
             {
                 return false;
             }
 
-            retVal = WebAdapter.ButtonClickById("add");
+            retVal = WebAdapter.ButtonClickById("create");
 
             if (!retVal)
             {
