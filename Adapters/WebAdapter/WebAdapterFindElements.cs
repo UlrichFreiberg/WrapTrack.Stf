@@ -13,6 +13,8 @@ namespace WrapTrack.Stf.Adapters.WebAdapter
     using System;
     using System.Collections.Generic;
 
+    using Mir.Stf.Utilities;
+
     using OpenQA.Selenium;
     using OpenQA.Selenium.Support.Extensions;
     using OpenQA.Selenium.Support.UI;
@@ -34,6 +36,30 @@ namespace WrapTrack.Stf.Adapters.WebAdapter
         public IWebElement FindElement(By by)
         {
             IWebElement retVal;
+
+            // if configured
+            if (Configuration.CheckForErrorsOnAllPages)
+            {
+                var sourceText = WebDriver.PageSource;
+                var errorIndication = sourceText.Contains(Configuration.CheckForErrorsOnAllPagesText);
+
+                if (errorIndication)
+                {
+                    var errorMsg = $"Found errors [matching {Configuration.CheckForErrorsOnAllPagesText}] on page";
+
+                    StfLogger.LogHeader("****************************");
+                    StfLogger.LogHeader("*** FOUND ERRORS ON PAGE ***");
+                    StfLogger.LogHeader("****************************");
+                    StfLogger.LogScreenshot(StfLogLevel.Error, errorMsg);
+
+                    // Ensure/enforce errors from now on! - of the exception was caught somewhere
+                    WebDriver = null;
+
+                    throw new Exception(errorMsg);
+                }
+
+                StfLogger.LogDebug($"Looked for errors [{Configuration.CheckForErrorsOnAllPagesText}] on page - found none");
+            }
 
             try
             {

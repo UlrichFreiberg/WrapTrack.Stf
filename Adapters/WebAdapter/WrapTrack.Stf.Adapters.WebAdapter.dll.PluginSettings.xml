@@ -3,7 +3,11 @@
 
   <section name="Adapters">
     <section name="WebAdapter">
-      <section name="Browsers" defaultsection="Chrome">
+      <section name="ErrorHandling">
+        <key name="CheckForErrorsOnAllPages" value="false" />
+        <key name="CheckForErrorsOnAllPagesText" value="PHP" />
+      </section>
+        <section name="Browsers" defaultsection="Chrome">
         <section name="InternetExplorer">
           <key name="BrowserName" value="InternetExplorer" />
           <key name="BrowserTimeout" value="180" />
