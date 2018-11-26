@@ -145,6 +145,7 @@
     <Compile Include="SignUp - LogIn\TestCase002.cs" />
     <Compile Include="SignUp - LogIn\TestCase003.cs" />
     <Compile Include="SignUp - LogIn\TestCase004.cs" />
+    <Compile Include="TestCase032.cs" />
     <Compile Include="Upload Pictures\TestCase009.cs" />
     <Compile Include="ZDeveloperTests\DataDrivenTests.cs" />
     <Compile Include="ZDeveloperTests\MenuTests.cs" />
