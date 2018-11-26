@@ -35,9 +35,13 @@ namespace WrapTrack.Stf.WrapTrackWeb.Model
         {
             try
             {
-                var reviewBtn = WebAdapter.FindElement(By.XPath("(//button//span[text()='Review'])[2]"));
+                //var reviewBtn = WebAdapter.FindElement(By.XPath("(//button//span[text()='Review'])[2]"));
+                var buttonClickByXpath = WebAdapter.ButtonClickByXpath("(//button//span[text()='Review'])[2]");
 
-                reviewBtn.Click();
+                if (!buttonClickByXpath)
+                {
+                    return null;
+                }
 
                 var reviewDetails = Get<IReview>();
 

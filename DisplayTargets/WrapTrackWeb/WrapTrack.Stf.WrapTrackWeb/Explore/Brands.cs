@@ -76,6 +76,5 @@ namespace WrapTrack.Stf.WrapTrackWeb.Explore
 
             return retVal;
         }
-
     }
 }
