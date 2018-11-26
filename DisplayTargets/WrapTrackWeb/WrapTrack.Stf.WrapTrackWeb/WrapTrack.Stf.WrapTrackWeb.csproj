@@ -129,6 +129,7 @@
     <Compile Include="Interfaces\Explore\IBrands.cs" />
     <Compile Include="Interfaces\Explore\IExplore.cs" />
     <Compile Include="Interfaces\IModel.cs" />
+    <Compile Include="Interfaces\IReview.cs" />
     <Compile Include="Interfaces\IWrap.cs" />
     <Compile Include="Interfaces\Me\Collection\CarrierManagement\IAddCarrier.cs" />
     <Compile Include="Interfaces\Me\Collection\CarrierManagement\IRingSling.cs" />
@@ -146,7 +147,8 @@
     <Compile Include="Me\Collection\CarrierManagement\WowenWrap.cs" />
     <Compile Include="Me\Collection\CarrierManagement\StretchyWrap.cs" />
     <Compile Include="Me\Collection\DeleteWrapOption.cs" />
-    <Compile Include="Model.cs" />
+    <Compile Include="Model\Model.cs" />
+    <Compile Include="Model\Review.cs" />
     <Compile Include="Wrap.cs" />
     <Compile Include="Me\MeInbox.cs" />
     <Compile Include="Me\MeReviews.cs" />

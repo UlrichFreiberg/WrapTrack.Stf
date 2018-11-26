@@ -123,6 +123,10 @@ namespace WrapTrack.Stf.WrapTrackWeb.Interfaces
         /// </returns>
         bool SignUp();
 
+        bool SignUpAndLogin();
+
+        void SignUp(string newUserName, string password);
+
         /// <summary>
         /// Checks if feedback for user is shown
         /// </summary>

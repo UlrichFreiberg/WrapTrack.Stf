@@ -25,5 +25,7 @@ namespace WrapTrack.Stf.WrapTrackWeb.Interfaces
         /// Indication of success.
         /// </returns>
         bool UploadPicture(string localPathToImage);
+
+        IReview Review();
     }
 }

@@ -47,7 +47,9 @@ namespace WrapTrack.Stf.WrapTrackWeb
 
             stfContainer.RegisterType<Interfaces.IWrap, Wrap>();
 
-            stfContainer.RegisterType<Interfaces.IModel, Model>();
+            stfContainer.RegisterType<Interfaces.IModel, Model.Model>();
+            
+            stfContainer.RegisterType<Interfaces.IReview, Model.Review>();
         }
 
         /// <summary>

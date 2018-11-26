@@ -122,19 +122,25 @@ namespace WrapTrack.Stf.WrapTrackWeb
             const string Password = "123456";
             var newUsername = WtUtils.GetRandomUsername();
 
+            SignUp(newUsername, Password);
+
+            return true;
+        }
+
+        public void SignUp(string newUserName, string password)
+        {
             WebAdapter.ButtonClickById("nav_login");
-            WebAdapter.TextboxSetTextById("input_newuser", newUsername);
-            WebAdapter.TextboxSetTextById("input_newPW", Password);
-            WebAdapter.TextboxSetTextById("input_email", newUsername + "@mitsite.org");
+            WebAdapter.TextboxSetTextById("input_newuser", newUserName);
+            WebAdapter.TextboxSetTextById("input_newPW", password);
+            WebAdapter.TextboxSetTextById("input_email", newUserName + "@mitsite.org");
             WebAdapter.CheckBoxSetValueById("check_cond", true);
             WebAdapter.ButtonClickById("OpretProfilKnap");
 
             // when debugging, we probably want to get to the signed up user 
-            StfLogger.LogKeyValue("SignUpUserName", newUsername, "SignUpUserName");
-            StfLogger.LogKeyValue("SignUpPassword", Password, "SignUpPassword");
-
-            return true;
+            StfLogger.LogKeyValue("SignUpUserName", newUserName, "SignUpUserName");
+            StfLogger.LogKeyValue("SignUpPassword", password, "SignUpPassword");
         }
+
 
         /// <summary>
         /// The collection.
@@ -364,6 +370,26 @@ namespace WrapTrack.Stf.WrapTrackWeb
             }
 
             return value;
+        }
+
+        public bool SignUpAndLogin()
+        {
+            try
+            {
+                const string Password = "123456";
+                var newUsername = WtUtils.GetRandomUsername();
+
+                SignUp(newUsername, Password);
+
+                var loginAsNewUser = Login(newUsername, Password);
+
+                return loginAsNewUser;
+            }
+            catch (Exception ex)
+            {
+                StfLogger.LogError($"Something went wrong when sign up and login. Message : [{ex.Message}]");
+                throw;
+            }
         }
     }
 }

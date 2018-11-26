@@ -8,8 +8,9 @@
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace WrapTrack.Stf.WrapTrackWeb
+namespace WrapTrack.Stf.WrapTrackWeb.Model
 {
+    using System;
     using OpenQA.Selenium;
 
     using WrapTrack.Stf.WrapTrackWeb.Interfaces;
@@ -28,6 +29,26 @@ namespace WrapTrack.Stf.WrapTrackWeb
         public Model(IWrapTrackWebShell wrapTrackWebShell)
             : base(wrapTrackWebShell)
         {
+        }
+
+        public IReview Review()
+        {
+            try
+            {
+                var reviewBtn = WebAdapter.FindElement(By.XPath("(//button//span[text()='Review'])[2]"));
+
+                reviewBtn.Click();
+
+                var reviewDetails = Get<IReview>();
+
+                return reviewDetails;
+            }
+            catch (Exception ex)
+            {
+                StfLogger.LogError($"Something went wrong when opening Review. Message : [{ex.Message}]");
+                throw;
+            }
+
         }
 
         /// <summary>
