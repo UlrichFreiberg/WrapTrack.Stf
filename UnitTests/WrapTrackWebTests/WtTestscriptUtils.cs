@@ -82,7 +82,7 @@ namespace WrapTrackWebTests
                 return false;
             }
 
-            if (textToCheck.Contains("PHP ERROR"))
+            if (textToCheck.Contains("Error"))
             {
                 StfLogger.LogError("While getting text we found a PHP ERROR");
                 return false;
