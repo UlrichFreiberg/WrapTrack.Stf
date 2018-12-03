@@ -16,6 +16,11 @@ namespace WrapTrack.Stf.WrapTrackWeb.Interfaces.Me
     public interface IMeProfile
     {
         /// <summary>
+        /// Gets or sets the username.
+        /// </summary>
+        string Username { get; set; }
+
+        /// <summary>
         /// The image related to MeProfile
         /// </summary>
         /// <returns>
