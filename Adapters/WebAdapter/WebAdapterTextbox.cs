@@ -10,9 +10,8 @@
 
 namespace WrapTrack.Stf.Adapters.WebAdapter
 {
-    using System;
-
     using OpenQA.Selenium;
+    using System;
 
     /// <summary>
     /// The web adapter.
@@ -78,7 +77,7 @@ namespace WrapTrack.Stf.Adapters.WebAdapter
         private bool TextboxSetTextBy(By by, string textToEnter, bool handlePopup = false)
         {
             StfLogger.LogDebug($"Textbox : Setting text [{textToEnter}] - by=[{by}]");
-            WaitForComplete(1);
+            WaitForComplete(2);
 
             var element = FindElement(by);
 
