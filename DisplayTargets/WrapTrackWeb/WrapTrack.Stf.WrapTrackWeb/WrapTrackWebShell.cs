@@ -9,6 +9,7 @@
 // --------------------------------------------------------------------------------------------------------------------
 
 using System;
+using System.Collections.Generic;
 
 namespace WrapTrack.Stf.WrapTrackWeb
 {
@@ -122,12 +123,10 @@ namespace WrapTrack.Stf.WrapTrackWeb
             const string Password = "123456";
             var newUsername = WtUtils.GetRandomUsername();
 
-            SignUp(newUsername, Password);
-
-            return true;
+            return SignUp(newUsername, Password);
         }
 
-        public void SignUp(string newUserName, string password)
+        public bool SignUp(string newUserName, string password)
         {
             WebAdapter.ButtonClickById("nav_login");
             WebAdapter.TextboxSetTextById("input_newuser", newUserName);
@@ -139,8 +138,9 @@ namespace WrapTrack.Stf.WrapTrackWeb
             // when debugging, we probably want to get to the signed up user 
             StfLogger.LogKeyValue("SignUpUserName", newUserName, "SignUpUserName");
             StfLogger.LogKeyValue("SignUpPassword", password, "SignUpPassword");
-        }
 
+            return CheckSignUpValidationMessages();
+        }
 
         /// <summary>
         /// The collection.
@@ -181,8 +181,8 @@ namespace WrapTrack.Stf.WrapTrackWeb
             // press the second level top menu tab - called "profile"
             buttonClicked = WebAdapter.ButtonClickById("nav_profile");
 
-            var retVal = buttonClicked 
-                ? StfContainer.Get<IMeProfile>() 
+            var retVal = buttonClicked
+                ? StfContainer.Get<IMeProfile>()
                 : null;
 
             return retVal;
@@ -197,7 +197,7 @@ namespace WrapTrack.Stf.WrapTrackWeb
         public IExplore Explore()
         {
             var clicked = WebAdapter.ButtonClickById("nav_explore");
-            var retVal = clicked 
+            var retVal = clicked
                        ? StfContainer.Get<IExplore>()
                        : null;
 
@@ -372,6 +372,7 @@ namespace WrapTrack.Stf.WrapTrackWeb
             return value;
         }
 
+        /// <inheritdoc />
         public bool SignUpAndLogin()
         {
             try
@@ -379,7 +380,12 @@ namespace WrapTrack.Stf.WrapTrackWeb
                 const string Password = "123456";
                 var newUsername = WtUtils.GetRandomUsername();
 
-                SignUp(newUsername, Password);
+                var signUpNewUser = SignUp(newUsername, Password);
+
+                if (!signUpNewUser)
+                {
+                    return false;
+                }
 
                 var loginAsNewUser = Login(newUsername, Password);
 
@@ -390,6 +396,35 @@ namespace WrapTrack.Stf.WrapTrackWeb
                 StfLogger.LogError($"Something went wrong when sign up and login. Message : [{ex.Message}]");
                 throw;
             }
+        }
+
+
+        private bool CheckSignUpValidationMessages()
+        {
+            var validationMessagesDoesntExists = true;
+
+            var signUpValidationMessages = new List<string>
+            {
+                "Please read and approve the terms and conditions",
+                "The username must be between four and 25 characters long. Only numbers, letters, and hyphen are accepted.",
+                "The password must be at least five characters long.",
+                "Please specify a valid e-mail address"
+            };
+
+            foreach (var signUpValidationMessage in signUpValidationMessages)
+            {
+                var xpath = $@"(//p[text()='{signUpValidationMessage}'])[1]";
+
+                var validationMessageElement = WebAdapter.FindElement(By.XPath(xpath));
+
+                if (validationMessageElement != null)
+                {
+                    validationMessagesDoesntExists = false;
+                    StfLogger.LogError($"SignUp. There is validation error. Message : [{signUpValidationMessage}]");
+                }
+            }
+
+            return validationMessagesDoesntExists;
         }
     }
 }

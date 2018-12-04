@@ -1,9 +1,17 @@
 ﻿namespace WrapTrack.Stf.WrapTrackWeb.Interfaces
 {
+   /// <summary>
+   /// The Review
+   /// </summary>
    public interface IReview
     {
 
-        //toDo: change it later
-        string Description { get; set; }
+        /// <summary>
+        /// Set description.
+        /// </summary>
+        string Description { set; }
+
+        bool Add();
+
     }
 }
