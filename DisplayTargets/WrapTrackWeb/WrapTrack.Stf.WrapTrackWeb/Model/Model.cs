@@ -31,13 +31,19 @@ namespace WrapTrack.Stf.WrapTrackWeb.Model
         {
         }
 
+        /// <summary>
+        /// The review.
+        /// </summary>
+        /// <returns>
+        /// The <see cref="IReview"/>.
+        /// </returns>
         public IReview Review()
         {
             try
             {
                 var buttonClick = WebAdapter.ButtonClickByXpath("(//button//span[text()='Review'])[2]");
-                //var buttonClick = WebAdapter.ButtonClickById("butAddReview");
-
+                
+                // var buttonClick = WebAdapter.ButtonClickById("butAddReview");
                 if (!buttonClick)
                 {
                     return null;
@@ -52,7 +58,6 @@ namespace WrapTrack.Stf.WrapTrackWeb.Model
                 StfLogger.LogError($"Something went wrong when opening Review. Message : [{ex.Message}]");
                 throw;
             }
-
         }
 
         /// <summary>

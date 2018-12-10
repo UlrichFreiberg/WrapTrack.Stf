@@ -51,10 +51,18 @@ namespace WrapTrackWebTests
 
             var numberOfReviewAfterAddingNewOne = GetNumberOfReviewsForNatibaby();
 
-            StfAssert.AreEqual("Number of review after adding new one increased by 1",
-                numberOfReviewBeforeAddingNewOne + 1, numberOfReviewAfterAddingNewOne);
+            StfAssert.AreEqual(
+                "Number of review after adding new one increased by 1",
+                numberOfReviewBeforeAddingNewOne + 1,
+                numberOfReviewAfterAddingNewOne);
         }
 
+        /// <summary>
+        /// The add new review.
+        /// </summary>
+        /// <param name="natiBabyMuluModel">
+        /// The nati baby mulu model.
+        /// </param>
         private void AddNewReview(IModel natiBabyMuluModel)
         {
             var review = natiBabyMuluModel.Review();
@@ -68,6 +76,12 @@ namespace WrapTrackWebTests
             StfAssert.IsTrue("Added review by new user", addReview);
         }
 
+        /// <summary>
+        /// The create user and find nati baby mulu model.
+        /// </summary>
+        /// <returns>
+        /// The <see cref="IModel"/>.
+        /// </returns>
         private IModel CreateUserAndFindNatiBabyMuluModel()
         {
             StfAssert.IsNotNull("wrapTrackShell", WrapTrackShell);
@@ -82,7 +96,12 @@ namespace WrapTrackWebTests
             return natiBabyMuluModel;
         }
 
-
+        /// <summary>
+        /// The get number of reviews for natibaby.
+        /// </summary>
+        /// <returns>
+        /// The <see cref="int"/>.
+        /// </returns>
         private int GetNumberOfReviewsForNatibaby()
         {
             var brandInfo = wtApi.BrandInfoByBrandId("5");

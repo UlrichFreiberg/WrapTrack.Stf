@@ -126,6 +126,18 @@ namespace WrapTrack.Stf.WrapTrackWeb
             return SignUp(newUsername, Password);
         }
 
+        /// <summary>
+        /// The sign up.
+        /// </summary>
+        /// <param name="newUserName">
+        /// The new user name.
+        /// </param>
+        /// <param name="password">
+        /// The password.
+        /// </param>
+        /// <returns>
+        /// The <see cref="bool"/>.
+        /// </returns>
         public bool SignUp(string newUserName, string password)
         {
             WebAdapter.ButtonClickById("nav_login");
@@ -349,30 +361,13 @@ namespace WrapTrack.Stf.WrapTrackWeb
             StfLogger.LogKeyValue("Current Directory", currentDomainBaseDirectory, "Current Directory");
             return true;
         }
-
+        
         /// <summary>
-        /// The handle default.
+        /// The sign up and login.
         /// </summary>
-        /// <param name="value">
-        /// The value.
-        /// </param>
-        /// <param name="defaultIfNull">
-        /// The default if null.
-        /// </param>
         /// <returns>
-        /// The <see cref="string"/>.
+        /// The <see cref="bool"/>.
         /// </returns>
-        private string HandleDefault(string value, string defaultIfNull)
-        {
-            if (string.IsNullOrWhiteSpace(value))
-            {
-                return defaultIfNull;
-            }
-
-            return value;
-        }
-
-        /// <inheritdoc />
         public bool SignUpAndLogin()
         {
             try
@@ -398,10 +393,15 @@ namespace WrapTrack.Stf.WrapTrackWeb
             }
         }
 
-
+        /// <summary>
+        /// The check sign up validation messages.
+        /// </summary>
+        /// <returns>
+        /// The <see cref="bool"/>.
+        /// </returns>
         private bool CheckSignUpValidationMessages()
         {
-            var validationMessagesDoesntExists = true;
+            var validationMessagesDoNotExist = true;
 
             var signUpValidationMessages = new List<string>
             {
@@ -419,12 +419,34 @@ namespace WrapTrack.Stf.WrapTrackWeb
 
                 if (validationMessageElement != null)
                 {
-                    validationMessagesDoesntExists = false;
+                    validationMessagesDoNotExist = false;
                     StfLogger.LogError($"SignUp. There is validation error. Message : [{signUpValidationMessage}]");
                 }
             }
 
-            return validationMessagesDoesntExists;
+            return validationMessagesDoNotExist;
+        }
+
+        /// <summary>
+        /// The handle default.
+        /// </summary>
+        /// <param name="value">
+        /// The value.
+        /// </param>
+        /// <param name="defaultIfNull">
+        /// The default if null.
+        /// </param>
+        /// <returns>
+        /// The <see cref="string"/>.
+        /// </returns>
+        private string HandleDefault(string value, string defaultIfNull)
+        {
+            if (string.IsNullOrWhiteSpace(value))
+            {
+                return defaultIfNull;
+            }
+
+            return value;
         }
     }
 }

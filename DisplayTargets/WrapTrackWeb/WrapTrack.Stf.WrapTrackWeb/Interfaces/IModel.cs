@@ -26,6 +26,12 @@ namespace WrapTrack.Stf.WrapTrackWeb.Interfaces
         /// </returns>
         bool UploadPicture(string localPathToImage);
 
+        /// <summary>
+        /// The review.
+        /// </summary>
+        /// <returns>
+        /// The <see cref="IReview"/>.
+        /// </returns>
         IReview Review();
     }
 }
