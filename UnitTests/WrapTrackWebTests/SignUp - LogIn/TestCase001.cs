@@ -10,7 +10,11 @@
 
 namespace WrapTrackWebTests
 {
+    using System.Security.Policy;
+
     using Microsoft.VisualStudio.TestTools.UnitTesting;
+
+    using Mir.Stf.Utilities;
 
     using WrapTrack.Stf.WrapTrackWeb.Interfaces;
 
@@ -55,9 +59,12 @@ namespace WrapTrackWebTests
         [TestMethod]
         public void Tc001()
         {
+            // WrapTrackShell.WebAdapter.Configuration.CheckForErrorsOnAllPagesText = "Error # ParseError";
+            WrapTrackShell.WebAdapter.Configuration.CheckForErrorsOnAllPagesText = "do not match # ParseError";
+            WrapTrackShell.WebAdapter.Configuration.CheckForErrorsOnAllPages = true;
+
             // Use default user
             WrapTrackShell.Login(); 
-            StfAssert.IsTrue("No php errors", wtTestscriptUtils.PhpErrorFree(WrapTrackShell.WebAdapter));
 
             // And the result....
             var me = WrapTrackShell.Me();
