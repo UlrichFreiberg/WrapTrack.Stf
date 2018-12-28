@@ -13,10 +13,13 @@ namespace WrapTrack.Stf.WrapTrackWeb.News
     using WrapTrack.Stf.WrapTrackWeb.Interfaces;
     using WrapTrack.Stf.WrapTrackWeb.Interfaces.News;
 
+    /// <summary>
+    /// The News entry carrier story section - 
+    /// </summary>
     public class NewsEntryCarrierStory : WrapTrackWebShellModelBase, INewsEntryCarrierStory
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="News"/> class.
+        /// Initializes a new instance of the <see cref="NewsEntryCarrierStory"/> class. 
         /// </summary>
         /// <param name="wrapTrackWebShell">
         /// The wrap track web shell.
@@ -28,8 +31,14 @@ namespace WrapTrack.Stf.WrapTrackWeb.News
             ChapterText = "Not implemented yet";
         }
 
+        /// <summary>
+        /// Gets or sets the header text.
+        /// </summary>
         public string HeaderText { get; set; }
 
+        /// <summary>
+        /// Gets or sets the chapter text.
+        /// </summary>
         public string ChapterText { get; set; }
     }
 }

@@ -19,7 +19,7 @@ namespace WrapTrack.Stf.WrapTrackWeb.News
     using WrapTrack.Stf.WrapTrackWeb.Interfaces.News;
 
     /// <summary>
-    /// The Newsr tab page - wraps section.
+    /// The News tab page - wraps section.
     /// </summary>
     public class News : WrapTrackWebShellModelBase, INews
     {
@@ -34,6 +34,18 @@ namespace WrapTrack.Stf.WrapTrackWeb.News
         {
         }
 
+        /// <summary>
+        /// The get news entry carrier story.
+        /// </summary>
+        /// <param name="wrapId">
+        /// The wrap id.
+        /// </param>
+        /// <param name="chapterText">
+        /// The chapter text.
+        /// </param>
+        /// <returns>
+        /// The <see cref="INewsEntryCarrierStory"/>.
+        /// </returns>
         public INewsEntryCarrierStory GetNewsEntryCarrierStory(string wrapId, string chapterText)
         {
             var elements = WebAdapter.FindElements(By.Id("baereredskab_fortaelling"));
