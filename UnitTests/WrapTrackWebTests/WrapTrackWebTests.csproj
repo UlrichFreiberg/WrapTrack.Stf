@@ -140,6 +140,7 @@
     <Compile Include="Explore\Brands\TestCase014.cs" />
     <Compile Include="Explore\Brands\TestCase016.cs" />
     <Compile Include="Explore\Brands\TestCase015.cs" />
+    <Compile Include="News\TestCase027.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SignUp - LogIn\TestCase001.cs" />
     <Compile Include="SignUp - LogIn\TestCase002.cs" />

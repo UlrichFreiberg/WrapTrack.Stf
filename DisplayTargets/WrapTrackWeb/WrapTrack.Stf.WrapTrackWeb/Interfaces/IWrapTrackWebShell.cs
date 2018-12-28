@@ -18,6 +18,7 @@ namespace WrapTrack.Stf.WrapTrackWeb.Interfaces
     using WrapTrack.Stf.WrapTrackWeb.Interfaces.Explore;
     using WrapTrack.Stf.WrapTrackWeb.Interfaces.FaqContact;
     using WrapTrack.Stf.WrapTrackWeb.Interfaces.Me;
+    using WrapTrack.Stf.WrapTrackWeb.Interfaces.News;
 
     /// <summary>
     /// The WrapTrackWebShell interface.
@@ -60,6 +61,14 @@ namespace WrapTrack.Stf.WrapTrackWeb.Interfaces
         /// The <see cref="IMeProfile"/>.
         /// </returns>
         IMeProfile Me();
+
+        /// <summary>
+        /// The news.
+        /// </summary>
+        /// <returns>
+        /// The <see cref="INews"/>.
+        /// </returns>
+        INews News();
 
         /// <summary>
         /// The explorer.
