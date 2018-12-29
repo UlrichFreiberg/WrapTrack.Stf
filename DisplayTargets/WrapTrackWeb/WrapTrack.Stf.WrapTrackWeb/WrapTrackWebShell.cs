@@ -13,6 +13,8 @@ using System.Collections.Generic;
 
 namespace WrapTrack.Stf.WrapTrackWeb
 {
+    using System.Text;
+
     using OpenQA.Selenium;
     using WrapTrack.Stf.Adapters.WebAdapter;
     using WrapTrack.Stf.Core;
@@ -21,6 +23,7 @@ namespace WrapTrack.Stf.WrapTrackWeb
     using WrapTrack.Stf.WrapTrackWeb.Interfaces.Explore;
     using WrapTrack.Stf.WrapTrackWeb.Interfaces.FaqContact;
     using WrapTrack.Stf.WrapTrackWeb.Interfaces.Me;
+    using WrapTrack.Stf.WrapTrackWeb.Interfaces.News;
 
     /// <summary>
     /// The demo corp web shell.
@@ -196,6 +199,22 @@ namespace WrapTrack.Stf.WrapTrackWeb
             var retVal = buttonClicked
                 ? StfContainer.Get<IMeProfile>()
                 : null;
+
+            return retVal;
+        }
+
+        /// <summary>
+        /// The news.
+        /// </summary>
+        /// <returns>
+        /// The <see cref="INews"/>.
+        /// </returns>
+        public INews News()
+        {
+            var clicked = WebAdapter.ButtonClickById("nav_home");
+            var retVal = clicked
+                       ? StfContainer.Get<INews>()
+                       : null;
 
             return retVal;
         }
@@ -401,8 +420,6 @@ namespace WrapTrack.Stf.WrapTrackWeb
         /// </returns>
         private bool CheckSignUpValidationMessages()
         {
-            var validationMessagesDoNotExist = true;
-
             var signUpValidationMessages = new List<string>
             {
                 "Please read and approve the terms and conditions",
@@ -411,20 +428,25 @@ namespace WrapTrack.Stf.WrapTrackWeb
                 "Please specify a valid e-mail address"
             };
 
+            // we dont want to wait "long time" for each message, which we would if not initially wating 3 secs.. Now each can wait 1!
+            WebAdapter.WaitForComplete(3);
+
             foreach (var signUpValidationMessage in signUpValidationMessages)
             {
                 var xpath = $@"(//p[text()='{signUpValidationMessage}'])[1]";
+                var validationMessageElement = WebAdapter.FindElement(By.XPath(xpath), 1);
 
-                var validationMessageElement = WebAdapter.FindElement(By.XPath(xpath));
-
-                if (validationMessageElement != null)
+                if (validationMessageElement == null)
                 {
-                    validationMessagesDoNotExist = false;
-                    StfLogger.LogError($"SignUp. There is validation error. Message : [{signUpValidationMessage}]");
+                    // found no error indication - All's well - so far...
+                    continue;
                 }
+
+                StfLogger.LogError($"SignUp. There is validation error. Message : [{signUpValidationMessage}]");
+                return false;
             }
 
-            return validationMessagesDoNotExist;
+            return true;
         }
 
         /// <summary>
