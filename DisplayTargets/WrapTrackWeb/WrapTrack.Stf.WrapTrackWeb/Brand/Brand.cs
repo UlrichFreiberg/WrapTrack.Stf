@@ -94,8 +94,6 @@ namespace WrapTrack.Stf.WrapTrackWeb.Brand
         /// </returns>
         public bool AddPattern(string patternName)
         {
-            //const string AddPatternXpath = "//span/span[text()='Add pattern']";
-            //var retVal = WebAdapter.ButtonClickByXpath(AddPatternXpath);
             var retVal = WebAdapter.ButtonClickById("addPattern");
 
             if (!retVal)
@@ -103,8 +101,6 @@ namespace WrapTrack.Stf.WrapTrackWeb.Brand
                 return false;
             }
 
-            //const string PatternNameXpath = "//p/input";
-            // retVal = WebAdapter.TextboxSetTextByXpath(PatternNameXpath, patternName);
             retVal = WebAdapter.TextboxSetTextById("inNameNewElement", patternName);
 
             if (!retVal)
@@ -120,6 +116,9 @@ namespace WrapTrack.Stf.WrapTrackWeb.Brand
             }
 
             retVal = WebAdapter.ButtonClickById("create");
+
+            // gotta wait for the WT to process the add...
+            WebAdapter.WaitForComplete(1);
 
             return retVal;
         }
