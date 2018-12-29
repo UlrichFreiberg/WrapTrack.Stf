@@ -8,15 +8,11 @@
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
 
-using OpenQA.Selenium;
-
 namespace WrapTrackWebTests
 {
     using System;
 
     using Mir.Stf.Utilities.Interfaces;
-
-    using WrapTrack.Stf.Adapters.WebAdapter;
 
     /// <summary>
     /// The util.
@@ -57,44 +53,6 @@ namespace WrapTrackWebTests
             var retVal = date.ToString(format);
 
             return retVal;
-        }
-
-        /// <summary>
-        /// The php error free.
-        /// </summary>
-        /// <param name="webAdapter">
-        /// The web adapter.
-        /// </param>
-        /// <returns>
-        /// True it no PHP errors found on current page
-        /// </returns>
-        public bool PhpErrorFree(IWebAdapter webAdapter)
-        {
-            string textToCheck;
-
-            try
-            {
-                textToCheck = webAdapter.GetText(By.XPath("//*"));
-            }
-            catch (Exception ex)
-            {
-                StfLogger.LogError($"While getting text we got this exception: [{ex}]");
-                return false;
-            }
-
-            if (textToCheck.Contains("Error"))
-            {
-                StfLogger.LogError("While getting text we found a PHP ERROR");
-                return false;
-            }
-
-            if (textToCheck.Contains("ParseError"))
-            {
-                StfLogger.LogError("While getting text we found a parseError");
-                return false;
-            }
-
-            return true;
         }
     }
 }
