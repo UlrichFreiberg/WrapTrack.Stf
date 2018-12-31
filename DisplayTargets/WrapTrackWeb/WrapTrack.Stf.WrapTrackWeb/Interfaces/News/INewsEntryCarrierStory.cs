@@ -16,13 +16,23 @@ namespace WrapTrack.Stf.WrapTrackWeb.Interfaces.News
     public interface INewsEntryCarrierStory
     {
         /// <summary>
-        /// Gets or sets the Header text
+        /// Gets or sets the text.
         /// </summary>
-        string HeaderText { get; set; }
+        string Text { get; set; }
 
         /// <summary>
-        /// Gets or sets the chapter text.
+        /// Gets the Header text
         /// </summary>
-        string ChapterText { get; set; }
+        string HeaderText { get; }
+
+        /// <summary>
+        /// Gets the chapter text.
+        /// </summary>
+        string ChapterText { get; }
+
+        /// <summary>
+        /// Gets the wrap text.
+        /// </summary>
+        string WrapText { get; }
     }
 }

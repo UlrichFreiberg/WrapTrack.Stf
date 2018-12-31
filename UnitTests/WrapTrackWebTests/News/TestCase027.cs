@@ -141,9 +141,6 @@ namespace WrapTrackWebTests.News
 
             StfAssert.IsNotNull("NewsEntry", newsEntry);
 
-            // TODO: missing model implementation:           
-            //// StfAssert.StringEqualsCi("Testing chapter text", chapterText, newsEntry.ChapterText);
-
             return true;
         }
     }

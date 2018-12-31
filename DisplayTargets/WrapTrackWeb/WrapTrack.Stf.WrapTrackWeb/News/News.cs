@@ -10,8 +10,11 @@
 
 namespace WrapTrack.Stf.WrapTrackWeb.News
 {
+    using System;
     using System.Linq;
     using System.Net.Http.Headers;
+
+    using Mir.Stf.Utilities;
 
     using OpenQA.Selenium;
 
@@ -35,7 +38,7 @@ namespace WrapTrack.Stf.WrapTrackWeb.News
         }
 
         /// <summary>
-        /// The get news entry carrier story.
+        /// The get news entry carrier story that contyains the chapter text for the wrap.
         /// </summary>
         /// <param name="wrapId">
         /// The wrap id.
@@ -56,12 +59,36 @@ namespace WrapTrack.Stf.WrapTrackWeb.News
                 return null;
             }
 
-            //var element = elements.First();
-            // and then some validation for WrapId and Text
+            var element = elements.First();
+            if (element == null)
+            {
+                StfLogger.LogError("elements.first() returned a null element");
+                return null;
+            }
 
-            var retVal = Get<INewsEntryCarrierStory>();
+            var newsEntryCarrierStory = Get<INewsEntryCarrierStory>();
 
-            return retVal;
+            if (newsEntryCarrierStory == null)
+            {
+                StfLogger.LogError("Could not newsEntryCarrierStory from Get<INewsEntryCarrierStory>");
+                return null;
+            }
+
+            newsEntryCarrierStory.Text = element.Text;
+
+            // :TODO test also for currentloggedinser at start of header text. Waiting for issue #33. See next comment line
+            // if (!newsEntryCarrierStory.HeaderText.Contains(WrapTrackWebShell.CurrentLoggedInUser)
+            var baseHeaderTextForNewsStory = "has written a new chapter in the story";
+            if (!newsEntryCarrierStory.HeaderText.Contains(baseHeaderTextForNewsStory)
+                || 
+                !newsEntryCarrierStory.WrapText.Contains(wrapId)
+                ||
+                !newsEntryCarrierStory.ChapterText.Equals(chapterText))
+            {
+                return null;
+            }
+
+            return newsEntryCarrierStory;
         }
     }
 }
