@@ -69,6 +69,7 @@ namespace WrapTrackWebTests.News
             var doesNewsExist = DoesNewsExist(newWrap, ChapterText);
 
             StfAssert.IsTrue("Does news exist for the added Chapter", doesNewsExist);
+            StfLogger.LogInfo("Hi Brian, here is the currently logged in user {0}", WrapTrackShell.CurrentLoggedInUser);
         }
 
         /// <summary>

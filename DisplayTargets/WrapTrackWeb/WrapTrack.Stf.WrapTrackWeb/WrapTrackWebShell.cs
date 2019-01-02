@@ -13,8 +13,6 @@ using System.Collections.Generic;
 
 namespace WrapTrack.Stf.WrapTrackWeb
 {
-    using System.Text;
-
     using OpenQA.Selenium;
     using WrapTrack.Stf.Adapters.WebAdapter;
     using WrapTrack.Stf.Core;
@@ -124,9 +122,13 @@ namespace WrapTrack.Stf.WrapTrackWeb
         public bool SignUp()
         {
             const string Password = "123456";
-            var newUsername = WtUtils.GetRandomUsername();
+            var randomUsername = WtUtils.GetRandomUsername();
+            var retVal = SignUp(randomUsername, Password);
 
-            return SignUp(newUsername, Password);
+            // Remember the logged in user
+            CurrentLoggedInUser = randomUsername;
+
+            return retVal;
         }
 
         /// <summary>
