@@ -153,6 +153,7 @@
     <Compile Include="Model\Review.cs" />
     <Compile Include="News\News.cs" />
     <Compile Include="News\NewsEntryCarrierStory.cs" />
+    <Compile Include="News\NewsEntryTypes.cs" />
     <Compile Include="Wrap.cs" />
     <Compile Include="Me\MeInbox.cs" />
     <Compile Include="Me\MeReviews.cs" />
