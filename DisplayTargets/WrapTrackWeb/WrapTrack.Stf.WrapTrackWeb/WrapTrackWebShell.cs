@@ -156,7 +156,11 @@ namespace WrapTrack.Stf.WrapTrackWeb
             StfLogger.LogKeyValue("SignUpUserName", newUserName, "SignUpUserName");
             StfLogger.LogKeyValue("SignUpPassword", password, "SignUpPassword");
 
-            return CheckSignUpValidationMessages();
+            // Check If still on LOGIN page <h1>Login</h1> - if so then the signup failed
+            var loginHeader = WebAdapter.FindElement(By.XPath("//h1[text='Login']"), 2);
+            var retVal = loginHeader == null || CheckSignUpValidationMessages();
+
+            return retVal;
         }
 
         /// <summary>
@@ -395,17 +399,9 @@ namespace WrapTrack.Stf.WrapTrackWeb
             {
                 const string Password = "123456";
                 var newUsername = WtUtils.GetRandomUsername();
-
                 var signUpNewUser = SignUp(newUsername, Password);
 
-                if (!signUpNewUser)
-                {
-                    return false;
-                }
-
-                var loginAsNewUser = Login(newUsername, Password);
-
-                return loginAsNewUser;
+                return signUpNewUser;
             }
             catch (Exception ex)
             {

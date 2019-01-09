@@ -44,7 +44,6 @@ namespace WrapTrackWebTests
         public void Tc032()
         {
             var natiBabyMuluModel = CreateUserAndFindNatiBabyMuluModel();
-
             var numberOfReviewBeforeAddingNewOne = GetNumberOfReviewsForNatibaby();
 
             AddNewReview(natiBabyMuluModel);
