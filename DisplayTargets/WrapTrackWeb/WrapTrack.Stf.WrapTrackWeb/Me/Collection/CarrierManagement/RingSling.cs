@@ -43,5 +43,21 @@ namespace WrapTrack.Stf.WrapTrackWeb.Me.Collection.CarrierManagement
         /// Gets or sets a name for a ring sling not not made of woven wrap fabric.
         /// </summary>
         public string Name { get; set; }
+
+        /// <summary>
+        /// Gets or sets the produced by.
+        /// TODO: // Needs some JS implementation....
+        /// </summary>
+        public CarrierProducedBy ProducedBy { get; set; }
+
+        /// <summary>
+        /// Gets or sets a value indicating whether shoulder right left.
+        /// </summary>
+        public bool ShoulderRightLeft { get; set; }
+
+        /// <summary>
+        /// Gets or sets the ring sling shoulder type.
+        /// </summary>
+        public RingSlingShoulderType RingSlingShoulderType { get; set; }
     }
 }

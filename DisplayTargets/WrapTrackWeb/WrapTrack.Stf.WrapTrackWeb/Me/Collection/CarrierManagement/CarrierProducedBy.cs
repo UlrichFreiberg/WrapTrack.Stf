@@ -1,25 +1,28 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="IWowenWrap.cs" company="Mir Software">
+// <copyright file="CarrierProducedBy.cs" company="Mir Software">
 //   Copyright governed by Artistic license as described here:
 //          http://www.perlfoundation.org/artistic_license_2_0
 // </copyright>
 // <summary>
-//   The WowenWrap interface.
+//   Defines the CarrierProducedBy type.
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace WrapTrack.Stf.WrapTrackWeb.Interfaces.Me.Collection.CarrierManagement
+namespace WrapTrack.Stf.WrapTrackWeb.Me.Collection.CarrierManagement
 {
-    using System;
-
     /// <summary>
-    /// The WowenWrap interface.
+    /// The carrier produced by.
     /// </summary>
-    public interface IWowenWrap : ICarrierBase
+    public enum CarrierProducedBy
     {
         /// <summary>
-        /// Gets or sets a value indicating whether home made.
+        /// The brand.
         /// </summary>
-        bool HomeMade { get; set; }
+        Brand,
+
+        /// <summary>
+        /// The private or converter.
+        /// </summary>
+        PrivateOrConverter
     }
 }

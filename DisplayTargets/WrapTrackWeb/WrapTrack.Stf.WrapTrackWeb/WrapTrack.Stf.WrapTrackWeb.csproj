@@ -132,9 +132,11 @@
     <Compile Include="Interfaces\IReview.cs" />
     <Compile Include="Interfaces\IWrap.cs" />
     <Compile Include="Interfaces\Me\Collection\CarrierManagement\IAddCarrier.cs" />
+    <Compile Include="Interfaces\Me\Collection\CarrierManagement\ICarrierBase.cs" />
     <Compile Include="Interfaces\Me\Collection\CarrierManagement\IRingSling.cs" />
     <Compile Include="Interfaces\Me\Collection\CarrierManagement\IStretchyWrap.cs" />
     <Compile Include="Interfaces\Me\Collection\CarrierManagement\IWowenWrap.cs" />
+    <Compile Include="Interfaces\Me\Collection\CarrierManagement\RingSlingShoulderType.cs" />
     <Compile Include="Interfaces\Me\IMeInbox.cs" />
     <Compile Include="Interfaces\Me\IMeReviews.cs" />
     <Compile Include="Interfaces\Me\IMeSettings.cs" />
@@ -144,6 +146,7 @@
     <Compile Include="Me\Collection\CarrierManagement\AddCarrier.cs" />
     <Compile Include="Me\Collection\CarrierManagement\AddCarrierType.cs" />
     <Compile Include="Me\Collection\CarrierManagement\CarrierBaseClass.cs" />
+    <Compile Include="Me\Collection\CarrierManagement\CarrierProducedBy.cs" />
     <Compile Include="Me\Collection\CarrierManagement\RingSling.cs" />
     <Compile Include="Me\Collection\CarrierManagement\Other.cs" />
     <Compile Include="Me\Collection\CarrierManagement\WowenWrap.cs" />

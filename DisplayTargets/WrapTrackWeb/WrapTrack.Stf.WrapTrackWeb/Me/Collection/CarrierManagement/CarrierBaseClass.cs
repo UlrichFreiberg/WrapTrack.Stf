@@ -87,6 +87,42 @@ namespace WrapTrack.Stf.WrapTrackWeb.Me.Collection.CarrierManagement
         }
 
         /// <summary>
+        /// Gets or sets the carrier model.
+        /// </summary>
+        public string CarrierModel
+        {
+            get
+            {
+                var retVal = WebAdapter.SelectElementGetText(By.Id("sel_carrier_model"));
+
+                return retVal;
+            }
+
+            set
+            {
+                WebAdapter.SelectElementSetText(By.Id("sel_carrier_model"), value);
+            }
+        }
+
+        /// <summary>
+        /// Gets or sets the carrier type.
+        /// </summary>
+        public string CarrierType
+        {
+            get
+            {
+                var retVal = WebAdapter.SelectElementGetText(By.Id("sel_carrier_type"));
+
+                return retVal;
+            }
+
+            set
+            {
+                WebAdapter.SelectElementSetText(By.Id("sel_carrier_type"), value);
+            }
+        }
+
+        /// <summary>
         /// Gets or sets the converted wrap.
         /// </summary>
         public string MadeOfWrap
@@ -111,14 +147,14 @@ namespace WrapTrack.Stf.WrapTrackWeb.Me.Collection.CarrierManagement
         {
             get
             {
-                var retVal = WebAdapter.CheckBoxGetValueByXpath("//span[text()='Converted by a private person or sling converter']/../input");
+                var retVal = WebAdapter.CheckBoxGetValueByXpath("//span[text()='The wrap has been converted from another wrap']/../input");
 
                 return retVal;
             }
 
             set
             {
-                WebAdapter.CheckBoxSetValueByXpath("//span[text()='Converted by a private person or sling converter']/../input", value);
+                WebAdapter.CheckBoxSetValueByXpath("//span[text()='The wrap has been converted from another wrap']/../input", value);
             }
         }
 
@@ -154,6 +190,13 @@ namespace WrapTrack.Stf.WrapTrackWeb.Me.Collection.CarrierManagement
 
             set
             {
+                // in some circumstances the name makes no sense - like when converter type is "unknown"
+                // Leaving it up to the test script to decide!
+                if (string.IsNullOrEmpty(value))
+                {
+                    return;
+                }
+
                 WebAdapter.TextboxSetTextById("soegBruger", value);
                 WebAdapter.ButtonClickById("butThisConverter");
             }
@@ -217,21 +260,63 @@ namespace WrapTrack.Stf.WrapTrackWeb.Me.Collection.CarrierManagement
         }
 
         /// <summary>
-        /// The save.
+        /// The select made of wrap.
         /// </summary>
-        /// <param name="brandName">
-        /// The brand Name.
+        /// <param name="wrapName">
+        /// The wrap name. If null, then pick a random one in the list
         /// </param>
         /// <returns>
         /// The <see cref="bool"/>.
         /// </returns>
-        public bool Save(string brandName = null)
+        public bool SelectMadeOfWrap(string wrapName = null)
+        {
+            var wrapToChose = wrapName;
+            var selectElem = WebAdapter.FindElement(By.Id("selConvertSuggestions"));
+
+            if (selectElem == null)
+            {
+                return false;
+            }
+
+            if (string.IsNullOrEmpty(wrapToChose))
+            {
+                // Okay no name given - we will pick a random one...
+                var options = selectElem.FindElements(By.XPath("./option"));
+                var numberOfOptions = options.Count;
+
+                if (numberOfOptions < 1)
+                {
+                    return false;
+                }
+
+                var numberToChoose = new Random().Next(2, numberOfOptions);
+
+                wrapToChose = options[numberToChoose].Text.Trim();
+            }
+
+            var retVal = WebAdapter.SelectElementSetText(By.Id("selConvertSuggestions"), wrapToChose);
+
+            return retVal;
+        }
+
+        /// <summary>
+        /// The save.
+        /// </summary>
+        /// <returns>
+        /// The <see cref="bool"/>.
+        /// </returns>
+        public bool Save()
         {
             WebAdapter.WaitForComplete(10);
 
             var retVal = WebAdapter.ButtonClickById("but_add_wrap");
 
-            AfterSavePageCheck(brandName);
+            if (!retVal)
+            {
+                return false;
+            }
+
+            retVal = AfterSavePageCheck();
 
             return retVal;
         }
@@ -239,31 +324,16 @@ namespace WrapTrack.Stf.WrapTrackWeb.Me.Collection.CarrierManagement
         /// <summary>
         /// The page check. Are we on the AddCarrier page or not
         /// </summary>
-        /// <param name="brandName">
-        /// The brand Name.
-        /// </param>
         /// <returns>
         /// The <see cref="bool"/>.
         /// </returns>
-        public bool AfterSavePageCheck(string brandName = null)
+        public bool AfterSavePageCheck()
         {
-            bool retVal;
+            // TODO: Retrier: Wait 3 seconds for this to GO away.. Not check if it is there
+            System.Threading.Thread.Sleep(2000);
 
-            WebAdapter.WaitForComplete(3);
-
-            if (string.IsNullOrEmpty(brandName))
-            {
-                var elem = WebAdapter.FindElement(By.XPath("//h1[text()='Add carrier']"), 1);
-
-                retVal = elem != null;
-
-                return retVal;
-            }
-
-            var labelElem = WebAdapter.FindElement(By.Id("lin_brand"));
-            var brandLabelText = labelElem?.Text ?? string.Empty;
-
-            retVal = string.Equals(brandName, brandLabelText, StringComparison.InvariantCultureIgnoreCase);
+            var elem = WebAdapter.FindElement(By.XPath("//h1[text()='Add carrier']"), 3);
+            var retVal = elem == null;
 
             return retVal;
         }

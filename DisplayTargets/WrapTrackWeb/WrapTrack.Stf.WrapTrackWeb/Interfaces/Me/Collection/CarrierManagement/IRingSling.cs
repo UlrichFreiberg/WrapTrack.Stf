@@ -10,13 +10,18 @@
 
 namespace WrapTrack.Stf.WrapTrackWeb.Interfaces.Me.Collection.CarrierManagement
 {
-    using System;
+    using WrapTrack.Stf.WrapTrackWeb.Me.Collection.CarrierManagement;
 
     /// <summary>
     /// The RingSling interface.
     /// </summary>
-    public interface IRingSling
+    public interface IRingSling : ICarrierBase
     {
+        /// <summary>
+        /// Gets or sets the produced by.
+        /// </summary>
+        CarrierProducedBy ProducedBy { get; set; }
+
         /// <summary>
         /// Gets or sets a value indicating whether brand produced.
         /// </summary>
@@ -28,58 +33,13 @@ namespace WrapTrack.Stf.WrapTrackWeb.Interfaces.Me.Collection.CarrierManagement
         bool WovenWrapFabric { get; set; }
 
         /// <summary>
-        /// Gets or sets a name for a ring sling not not made of woven wrap fabric.
+        /// Gets or sets a value indicating whether shoulder right left.
         /// </summary>
-        string Name { get; set; }
+        bool ShoulderRightLeft { get; set; }
 
         /// <summary>
-        /// Gets or sets the brand.
+        /// Gets or sets the ring sling shoulder type.
         /// </summary>
-        string Brand { get; set; }
-
-        /// <summary>
-        /// Gets or sets the pattern.
-        /// </summary>
-        string Pattern { get; set; }
-
-        /// <summary>
-        /// Gets or sets the model.
-        /// </summary>
-        string Model { get; set; }
-
-        /// <summary>
-        /// Gets or sets the converted wrap.
-        /// </summary>
-        string MadeOfWrap { get; set; }
-
-        /// <summary>
-        /// Gets or sets a value indicating whether converted. Is the carrier result of a convertion?
-        /// </summary>
-        bool Converted { get; set; }
-
-        /// <summary>
-        /// Gets or sets type of converter.
-        /// </summary>
-        string ConvertType { get; set; }
-
-        /// <summary>
-        /// Gets or sets type of name of converter.
-        /// </summary>
-        string ConvertName { get; set; }
-
-        /// <summary>
-        /// Gets or sets the size.
-        /// </summary>
-        string Size { get; set; }
-
-        /// <summary>
-        /// Gets or sets the grade.
-        /// </summary>
-        string Grade { get; set; }
-
-        /// <summary>
-        /// Gets or sets the acquired.
-        /// </summary>
-        DateTime Acquired { get; set; }
+        RingSlingShoulderType RingSlingShoulderType { get; set; }
     }
 }

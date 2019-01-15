@@ -27,15 +27,5 @@ namespace WrapTrack.Stf.WrapTrackWeb.Me.Collection.CarrierManagement
             : base(wrapTrackWebShell)
         {
         }
-
-        /// <summary>
-        /// Gets or sets the carrier type.
-        /// </summary>
-        public string CarrierType { get; set; }
-
-        /// <summary>
-        /// Gets or sets the Carrier model.
-        /// </summary>
-        public string CarrierModel { get; set; }
     }
 }

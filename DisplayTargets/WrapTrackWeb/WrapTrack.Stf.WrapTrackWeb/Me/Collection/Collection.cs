@@ -21,7 +21,6 @@ namespace WrapTrack.Stf.WrapTrackWeb.Me.Collection
 
     using WrapTrack.Stf.WrapTrackWeb.Interfaces;
     using WrapTrack.Stf.WrapTrackWeb.Interfaces.Me;
-    using WrapTrack.Stf.WrapTrackWeb.Me.Collection.CarrierManagement;
 
     /// <summary>
     /// The learn more.
@@ -141,10 +140,10 @@ namespace WrapTrack.Stf.WrapTrackWeb.Me.Collection
         {
             var existingListOfWtIds = GetListOfWtIds();
 
-            //TODO: Is now related to English language
+            // TODO: Is now related to English language
             var typeCarrier = "woven wrap";
 
-            WebAdapter.ButtonClickById("but_add_carrier");           
+            WebAdapter.ButtonClickById("but_add_carrier");
 
             if (brand == null)
             {
@@ -172,7 +171,7 @@ namespace WrapTrack.Stf.WrapTrackWeb.Me.Collection
             // gotta fix that after adding a wrap the wrap itself is shown
             // not the collection as it used to
             var me = WrapTrackWebShell.Me();
-            
+
             me.GetCollection();
 
             var newListOfWtIds = GetListOfWtIds();
@@ -195,6 +194,16 @@ namespace WrapTrack.Stf.WrapTrackWeb.Me.Collection
         public T AddCarrier<T>()
         {
             WebAdapter.ButtonClickById("but_add_carrier");
+
+            // Give WT time to load the page
+            WebAdapter.WaitForComplete(2);
+
+            var selectCarrierType = GetAddCarrierSelectTypeByInterface<T>();
+
+            WebAdapter.SelectElementSetText(By.Id("selTypeCarrier"), selectCarrierType);
+
+            // Selecting the Carrier Type makes the page reload
+            WebAdapter.WaitForComplete(2);
 
             var retVal = Get<T>();
 
@@ -296,6 +305,42 @@ namespace WrapTrack.Stf.WrapTrackWeb.Me.Collection
             }
 
             return retVal;
+        }
+
+        /// <summary>
+        /// The get add carrier select type by interface.
+        /// </summary>
+        /// <typeparam name="T">
+        /// Expected carrier type to select in the dropdown for the Add Carrier
+        /// </typeparam>
+        /// <returns>
+        /// The <see cref="string"/>.
+        /// </returns>
+        private string GetAddCarrierSelectTypeByInterface<T>()
+        {
+            var typeName = typeof(T).Name;
+
+            switch (typeName)
+            {
+                case "IRingSling": return "ring sling";
+                case "IWowenWrap": return "woven wrap";
+                case "I1": return "woven wrap";
+                case "I2": return "stretchy wrap";
+                case "I3": return "hybrid wrap";
+                case "I4": return "ring sling";
+                case "I5": return "mei tai";
+                case "I6": return "half buckle mei tai";
+                case "I7": return "wrap tai";
+                case "I8": return "half buckle wrap tai";
+                case "I9": return "onbuhimo";
+                case "I10": return "reverse onbuhimo";
+                case "I11": return "buckle onbuhimo";
+                case "I12": return "podeagi";
+                case "I13": return "nyia";
+                case "I14": return "doll sling";
+                case "I15": return "other carrier";
+                default: return "AddCarrier:Unsupported value";
+            }
         }
 
         /// <summary>
