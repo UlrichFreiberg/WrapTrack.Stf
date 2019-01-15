@@ -1,2 +1,2 @@
-variantID;StfIgnoreRow;CarrierType;Brand;Pattern;Model;Grade;Acquired;HomeMade;Name;Comments
-1;FALSE;hybrid wrap ;Joy and Joe;Bamboo Stretchy;Black;1;;;;
+variantID,StfIgnoreRow,CarrierType,Brand,Pattern,Model,Grade,Acquired,HomeMade,Name,Comments
+1,FALSE,hybrid wrap ,Joy and Joe,Bamboo Stretchy,Black,1,,,,

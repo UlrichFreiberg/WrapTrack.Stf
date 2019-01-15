@@ -1,6 +1,6 @@
-variantID;StfIgnoreRow;CarrierType;Brand;Pattern;Model;MadeOfWrap;Converted;ConvertType;ConvertName;Size;Grade;Acquired;HomeMade;Name;Comments
-1;TRUE;woven wrap;;;;;;;;9;1;0;X;MyOwn_{TODAY}{NOW};
-2;FALSE;woven wrap;Ali Dover;Hygge;Pop;;;;;8;2;-1;;;
-3;TRUE;woven wrap;Ali Dover;Hygge;Pop;;X;a sling converter;Nova;6;1;-3;;;
-4;TRUE;woven wrap;Ali Dover;Hygge;Pop;;X;a Wraptrack User;Camomilla;5;2;1;;;
-5;TRUE;woven wrap;Ali Dover;Hygge;Pop;;X;unknown;;4;3;2;;;
+variantID,StfIgnoreRow,CarrierType,Brand,Pattern,Model,MadeOfWrap,Converted,ConvertType,ConvertName,Size,Grade,Acquired,HomeMade,Name,Comments
+1,TRUE,woven wrap,,,,,,,,9,1,0,X,MyOwn_{TODAY}{NOW},
+2,FALSE,woven wrap,Ali Dover,Hygge,Pop,,,,,8,2,-1,,,
+3,TRUE,woven wrap,Ali Dover,Hygge,Pop,,X,a sling converter,Nova,6,1,-3,,,
+4,TRUE,woven wrap,Ali Dover,Hygge,Pop,,X,a Wraptrack User,Camomilla,5,2,1,,,
+5,TRUE,woven wrap,Ali Dover,Hygge,Pop,,X,unknown,,4,3,2,,,

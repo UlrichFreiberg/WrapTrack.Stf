@@ -1,2 +1,2 @@
-variantID;StfIgnoreRow;CarrierType;BrandProduced;WrapFabric;Name;Brand;Pattern;Model;ConverterType;ConvertName;MadeOfWrap;Grade;Acquired;Note
-1;FALSE;half buckle mei tai;Yes;X;;Oscha;Alto;Zen;;;;;;
+variantID,StfIgnoreRow,CarrierType,BrandProduced,WrapFabric,Name,Brand,Pattern,Model,ConverterType,ConvertName,MadeOfWrap,Grade,Acquired,Note
+1,FALSE,half buckle mei tai,Yes,X,,Oscha,Alto,Zen,,,,,,
