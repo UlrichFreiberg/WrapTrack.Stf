@@ -274,14 +274,21 @@ namespace WrapTrack.Stf.WrapTrackWeb
         /// </returns>
         public bool Logout(bool doCareAboutErrors = true)
         {
-            if (WebAdapter.Click(By.Id("nav_logout")))
+            try
             {
-                return true;
-            }
+                if (WebAdapter.Click(By.Id("nav_logout")))
+                {
+                    return true;
+                }
 
-            if (doCareAboutErrors)
+                if (doCareAboutErrors)
+                {
+                    StfLogger.LogError("Got error while logging out");
+                }
+            }
+            catch
             {
-                StfLogger.LogError("Got error while logging out");
+                // slurp
             }
 
             // if we cant click the logout button, then the return value is down to if we care or not:-)
@@ -386,7 +393,7 @@ namespace WrapTrack.Stf.WrapTrackWeb
             StfLogger.LogKeyValue("Current Directory", currentDomainBaseDirectory, "Current Directory");
             return true;
         }
-        
+
         /// <summary>
         /// The sign up and login.
         /// </summary>
