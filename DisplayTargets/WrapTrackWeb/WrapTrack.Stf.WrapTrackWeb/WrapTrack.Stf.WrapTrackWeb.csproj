@@ -141,6 +141,7 @@
     <Compile Include="Interfaces\Me\IMeReviews.cs" />
     <Compile Include="Interfaces\Me\IMeSettings.cs" />
     <Compile Include="Interfaces\News\INews.cs" />
+    <Compile Include="Interfaces\News\INewsEntryCarrierForSale.cs" />
     <Compile Include="Interfaces\News\INewsEntryCarrierStory.cs" />
     <Compile Include="MenuManager.cs" />
     <Compile Include="Me\Collection\CarrierManagement\AddCarrier.cs" />
@@ -155,6 +156,7 @@
     <Compile Include="Model\Model.cs" />
     <Compile Include="Model\Review.cs" />
     <Compile Include="News\News.cs" />
+    <Compile Include="News\NewsEntryCarrierForSale.cs" />
     <Compile Include="News\NewsEntryCarrierStory.cs" />
     <Compile Include="News\NewsEntryTypes.cs" />
     <Compile Include="Wrap.cs" />

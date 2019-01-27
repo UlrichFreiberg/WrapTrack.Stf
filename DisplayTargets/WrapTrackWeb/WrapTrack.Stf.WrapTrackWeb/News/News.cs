@@ -10,12 +10,7 @@
 
 namespace WrapTrack.Stf.WrapTrackWeb.News
 {
-    using System;
     using System.Linq;
-    using System.Net.Http.Headers;
-
-    using Mir.Stf.Utilities;
-
     using OpenQA.Selenium;
 
     using WrapTrack.Stf.WrapTrackWeb.Interfaces;
@@ -38,7 +33,7 @@ namespace WrapTrack.Stf.WrapTrackWeb.News
         }
 
         /// <summary>
-        /// The get news entry carrier story that contyains the chapter text for the wrap.
+        /// The get news entry carrier story that contains the chapter text for the wrap.
         /// </summary>
         /// <param name="wrapId">
         /// The wrap id.
@@ -89,6 +84,57 @@ namespace WrapTrack.Stf.WrapTrackWeb.News
             }
 
             return newsEntryCarrierStory;
+        }
+
+        /// <summary>
+        /// The get news entry carrier for sale.
+        /// </summary>
+        /// <param name="wrapId">
+        /// The wrap id.
+        /// </param>
+        /// <param name="typeOfSale">
+        /// The type Of Sale.
+        /// </param>
+        /// <returns>
+        /// The <see cref="INewsEntryCarrierForSale"/>.
+        /// </returns>
+        public INewsEntryCarrierForSale GetNewsEntryCarrierForSale(string wrapId, string typeOfSale)
+        {
+            var elements = WebAdapter.FindElements(By.Id("baereredskab_paamarkedet"));
+
+            if (elements.Count != 1)
+            {
+                StfLogger.LogError("only support 1 carrier story");
+                return null;
+            }
+
+            var element = elements.First();
+            if (element == null)
+            {
+                StfLogger.LogError("elements.first() returned a null element");
+                return null;
+            }
+
+            var newsEntryCarrierForSale = Get<INewsEntryCarrierForSale>();
+
+            if (newsEntryCarrierForSale == null)
+            {
+                StfLogger.LogError("Could not get newsEntryCarrierForSale from Get<INewsEntryCarrierForSale>");
+                return null;
+            }
+
+            newsEntryCarrierForSale.Text = element.Text;
+
+            if (!newsEntryCarrierForSale.HeaderText.Contains(WrapTrackWebShell.CurrentLoggedInUser)
+                ||
+                !newsEntryCarrierForSale.WrapText.Contains(wrapId)
+                ||
+                !newsEntryCarrierForSale.StatusText.Equals(typeOfSale))
+            {
+                return null;
+            }
+
+            return newsEntryCarrierForSale;
         }
     }
 }
