@@ -103,10 +103,13 @@ namespace WrapTrackWebTests
         /// </returns>
         private int GetNumberOfReviewsForNatibaby()
         {
-            var brandInfo = wtApi.BrandInfoByBrandId("5");
-            var numberOfReviews = brandInfo.NumOfReviews;
+            //var brandInfo = wtApi.BrandInfoByBrandId("5");
+            //var numberOfReviews = brandInfo.NumOfReviews;
+            //return numberOfReviews;
 
-            return numberOfReviews;
+            var numOfReviews = wtApi.ModelInfoByModelId("2624").NumOfReviews;
+
+            return numOfReviews;
         }
     }
 }
