@@ -324,8 +324,10 @@ namespace WrapTrack.Stf.WrapTrackWeb.Me.Collection
             {
                 case "IRingSling": return "ring sling";
                 case "IWowenWrap": return "woven wrap";
+                case "IStretchyWrap": return "stretchy wrap";
+                case "IHybridWrap": return "hybrid wrap";
+
                 case "I1": return "woven wrap";
-                case "I2": return "stretchy wrap";
                 case "I3": return "hybrid wrap";
                 case "I4": return "ring sling";
                 case "I5": return "mei tai";

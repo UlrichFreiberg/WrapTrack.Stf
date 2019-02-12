@@ -34,24 +34,6 @@ namespace WrapTrack.Stf.WrapTrackWeb.Me.Collection.CarrierManagement
         }
 
         /// <summary>
-        /// Gets or sets a value indicating whether home made.
-        /// </summary>
-        public bool HomeMade
-        {
-            get
-            {
-                var retVal = WebAdapter.CheckBoxGetValueById("checkHomemade");
-
-                return retVal;
-            }
-
-            set
-            {
-                WebAdapter.CheckBoxSetValueById("checkHomemade", value);
-            }
-        }
-
-        /// <summary>
         /// Gets or sets the name.
         /// </summary>
         public string Name

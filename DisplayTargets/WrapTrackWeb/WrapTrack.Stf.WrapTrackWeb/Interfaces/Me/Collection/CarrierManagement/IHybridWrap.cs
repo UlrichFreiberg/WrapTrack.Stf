@@ -1,7 +1,7 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="IStretchyWrap.cs" company="Mir Software">
+// <copyright file="IHybridWrap.cs" company="Mir Software">
 //   Copyright governed by Artistic license as described here:
-//          http://www.perlfoundation.org/artistic_license_2_0
+//   //          http://www.perlfoundation.org/artistic_license_2_0
 // </copyright>
 // <summary>
 //   Defines the IStretchyWrap type.
@@ -13,9 +13,9 @@ namespace WrapTrack.Stf.WrapTrackWeb.Interfaces.Me.Collection.CarrierManagement
     using System;
 
     /// <summary>
-    /// The StretchyWrap interface.
+    /// The IHybridWrap interface.
     /// </summary>
-    public interface IStretchyWrap : ICarrierBase
+    public interface IHybridWrap : ICarrierBase
     {
     }
 }

@@ -1,5 +1,5 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="StretchyWrap.cs" company="Mir Software">
+// <copyright file="HybridWrap.cs" company="Mir Software">
 //   Copyright governed by Artistic license as described here:
 //          http://www.perlfoundation.org/artistic_license_2_0
 // </copyright>
@@ -16,15 +16,15 @@ namespace WrapTrack.Stf.WrapTrackWeb.Me.Collection.CarrierManagement
     /// <summary>
     /// The stretchy wrap.
     /// </summary>
-    public class StretchyWrap : CarrierBaseClass, IStretchyWrap
+    public class HybridWrap : CarrierBaseClass, IHybridWrap
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="StretchyWrap"/> class.
+        /// Initializes a new instance of the <see cref="HybridWrap"/> class.
         /// </summary>
         /// <param name="wrapTrackWebShell">
         /// The wrap track web shell.
         /// </param>
-        public StretchyWrap(IWrapTrackWebShell wrapTrackWebShell)
+        public HybridWrap(IWrapTrackWebShell wrapTrackWebShell)
             : base(wrapTrackWebShell)
         {
         }

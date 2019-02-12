@@ -93,6 +93,7 @@ namespace WrapTrack.Stf.WrapTrackWeb
             stfContainer.RegisterType<Interfaces.Me.Collection.CarrierManagement.IRingSling, Me.Collection.CarrierManagement.RingSling>();
             stfContainer.RegisterType<Interfaces.Me.Collection.CarrierManagement.IStretchyWrap, Me.Collection.CarrierManagement.StretchyWrap>();
             stfContainer.RegisterType<Interfaces.Me.Collection.CarrierManagement.IWowenWrap, Me.Collection.CarrierManagement.WowenWrap>();
+            stfContainer.RegisterType<Interfaces.Me.Collection.CarrierManagement.IHybridWrap, Me.Collection.CarrierManagement.HybridWrap>();            
         }
 
         /// <summary>

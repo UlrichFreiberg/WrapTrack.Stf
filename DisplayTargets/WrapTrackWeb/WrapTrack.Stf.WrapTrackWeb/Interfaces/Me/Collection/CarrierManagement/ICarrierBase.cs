@@ -85,6 +85,11 @@ namespace WrapTrack.Stf.WrapTrackWeb.Interfaces.Me.Collection.CarrierManagement
         DateTime Acquired { get; set; }
 
         /// <summary>
+        /// Gets or sets a value indicating whether home made.
+        /// </summary>
+        bool HomeMade { get; set; }
+
+        /// <summary>
         /// The select made of wrap.
         /// </summary>
         /// <param name="wrapName">
