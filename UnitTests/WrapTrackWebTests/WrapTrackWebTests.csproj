@@ -124,11 +124,10 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
-    <Compile Include="Collection\AddCarrier\TestCase031.cs" />
     <Compile Include="Collection\AddCarrier\TestCaseUtils.cs" />
     <Compile Include="Collection\AddCarrier\TestCase029.cs" />
     <Compile Include="Collection\AddCarrier\TestData\TestDataBase.cs" />
-    <Compile Include="Collection\AddCarrier\TestData\TestDataRingSling.cs" />
+    <Compile Include="Collection\AddCarrier\TestData\TestDataAddWrapConversion.cs" />
     <Compile Include="Collection\TestCase010.cs" />
     <Compile Include="Collection\TestCase011.cs" />
     <Compile Include="Collection\TestCase006.cs" />
@@ -160,11 +159,11 @@
     <Compile Include="WrapTrackTestScriptBase.cs" />
     <Compile Include="WtTestscriptUtils.cs" />
     <Compile Include="Collection\TestCase020.cs" />
-    <Compile Include="Collection\AddCarrier\TestData\TestDataWoven.cs" />
+    <Compile Include="Collection\AddCarrier\TestData\TestDataAddWrap.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Collection\AddCarrier\TestData\Testdata_add_ring_sling.csv" />
-    <None Include="Collection\AddCarrier\TestData\Testdata_add_woven_wrap.csv">
+    <None Include="Collection\AddCarrier\TestData\TestdataAddWrapConversion.csv" />
+    <None Include="Collection\AddCarrier\TestData\TestdataAddWrap.csv">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="Collection\Data010.csv" />

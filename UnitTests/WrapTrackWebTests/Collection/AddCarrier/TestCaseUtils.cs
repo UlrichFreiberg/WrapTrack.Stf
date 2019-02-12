@@ -14,6 +14,8 @@ namespace WrapTrackWebTests.Collection.AddCarrier
 
     using Mir.Stf.Utilities;
 
+    using WrapTrack.Stf.WrapTrackWeb.Interfaces;
+    using WrapTrack.Stf.WrapTrackWeb.Interfaces.Me;
     using WrapTrack.Stf.WrapTrackWeb.Interfaces.Me.Collection.CarrierManagement;
 
     /// <summary>
@@ -77,9 +79,9 @@ namespace WrapTrackWebTests.Collection.AddCarrier
             string convertName)
         {
             var retVal = InternalHandleConvertedConvertTypeConvertName(
-                addCarrier, 
-                converted, 
-                convertType, 
+                addCarrier,
+                converted,
+                convertType,
                 convertName);
 
             StfAssert.IsTrue("HandleConvertedConvertTypeConvertName", retVal);
@@ -99,7 +101,7 @@ namespace WrapTrackWebTests.Collection.AddCarrier
         /// <returns>
         /// The <see cref="bool"/>.
         /// </returns>
-        public bool HandleHomeMade(IWowenWrap addCarrier, string homeMade)
+        public bool HandleHomeMade(ICarrierBase addCarrier, string homeMade)
         {
             var retVal = InternalHandleHomeMade(addCarrier, homeMade);
 
@@ -182,7 +184,7 @@ namespace WrapTrackWebTests.Collection.AddCarrier
         /// <returns>
         /// The <see cref="bool"/>.
         /// </returns>
-        private bool InternalHandleHomeMade(IWowenWrap addCarrier, string homeMade)
+        private bool InternalHandleHomeMade(ICarrierBase addCarrier, string homeMade)
         {
             if (string.IsNullOrEmpty(homeMade))
             {
@@ -290,6 +292,43 @@ namespace WrapTrackWebTests.Collection.AddCarrier
             addCarrier.Acquired = addCarrierAcquired;
 
             return true;
+        }
+
+        public ICarrierBase GetAddCarrier<T>(IWrapTrackWebShell wrapTrackShell, string carrierType)
+        {
+            var me = wrapTrackShell.Me();
+            var collection = me.GetCollection();
+            var addCarrier = GetCarrierBySelectType(collection, carrierType);
+
+            return addCarrier;
+        }
+
+        private ICarrierBase GetCarrierBySelectType(ICollection collection, string selectType)
+        {
+            switch (selectType.ToLower().Trim())
+            {
+                case "ring sling": return collection.AddCarrier<IRingSling>();
+                case "woven wrap": return collection.AddCarrier<IWowenWrap>();
+                case "stretchy wrap": return collection.AddCarrier<IStretchyWrap>();
+                case "hybrid wrap": return collection.AddCarrier<IHybridWrap>();
+            }
+
+            return null;
+
+            //case "I3": return "hybrid wrap";
+            //case "I4": return "ring sling";
+            //case "I5": return "mei tai";
+            //case "I6": return "half buckle mei tai";
+            //case "I7": return "wrap tai";
+            //case "I8": return "half buckle wrap tai";
+            //case "I9": return "onbuhimo";
+            //case "I10": return "reverse onbuhimo";
+            //case "I11": return "buckle onbuhimo";
+            //case "I12": return "podeagi";
+            //case "I13": return "nyia";
+            //case "I14": return "doll sling";
+            //case "I15": return "other carrier";
+            //default: return "AddCarrier:Unsupported value";
         }
     }
 }

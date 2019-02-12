@@ -26,26 +26,24 @@ namespace WrapTrackWebTests.Collection.AddCarrier
     public class TestCase029 : WrapTrackTestScriptBase
     {
         /// <summary>
-        /// The add woven.
+        /// The add wrap. Houses woven wrap, stretch wrap and hyvrid wrap
         /// </summary>
         [DataSource(
             "Microsoft.VisualStudio.TestTools.DataSource.CSV",
-            @"D:\Projects\WrapTrack.Stf\UnitTests\WrapTrackWebTests\Collection\AddCarrier\TestData\Testdata_add_woven_wrap.csv",
-            "Testdata_add_woven_wrap#csv", DataAccessMethod.Sequential)]
+            @"D:\Projects\WrapTrack.Stf\UnitTests\WrapTrackWebTests\Collection\AddCarrier\TestData\TestdataAddWrap.csv",
+            "TestdataAddWrap#csv", DataAccessMethod.Sequential)]
         [TestMethod]
         public void Tc029()
         {
-            var testdata = InitTestData<TestDataWoven>();
+            var testdata = InitTestData<TestDataAddWrap>();
 
             WrapTrackShell = Get<IWrapTrackWebShell>();
 
             // Use default user
             WrapTrackShell.Login();
 
-            var me = WrapTrackShell.Me();
-            var collection = me.GetCollection();
-            var addCarrier = collection.AddCarrier<IWowenWrap>();
             var testCaseUtil = new TestCaseUtils(StfAssert);
+            var addCarrier = testCaseUtil.GetAddCarrier<ICarrierBase>(WrapTrackShell, testdata.CarrierType);
 
             StfAssert.IsTrue("HandleHomeMade", testCaseUtil.HandleHomeMade(addCarrier, testdata.HomeMade));
 

@@ -1,5 +1,5 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="TestDataWoven.cs" company="Mir Software">
+// <copyright file="TestDataAddWrap.cs" company="Mir Software">
 //   Copyright governed by Artistic license as described here:
 //          http://www.perlfoundation.org/artistic_license_2_0
 // </copyright>
@@ -13,7 +13,7 @@ namespace WrapTrackWebTests.Collection.AddCarrier.TestData
     /// <summary>
     /// The woven test data.
     /// </summary>
-    public class TestDataWoven : TestDataBase
+    public class TestDataAddWrap : TestDataBase
     {
     }
 }
