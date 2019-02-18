@@ -311,15 +311,13 @@ namespace WrapTrackWebTests.Collection.AddCarrier
                 case "woven wrap": return collection.AddCarrier<IWowenWrap>();
                 case "stretchy wrap": return collection.AddCarrier<IStretchyWrap>();
                 case "hybrid wrap": return collection.AddCarrier<IHybridWrap>();
+                case "mei tai": return collection.AddCarrier<IMeiTai>();
+                case "half buckle mei tai": return collection.AddCarrier<IHalfBuckleMeiTai>();
+                case "wrap tai": return collection.AddCarrier<IWrapTai>();
             }
 
             return null;
 
-            //case "I3": return "hybrid wrap";
-            //case "I4": return "ring sling";
-            //case "I5": return "mei tai";
-            //case "I6": return "half buckle mei tai";
-            //case "I7": return "wrap tai";
             //case "I8": return "half buckle wrap tai";
             //case "I9": return "onbuhimo";
             //case "I10": return "reverse onbuhimo";

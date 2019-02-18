@@ -124,6 +124,7 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
+    <Compile Include="Collection\AddCarrier\TestCase031.cs" />
     <Compile Include="Collection\AddCarrier\TestCaseUtils.cs" />
     <Compile Include="Collection\AddCarrier\TestCase029.cs" />
     <Compile Include="Collection\AddCarrier\TestData\TestDataBase.cs" />

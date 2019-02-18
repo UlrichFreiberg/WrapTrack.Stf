@@ -30,22 +30,22 @@ namespace WrapTrackWebTests.Collection.AddCarrier
         /// </summary>
         [DataSource(
             "Microsoft.VisualStudio.TestTools.DataSource.CSV",
-            @"D:\Projects\WrapTrack.Stf\UnitTests\WrapTrackWebTests\Collection\AddCarrier\TestData\Testdata_add_ring_sling.csv",
-            "Testdata_add_ring_sling#csv", DataAccessMethod.Sequential)]
+            @"D:\Projects\WrapTrack.Stf\UnitTests\WrapTrackWebTests\Collection\AddCarrier\TestData\TestdataAddWrapCOnversion.csv",
+            "TestdataAddWrapConversion#csv", DataAccessMethod.Sequential)]
         [TestMethod]
         public void Tc031()
         {
-            var testdata = InitTestData<TestDataRingSling>();
+            var testdata = InitTestData<TestDataAddWrapConversion>();
 
             WrapTrackShell = Get<IWrapTrackWebShell>();
 
             // Use default user
             WrapTrackShell.Login();
 
-            var me = WrapTrackShell.Me();
-            var collection = me.GetCollection();
-            var addCarrier = collection.AddCarrier<IRingSling>();
             var testCaseUtil = new TestCaseUtils(StfAssert);
+            var addCarrier = testCaseUtil.GetAddCarrier<ICarrierBase>(WrapTrackShell, testdata.CarrierType);
+
+            StfAssert.IsTrue("HandleHomeMade", testCaseUtil.HandleHomeMade(addCarrier, testdata.HomeMade));
 
             testCaseUtil.HandleBrandPatternModel(
                 addCarrier, 
