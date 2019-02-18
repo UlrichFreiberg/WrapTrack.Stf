@@ -1,10 +1,10 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="WowenWrap.cs" company="Mir Software">
+// <copyright file="WrapTai.cs" company="Mir Software">
 //   Copyright governed by Artistic license as described here:
 //          http://www.perlfoundation.org/artistic_license_2_0
 // </copyright>
 // <summary>
-//   Defines the StretchyWrap type.
+//   Defines the WrapTai type.
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
 
@@ -16,17 +16,17 @@ namespace WrapTrack.Stf.WrapTrackWeb.Me.Collection.CarrierManagement
     using WrapTrack.Stf.WrapTrackWeb.Interfaces.Me.Collection.CarrierManagement;
 
     /// <summary>
-    /// The stretchy wrap.
+    /// The WrapTai wrap.
     /// </summary>
-    public class WowenWrap : CarrierBaseClass, IWowenWrap
+    public class WrapTai : CarrierBaseClass, IWrapTai
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="WowenWrap"/> class.
+        /// Initializes a new instance of the <see cref="WrapTai"/> class.
         /// </summary>
         /// <param name="wrapTrackWebShell">
         /// The wrap track web shell.
         /// </param>
-        public WowenWrap(IWrapTrackWebShell wrapTrackWebShell)
+        public WrapTai(IWrapTrackWebShell wrapTrackWebShell)
             : base(wrapTrackWebShell)
         {
         }

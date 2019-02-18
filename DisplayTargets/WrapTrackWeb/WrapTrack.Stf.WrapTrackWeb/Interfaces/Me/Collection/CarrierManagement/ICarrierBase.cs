@@ -12,8 +12,6 @@ namespace WrapTrack.Stf.WrapTrackWeb.Interfaces.Me.Collection.CarrierManagement
 {
     using System;
 
-    using WrapTrack.Stf.WrapTrackWeb.Me.Collection.CarrierManagement;
-
     /// <summary>
     /// The Base interface for all Carrier's.
     /// </summary>

@@ -1,19 +1,19 @@
-﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="IWowenWrap.cs" company="Mir Software">
+// --------------------------------------------------------------------------------------------------------------------
+// <copyright file="IMeiTai.cs" company="Mir Software">
 //   Copyright governed by Artistic license as described here:
 //          http://www.perlfoundation.org/artistic_license_2_0
 // </copyright>
 // <summary>
-//   The WowenWrap interface.
+//   Defines the IMeiTai type.
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
 
 namespace WrapTrack.Stf.WrapTrackWeb.Interfaces.Me.Collection.CarrierManagement
 {
     /// <summary>
-    /// The WowenWrap interface.
+    /// The IMeiTai interface.
     /// </summary>
-    public interface IWowenWrap : ICarrierBase
+    public interface IMeiTai : ICarrierBase
     {
     }
 }

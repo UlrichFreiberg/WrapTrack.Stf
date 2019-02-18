@@ -1,10 +1,10 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="WowenWrap.cs" company="Mir Software">
+// <copyright file="HalfBuckleMeiTai.cs" company="Mir Software">
 //   Copyright governed by Artistic license as described here:
 //          http://www.perlfoundation.org/artistic_license_2_0
 // </copyright>
 // <summary>
-//   Defines the StretchyWrap type.
+//   Defines the HalfBuckleMeiTai type.
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
 
@@ -16,17 +16,17 @@ namespace WrapTrack.Stf.WrapTrackWeb.Me.Collection.CarrierManagement
     using WrapTrack.Stf.WrapTrackWeb.Interfaces.Me.Collection.CarrierManagement;
 
     /// <summary>
-    /// The stretchy wrap.
+    /// The HalfBuckleMeiTai wrap.
     /// </summary>
-    public class WowenWrap : CarrierBaseClass, IWowenWrap
+    public class HalfBuckleMeiTai : CarrierBaseClass, IHalfBuckleMeiTai
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="WowenWrap"/> class.
+        /// Initializes a new instance of the <see cref="HalfBuckleMeiTai"/> class.
         /// </summary>
         /// <param name="wrapTrackWebShell">
         /// The wrap track web shell.
         /// </param>
-        public WowenWrap(IWrapTrackWebShell wrapTrackWebShell)
+        public HalfBuckleMeiTai(IWrapTrackWebShell wrapTrackWebShell)
             : base(wrapTrackWebShell)
         {
         }

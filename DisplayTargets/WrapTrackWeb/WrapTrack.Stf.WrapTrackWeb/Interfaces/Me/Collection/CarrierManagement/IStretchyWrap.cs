@@ -10,8 +10,6 @@
 
 namespace WrapTrack.Stf.WrapTrackWeb.Interfaces.Me.Collection.CarrierManagement
 {
-    using System;
-
     /// <summary>
     /// The StretchyWrap interface.
     /// </summary>

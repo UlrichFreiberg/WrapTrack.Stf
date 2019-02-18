@@ -48,7 +48,7 @@ namespace WrapTrack.Stf.WrapTrackWeb
             stfContainer.RegisterType<Interfaces.IWrap, Wrap>();
 
             stfContainer.RegisterType<Interfaces.IModel, Model.Model>();
-            
+
             stfContainer.RegisterType<Interfaces.IReview, Model.Review>();
 
             stfContainer.RegisterType<Interfaces.News.INews, News.News>();
@@ -93,7 +93,10 @@ namespace WrapTrack.Stf.WrapTrackWeb
             stfContainer.RegisterType<Interfaces.Me.Collection.CarrierManagement.IRingSling, Me.Collection.CarrierManagement.RingSling>();
             stfContainer.RegisterType<Interfaces.Me.Collection.CarrierManagement.IStretchyWrap, Me.Collection.CarrierManagement.StretchyWrap>();
             stfContainer.RegisterType<Interfaces.Me.Collection.CarrierManagement.IWowenWrap, Me.Collection.CarrierManagement.WowenWrap>();
-            stfContainer.RegisterType<Interfaces.Me.Collection.CarrierManagement.IHybridWrap, Me.Collection.CarrierManagement.HybridWrap>();            
+            stfContainer.RegisterType<Interfaces.Me.Collection.CarrierManagement.IHybridWrap, Me.Collection.CarrierManagement.HybridWrap>();
+            stfContainer.RegisterType<Interfaces.Me.Collection.CarrierManagement.IHalfBuckleMeiTai, Me.Collection.CarrierManagement.HalfBuckleMeiTai>();
+            stfContainer.RegisterType<Interfaces.Me.Collection.CarrierManagement.IMeiTai, Me.Collection.CarrierManagement.MeiTai>();
+            stfContainer.RegisterType<Interfaces.Me.Collection.CarrierManagement.IWrapTai, Me.Collection.CarrierManagement.WrapTai>();
         }
 
         /// <summary>
