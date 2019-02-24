@@ -136,5 +136,56 @@ namespace WrapTrack.Stf.WrapTrackWeb.News
 
             return newsEntryCarrierForSale;
         }
+
+        /// <summary>
+        /// The get news entry carrier review.
+        /// </summary>
+        /// <param name="wrapId">
+        /// The wrap id.
+        /// </param>
+        /// <param name="reviewText">
+        /// The text for the review
+        /// </param>
+        /// <returns>
+        /// The <see cref="INewsEntryCarrierReview"/>.
+        /// </returns>
+        public INewsEntryCarrierReview GetNewsEntryCarrierReview(string wrapId, string reviewText)
+        {
+            var elements = WebAdapter.FindElements(By.Id("anmeldelse_vurdering"));
+
+            if (elements.Count != 1)
+            {
+                StfLogger.LogError("only support 1 carrier review");
+                return null;
+            }
+
+            var element = elements.First();
+            if (element == null)
+            {
+                StfLogger.LogError("elements.first() returned a null element");
+                return null;
+            }
+
+            var newsEntryCarrierReview = Get<INewsEntryCarrierReview>();
+
+            if (newsEntryCarrierReview == null)
+            {
+                StfLogger.LogError("Could not get newsEntryCarrierReview from Get<INewsEntryCarrierReview>");
+                return null;
+            }
+
+            newsEntryCarrierReview.Text = element.Text;
+
+            if (!newsEntryCarrierReview.HeaderText.Contains(WrapTrackWebShell.CurrentLoggedInUser)
+                ||
+                !newsEntryCarrierReview.WrapText.Contains(wrapId)
+                ||
+                !newsEntryCarrierReview.ReviewText.Equals(reviewText))
+            {
+                return null;
+            }
+
+            return newsEntryCarrierReview;
+        }
     }
 }
