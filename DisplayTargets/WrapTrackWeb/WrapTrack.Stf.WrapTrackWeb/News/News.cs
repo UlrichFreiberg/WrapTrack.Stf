@@ -160,6 +160,7 @@ namespace WrapTrack.Stf.WrapTrackWeb.News
             }
 
             var element = elements.First();
+
             if (element == null)
             {
                 StfLogger.LogError("elements.first() returned a null element");
@@ -176,12 +177,21 @@ namespace WrapTrack.Stf.WrapTrackWeb.News
 
             newsEntryCarrierReview.Text = element.Text;
 
-            if (!newsEntryCarrierReview.HeaderText.Contains(WrapTrackWebShell.CurrentLoggedInUser)
-                ||
-                !newsEntryCarrierReview.WrapText.Contains(wrapId)
-                ||
-                !newsEntryCarrierReview.ReviewText.Equals(reviewText))
+            if (!newsEntryCarrierReview.HeaderText.Contains(WrapTrackWebShell.CurrentLoggedInUser))
             {
+                StfLogger.LogDebug("Returning null as !newsEntryCarrierReview.HeaderText.Contains(WrapTrackWebShell.CurrentLoggedInUser)");
+                return null;
+            }
+
+            if (!newsEntryCarrierReview.WrapText.Contains(wrapId))
+            {
+                StfLogger.LogDebug("Returning null as !newsEntryCarrierReview.WrapText.Contains(wrapId)");
+                return null;
+            }
+
+            if (!newsEntryCarrierReview.ReviewText.Equals(reviewText))
+            {
+                StfLogger.LogDebug("Returning null as !newsEntryCarrierReview.ReviewText.Equals(reviewText)");
                 return null;
             }
 
