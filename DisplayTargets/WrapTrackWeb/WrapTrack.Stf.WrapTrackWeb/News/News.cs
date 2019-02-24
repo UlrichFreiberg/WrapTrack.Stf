@@ -140,8 +140,8 @@ namespace WrapTrack.Stf.WrapTrackWeb.News
         /// <summary>
         /// The get news entry carrier review.
         /// </summary>
-        /// <param name="wrapId">
-        /// The wrap id.
+        /// <param name="modelName">
+        /// The model name
         /// </param>
         /// <param name="reviewText">
         /// The text for the review
@@ -149,9 +149,11 @@ namespace WrapTrack.Stf.WrapTrackWeb.News
         /// <returns>
         /// The <see cref="INewsEntryCarrierReview"/>.
         /// </returns>
-        public INewsEntryCarrierReview GetNewsEntryCarrierReview(string wrapId, string reviewText)
+        public INewsEntryCarrierReview GetNewsEntryCarrierReview(string modelName, string reviewText)
         {
             var elements = WebAdapter.FindElements(By.Id("anmeldelse_vurdering"));
+
+            WebAdapter.WaitForComplete(1);
 
             if (elements.Count != 1)
             {
@@ -183,9 +185,9 @@ namespace WrapTrack.Stf.WrapTrackWeb.News
                 return null;
             }
 
-            if (!newsEntryCarrierReview.WrapText.Contains(wrapId))
+            if (!newsEntryCarrierReview.WrapText.Contains(modelName))
             {
-                StfLogger.LogDebug("Returning null as !newsEntryCarrierReview.WrapText.Contains(wrapId)");
+                StfLogger.LogDebug("Returning null as !newsEntryCarrierReview.WrapText.Contains(modelId)");
                 return null;
             }
 

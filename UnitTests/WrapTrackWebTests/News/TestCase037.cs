@@ -49,6 +49,9 @@ namespace WrapTrackWebTests.News
         public void Tc037()
         {
             const string ReviewText = "This is an automated review by TC037";
+            const string BrandName = "Agossie";
+            const string PatternName = "Orchid";
+            const string ModelName = "Glores";
 
             StfAssert.IsNotNull("wrapTrackShell", WrapTrackShell);
             WrapTrackShell.SignUp();
@@ -61,14 +64,14 @@ namespace WrapTrackWebTests.News
 
             StfAssert.IsNotNull("Got my collection", collection);
 
-            var newWrap = collection.AddWrap("Agossie", "Orchid", "Glores");
+            var newWrap = collection.AddWrap(BrandName, PatternName, ModelName);
             var wrap = GetToWrap(newWrap);
 
             var writeReviewForWrap = WriteReviewForWrap(wrap, ReviewText);
 
             StfAssert.IsTrue("Review written for wrap", writeReviewForWrap);
 
-            var doesNewsOfCarrierReviewExist = this.DoesNewsOfCarrierReviewExist(newWrap, ReviewText);
+            var doesNewsOfCarrierReviewExist = this.DoesNewsOfCarrierReviewExist(ModelName, ReviewText);
 
             StfAssert.IsTrue("Does news exist that carrier has a review", doesNewsOfCarrierReviewExist);
         }
@@ -132,22 +135,22 @@ namespace WrapTrackWebTests.News
         /// <summary>
         /// The does news exist.
         /// </summary>
-        /// <param name="wrapId">
-        /// The wrap id.
+        /// <param name="modelName">
+        /// The model name
         /// </param>
         /// <param name="reviewText">
-        /// The type of the sale
+        /// The review text
         /// </param>
         /// <returns>
         /// The <see cref="bool"/>.
         /// </returns>
-        private bool DoesNewsOfCarrierReviewExist(string wrapId, string reviewText)
+        private bool DoesNewsOfCarrierReviewExist(string modelName, string reviewText)
         {
-            StfAssert.StringNotEmpty("WrapId", wrapId);
+            StfAssert.StringNotEmpty("modelId", modelName);
             StfAssert.StringNotEmpty("reviewText", reviewText);
 
             var news = WrapTrackShell.News();
-            var newsEntry = news.GetNewsEntryCarrierReview(wrapId, reviewText);
+            var newsEntry = news.GetNewsEntryCarrierReview(modelName, reviewText);
 
             StfAssert.IsNotNull("NewsEntry", newsEntry);
 
