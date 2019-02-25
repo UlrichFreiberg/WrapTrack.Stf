@@ -15,7 +15,6 @@ namespace WrapTrackWebTests.Collection.AddCarrier
     using Mir.Stf.Utilities;
 
     using WrapTrack.Stf.WrapTrackWeb.Interfaces;
-    using WrapTrack.Stf.WrapTrackWeb.Interfaces.Me.Collection.CarrierManagement;
 
     using WrapTrackWebTests.Collection.AddCarrier.TestData;
 
@@ -43,7 +42,7 @@ namespace WrapTrackWebTests.Collection.AddCarrier
             WrapTrackShell.Login();
 
             var testCaseUtil = new TestCaseUtils(StfAssert);
-            var addCarrier = testCaseUtil.GetAddCarrier<ICarrierBase>(WrapTrackShell, testdata.CarrierType);
+            var addCarrier = testCaseUtil.GetAddCarrier(WrapTrackShell, testdata.CarrierType);
 
             StfAssert.IsTrue("HandleHomeMade", testCaseUtil.HandleHomeMade(addCarrier, testdata.HomeMade));
 

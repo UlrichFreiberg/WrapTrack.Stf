@@ -23,6 +23,12 @@ namespace WrapTrackWebTests.Collection.AddCarrier
     /// </summary>
     public class TestCaseUtils
     {
+        /// <summary>
+        /// Initializes a new instance of the <see cref="TestCaseUtils"/> class.
+        /// </summary>
+        /// <param name="stfAssert">
+        /// The stf assert.
+        /// </param>
         public TestCaseUtils(StfAssert stfAssert)
         {
             StfAssert = stfAssert;
@@ -108,95 +114,6 @@ namespace WrapTrackWebTests.Collection.AddCarrier
             StfAssert.IsTrue("HandleSizeGradeAcquired", retVal);
 
             return retVal;
-        }
-
-        /// <summary>
-        /// The handle made of wrap.
-        /// </summary>
-        /// <param name="addCarrier">
-        /// The add carrier.
-        /// </param>
-        /// <param name="madeOfWrap">
-        /// The made Of Wrap.
-        /// </param>
-        /// <returns>
-        /// The <see cref="bool"/>.
-        /// </returns>
-        private bool InternalHandleMadeOfWrap(ICarrierBase addCarrier, string madeOfWrap)
-        {
-            if (string.IsNullOrEmpty(madeOfWrap))
-            {
-                // Mom I'm done!! - If not Converted...
-                return true;
-            }
-
-            var retVal = addCarrier.SelectMadeOfWrap();
-
-            return retVal;
-        }
-
-        /// <summary>
-        /// The handle converted convert type convert name.
-        /// </summary>
-        /// <param name="addCarrier">
-        /// The add carrier.
-        /// </param>
-        /// <param name="converted">
-        /// The converted.
-        /// </param>
-        /// <param name="convertType">
-        /// The convert Type.
-        /// </param>
-        /// <param name="convertName">
-        /// The convert Name.
-        /// </param>
-        /// <returns>
-        /// The <see cref="bool"/>.
-        /// </returns>
-        private bool InternalHandleConvertedConvertTypeConvertName(
-            ICarrierBase addCarrier,
-            string converted,
-            string convertType,
-            string convertName)
-        {
-            if (string.IsNullOrEmpty(converted))
-            {
-                // Mom I'm done!! - If not Converted...
-                return true;
-            }
-
-            addCarrier.Converted = true;
-            addCarrier.ConvertType = convertType;
-            addCarrier.ConvertName = convertName;
-
-            return true;
-        }
-
-        /// <summary>
-        /// The handle home made.
-        /// </summary>
-        /// <param name="addCarrier">
-        /// The add carrier.
-        /// </param>
-        /// <param name="homeMade">
-        /// The home Made.
-        /// </param>
-        /// <returns>
-        /// The <see cref="bool"/>.
-        /// </returns>
-        private bool InternalHandleHomeMade(ICarrierBase addCarrier, string homeMade)
-        {
-            if (string.IsNullOrEmpty(homeMade))
-            {
-                addCarrier.HomeMade = false;
-
-                return true;
-            }
-
-            addCarrier.HomeMade = true;
-            addCarrier.Name = $"MyOwn_{Guid.NewGuid()}";
-
-            return true;
         }
 
         /// <summary>
@@ -294,7 +211,19 @@ namespace WrapTrackWebTests.Collection.AddCarrier
             return true;
         }
 
-        public ICarrierBase GetAddCarrier<T>(IWrapTrackWebShell wrapTrackShell, string carrierType)
+        /// <summary>
+        /// The get add carrier.
+        /// </summary>
+        /// <param name="wrapTrackShell">
+        /// The wrap track shell.
+        /// </param>
+        /// <param name="carrierType">
+        /// The carrier type.
+        /// </param>
+        /// <returns>
+        /// The <see cref="ICarrierBase"/>.
+        /// </returns>
+        public ICarrierBase GetAddCarrier(IWrapTrackWebShell wrapTrackShell, string carrierType)
         {
             var me = wrapTrackShell.Me();
             var collection = me.GetCollection();
@@ -303,6 +232,133 @@ namespace WrapTrackWebTests.Collection.AddCarrier
             return addCarrier;
         }
 
+        /// <summary>
+        /// The handle brand carriertypenickname carriermodel.
+        /// </summary>
+        /// <param name="addCarrier">
+        /// The add carrier.
+        /// </param>
+        /// <param name="testdataBrand">
+        /// The testdata brand.
+        /// </param>
+        /// <param name="testdataCarrierTypeNickName">
+        /// The testdata carrier type nick name.
+        /// </param>
+        /// <param name="testdataCarrierModel">
+        /// The testdata carrier model.
+        /// </param>
+        public void HandleBrandCarriertypenicknameCarriermodel(
+            ICarrierBase addCarrier,
+            string testdataBrand,
+            string testdataCarrierTypeNickName,
+            string testdataCarrierModel)
+        {
+            addCarrier.Brand = testdataBrand;
+            addCarrier.CarrierType = testdataCarrierTypeNickName;
+            addCarrier.CarrierModel = testdataCarrierModel;
+        }
+
+        /// <summary>
+        /// The handle made of wrap.
+        /// </summary>
+        /// <param name="addCarrier">
+        /// The add carrier.
+        /// </param>
+        /// <param name="madeOfWrap">
+        /// The made Of Wrap.
+        /// </param>
+        /// <returns>
+        /// The <see cref="bool"/>.
+        /// </returns>
+        private bool InternalHandleMadeOfWrap(ICarrierBase addCarrier, string madeOfWrap)
+        {
+            if (string.IsNullOrEmpty(madeOfWrap))
+            {
+                // Mom I'm done!! - If not Converted...
+                return true;
+            }
+
+            var retVal = addCarrier.SelectMadeOfWrap();
+
+            return retVal;
+        }
+
+        /// <summary>
+        /// The handle converted convert type convert name.
+        /// </summary>
+        /// <param name="addCarrier">
+        /// The add carrier.
+        /// </param>
+        /// <param name="converted">
+        /// The converted.
+        /// </param>
+        /// <param name="convertType">
+        /// The convert Type.
+        /// </param>
+        /// <param name="convertName">
+        /// The convert Name.
+        /// </param>
+        /// <returns>
+        /// The <see cref="bool"/>.
+        /// </returns>
+        private bool InternalHandleConvertedConvertTypeConvertName(
+            ICarrierBase addCarrier,
+            string converted,
+            string convertType,
+            string convertName)
+        {
+            if (string.IsNullOrEmpty(converted))
+            {
+                // Mom I'm done!! - If not Converted...
+                return true;
+            }
+
+            addCarrier.Converted = true;
+            addCarrier.ConvertType = convertType;
+            addCarrier.ConvertName = convertName;
+
+            return true;
+        }
+
+        /// <summary>
+        /// The handle home made.
+        /// </summary>
+        /// <param name="addCarrier">
+        /// The add carrier.
+        /// </param>
+        /// <param name="homeMade">
+        /// The home Made.
+        /// </param>
+        /// <returns>
+        /// The <see cref="bool"/>.
+        /// </returns>
+        private bool InternalHandleHomeMade(ICarrierBase addCarrier, string homeMade)
+        {
+            if (string.IsNullOrEmpty(homeMade))
+            {
+                addCarrier.HomeMade = false;
+
+                return true;
+            }
+
+            addCarrier.HomeMade = true;
+            addCarrier.Name = $"MyOwn_{Guid.NewGuid()}";
+
+            return true;
+        }
+
+        /// <summary>
+        /// The get carrier by select type.
+        /// </summary>
+        /// <param name="collection">
+        /// The collection.
+        /// </param>
+        /// <param name="selectType">
+        /// The select type.
+        /// </param>
+        /// <returns>
+        /// The <see cref="ICarrierBase"/>.
+        /// </returns>
         private ICarrierBase GetCarrierBySelectType(ICollection collection, string selectType)
         {
             switch (selectType.ToLower().Trim())
@@ -314,19 +370,16 @@ namespace WrapTrackWebTests.Collection.AddCarrier
                 case "mei tai": return collection.AddCarrier<IMeiTai>();
                 case "half buckle mei tai": return collection.AddCarrier<IHalfBuckleMeiTai>();
                 case "wrap tai": return collection.AddCarrier<IWrapTai>();
+                case "half buckle wrap tai": return collection.AddCarrier<IHalfBuckleWrapTai>();
+                case "onbuhimo": return collection.AddCarrier<IOnbuhimo>();
+                case "reverse onbuhimo": return collection.AddCarrier<IReverseOnbuhimo>();
+                case "buckle onbuhimo": return collection.AddCarrier<IBuckleOnbuhimo>();
+                case "podeagi": return collection.AddCarrier<IPodeagi>();
+                case "nyia": return collection.AddCarrier<INyia>();
+                case "doll sling": return collection.AddCarrier<IDollSling>();
             }
 
             return null;
-
-            //case "I8": return "half buckle wrap tai";
-            //case "I9": return "onbuhimo";
-            //case "I10": return "reverse onbuhimo";
-            //case "I11": return "buckle onbuhimo";
-            //case "I12": return "podeagi";
-            //case "I13": return "nyia";
-            //case "I14": return "doll sling";
-            //case "I15": return "other carrier";
-            //default: return "AddCarrier:Unsupported value";
         }
     }
 }
