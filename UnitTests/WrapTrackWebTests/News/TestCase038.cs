@@ -1,5 +1,5 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="TestCase037.cs" company="Mir Software">
+// <copyright file="TestCase038.cs" company="Mir Software">
 //   Copyright governed by Artistic license as described here:
 //          http://www.perlfoundation.org/artistic_license_2_0
 // </copyright>
@@ -21,7 +21,7 @@ namespace WrapTrackWebTests.News
     /// News is generated when a user rates a wrap  
     /// </summary>
     [TestClass]
-    public class TestCase037 : WrapTrackTestScriptBase
+    public class TestCase038 : WrapTrackTestScriptBase
     {
         /// <summary>
         /// The test initialize.
@@ -42,13 +42,15 @@ namespace WrapTrackWebTests.News
         }
 
         /// <summary>
-        /// The tc 037.
-        /// News is generated when a user rates a wrap
+        /// The tc 038.
+        /// News is generated when a user rates a wrap.
+        /// The user adds some of the review parameters and these are checked 
+        /// for entries in the news ite.
         /// </summary>
         [TestMethod]
-        public void Tc037()
+        public void Tc038()
         {
-            const string ReviewText = "This is an automated review by TC037";
+            const string CriteriaText = "Easycare";
             const string BrandName = "Agossie";
             const string PatternName = "Orchid";
             const string ModelName = "Glores";
@@ -67,13 +69,13 @@ namespace WrapTrackWebTests.News
             var newWrap = collection.AddWrap(BrandName, PatternName, ModelName);
             var wrap = GetToWrap(newWrap);
 
-            var writeReviewForWrap = WriteReviewForWrap(wrap, ReviewText);
+            var makeEvaluationForWrap = MakeEvaluationForWrap(wrap, CriteriaText);
 
-            StfAssert.IsTrue("Review written for wrap", writeReviewForWrap);
+            StfAssert.IsTrue("evaluation made for wrap", makeEvaluationForWrap);
 
-            var doesNewsOfCarrierReviewExist = DoesNewsOfCarrierReviewExist(ModelName, ReviewText);
+            var doesNewsOfCarrierEvaluationExist = DoesNewsOfCarrierEvaluationExist(ModelName, CriteriaText);
 
-            StfAssert.IsTrue("Does news exist that carrier has a review", doesNewsOfCarrierReviewExist);
+            StfAssert.IsTrue("Does news exist that carrier has an evaluation", doesNewsOfCarrierEvaluationExist);
         }
 
         /// <summary>
@@ -82,26 +84,33 @@ namespace WrapTrackWebTests.News
         /// <param name="wrap">
         /// The wrap.
         /// </param>
-        /// <param name="reviewText">
+        /// <param name="criteriaText">
         /// The text to add to the review
         /// </param>
         /// <returns>
         /// The <see cref="bool"/>.
         /// </returns>
-        private bool WriteReviewForWrap(IWrap wrap, string reviewText)
+        private bool MakeEvaluationForWrap(IWrap wrap, string criteriaText)
         {
             StfAssert.IsNotNull("Wrap", wrap);
-            StfAssert.IsNotNull("reviewText", reviewText);
-            StfAssert.StringNotEmpty("reviewText", reviewText);
+            StfAssert.IsNotNull("criteriaText", criteriaText);
+            StfAssert.StringNotEmpty("criteriaText", criteriaText);
 
             WrapTrackShell.WebAdapter.Click(By.Id("butReview"));
 
             // mostly for demo purposes - you can follow what happens
             WrapTrackShell.WebAdapter.WaitForComplete(1);
 
-            var elem = WrapTrackShell.WebAdapter.FindElement(By.XPath("//textarea[@name='fortaelling']"));
+            var xPath = "(//p/span[text()='" + 
+                        criteriaText + 
+                        "']/../../following::div/anmeldelse_bedoemmelse_punkt[1])[1]";
 
-            elem.SendKeys(reviewText);
+            StfLogger.LogDebug("criteria text xpath ", xPath);
+
+            var elem = WrapTrackShell.WebAdapter.FindElement(By.XPath(xPath));
+
+            elem.Click();
+
             WrapTrackShell.WebAdapter.WaitForComplete(1);
 
             WrapTrackShell.WebAdapter.Click(By.Id("butSaveReviewOneLang"));
@@ -138,19 +147,19 @@ namespace WrapTrackWebTests.News
         /// <param name="modelName">
         /// The model name
         /// </param>
-        /// <param name="reviewText">
+        /// <param name="criteriaText">
         /// The review text
         /// </param>
         /// <returns>
         /// The <see cref="bool"/>.
         /// </returns>
-        private bool DoesNewsOfCarrierReviewExist(string modelName, string reviewText)
+        private bool DoesNewsOfCarrierEvaluationExist(string modelName, string criteriaText)
         {
             StfAssert.StringNotEmpty("modelId", modelName);
-            StfAssert.StringNotEmpty("reviewText", reviewText);
+            StfAssert.StringNotEmpty("criteriaText", criteriaText);
 
             var news = WrapTrackShell.News();
-            var newsEntry = news.GetNewsEntryCarrierReview(modelName, reviewText);
+            var newsEntry = news.GetNewsEntryCarrierEvaluation(modelName, criteriaText);
 
             StfAssert.IsNotNull("NewsEntry", newsEntry);
 

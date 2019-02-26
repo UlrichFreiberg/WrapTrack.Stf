@@ -55,6 +55,7 @@ namespace WrapTrack.Stf.WrapTrackWeb
             stfContainer.RegisterType<Interfaces.News.INewsEntryCarrierStory, News.NewsEntryCarrierStory>();
             stfContainer.RegisterType<Interfaces.News.INewsEntryCarrierForSale, News.NewsEntryCarrierForSale>();
             stfContainer.RegisterType<Interfaces.News.INewsEntryCarrierReview, News.NewsEntryCarrierReview>();
+            stfContainer.RegisterType<Interfaces.News.INewsEntryCarrierEvaluation, News.NewsEntryCarrierEvaluation>();
         }
 
         /// <summary>
