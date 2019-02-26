@@ -25,11 +25,6 @@ namespace WrapTrackWebTests.Explore.Brands
     public class TestCase015 : WrapTrackTestScriptBase
     {
         /// <summary>
-        /// The brand id. Should NOT be hardcoded - randomBrand is not that random;-)
-        /// </summary>
-        private const string BrandId = "306";
-
-        /// <summary>
         /// The wt utils.
         /// </summary>
         private IWtApi wtApi;
@@ -59,11 +54,15 @@ namespace WrapTrackWebTests.Explore.Brands
         [TestMethod]
         public void Tc015()
         {
+            // For now hard coded. TOdo: Random
+           const string BrandId = "289";
+           const string BrandName = "Agossie";
+
             // Use default user
-            WrapTrackShell.LoginAsAdmin();
+            WrapTrackShell.Login();
             StfAssert.IsNotNull("wrapTrackShell", WrapTrackShell);
 
-            var randomBrand = GetRandomBrand();
+            var randomBrand = this.GetBrand(BrandName);
             var newPatternName = WtUtils.GetRandomString("StfPattern");
             var baseLineNumberOfPatterns = wtApi.BrandNumberOfPatterns(BrandId);
             var patternAdded = randomBrand.AddPattern(newPatternName);

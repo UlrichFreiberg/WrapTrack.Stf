@@ -160,7 +160,16 @@ namespace WrapTrack.Stf.WrapTrackWeb
             var loginHeader = WebAdapter.FindElement(By.XPath("//h1[text='Login']"), 2);
             var retVal = loginHeader == null || CheckSignUpValidationMessages();
 
+            ChooseEnglish(); 
+
             return retVal;
+        }
+
+        private void ChooseEnglish()
+        {
+            const string Xpath = @"//sprog_valg//img[@src=""http://wt.troldvaerk.org/grafik/flag/2.svg""]";
+            WebAdapter.Click(By.XPath(Xpath)); 
+            WebAdapter.WaitForComplete(1);
         }
 
         /// <summary>

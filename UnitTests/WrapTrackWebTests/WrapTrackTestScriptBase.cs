@@ -212,14 +212,14 @@ namespace WrapTrackWebTests
         /// <returns>
         /// The <see cref="IBrand"/>.
         /// </returns>
-        protected IBrand GetRandomBrand()
+        protected IBrand GetBrand(string brandName)
         {
             var explorer = WrapTrackShell.Explore();
 
             StfAssert.IsInstanceOfType("explorer", explorer, typeof(IExplore));
 
             var brands = explorer.Brands();
-            var selectedBrand = brands.SelectAndOpenBrand("Agossie");
+            var selectedBrand = brands.SelectAndOpenBrand(brandName);
 
             return selectedBrand;
         }
