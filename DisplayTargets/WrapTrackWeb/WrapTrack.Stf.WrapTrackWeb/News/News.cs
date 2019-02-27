@@ -153,8 +153,9 @@ namespace WrapTrack.Stf.WrapTrackWeb.News
         {
             var elements = WebAdapter.FindElements(By.Id("anmeldelse_vurdering"));
 
-            WebAdapter.WaitForComplete(1);
+            WebAdapter.WaitForComplete(30);
 
+            StfLogger.LogDebug("no. carrier review stories :" + elements.Count);
             if (elements.Count != 1)
             {
                 StfLogger.LogError("only support 1 carrier review");
@@ -198,6 +199,70 @@ namespace WrapTrack.Stf.WrapTrackWeb.News
             }
 
             return newsEntryCarrierReview;
+        }
+
+        /// <summary>
+        /// The get news entry carrier evaulation
+        /// </summary>
+        /// <param name="modelName">
+        /// The model name 
+        /// </param>
+        /// <param name="criteria">
+        /// The criteria
+        /// </param>
+        /// <returns>
+        /// The <see cref="INewsEntryCarrierEvaluation"/>.
+        /// </returns>
+        public INewsEntryCarrierEvaluation GetNewsEntryCarrierEvaluation(string modelName, string criteria)
+        {
+            var elements = WebAdapter.FindElements(By.Id("anmeldelse_bedoemmelse"));
+
+            WebAdapter.WaitForComplete(30);
+
+            StfLogger.LogDebug("no. carrier evaluations :" + elements.Count);
+            if (elements.Count != 1)
+            {
+                StfLogger.LogError("only support 1 carrier evaluation");
+                return null;
+            }
+
+            var element = elements.First();
+
+            if (element == null)
+            {
+                StfLogger.LogError("elements.first() returned a null element");
+                return null;
+            }
+
+            var newsEntryCarrierEvaluation = Get<INewsEntryCarrierEvaluation>();
+
+            if (newsEntryCarrierEvaluation == null)
+            {
+                StfLogger.LogError("Could not get newsEntryCarrierEvaluation from Get<INewsEntryCarrierEvaluation>");
+                return null;
+            }
+
+            newsEntryCarrierEvaluation.Text = element.Text;
+
+            if (!newsEntryCarrierEvaluation.HeaderText.Contains(WrapTrackWebShell.CurrentLoggedInUser))
+            {
+                StfLogger.LogDebug("Returning null as !newsEntryCarrierEvaluation.HeaderText.Contains(WrapTrackWebShell.CurrentLoggedInUser)");
+                return null;
+            }
+
+            if (!newsEntryCarrierEvaluation.WrapText.Contains(modelName))
+            {
+                StfLogger.LogDebug("Returning null as !newsEntryCarrierEvaluation.WrapText.Contains(modelId)");
+                return null;
+            }
+
+            if (!newsEntryCarrierEvaluation.CriteriaText.Equals(criteria))
+            {
+                StfLogger.LogDebug("Returning null as !newsEntryCarrierEvaluation.CriteriaText.Equals(criteria)");
+                return null;
+            }
+
+            return newsEntryCarrierEvaluation;
         }
     }
 }

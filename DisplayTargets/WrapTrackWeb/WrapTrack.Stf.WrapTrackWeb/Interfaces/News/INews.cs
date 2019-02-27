@@ -53,8 +53,22 @@ namespace WrapTrack.Stf.WrapTrackWeb.Interfaces.News
         /// The text for the review
         /// </param>
         /// <returns>
-        /// The <see cref="INewsEntryCarrierForSale"/>.
+        /// The <see cref="INewsEntryCarrierReview"/>.
         /// </returns>
         INewsEntryCarrierReview GetNewsEntryCarrierReview(string modelName, string reviewText);
+
+        /// <summary>
+        /// The get news entry carrier evaulation
+        /// </summary>
+        /// <param name="modelName">
+        /// The model name 
+        /// </param>
+        /// <param name="criteria">
+        /// The criteria
+        /// </param>
+        /// <returns>
+        /// The <see cref="INewsEntryCarrierEvaluation"/>.
+        /// </returns>
+        INewsEntryCarrierEvaluation GetNewsEntryCarrierEvaluation(string modelName, string criteria);
     }
 }
