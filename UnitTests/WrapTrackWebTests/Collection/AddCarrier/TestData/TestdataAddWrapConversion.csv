@@ -1,4 +1,6 @@
-variantID,StfIgnoreRow,CarrierType,BrandProduced,WrapFabric,Name,Brand,CarrierTypeNickName,CarrierModel,ConverterType,ConvertName,MadeOfWrap,Grade,Acquired,Note
-1,FALSE,mei tai,,,,Kleinsmekker,Kleinsmekker,Clara,,,,,,
-2,FALSE,half buckle mei tai,,,,Oscha,Cairis Baby,Oscha Zorro Fall,,,,,,
-3,FALSE,wrap tai,,,,Fidella,Fly tai,Amors Love Arrows Plum,,,,,,
+variantID;StfIgnoreRow;CarrierType;BrandProduced;WrapFabric;Name;Brand;CarrierTypeNickName;CarrierModel;ConverterType;ConvertName;MadeOfWrap;Grade;Acquired;Note
+1;FALSE;mei tai;;;;Kleinsmekker;Kleinsmekker;Clara;;;;;;Not wrap model
+2;FALSE;half buckle mei tai;;;;Kokadi;TaiTai XL;Royal Stars Reverse;;;;;;Not wrap model
+3;FALSE;wrap tai;;;;Fidella;Fly tai Baby size;Outer Space Blue;;;;;;Not wrap model
+4;FALSE;onbuhimo;;;;Sakura Bloom;Onbuhimo Linen;Quartz;;;;;;Not wrap model
+5;FALSE;full-buckle;;;;Artipoppe;Zeitgeist Baby;Leopard Classic;;;;;;Not wrap model
