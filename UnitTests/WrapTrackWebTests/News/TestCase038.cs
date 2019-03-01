@@ -10,6 +10,8 @@
 
 namespace WrapTrackWebTests.News
 {
+    using System;
+
     using Microsoft.VisualStudio.TestTools.UnitTesting;
 
     using OpenQA.Selenium;
@@ -50,10 +52,12 @@ namespace WrapTrackWebTests.News
         [TestMethod]
         public void Tc038()
         {
-            const string CriteriaText = "Easycare";
             const string BrandName = "Agossie";
             const string PatternName = "Orchid";
             const string ModelName = "Glores";
+
+            var criteriaText = GetCriteriaString();
+            var evaulationValue = GetEvaulationValue();
 
             StfAssert.IsNotNull("wrapTrackShell", WrapTrackShell);
             WrapTrackShell.SignUp();
@@ -69,13 +73,89 @@ namespace WrapTrackWebTests.News
             var newWrap = collection.AddWrap(BrandName, PatternName, ModelName);
             var wrap = GetToWrap(newWrap);
 
-            var makeEvaluationForWrap = MakeEvaluationForWrap(wrap, CriteriaText);
+            var makeEvaluationForWrap = MakeEvaluationForWrap(wrap, criteriaText, evaulationValue);
 
             StfAssert.IsTrue("evaluation made for wrap", makeEvaluationForWrap);
 
-            var doesNewsOfCarrierEvaluationExist = DoesNewsOfCarrierEvaluationExist(ModelName, CriteriaText);
+            var doesNewsOfCarrierEvaluationExist = DoesNewsOfCarrierEvaluationExist(ModelName, criteriaText);
 
             StfAssert.IsTrue("Does news exist that carrier has an evaluation", doesNewsOfCarrierEvaluationExist);
+        }
+
+        /// <summary>
+        /// get the evaulation value.
+        /// </summary>
+        /// <returns>
+        /// The <see cref="int"/>.
+        /// </returns>
+        private int GetEvaulationValue()
+        {
+            // TODO: Change the MaxEvaluationValue to 7. 
+            // When this is done, need to test for other criteria strings
+            const int MaxEvaluationValue = 3;
+            Random rnd = new Random();
+            var evaluationNumber = rnd.Next(1, MaxEvaluationValue + 1);
+            StfAssert.LessThanOrEqual(
+                "evaluationNumber less than length-1 of array of criteriaTexts",
+                evaluationNumber,
+                MaxEvaluationValue);
+            StfAssert.GreaterThanOrEqual(
+                "evaluationNumber greater than or equalt to 0",
+                evaluationNumber,
+                0);
+
+            StfLogger.LogDebug("Evaluation number is " + evaluationNumber);
+
+            return evaluationNumber;
+        }
+
+        /// <summary>
+        /// get the criteria string.
+        /// </summary>
+        /// <returns>
+        /// The <see cref="string"/>.
+        /// </returns>
+        private string GetCriteriaString()
+        {
+            var criteriaStrings = new[] 
+            {
+                "Easycare",
+                "Low quality",
+                "No breaking in needed",
+                "Good for new wrappers",
+                "No cush",
+                "No bounce",
+                "Not squish-worthy",
+                "Not toddler-worthy",
+                "Not summer-worthy",
+                "Not winter-worthy",
+                "Short to size",
+                "Thin",
+                "Airy",
+                "Solid",
+                "Stiff",
+                "Slippery",
+                "Soapy",
+                "Smooth",
+                "Flat"
+            };
+
+            Random rnd = new Random();
+            var criteriaNumber = rnd.Next(0, criteriaStrings.Length - 1);
+            StfAssert.LessThanOrEqual(
+                "criteriaNumber less than length-1 of array of criteriaTexts",
+                criteriaNumber,
+                criteriaStrings.Length - 1);
+            StfAssert.GreaterThanOrEqual(
+                "criteriaNumber greater than or equalt to 0",
+                criteriaNumber,
+                0);
+
+            var criteriaText = criteriaStrings[criteriaNumber];
+
+            StfLogger.LogDebug("Criteria text and number is " + criteriaText + " and " + criteriaNumber);
+
+            return criteriaText;
         }
 
         /// <summary>
@@ -85,12 +165,15 @@ namespace WrapTrackWebTests.News
         /// The wrap.
         /// </param>
         /// <param name="criteriaText">
-        /// The text to add to the review
+        /// The criteria for the review
+        /// </param>
+        /// <param name="evaluationvalue">
+        /// The evaulation number to assign to the criteria
         /// </param>
         /// <returns>
         /// The <see cref="bool"/>.
         /// </returns>
-        private bool MakeEvaluationForWrap(IWrap wrap, string criteriaText)
+        private bool MakeEvaluationForWrap(IWrap wrap, string criteriaText, int evaluationvalue)
         {
             StfAssert.IsNotNull("Wrap", wrap);
             StfAssert.IsNotNull("criteriaText", criteriaText);
@@ -102,8 +185,10 @@ namespace WrapTrackWebTests.News
             WrapTrackShell.WebAdapter.WaitForComplete(1);
 
             var xPath = "(//p/span[text()='" + 
-                        criteriaText + 
-                        "']/../../following::div/anmeldelse_bedoemmelse_punkt[1])[1]";
+                        criteriaText +
+                        "']/../../following::div/anmeldelse_bedoemmelse_punkt[" +
+                        evaluationvalue + 
+                        "])[1]";
 
             StfLogger.LogDebug("criteria text xpath ", xPath);
 
