@@ -329,18 +329,18 @@ namespace WrapTrack.Stf.WrapTrackWeb.Me.Collection
                 case "IHalfBuckleMeiTai": return "half buckle mei tai";
                 case "IMeiTai": return "mei tai";
                 case "IWrapTai": return "wrap tai";
+                case "IHalfBuckleWrapTai": return "half buckle wrap tai";
+                case "IOnbuhimo": return "onbuhimo";
+                case "IReverseOnbuhimo": return "reverse onbuhimo";
+                case "IBuckleOnbuhimo": return "buckle onbuhimo";
+                case "IPodeagi": return "podeagi";
+                case "INyia": return "nyia";
+                case "IDollSling": return "doll sling";
+                case "IFullBuckleMeiTai": return "full buckle mei tai";
+                case "IKanga": return "kanga";
+                case "IFullBuckle": return "full buckle";
 
-                case "I5": return "mei tai";
-                case "I6": return "half buckle mei tai";
-                case "I7": return "wrap tai";
-                case "I8": return "half buckle wrap tai";
-                case "I9": return "onbuhimo";
-                case "I10": return "reverse onbuhimo";
-                case "I11": return "buckle onbuhimo";
-                case "I12": return "podeagi";
-                case "I13": return "nyia";
-                case "I14": return "doll sling";
-                case "I15": return "other carrier";
+                // TODO:case "MISSING IMPLEMENTATION": return "other carrier";
                 default: return "AddCarrier:Unsupported value";
             }
         }

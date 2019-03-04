@@ -141,6 +141,9 @@
     <Compile Include="Interfaces\Me\Collection\CarrierManagement\IOnbuhimo.cs" />
     <Compile Include="Interfaces\Me\Collection\CarrierManagement\IPodeagi.cs" />
     <Compile Include="Interfaces\Me\Collection\CarrierManagement\IReverseOnbuhimo.cs" />
+    <Compile Include="Interfaces\Me\Collection\CarrierManagement\IFullBuckleMeiTai.cs" />
+    <Compile Include="Interfaces\Me\Collection\CarrierManagement\IKanga.cs" />
+    <Compile Include="Interfaces\Me\Collection\CarrierManagement\IFullBuckle.cs" />
     <Compile Include="Interfaces\Me\Collection\CarrierManagement\IWrapTai.cs" />
     <Compile Include="Interfaces\Me\Collection\CarrierManagement\IHalfBuckleMeiTai.cs" />
     <Compile Include="Interfaces\Me\Collection\CarrierManagement\IRingSling.cs" />
@@ -175,6 +178,9 @@
     <Compile Include="Me\Collection\CarrierManagement\HybridWrap.cs" />
     <Compile Include="Me\Collection\CarrierManagement\WowenWrap.cs" />
     <Compile Include="Me\Collection\CarrierManagement\StretchyWrap.cs" />
+    <Compile Include="Me\Collection\CarrierManagement\Kanga.cs" />
+    <Compile Include="Me\Collection\CarrierManagement\FullBuckle.cs" />
+    <Compile Include="Me\Collection\CarrierManagement\FullBuckleMeiTai.cs" />
     <Compile Include="Me\Collection\CarrierManagement\WrapTai.cs" />
     <Compile Include="Me\Collection\DeleteWrapOption.cs" />
     <Compile Include="Model\Model.cs" />
