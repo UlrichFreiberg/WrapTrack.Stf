@@ -334,6 +334,8 @@ namespace WrapTrackWebTests.Collection.AddCarrier
         /// </returns>
         private bool InternalHandleHomeMade(ICarrierBase addCarrier, string homeMade)
         {
+            StfAssert.IsNotNull("InternalHandleHomeMade:addCarrier", addCarrier);
+
             if (string.IsNullOrEmpty(homeMade))
             {
                 addCarrier.HomeMade = false;
@@ -363,12 +365,13 @@ namespace WrapTrackWebTests.Collection.AddCarrier
         {
             switch (selectType.ToLower().Trim())
             {
-                case "ring sling": return collection.AddCarrier<IRingSling>();
                 case "woven wrap": return collection.AddCarrier<IWowenWrap>();
                 case "stretchy wrap": return collection.AddCarrier<IStretchyWrap>();
                 case "hybrid wrap": return collection.AddCarrier<IHybridWrap>();
+                case "ring sling": return collection.AddCarrier<IRingSling>();
                 case "mei tai": return collection.AddCarrier<IMeiTai>();
                 case "half buckle mei tai": return collection.AddCarrier<IHalfBuckleMeiTai>();
+                case "full buckle mei tai": return collection.AddCarrier<IFullBuckleMeiTai>();
                 case "wrap tai": return collection.AddCarrier<IWrapTai>();
                 case "half buckle wrap tai": return collection.AddCarrier<IHalfBuckleWrapTai>();
                 case "onbuhimo": return collection.AddCarrier<IOnbuhimo>();
@@ -376,7 +379,9 @@ namespace WrapTrackWebTests.Collection.AddCarrier
                 case "buckle onbuhimo": return collection.AddCarrier<IBuckleOnbuhimo>();
                 case "podeagi": return collection.AddCarrier<IPodeagi>();
                 case "nyia": return collection.AddCarrier<INyia>();
+                case "kanga": return collection.AddCarrier<IKanga>();
                 case "doll sling": return collection.AddCarrier<IDollSling>();
+                case "full buckle": return collection.AddCarrier<IFullBuckle>();
             }
 
             return null;

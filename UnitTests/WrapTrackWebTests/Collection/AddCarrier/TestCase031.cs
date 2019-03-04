@@ -29,7 +29,7 @@ namespace WrapTrackWebTests.Collection.AddCarrier
         /// </summary>
         [DataSource(
             "Microsoft.VisualStudio.TestTools.DataSource.CSV",
-            @"D:\Projects\WrapTrack.Stf\UnitTests\WrapTrackWebTests\Collection\AddCarrier\TestData\TestdataAddWrapCOnversion.csv",
+            @"D:\Projects\WrapTrack.Stf\UnitTests\WrapTrackWebTests\Collection\AddCarrier\TestData\TestdataAddWrapConversion.csv",
             "TestdataAddWrapConversion#csv", DataAccessMethod.Sequential)]
         [TestMethod]
         public void Tc031()
