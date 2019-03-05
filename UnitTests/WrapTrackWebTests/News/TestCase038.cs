@@ -16,8 +16,10 @@ namespace WrapTrackWebTests.News
 
     using OpenQA.Selenium;
 
+    using WrapTrack.Stf.Core;
     using WrapTrack.Stf.WrapTrackApi.Interfaces;
     using WrapTrack.Stf.WrapTrackWeb.Interfaces;
+    using WrapTrack.Stf.WrapTrackWeb.Review;
 
     /// <summary>
     /// News is generated when a user rates a wrap  
@@ -25,6 +27,21 @@ namespace WrapTrackWebTests.News
     [TestClass]
     public class TestCase038 : WrapTrackTestScriptBase
     {
+        /// <summary>
+        /// The brand name.
+        /// </summary>
+        private const string BrandName = "Agossie";
+
+        /// <summary>
+        /// The pattern name.
+        /// </summary>
+        private const string PatternName = "Orchid";
+
+        /// <summary>
+        /// The model name.
+        /// </summary>
+        private const string ModelName = "Glores";
+
         /// <summary>
         /// The test initialize.
         /// </summary>
@@ -52,10 +69,6 @@ namespace WrapTrackWebTests.News
         [TestMethod]
         public void Tc038()
         {
-            const string BrandName = "Agossie";
-            const string PatternName = "Orchid";
-            const string ModelName = "Glores";
-
             var criteriaText = GetCriteriaString();
             var evaulationValue = GetEvaulationValue();
 
@@ -72,7 +85,6 @@ namespace WrapTrackWebTests.News
 
             var newWrap = collection.AddWrap(BrandName, PatternName, ModelName);
             var wrap = GetToWrap(newWrap);
-
             var makeEvaluationForWrap = MakeEvaluationForWrap(wrap, criteriaText, evaulationValue);
 
             StfAssert.IsTrue("evaluation made for wrap", makeEvaluationForWrap);
@@ -93,18 +105,12 @@ namespace WrapTrackWebTests.News
             // TODO: Change the MaxEvaluationValue to 7. 
             // When this is done, need to test for other criteria strings
             const int MaxEvaluationValue = 3;
-            Random rnd = new Random();
-            var evaluationNumber = rnd.Next(1, MaxEvaluationValue + 1);
-            StfAssert.LessThanOrEqual(
-                "evaluationNumber less than length-1 of array of criteriaTexts",
-                evaluationNumber,
-                MaxEvaluationValue);
-            StfAssert.GreaterThanOrEqual(
-                "evaluationNumber greater than or equalt to 0",
-                evaluationNumber,
-                0);
+            var random = new Random();
+            var evaluationNumber = random.Next(1, MaxEvaluationValue + 1);
 
-            StfLogger.LogDebug("Evaluation number is " + evaluationNumber);
+            // evaluationNumber less than length-1 of array of criteriaTexts
+            StfAssert.LessThanOrEqual("evaluationNumber within array boundaries", evaluationNumber, MaxEvaluationValue);
+            StfAssert.GreaterThanOrEqual("evaluationNumber", evaluationNumber, 0);
 
             return evaluationNumber;
         }
@@ -117,45 +123,11 @@ namespace WrapTrackWebTests.News
         /// </returns>
         private string GetCriteriaString()
         {
-            var criteriaStrings = new[] 
-            {
-                "Easycare",
-                "Low quality",
-                "No breaking in needed",
-                "Good for new wrappers",
-                "No cush",
-                "No bounce",
-                "Not squish-worthy",
-                "Not toddler-worthy",
-                "Not summer-worthy",
-                "Not winter-worthy",
-                "Short to size",
-                "Thin",
-                "Airy",
-                "Solid",
-                "Stiff",
-                "Slippery",
-                "Soapy",
-                "Smooth",
-                "Flat"
-            };
+            var retVal = EnumExtensions.GetRandomEnum<WrapReviewProperties>();
 
-            Random rnd = new Random();
-            var criteriaNumber = rnd.Next(0, criteriaStrings.Length - 1);
-            StfAssert.LessThanOrEqual(
-                "criteriaNumber less than length-1 of array of criteriaTexts",
-                criteriaNumber,
-                criteriaStrings.Length - 1);
-            StfAssert.GreaterThanOrEqual(
-                "criteriaNumber greater than or equalt to 0",
-                criteriaNumber,
-                0);
+            StfLogger.LogDebug($"Criteria text {retVal}");
 
-            var criteriaText = criteriaStrings[criteriaNumber];
-
-            StfLogger.LogDebug("Criteria text and number is " + criteriaText + " and " + criteriaNumber);
-
-            return criteriaText;
+            return retVal.GetDisplayName();
         }
 
         /// <summary>
@@ -195,9 +167,7 @@ namespace WrapTrackWebTests.News
             var elem = WrapTrackShell.WebAdapter.FindElement(By.XPath(xPath));
 
             elem.Click();
-
             WrapTrackShell.WebAdapter.WaitForComplete(1);
-
             WrapTrackShell.WebAdapter.Click(By.Id("butSaveReviewOneLang"));
 
             return true;
