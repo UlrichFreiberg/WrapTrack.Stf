@@ -71,19 +71,32 @@ namespace WrapTrack.Stf.WrapTrackWeb.Model
         /// </returns>
         public bool UploadPicture(string localPathToImage)
         {
-            // click the button 'Administrate pictures' 
-            // WebAdapter.ButtonClickById("admModelImages");
-            WebAdapter.ButtonClickByXpath("(//button[@id='admModelImages'])[2]");
+            var buttonClickAdminPictures = WebAdapter.ButtonClickByXpath("(//button[@id='but_adm_pic'])[2]");
+
+            if (!buttonClickAdminPictures)
+            {
+                return false;
+            }
 
             WebAdapter.WaitForComplete(3);
 
             // handle the File Upload Dialog
-            WebAdapter.NativeDialogFileUpload(By.Id("userfile"), localPathToImage);
+            var nativeDialogFileUpload = WebAdapter.NativeDialogFileUpload(By.Id("userfile"), localPathToImage);
+
+            if (!nativeDialogFileUpload)
+            {
+                return false;
+            }
 
             WebAdapter.WaitForComplete(3);
 
             // Press upload the image
-            WebAdapter.ButtonClickById("but_doupload");
+            var buttonClickUploadImage = WebAdapter.ButtonClickById("but_doupload");
+
+            if (!buttonClickUploadImage)
+            {
+                return false;
+            }
 
             WebAdapter.WaitForComplete(3);
 

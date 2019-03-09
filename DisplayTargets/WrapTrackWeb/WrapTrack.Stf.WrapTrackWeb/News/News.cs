@@ -217,12 +217,13 @@ namespace WrapTrack.Stf.WrapTrackWeb.News
         {
             var elements = WebAdapter.FindElements(By.Id("anmeldelse_bedoemmelse"));
 
+            // TODO: Could be we should call the API so this becomes a bit more event driven:-) 
             WebAdapter.WaitForComplete(30);
-
             StfLogger.LogDebug("no. carrier evaluations :" + elements.Count);
+
             if (elements.Count != 1)
             {
-                StfLogger.LogError("only support 1 carrier evaluation");
+                StfLogger.LogError($"only support 1 carrier evaluation - found {elements.Count} elements");
                 return null;
             }
 

@@ -165,13 +165,6 @@ namespace WrapTrack.Stf.WrapTrackWeb
             return retVal;
         }
 
-        private void ChooseEnglish()
-        {
-            const string Xpath = @"//sprog_valg//img[@src=""http://wt.troldvaerk.org/grafik/flag/2.svg""]";
-            WebAdapter.Click(By.XPath(Xpath)); 
-            WebAdapter.WaitForComplete(1);
-        }
-
         /// <summary>
         /// The collection.
         /// </summary>
@@ -341,8 +334,13 @@ namespace WrapTrack.Stf.WrapTrackWeb
         {
             var baseUrl = WtConfiguration.Url;
             var wrapIdUrl = $"{baseUrl}Collection/wrap/{wrapId}";
+            var openUrl = WebAdapter.OpenUrl(wrapIdUrl);
 
-            WebAdapter.OpenUrl(wrapIdUrl);
+            if (!openUrl)
+            {
+                StfLogger.LogError($"Couldn't open the url [{wrapIdUrl}]");
+                return null;
+            }
 
             var retVal = StfContainer.Get<IWrap>();
 
@@ -483,6 +481,17 @@ namespace WrapTrack.Stf.WrapTrackWeb
             }
 
             return value;
+        }
+
+        /// <summary>
+        /// The choose english.
+        /// </summary>
+        private void ChooseEnglish()
+        {
+            const string Xpath = @"//sprog_valg//img[@src=""http://wt.troldvaerk.org/grafik/flag/2.svg""]";
+
+            WebAdapter.ButtonClickByXpath(Xpath);
+            WebAdapter.WaitForComplete(1);
         }
     }
 }

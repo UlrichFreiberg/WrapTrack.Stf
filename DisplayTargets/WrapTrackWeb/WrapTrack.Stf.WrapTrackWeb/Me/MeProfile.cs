@@ -65,7 +65,7 @@ namespace WrapTrack.Stf.WrapTrackWeb.Me
                 WebAdapter.WaitForComplete(2);
 
                 // Accept new name, by clicking OK - Weird ID, but true:-)
-                var retValButtonClick = WebAdapter.ButtonClickById("butUserNameOK\"");
+                var retValButtonClick = WebAdapter.ButtonClickById("butUserNameOK");
 
                 if (!retValButtonClick)
                 {
