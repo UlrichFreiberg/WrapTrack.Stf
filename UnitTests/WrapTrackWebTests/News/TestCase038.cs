@@ -10,11 +10,7 @@
 
 namespace WrapTrackWebTests.News
 {
-    using System;
-
     using Microsoft.VisualStudio.TestTools.UnitTesting;
-
-    using OpenQA.Selenium;
 
     using WrapTrack.Stf.Core;
     using WrapTrack.Stf.WrapTrackApi.Interfaces;
@@ -69,12 +65,11 @@ namespace WrapTrackWebTests.News
         [TestMethod]
         public void Tc038()
         {
-            var criteriaText = GetCriteriaString();
-            var evaulationValue = GetEvaulationValue();
-
             StfAssert.IsNotNull("wrapTrackShell", WrapTrackShell);
             WrapTrackShell.SignUp();
 
+            var criteria = EnumExtensions.GetRandomEnum<ModelReviewProperties>();
+            var criteriaText = criteria.GetDisplayName();
             var me = WrapTrackShell.Me();
 
             StfAssert.IsNotNull("me", me);
@@ -85,7 +80,7 @@ namespace WrapTrackWebTests.News
 
             var newWrap = collection.AddWrap(BrandName, PatternName, ModelName);
             var wrap = GetToWrap(newWrap);
-            var makeEvaluationForWrap = MakeEvaluationForWrap(wrap, criteriaText, evaulationValue);
+            var makeEvaluationForWrap = MakeEvaluationForWrap(wrap, criteria);
 
             StfAssert.IsTrue("evaluation made for wrap", makeEvaluationForWrap);
 
@@ -95,82 +90,29 @@ namespace WrapTrackWebTests.News
         }
 
         /// <summary>
-        /// get the evaulation value.
-        /// </summary>
-        /// <returns>
-        /// The <see cref="int"/>.
-        /// </returns>
-        private int GetEvaulationValue()
-        {
-            // TODO: Change the MaxEvaluationValue to 7. 
-            // When this is done, need to test for other criteria strings
-            const int MaxEvaluationValue = 3;
-            var random = new Random();
-            var evaluationNumber = random.Next(1, MaxEvaluationValue + 1);
-
-            // evaluationNumber less than length-1 of array of criteriaTexts
-            StfAssert.LessThanOrEqual("evaluationNumber within array boundaries", evaluationNumber, MaxEvaluationValue);
-            StfAssert.GreaterThanOrEqual("evaluationNumber", evaluationNumber, 0);
-
-            return evaluationNumber;
-        }
-
-        /// <summary>
-        /// get the criteria string.
-        /// </summary>
-        /// <returns>
-        /// The <see cref="string"/>.
-        /// </returns>
-        private string GetCriteriaString()
-        {
-            var retVal = EnumExtensions.GetRandomEnum<WrapReviewProperties>();
-
-            StfLogger.LogDebug($"Criteria text {retVal}");
-
-            return retVal.GetDisplayName();
-        }
-
-        /// <summary>
         /// The mark wrap for review.
         /// </summary>
         /// <param name="wrap">
         /// The wrap.
         /// </param>
-        /// <param name="criteriaText">
-        /// The criteria for the review
-        /// </param>
-        /// <param name="evaluationvalue">
-        /// The evaulation number to assign to the criteria
+        /// <param name="criteria">
+        /// The criteria.
         /// </param>
         /// <returns>
         /// The <see cref="bool"/>.
         /// </returns>
-        private bool MakeEvaluationForWrap(IWrap wrap, string criteriaText, int evaluationvalue)
+        private bool MakeEvaluationForWrap(IWrap wrap, ModelReviewProperties criteria)
         {
             StfAssert.IsNotNull("Wrap", wrap);
-            StfAssert.IsNotNull("criteriaText", criteriaText);
-            StfAssert.StringNotEmpty("criteriaText", criteriaText);
 
-            WrapTrackShell.WebAdapter.Click(By.Id("butReview"));
+            var evaulationValue = EnumExtensions.GetRandomEnum<ModelReviewValues>();
+            var modelReview = wrap.Review();
 
-            // mostly for demo purposes - you can follow what happens
-            WrapTrackShell.WebAdapter.WaitForComplete(1);
+            modelReview.ReviewText = "Some Review inserted by STF";
 
-            var xPath = "(//p/span[text()='" + 
-                        criteriaText +
-                        "']/../../following::div/anmeldelse_bedoemmelse_punkt[" +
-                        evaluationvalue + 
-                        "])[1]";
+            var retVal = modelReview.SetReviewPropertyValue(criteria, evaulationValue);
 
-            StfLogger.LogDebug("criteria text xpath ", xPath);
-
-            var elem = WrapTrackShell.WebAdapter.FindElement(By.XPath(xPath));
-
-            elem.Click();
-            WrapTrackShell.WebAdapter.WaitForComplete(1);
-            WrapTrackShell.WebAdapter.Click(By.Id("butSaveReviewOneLang"));
-
-            return true;
+            return retVal;
         }
 
         /// <summary>
