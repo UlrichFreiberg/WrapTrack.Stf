@@ -44,6 +44,8 @@ namespace WrapTrackWebTests.Collection
         [TestMethod]
         public void Tc020()
         {
+            const string PictureToUpload = @"C:\temp\Stf\Images\WT.jpg";
+
             // Set up user context for actual test
             // Use default user
             WrapTrackShell.Login();
@@ -65,8 +67,9 @@ namespace WrapTrackWebTests.Collection
             var modelToGet = WrapTrackShell.GetToModel(modelId);
 
             StfAssert.IsNotNull("modelToGet", modelToGet);
+            var uploadPicture = modelToGet.UploadPicture(PictureToUpload);
 
-            modelToGet.UploadPicture(@"C:\temp\Stf\Images\WT.jpg");
+            StfAssert.IsNotNull($"Able to upload picture [{PictureToUpload}]", uploadPicture);
 
             var modelInfoAfter = wtApi.ModelInfoByModelId(modelId);
             var newNmberOfModelImages = modelInfoAfter.NumOfImages;

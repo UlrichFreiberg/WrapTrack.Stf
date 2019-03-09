@@ -72,9 +72,9 @@ namespace WrapTrackWebTests.Explore.Brands
             StfAssert.GreaterThan("Number of patterns for brand up by one", numberOfPatterns, baseLineNumberOfPatterns);
            
             var patternDeleted = randomBrand.DeletePattern(newPatternName);
-          
-            numberOfPatterns = wtApi.BrandNumberOfPatterns(BrandId);
+
             StfAssert.IsTrue($"Pattern {newPatternName} Deleted", patternDeleted);
+            numberOfPatterns = wtApi.BrandNumberOfPatterns(BrandId);
             StfAssert.AreEqual($"Number of patterns for brand as baseline", numberOfPatterns, baseLineNumberOfPatterns);
         }
     }

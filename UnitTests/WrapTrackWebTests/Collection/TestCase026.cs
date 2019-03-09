@@ -114,14 +114,19 @@ namespace WrapTrackWebTests.Collection
 
             var newsElements = WrapTrackShell.WebAdapter.FindElements(By.Id("vikle_ferie"));
 
+            if (newsElements.Count == 0)
+            {
+                StfLogger.LogInfo("Found no news elements at all - for wraps sent on holiday");
+                return false;
+            }
+
             foreach (var newsElement in newsElements)
             {
                 var newsHolidayText = newsElement.Text;
+
                 if (newsHolidayText.Contains(recipient)
-                    &&
-                    newsHolidayText.Contains(wrapWtId)
-                    &&
-                    newsHolidayText.Contains(sender))
+                 && newsHolidayText.Contains(wrapWtId)
+                 && newsHolidayText.Contains(sender))
                 {
                     return true;
                 }
