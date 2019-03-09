@@ -115,7 +115,7 @@ namespace WrapTrack.Stf.WrapTrackWeb.Brand
                 return false;
             }
 
-            retVal = WebAdapter.ButtonClickById("create");
+            retVal = WebAdapter.ButtonClickById("Done");
 
             // gotta wait for the WT to process the add...
             WebAdapter.WaitForComplete(1);

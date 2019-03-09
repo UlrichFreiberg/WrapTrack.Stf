@@ -53,10 +53,10 @@ namespace WrapTrack.Stf.WrapTrackWeb.Explore
         /// </returns>
         public IAddBrand AddBrand()
         {
-            var clicked = WebAdapter.ButtonClickByXpath("//a[normalize-space()='add brand']");
-            var retVal = clicked ? Get<IAddBrand>() : null;
+            StfLogger.LogError("AddBrand is no longer supported by the WrapTrack UI");
+            StfLogger.LogInconclusive("UnSUpported", "AddBrand is no longer supported by the WrapTrack UI");
 
-            return retVal;
+            return null;
         }
 
         /// <summary>

@@ -51,7 +51,7 @@ namespace WrapTrackWebTests.Explore.Brands
         /// <summary>
         /// Test of creating a new brand.
         /// </summary>
-        [TestMethod]
+        // Uncommented as AddBrand is unsupported[TestMethod]
         public void Tc014()
         {
             StfAssert.IsNotNull("wrapTrackShell", wrapTrackShell);
