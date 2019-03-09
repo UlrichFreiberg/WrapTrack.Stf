@@ -12,6 +12,7 @@ using System;
 
 namespace WrapTrack.Stf.WrapTrackWeb.Interfaces
 {
+    using WrapTrack.Stf.WrapTrackWeb.Interfaces.Review;
     using WrapTrack.Stf.WrapTrackWeb.Me.Collection;
 
     /// <summary>
@@ -165,5 +166,13 @@ namespace WrapTrack.Stf.WrapTrackWeb.Interfaces
         /// The <see cref="bool"/>.
         /// </returns>
         bool SendAwayTemporarily(SendAwayReason sendAwayReason, string recipient);
+
+        /// <summary>
+        /// The review.
+        /// </summary>
+        /// <returns>
+        /// The <see cref="IModelReview"/>.
+        /// </returns>
+        IModelReview Review();
     }
 }

@@ -41,16 +41,31 @@ namespace WrapTrack.Stf.WrapTrackWeb
             RegisterMeClasses();
             RegisterExploreClasses();
             RegisterBrandClasses();
+            RegisterReviewClasses();
+            RegisterNewsClasses();
 
             // FAQ and contact classes
             stfContainer.RegisterType<Interfaces.FaqContact.IFaq, FaqContact.Faq>();
 
-            stfContainer.RegisterType<Interfaces.IWrap, Wrap>();
+            stfContainer.RegisterType<Interfaces.IWrap, Wrap>();            
 
             stfContainer.RegisterType<Interfaces.IModel, Model.Model>();
+        }
 
+        /// <summary>
+        /// The register review classes.
+        /// </summary>
+        private void RegisterReviewClasses()
+        {
             stfContainer.RegisterType<Interfaces.IReview, Model.Review>();
+            stfContainer.RegisterType<Interfaces.Review.IModelReview, Review.ModelReview>();
+        }
 
+        /// <summary>
+        /// The register news classes.
+        /// </summary>
+        private void RegisterNewsClasses()
+        {
             stfContainer.RegisterType<Interfaces.News.INews, News.News>();
             stfContainer.RegisterType<Interfaces.News.INewsEntryCarrierStory, News.NewsEntryCarrierStory>();
             stfContainer.RegisterType<Interfaces.News.INewsEntryCarrierForSale, News.NewsEntryCarrierForSale>();

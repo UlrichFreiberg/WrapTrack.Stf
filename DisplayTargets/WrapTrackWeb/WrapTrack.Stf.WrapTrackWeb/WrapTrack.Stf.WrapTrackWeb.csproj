@@ -195,7 +195,10 @@
     <Compile Include="News\NewsEntryCarrierReview.cs" />
     <Compile Include="News\NewsEntryCarrierStory.cs" />
     <Compile Include="News\NewsEntryTypes.cs" />
-    <Compile Include="Review\WrapReviewProperties.cs" />
+    <Compile Include="Interfaces\Review\IModelReview.cs" />
+    <Compile Include="Review\ModelReview.cs" />
+    <Compile Include="Review\ModelReviewValues.cs" />
+    <Compile Include="Review\ModelReviewProperties.cs" />
     <Compile Include="Wrap.cs" />
     <Compile Include="Me\MeInbox.cs" />
     <Compile Include="Me\MeReviews.cs" />
