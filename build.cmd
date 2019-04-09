@@ -4,6 +4,12 @@ setlocal
 REM one way to get to the solution name :-D
 for %%* in (.) do set BUILD_SOLUTION=%%~nx*
 
+set BUILD_VSCMD=C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\Common7\Tools\VsDevCmd.bat
+
+if exist "%BUILD_VSCMD%" (call "%BUILD_VSCMD%")
+
+pause
+
 set BUILD_ROOT=%~dp0
 set BUILD_BIN=%BUILD_ROOT%StfBin
 set BUILD_DEPLOY_DIR=C:\Temp\Stf
