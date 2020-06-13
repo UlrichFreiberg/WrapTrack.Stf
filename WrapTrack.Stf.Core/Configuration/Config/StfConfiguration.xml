@@ -19,40 +19,65 @@
   If you dont want passwords etc to be public...
   -->
   <section name="Environments" defaultsection="UAT">
-    <section name="UAT">
 
-      <section name="Users" defaultsection="%USERNAME%">
-        <section name="Bob">
-          <key name="Username" value="USERNAME_NOT_GIT" />
-          <key name="Password" value="PASSWORD_NOT_GIT" />
-        </section>
-        <section name="John">
-          <key name="Username" value="USERNAME_NOT_GIT" />
-          <key name="Password" value="PASSWORD_NOT_GIT" />
+    <section name="UAT">
+      <section name="DisplayTargets">
+        <section name="WrapTrackWeb">
+          <key name="BaseUrl" value="https://UAT.WrapTrack.org/" />
+          <key name="Browser" value="Chrome" />
+
+          <section name="Users" defaultsection="%USERNAME%">
+            <section name="Bob">
+              <key name="Username" value="USERNAME_NOT_GIT" />
+              <key name="Password" value="PASSWORD_NOT_GIT" />
+            </section>
+            <section name="John">
+              <key name="Username" value="USERNAME_NOT_GIT" />
+              <key name="Password" value="PASSWORD_NOT_GIT" />
+            </section>
+          </section>
         </section>
       </section>
     </section>
-
+    
     <section name="Preprod">
       <section name="DisplayTargets">
-      </section>
+        <section name="WrapTrackWeb">
+          <key name="BaseUrl" value="https://PreProd.WrapTrack.org/" />
+          <key name="Browser" value="Chrome" />
 
-      <section name="Users" defaultsection="%USERNAME%">
-        <section name="Ulrich">
-          <key name="Username" value="USERNAME_NOT_GIT" />
-          <key name="Password" value="PASSWORD_NOT_GIT" />
+          <section name="Users" defaultsection="%USERNAME%">
+            <section name="Bob">
+              <key name="Username" value="USERNAME_NOT_GIT" />
+              <key name="Password" value="PASSWORD_NOT_GIT" />
+            </section>
+            <section name="John">
+              <key name="Username" value="USERNAME_NOT_GIT" />
+              <key name="Password" value="PASSWORD_NOT_GIT" />
+            </section>
+          </section>
         </section>
       </section>
     </section>
 
     <section name="Prod">
-      <section name="Users" defaultsection="%USERNAME%">
-        <section name="Ulrich">
-          <key name="Username" value="USERNAME_NOT_GIT" />
-          <key name="Password" value="PASSWORD_NOT_GIT" />
+      <section name="DisplayTargets">
+        <section name="WrapTrackWeb">
+          <key name="BaseUrl" value="https://WrapTrack.org/" />
+          <key name="Browser" value="Chrome" />
+
+          <section name="Bob">
+            <key name="Username" value="USERNAME_NOT_GIT" />
+            <key name="Password" value="PASSWORD_NOT_GIT" />
+          </section>
+          <section name="John">
+            <key name="Username" value="USERNAME_NOT_GIT" />
+            <key name="Password" value="PASSWORD_NOT_GIT" />
+          </section>
+        </section>
+
         </section>
       </section>
-    </section>
 
   </section>
 
