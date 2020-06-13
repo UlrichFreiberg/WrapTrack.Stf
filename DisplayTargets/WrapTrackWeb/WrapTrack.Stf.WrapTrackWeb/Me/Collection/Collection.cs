@@ -140,7 +140,7 @@ namespace WrapTrack.Stf.WrapTrackWeb.Me.Collection
         {
             var existingListOfWtIds = GetListOfWtIds();
 
-            WebAdapter.ButtonClickByXpath("//button[contains(@data-bind,'Collection/tilfoej_vikle')]");
+            WebAdapter.ButtonClickById("but_add_carrier");
             ClickById("lin_newwrap");
 
             if (brand == null)
