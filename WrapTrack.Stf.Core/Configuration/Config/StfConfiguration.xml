@@ -2,7 +2,7 @@
 <configuration xmlns="http://www.testautomation.com/yacf" version="2013.04.21.0">
   <section name="StfKernel">
     <!--<key name="PluginPath" value="%STF_ROOT%\Plugins\" />-->
-    <key name="PluginPath" value="D:\Projects\WrapTrack.Stf\StfBin" />
+    <key name="PluginPath" value="C:\Projects\WrapTrack.Stf\StfBin" />
     <key name="PluginPatterns" value="Mir.Stf.*.dll;WrapTrack.Stf.*.dll" />
     <key name="ArchiveTestResults" value="true" />
     <key name="ArchiveDestination" value="%STF_ROOT%\archiveDir" />
@@ -22,9 +22,13 @@
     <section name="UAT">
 
       <section name="Users" defaultsection="%USERNAME%">
-        <section name="Ulrich">
-          <key name="Username" value="ida88" />
-          <key name="Password" value="lk8dsafpUqwe" />
+        <section name="Bob">
+          <key name="Username" value="USERNAME_NOT_GIT" />
+          <key name="Password" value="PASSWORD_NOT_GIT" />
+        </section>
+        <section name="John">
+          <key name="Username" value="USERNAME_NOT_GIT" />
+          <key name="Password" value="PASSWORD_NOT_GIT" />
         </section>
       </section>
     </section>
@@ -35,8 +39,8 @@
 
       <section name="Users" defaultsection="%USERNAME%">
         <section name="Ulrich">
-          <key name="Username" value="ida88" />
-          <key name="Password" value="lk8dsafpUqwe" />
+          <key name="Username" value="USERNAME_NOT_GIT" />
+          <key name="Password" value="PASSWORD_NOT_GIT" />
         </section>
       </section>
     </section>
@@ -44,8 +48,8 @@
     <section name="Prod">
       <section name="Users" defaultsection="%USERNAME%">
         <section name="Ulrich">
-          <key name="Username" value="ida88" />
-          <key name="Password" value="lk8dsafpUqwe" />
+          <key name="Username" value="USERNAME_NOT_GIT" />
+          <key name="Password" value="PASSWORD_NOT_GIT" />
         </section>
       </section>
     </section>
