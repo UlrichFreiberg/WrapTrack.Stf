@@ -32,6 +32,52 @@ namespace WrapTrack.Stf.WrapTrackWeb.Me
         }
 
         /// <summary>
+        /// Gets or sets the username.
+        /// </summary>
+        public string Username
+        {
+            get
+            {
+                var elem = WebAdapter.FindElement(By.Id("userName"));
+
+                return elem.Text;
+            }
+
+            set
+            {
+                // Gotta click for the text box to appear
+                var retValClick = WebAdapter.ButtonClickById("userName");
+
+                if (!retValClick)
+                {
+                    return;
+                }
+
+                // insert the value
+                var retValTextSet = WebAdapter.TextboxSetTextByXpath("//input[@class='basisinputfelt']", value);
+
+                if (!retValTextSet)
+                {
+                    return;
+                }
+
+                // Wait for the DOM to be rendered
+                WebAdapter.WaitForComplete(2);
+
+                // Accept new name, by clicking OK - Weird ID, but true:-)
+                var retValButtonClick = WebAdapter.ButtonClickById("butUserNameOK");
+
+                if (!retValButtonClick)
+                {
+                    return;
+                }
+
+                // Wait for the DOM to be rendered
+                WebAdapter.WaitForComplete(2);
+            }
+        }
+
+        /// <summary>
         /// The actual image related to users profile
         /// </summary>
         /// <returns>
@@ -77,14 +123,22 @@ namespace WrapTrack.Stf.WrapTrackWeb.Me
             // handle the File Upload Dialog
             WebAdapter.NativeDialogFileUpload(By.Name("userfile"), clientSideFilePath);
 
-            var submitButton = WebAdapter.FindElement(By.Id("but_upl_profile"));
+            var submitButton = WebAdapter.FindElement(By.Id("but_doupload"));
 
-            submitButton.Submit();
+            if (submitButton == null)
+            {
+                StfLogger.LogError("Couldn't find the upload button");
+
+                return false;
+            }
+
+            submitButton.Click();
 
             // Back to me again
-            var navBack = WebAdapter.FindElement(By.Id("nav_back_profile"));
+            var navBack = WebAdapter.FindElement(By.Id("but_back"));
 
             navBack.Click();
+
             return true;
         }
     }

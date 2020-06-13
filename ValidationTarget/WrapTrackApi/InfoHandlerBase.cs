@@ -13,7 +13,9 @@ using System.Threading.Tasks;
 namespace WrapTrack.Stf.WrapTrackApi
 {
     using System;
+    using System.IO;
     using System.Net.Http;
+    using System.Text;
 
     using Mir.Stf.Utilities.Interfaces;
 
@@ -50,6 +52,27 @@ namespace WrapTrack.Stf.WrapTrackApi
         /// Gets or sets the wt api configuration.
         /// </summary>
         public WtApiConfiguration WtApiConfiguration { get; set; }
+
+        protected async Task<HttpResponseMessage> PutWrapRestInfo(string uri)
+        {
+            HttpResponseMessage retVal = null;
+            var client = new HttpClient();
+            //HttpContent httpContent = new StringContent(new_doc.ToString(), Encoding.UTF8, "application/xml");
+            var fullUri = $"{WtApiConfiguration.Url}/{uri}";
+
+            try
+            {
+                retVal = await client.PutAsync(fullUri, new StreamContent(Stream.Null));
+                StfLogger.LogInfo($"PutWrapRestInfo: Called [{fullUri}]");
+                StfLogger.LogInfo($"PutWrapRestInfo: Got response [{retVal}]");
+            }
+            catch(Exception ex)
+            {
+                StfLogger.LogError($"PutWrapRestInfo: Got response exception[{ex}]");
+            }
+
+            return retVal;
+        }
 
         /// <summary>
         /// The get wrap rest info.

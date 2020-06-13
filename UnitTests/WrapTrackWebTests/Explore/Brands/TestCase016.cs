@@ -23,11 +23,6 @@ namespace WrapTrackWebTests.Explore.Brands
     public class TestCase016 : WrapTrackTestScriptBase
     {
         /// <summary>
-        /// The brand id. Should NOT be hardcoded - randomBrand is not that random;-)
-        /// </summary>
-        private const string BrandId = "306";
-
-        /// <summary>
         /// The wt utils.
         /// </summary>
         private IWtApi wtApi;
@@ -52,19 +47,20 @@ namespace WrapTrackWebTests.Explore.Brands
         }
 
         /// <summary>
-        /// The log in test.
+        /// Create and delete a model (model related to pattern)
         /// </summary>
-        /// <remarks>
-        /// After log in it's possible to acess 'MeProfile-page'
-        /// </remarks>
         [TestMethod]
         public void Tc016()
         {
+            // For now hard coded. TOdo: Random
+            const string BrandId = "289";
+            const string BrandName = "Agossie";
+
             // Use default user
-            WrapTrackShell.LoginAsAdmin();
+            WrapTrackShell.Login();
             StfAssert.IsNotNull("wrapTrackShell", WrapTrackShell);
 
-            var randomBrand = GetRandomBrand();
+            var randomBrand = this.GetBrand(BrandName);
             var newModelName = WtUtils.GetRandomString("StfModel");
             var baseLineNumberOfModels = wtApi.BrandNumberOfModels(BrandId);
             var modelAdded = randomBrand.AddModel(newModelName);

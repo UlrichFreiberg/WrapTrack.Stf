@@ -47,18 +47,20 @@ namespace WrapTrackWebTests.Collection
             WrapTrackShell.Login();
 
             var me = WrapTrackShell.Me();
-            var collection = me.GetCollection();
 
             StfAssert.IsNotNull("Got a MeProfile", me);
+
+            var collection = me.GetCollection();
+
             StfAssert.IsNotNull("Got my collection", collection);
 
-            var numBefore = collection.NumOfWraps();
+            //var numBefore = collection.NumOfWraps();
 
-            collection.AddWrap("Ali Dover", "Hygge", "blue");
+            var newWrap = collection.AddWrap("Ali Dover", "Hygge", "blue");
 
-            var numAfter = collection.NumOfWraps();
+            //var numAfter = collection.NumOfWraps();
 
-            StfAssert.AreEqual("One more wrap in collection", numBefore + 1, numAfter);
+            StfAssert.StringNotEmpty("Got ID of new wrap", newWrap);
         }
     }
 }

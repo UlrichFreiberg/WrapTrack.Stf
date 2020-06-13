@@ -82,8 +82,13 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Linq.Dynamic, Version=1.0.6132.35681, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\..\packages\System.Linq.Dynamic.1.0.7\lib\net40\System.Linq.Dynamic.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System.Net.Http" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -127,12 +132,73 @@
     <Compile Include="Interfaces\Explore\IExploreUsers.cs" />
     <Compile Include="Interfaces\Explore\IBrands.cs" />
     <Compile Include="Interfaces\Explore\IExplore.cs" />
+    <Compile Include="Interfaces\IModel.cs" />
+    <Compile Include="Interfaces\IReview.cs" />
     <Compile Include="Interfaces\IWrap.cs" />
+    <Compile Include="Interfaces\Me\Collection\CarrierManagement\IAddCarrier.cs" />
+    <Compile Include="Interfaces\Me\Collection\CarrierManagement\IBuckleOnbuhimo.cs" />
+    <Compile Include="Interfaces\Me\Collection\CarrierManagement\ICarrierBase.cs" />
+    <Compile Include="Interfaces\Me\Collection\CarrierManagement\IDollSling.cs" />
+    <Compile Include="Interfaces\Me\Collection\CarrierManagement\IHalfBuckleWrapTai.cs" />
+    <Compile Include="Interfaces\Me\Collection\CarrierManagement\IMeiTai.cs" />
+    <Compile Include="Interfaces\Me\Collection\CarrierManagement\INyia.cs" />
+    <Compile Include="Interfaces\Me\Collection\CarrierManagement\IOnbuhimo.cs" />
+    <Compile Include="Interfaces\Me\Collection\CarrierManagement\IPodeagi.cs" />
+    <Compile Include="Interfaces\Me\Collection\CarrierManagement\IReverseOnbuhimo.cs" />
+    <Compile Include="Interfaces\Me\Collection\CarrierManagement\IFullBuckleMeiTai.cs" />
+    <Compile Include="Interfaces\Me\Collection\CarrierManagement\IKanga.cs" />
+    <Compile Include="Interfaces\Me\Collection\CarrierManagement\IFullBuckle.cs" />
+    <Compile Include="Interfaces\Me\Collection\CarrierManagement\IWrapTai.cs" />
+    <Compile Include="Interfaces\Me\Collection\CarrierManagement\IHalfBuckleMeiTai.cs" />
+    <Compile Include="Interfaces\Me\Collection\CarrierManagement\IRingSling.cs" />
+    <Compile Include="Interfaces\Me\Collection\CarrierManagement\IHybridWrap.cs" />
+    <Compile Include="Interfaces\Me\Collection\CarrierManagement\IStretchyWrap.cs" />
+    <Compile Include="Interfaces\Me\Collection\CarrierManagement\IWowenWrap.cs" />
+    <Compile Include="Interfaces\Me\Collection\CarrierManagement\RingSlingShoulderType.cs" />
     <Compile Include="Interfaces\Me\IMeInbox.cs" />
     <Compile Include="Interfaces\Me\IMeReviews.cs" />
     <Compile Include="Interfaces\Me\IMeSettings.cs" />
+    <Compile Include="Interfaces\News\INews.cs" />
+    <Compile Include="Interfaces\News\INewsEntryCarrierEvaluation.cs" />
+    <Compile Include="Interfaces\News\INewsEntryCarrierReview.cs" />
+    <Compile Include="Interfaces\News\INewsEntryCarrierForSale.cs" />
+    <Compile Include="Interfaces\News\INewsEntryCarrierStory.cs" />
     <Compile Include="MenuManager.cs" />
+    <Compile Include="Me\Collection\CarrierManagement\AddCarrier.cs" />
+    <Compile Include="Me\Collection\CarrierManagement\AddCarrierType.cs" />
+    <Compile Include="Me\Collection\CarrierManagement\BuckleOnbuhimo.cs" />
+    <Compile Include="Me\Collection\CarrierManagement\CarrierBaseClass.cs" />
+    <Compile Include="Me\Collection\CarrierManagement\CarrierProducedBy.cs" />
+    <Compile Include="Me\Collection\CarrierManagement\DollSling.cs" />
+    <Compile Include="Me\Collection\CarrierManagement\HalfBuckleMeiTai.cs" />
+    <Compile Include="Me\Collection\CarrierManagement\HalfBuckleWrapTai.cs" />
+    <Compile Include="Me\Collection\CarrierManagement\MeiTai.cs" />
+    <Compile Include="Me\Collection\CarrierManagement\Nyia.cs" />
+    <Compile Include="Me\Collection\CarrierManagement\Onbuhimo.cs" />
+    <Compile Include="Me\Collection\CarrierManagement\Podeagi.cs" />
+    <Compile Include="Me\Collection\CarrierManagement\ReverseOnbuhimo.cs" />
+    <Compile Include="Me\Collection\CarrierManagement\RingSling.cs" />
+    <Compile Include="Me\Collection\CarrierManagement\Other.cs" />
+    <Compile Include="Me\Collection\CarrierManagement\HybridWrap.cs" />
+    <Compile Include="Me\Collection\CarrierManagement\WowenWrap.cs" />
+    <Compile Include="Me\Collection\CarrierManagement\StretchyWrap.cs" />
+    <Compile Include="Me\Collection\CarrierManagement\Kanga.cs" />
+    <Compile Include="Me\Collection\CarrierManagement\FullBuckle.cs" />
+    <Compile Include="Me\Collection\CarrierManagement\FullBuckleMeiTai.cs" />
+    <Compile Include="Me\Collection\CarrierManagement\WrapTai.cs" />
     <Compile Include="Me\Collection\DeleteWrapOption.cs" />
+    <Compile Include="Model\Model.cs" />
+    <Compile Include="Model\Review.cs" />
+    <Compile Include="News\News.cs" />
+    <Compile Include="News\NewsEntryCarrierForSale.cs" />
+    <Compile Include="News\NewsEntryCarrierEvaluation.cs" />
+    <Compile Include="News\NewsEntryCarrierReview.cs" />
+    <Compile Include="News\NewsEntryCarrierStory.cs" />
+    <Compile Include="News\NewsEntryTypes.cs" />
+    <Compile Include="Interfaces\Review\IModelReview.cs" />
+    <Compile Include="Review\ModelReview.cs" />
+    <Compile Include="Review\ModelReviewValues.cs" />
+    <Compile Include="Review\ModelReviewProperties.cs" />
     <Compile Include="Wrap.cs" />
     <Compile Include="Me\MeInbox.cs" />
     <Compile Include="Me\MeReviews.cs" />

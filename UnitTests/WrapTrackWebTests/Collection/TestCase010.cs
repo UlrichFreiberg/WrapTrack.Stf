@@ -44,15 +44,9 @@ namespace WrapTrackWebTests.Collection
             WrapTrackShell = Get<IWrapTrackWebShell>();
             WrapTrackShell.Login();
 
-            // Be sure we have enough wraps for all test instances
+            // GetCurrentUserCollection will add one wrap if none found
+            // Ensure we have enough wraps for all test instances
             Collection = GetCurrentUserCollection(WrapTrackShell);
-
-            var numOfWraps = Collection.NumOfWraps(); 
-
-            if (numOfWraps == 0)
-            {
-                Collection.AddWrap(); 
-            }
         }
 
         /// <summary>
@@ -96,7 +90,8 @@ namespace WrapTrackWebTests.Collection
             var wrapInfo = validationTarget.WrapInfoByTrackId(wtId);
             var statusBefore = wrapInfo.Status;
 
-            StfAssert.AreEqual("Status before deleting is 0", statusBefore, "0");
+            // When created the status is zero (0)
+            StfAssert.AreEqual("Status", statusBefore, "0");
 
             // Delete wrap
             StfLogger.LogInfo($"DeleteOption = {testdata.DeleteOption}");

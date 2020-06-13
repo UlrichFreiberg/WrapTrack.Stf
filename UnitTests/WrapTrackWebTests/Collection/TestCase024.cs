@@ -17,24 +17,18 @@ namespace WrapTrackWebTests.Collection
     using WrapTrack.Stf.WrapTrackWeb.Interfaces.Me;
 
     /// <summary>
-    /// The test case 020.
+    /// The test case 024.
     /// </summary>
     [TestClass]
     public class TestCase024 : WrapTrackTestScriptBase
     {
-        /// <summary>
-        /// The wt testscript utils.
-        /// </summary>
-        private WtTestscriptUtils wtTestscriptUtils;
-
         /// <summary>
         /// The test initialize.
         /// </summary>
         [TestInitialize]
         public void TestInitialize()
         {
-            WrapTrackShell = this.Get<IWrapTrackWebShell>();
-            wtTestscriptUtils = new WtTestscriptUtils(StfLogger);
+            WrapTrackShell = Get<IWrapTrackWebShell>();
         }
 
         /// <summary>
@@ -64,10 +58,8 @@ namespace WrapTrackWebTests.Collection
 
             var me = WrapTrackShell.Me();
 
-            StfAssert.IsNotNull("WrapTrackShell", this.WrapTrackShell);
+            StfAssert.IsNotNull("WrapTrackShell", WrapTrackShell);
             StfAssert.IsInstanceOfType("me", me, typeof(IMeProfile));
-
-            // Actual test 
 
             // Create a new wrap
             var wrapCollection = me.GetCollection();
@@ -75,20 +67,30 @@ namespace WrapTrackWebTests.Collection
             StfAssert.IsNotNull("check if me.GetCollection null", wrapCollection);
 
             var newWrapWtId = wrapCollection.AddWrap();
+            var wtApi = Get<IWtApi>();
+            var wrapInfoBefore = wtApi.WrapInfoByTrackId(newWrapWtId);
+            var internalId = wrapInfoBefore.InternalId;
 
             // Move to the new wrap
-            var wrapToSendOnHoliday = this.WrapTrackShell.GetToWrap(newWrapWtId);
-            var recipient = this.GetAnotherUser();
+            var wraptoSendOnVisit = WrapTrackShell.GetToWrap(internalId);
 
-            // Send warp away on holiday
-            wrapToSendOnHoliday.SendAwayTemporarily(SendAwayReason.Holiday, recipient);
+           // StfAssert.IsNotNull("Check if wraptoSendOnVisit is null", wraptoSendOnVisit);
+
+            // Move to the new wrap
+           // var wraptoSendOnVisit = WrapTrackShell.GetToWrap(newWrapWtId);
+            var recipient = GetAnotherUser();
+
+            // Send wrap away on holiday
+            wraptoSendOnVisit.SendAwayTemporarily(SendAwayReason.Holiday, recipient);
 
             // Validate the the wrap indeed is on holiday
-            var wtApi = this.Get<IWtApi>();
-            var wrapInfo = wtApi.WrapInfoByTrackId(newWrapWtId);
+            var wrapInfoAfter = wtApi.WrapInfoByTrackId(newWrapWtId);
+            var userId = wtApi.UserId(recipient);
 
-            StfLogger.LogInfo("The recipient user name attempted is {0} and userid from wrapInfo API is {1}", recipient, wrapInfo.VisitingUserId);
-            StfAssert.IsTrue("Wrap is on holiday", wrapInfo.OnHoliday);
+            StfLogger.LogInfo("The recipient user name, user id attempted is {0},{1} and userid from wrapInfo API is {1}", recipient, userId, wrapInfoAfter.VisitingUserId);
+
+            StfAssert.IsTrue("Wrap is on holiday", wrapInfoAfter.OnHoliday);
+            StfAssert.AreEqual("recipient userid is same as VisitingUserId in wrap", userId, wrapInfoAfter.VisitingUserId);
         }
     }
 }

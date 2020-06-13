@@ -9,3 +9,6 @@ Thumbs.db
 **/TestResults/**
 *.nupkg
 /.vs/config/applicationhost.config
+/Doc/~$wraptrack_testcases.xlsx
+/Doc/.~lock.ExcelTM for STF.xlsm#
+.vs/**

@@ -59,15 +59,21 @@ namespace WrapTrackWebTests
             bool addIfNone = true)
         {
             var me = wrapTrackShell.Me();
-            var collection = me.GetCollection();
 
             StfAssert.IsNotNull("Got a MeProfile", me);
+
+            var collection = me.GetCollection();
+
             StfAssert.IsNotNull("Got my collection", collection);
 
             // Be sure there is a wrap in collection. If requested
             if (addIfNone && collection.NumOfWraps() == 0)
             {
                 collection.AddWrap("Ali Dover", "Hygge", "Blue");
+
+                // ensure we always are at Collection when done - as we would if not adding a wrap
+                me = wrapTrackShell.Me();
+                collection = me.GetCollection();
             }
 
             return collection;
@@ -127,11 +133,11 @@ namespace WrapTrackWebTests
         {
             var currentShell = wrapTrackWebShell ?? WrapTrackShell;
             var currentUser = currentShell.CurrentLoggedInUser;
-            var retVal = "Ida88";
+            var retVal = "mie88";
 
-            if (currentUser.Equals("Ida88", StringComparison.InvariantCultureIgnoreCase))
+            if (currentUser.Equals("mie88", StringComparison.InvariantCultureIgnoreCase))
             {
-                retVal = "Mie88";
+                retVal = "ida88";
             }
 
             return retVal;
@@ -190,9 +196,12 @@ namespace WrapTrackWebTests
         /// </returns>
         protected bool ValidatePassOn(string wrapToGo, string anotherUsername)
         {
+            Wait(TimeSpan.FromSeconds(10));
             var validationTarget = Get<IWtApi>();
             var wrapInfo = validationTarget.WrapInfoByTrackId(wrapToGo);
-            var retVal = wrapInfo.OwnerName == anotherUsername;
+            var retVal = string.Compare(wrapInfo.OwnerName, anotherUsername, StringComparison.InvariantCultureIgnoreCase) == 0;
+
+            StfLogger.LogInfo($"ValidatePassOn: OwnerNow=[{wrapInfo.OwnerName}], anotherUser=[{anotherUsername}]");
 
             return retVal;
         }
@@ -203,19 +212,16 @@ namespace WrapTrackWebTests
         /// <returns>
         /// The <see cref="IBrand"/>.
         /// </returns>
-        protected IBrand GetRandomBrand()
+        protected IBrand GetBrand(string brandName)
         {
             var explorer = WrapTrackShell.Explore();
 
             StfAssert.IsInstanceOfType("explorer", explorer, typeof(IExplore));
 
             var brands = explorer.Brands();
-            var addBrand = brands.AddBrand();
+            var selectedBrand = brands.SelectAndOpenBrand(brandName);
 
-            // TODO: Right now we are not really random :-)
-            var randomBrand = addBrand.OpenRegisteredBrand("Beloved");
-
-            return randomBrand;
+            return selectedBrand;
         }
     }
 }

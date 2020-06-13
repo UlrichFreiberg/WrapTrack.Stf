@@ -139,12 +139,12 @@ namespace WrapTrack.Stf.WrapTrackApi.Wrap
         /// </returns>
         private WrapInfo WrapInfoMapper(JObject info)
         {
-            WrapInfo retVal;
-
             if (info == null)
             {
                 return null;
             }
+
+            WrapInfo retVal;
 
             StfLogger.LogDebug($"WrapInfoMapper: Got info = [{info}]");
 
@@ -166,16 +166,11 @@ namespace WrapTrack.Stf.WrapTrackApi.Wrap
             catch (Exception ex)
             {
                 StfLogger.LogError($"WrapInfoMapper: Got ex = [{ex}]");
+
                 return null;
             }
 
-            var numOfOwnershipPic = info["ejerskab_nuv"]?.SelectToken("private_billeder")?.ToString();
-            int number;
-
-            if (int.TryParse(numOfOwnershipPic, out number))
-            {
-                retVal.NumOfOwnershipPic = number;
-            }
+            retVal.NumOfOwnershipPic = GetInteger(info["ejerskab_nuv"]?.SelectToken("private_billeder")?.ToString());
 
             // sometime we dont have this node - if not, then the value is zero:-)
             retVal.NumOfPictures = info["billeder"]?.Count() ?? 0;

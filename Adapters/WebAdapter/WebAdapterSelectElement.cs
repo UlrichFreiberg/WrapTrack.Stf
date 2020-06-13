@@ -79,6 +79,7 @@ namespace WrapTrack.Stf.Adapters.WebAdapter
             }
 
             elem.SelectByText(value);
+
             return true;
         }
    }

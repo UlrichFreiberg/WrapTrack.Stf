@@ -94,16 +94,14 @@ namespace WrapTrack.Stf.WrapTrackWeb.Brand
         /// </returns>
         public bool AddPattern(string patternName)
         {
-            const string AddPatternXpath = "//span/span[text()='Add pattern']";
-            var retVal = WebAdapter.ButtonClickByXpath(AddPatternXpath);
+            var retVal = WebAdapter.ButtonClickById("addPattern");
 
             if (!retVal)
             {
                 return false;
             }
 
-            const string PatternNameXpath = "//p/input";
-            retVal = WebAdapter.TextboxSetTextByXpath(PatternNameXpath, patternName);
+            retVal = WebAdapter.TextboxSetTextById("inNameNewElement", patternName);
 
             if (!retVal)
             {
@@ -118,6 +116,9 @@ namespace WrapTrack.Stf.WrapTrackWeb.Brand
             }
 
             retVal = WebAdapter.ButtonClickById("Done");
+
+            // gotta wait for the WT to process the add...
+            WebAdapter.WaitForComplete(1);
 
             return retVal;
         }
@@ -201,16 +202,18 @@ namespace WrapTrack.Stf.WrapTrackWeb.Brand
             }
 
             // if pattern is null, then create model without pattern
-            if (!string.IsNullOrEmpty(pattern))
+            if (string.IsNullOrEmpty(pattern))
             {
-                const string PatternNameXpath = "//p[normalize-space()='Pattern']/../..//select";
+                pattern = "--- without pattern ---";
+            }
 
-                retVal = WebAdapter.SelectElementSetText(By.XPath(PatternNameXpath), modelName);
+            const string PatternNameXpath = "//p[normalize-space()='Pattern']/../..//select";
 
-                if (!retVal)
-                {
-                    return false;
-                }
+            retVal = WebAdapter.SelectElementSetText(By.XPath(PatternNameXpath), pattern);
+
+            if (!retVal)
+            {
+                return false;
             }
 
             const string ModelNameXpath = "//p[normalize-space()='Model']/../..//input";
@@ -222,14 +225,7 @@ namespace WrapTrack.Stf.WrapTrackWeb.Brand
                 return false;
             }
 
-            retVal = WebAdapter.ButtonClickById("goAddModel");
-
-            if (!retVal)
-            {
-                return false;
-            }
-
-            retVal = WebAdapter.ButtonClickById("confirmModel");
+            retVal = WebAdapter.ButtonClickById("create");
 
             if (!retVal)
             {
@@ -239,12 +235,7 @@ namespace WrapTrack.Stf.WrapTrackWeb.Brand
             // Yeap done
             retVal = WebAdapter.ButtonClickById("modelDone");
 
-            if (!retVal)
-            {
-                return false;
-            }
-
-            return true;
+            return retVal;
         }
 
         /// <summary>

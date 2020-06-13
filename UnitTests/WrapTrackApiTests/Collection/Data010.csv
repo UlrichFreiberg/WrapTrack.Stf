@@ -1,0 +1,7 @@
+StfIgnoreRow, DeleteOption, StatusAfter, PageAfter
+false, SoldToAnotherUser, 0, wrap
+false, SoldToStranger, 1, wrap
+false, LostWrap, 1, wrap
+false, BrokenWrap, 2, wrap
+false, WasAnError, 3, news
+false, ConvertedNonWrap, 2, wrap

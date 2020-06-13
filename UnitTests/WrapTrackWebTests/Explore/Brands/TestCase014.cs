@@ -49,12 +49,9 @@ namespace WrapTrackWebTests.Explore.Brands
         }
 
         /// <summary>
-        /// The log in test.
+        /// Test of creating a new brand.
         /// </summary>
-        /// <remarks>
-        /// After log in it's possible to acess 'MeProfile-page'
-        /// </remarks>
-        [TestMethod]
+        // Uncommented as AddBrand is unsupported[TestMethod]
         public void Tc014()
         {
             StfAssert.IsNotNull("wrapTrackShell", wrapTrackShell);
@@ -65,6 +62,9 @@ namespace WrapTrackWebTests.Explore.Brands
 
             var brands = explorer.Brands();
             var addBrand = brands.AddBrand();
+
+            StfAssert.IsNotNull("Add brand", addBrand);
+
             var newBrandName = WtUtils.GetRandomString("StfBrand");
 
             addBrand.NewBrandName = newBrandName;

@@ -17,6 +17,7 @@ namespace WrapTrack.Stf.WrapTrackWeb
 
     using WrapTrack.Stf.WrapTrackApi.Interfaces;
     using WrapTrack.Stf.WrapTrackWeb.Interfaces;
+    using WrapTrack.Stf.WrapTrackWeb.Interfaces.Review;
     using WrapTrack.Stf.WrapTrackWeb.Me.Collection;
 
     /// <summary>
@@ -108,7 +109,7 @@ namespace WrapTrack.Stf.WrapTrackWeb
                 return false;
             }
 
-            if (!WebAdapter.TextboxSetTextById("inputBrugerSoeg", username))
+            if (!WebAdapter.TextboxSetTextById("inputBrugerSoeg", username, true))
             {
                 StfLogger.LogDebug("Couldn't set brugerSoeg text");
                 return false;
@@ -182,7 +183,7 @@ namespace WrapTrack.Stf.WrapTrackWeb
             WebAdapter.ButtonClickByXpath(xPath);
 
             // now chose the recipient
-            WebAdapter.TextboxSetTextById("inputBrugerSoeg_ferievikle", recipient);
+            WebAdapter.TextboxSetTextById("inputBrugerSoeg_ferievikle", recipient, true);
             WebAdapter.ButtonClickById("but_chooseUser");
 
             // press ok
@@ -338,6 +339,21 @@ namespace WrapTrack.Stf.WrapTrackWeb
             
             // if we managed to press Next, then we are good:-)
             return next;
+        }
+
+        /// <summary>
+        /// The review.
+        /// </summary>
+        /// <returns>
+        /// The <see cref="IModelReview"/>.
+        /// </returns>
+        public IModelReview Review()
+        {
+            WebAdapter.ButtonClickById("butReview");
+
+            var retVal = Get<IModelReview>();
+
+            return retVal;
         }
     }
 }

@@ -12,8 +12,6 @@ namespace WrapTrack.Stf.WrapTrackWeb
 {
     using Mir.Stf.Utilities;
 
-    using WrapTrack.Stf.WrapTrackWeb.Interfaces;
-
     /// <summary>
     /// The demo corp web shell.
     /// </summary>
@@ -30,7 +28,7 @@ namespace WrapTrack.Stf.WrapTrackWeb
         /// <param name="wtShell">
         /// The wt shell.
         /// </param>
-        public RegisterMyNeededTypes(IWrapTrackWebShell wtShell)
+        public RegisterMyNeededTypes(Interfaces.IWrapTrackWebShell wtShell)
         {
             stfContainer = wtShell.StfContainer;
         }
@@ -43,11 +41,36 @@ namespace WrapTrack.Stf.WrapTrackWeb
             RegisterMeClasses();
             RegisterExploreClasses();
             RegisterBrandClasses();
+            RegisterReviewClasses();
+            RegisterNewsClasses();
 
             // FAQ and contact classes
             stfContainer.RegisterType<Interfaces.FaqContact.IFaq, FaqContact.Faq>();
 
-            stfContainer.RegisterType<Interfaces.IWrap, Wrap>();
+            stfContainer.RegisterType<Interfaces.IWrap, Wrap>();            
+
+            stfContainer.RegisterType<Interfaces.IModel, Model.Model>();
+        }
+
+        /// <summary>
+        /// The register review classes.
+        /// </summary>
+        private void RegisterReviewClasses()
+        {
+            stfContainer.RegisterType<Interfaces.IReview, Model.Review>();
+            stfContainer.RegisterType<Interfaces.Review.IModelReview, Review.ModelReview>();
+        }
+
+        /// <summary>
+        /// The register news classes.
+        /// </summary>
+        private void RegisterNewsClasses()
+        {
+            stfContainer.RegisterType<Interfaces.News.INews, News.News>();
+            stfContainer.RegisterType<Interfaces.News.INewsEntryCarrierStory, News.NewsEntryCarrierStory>();
+            stfContainer.RegisterType<Interfaces.News.INewsEntryCarrierForSale, News.NewsEntryCarrierForSale>();
+            stfContainer.RegisterType<Interfaces.News.INewsEntryCarrierReview, News.NewsEntryCarrierReview>();
+            stfContainer.RegisterType<Interfaces.News.INewsEntryCarrierEvaluation, News.NewsEntryCarrierEvaluation>();
         }
 
         /// <summary>
@@ -73,6 +96,35 @@ namespace WrapTrack.Stf.WrapTrackWeb
             stfContainer.RegisterType<Interfaces.Me.IMeSettings, Me.MeSettings>();
             stfContainer.RegisterType<Interfaces.Me.ICollection, Me.Collection.Collection>();
             stfContainer.RegisterType<Interfaces.Me.IMeProfile, Me.MeProfile>();
+
+            RegisterCarrierManagementClasses();
+        }
+
+        /// <summary>
+        /// The register carrier management classes.
+        /// </summary>
+        private void RegisterCarrierManagementClasses()
+        {
+            // CarrierManagement classes
+            stfContainer.RegisterType<Interfaces.Me.Collection.CarrierManagement.IAddCarrier, Me.Collection.CarrierManagement.AddCarrier>();
+            stfContainer.RegisterType<Interfaces.Me.Collection.CarrierManagement.IRingSling, Me.Collection.CarrierManagement.RingSling>();
+            stfContainer.RegisterType<Interfaces.Me.Collection.CarrierManagement.IWowenWrap, Me.Collection.CarrierManagement.WowenWrap>();
+            stfContainer.RegisterType<Interfaces.Me.Collection.CarrierManagement.IStretchyWrap, Me.Collection.CarrierManagement.StretchyWrap>();
+            stfContainer.RegisterType<Interfaces.Me.Collection.CarrierManagement.IHybridWrap, Me.Collection.CarrierManagement.HybridWrap>();
+            stfContainer.RegisterType<Interfaces.Me.Collection.CarrierManagement.IMeiTai, Me.Collection.CarrierManagement.MeiTai>();
+            stfContainer.RegisterType<Interfaces.Me.Collection.CarrierManagement.IHalfBuckleMeiTai, Me.Collection.CarrierManagement.HalfBuckleMeiTai>();
+            stfContainer.RegisterType<Interfaces.Me.Collection.CarrierManagement.IWrapTai, Me.Collection.CarrierManagement.WrapTai>();
+            stfContainer.RegisterType<Interfaces.Me.Collection.CarrierManagement.IHalfBuckleWrapTai, Me.Collection.CarrierManagement.HalfBuckleWrapTai>();
+            stfContainer.RegisterType<Interfaces.Me.Collection.CarrierManagement.IOnbuhimo, Me.Collection.CarrierManagement.Onbuhimo>();
+            stfContainer.RegisterType<Interfaces.Me.Collection.CarrierManagement.IReverseOnbuhimo, Me.Collection.CarrierManagement.ReverseOnbuhimo>();
+            stfContainer.RegisterType<Interfaces.Me.Collection.CarrierManagement.IBuckleOnbuhimo, Me.Collection.CarrierManagement.BuckleOnbuhimo>();
+            stfContainer.RegisterType<Interfaces.Me.Collection.CarrierManagement.IPodeagi, Me.Collection.CarrierManagement.Podeagi>();
+            stfContainer.RegisterType<Interfaces.Me.Collection.CarrierManagement.INyia, Me.Collection.CarrierManagement.Nyia>();
+            stfContainer.RegisterType<Interfaces.Me.Collection.CarrierManagement.IDollSling, Me.Collection.CarrierManagement.DollSling>();
+            stfContainer.RegisterType<Interfaces.Me.Collection.CarrierManagement.IFullBuckleMeiTai, Me.Collection.CarrierManagement.FullBuckleMeiTai>();
+            stfContainer.RegisterType<Interfaces.Me.Collection.CarrierManagement.IKanga, Me.Collection.CarrierManagement.Kanga>();
+            stfContainer.RegisterType<Interfaces.Me.Collection.CarrierManagement.IFullBuckle, Me.Collection.CarrierManagement.FullBuckle>();
+
         }
 
         /// <summary>

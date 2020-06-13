@@ -10,8 +10,13 @@
 
 namespace WrapTrackWebTests.Collection
 {
+    using System;
+
     using Microsoft.VisualStudio.TestTools.UnitTesting;
 
+    using OpenQA.Selenium;
+
+    using WrapTrack.Stf.WrapTrackApi.Interfaces;
     using WrapTrack.Stf.WrapTrackWeb.Interfaces;
 
     /// <summary>
@@ -51,28 +56,72 @@ namespace WrapTrackWebTests.Collection
             var collection = GetCurrentUserCollection();
 
             // Find a random wrap
-            var wrapToGo = collection.GetRandomWrap(); 
-            var wtId = wrapToGo.WtId;
+            var wrapToGo = collection.GetRandomWrap();
+            var wtId = wrapToGo.WtId; 
+            var wtApi = Get<IWtApi>();
+            var wrapInfo = wtApi.WrapInfoByTrackId(wtId);
+            var internalId = wrapInfo.InternalId;
 
             WrapTrackShell.Logout();
 
             // user #2 want the wrap
             var anotherUser = GetAnotherUser(WrapTrackShell);
+            
+            // TODO: pw should not be hardcoded
+            WrapTrackShell.Login(anotherUser, "wraptrack4ever");
 
-            WrapTrackShell.Login(anotherUser);
-
-            var desiredWrap = WrapTrackShell.GetToWrap(wtId);
+            // Move to the new wrap
+            var desiredWrap = WrapTrackShell.GetToWrap(internalId);
 
             desiredWrap.AskFor();
             WrapTrackShell.Logout();
 
             // User #1: Lets wrap go
             WrapTrackShell.Login(); // Default user
+            WrapTrackShell.Me();
 
-            // TODO:Assert: Der er en anmodning på nyhedssiden, hvor man lander efter login 
-            // TODO:Vises ved link med teksten 'You have 1 pending request' (evt X pending requests)
+            // navigate to the news page - and then to request page
+            WrapTrackShell.WebAdapter.ButtonClickById("nav_home");
+            WrapTrackShell.WebAdapter.ButtonClickById("navRequests");
 
-            // TODO:Bruger klikker og kommer til request side, hvor hun godkender reqest fra bruger #2
+            var testNoRequests = WrapTrackShell.WebAdapter.FindElement(By.Id("textNoRequests"));
+            var respons = testNoRequests.Displayed;
+            
+            StfAssert.IsFalse("Dont want to hear 'no pending requests'", respons);
+
+            // On actual page: Find button id="butAcceptReq". But be sure it's the right button.  
+            var xPath = $"//a[text()='{wtId}']/../../../../../..//button[@id='butAcceptReq']";
+            var retVal = WrapTrackShell.WebAdapter.Click(By.XPath(xPath));
+
+            if (!retVal)
+            {
+                StfAssert.IsFalse("Accept button not found", true);
+            }
+
+            // var xPath2 = "//button[@id='butDoReq']";
+            var xPath2 = $"//a[text()='{wtId}']/../../../../../..//button[@id='butDoReq']";
+            var retVal2 = WrapTrackShell.WebAdapter.Click(By.XPath(xPath2));
+
+            // Click to accept the request
+            if (!retVal2)
+            {
+                StfAssert.IsFalse("Do-it button not found", true);
+            }
+
+            // Assert: The link to <wtId> is gone (request handled)
+            Wait(TimeSpan.FromSeconds(1));
+            var xPath3 = $"//a[text()='{wtId}']"; 
+            var retVal3 = WrapTrackShell.WebAdapter.FindElement(By.XPath(xPath3));
+            StfAssert.IsNull("Reqest is gone", retVal3);
+
+            // Assert: New owner is user#2
+            var validationTarget = Get<IWtApi>();
+            var wrapInfoAfter = validationTarget.WrapInfoByTrackId(wtId);
+            var newOwnerName = wrapInfoAfter.OwnerName;
+
+            StfAssert.IsTrue("PassedOn Validated", ValidatePassOn(wtId, newOwnerName));
+
+           // StfAssert.AreEqual("User #2 is new owner", newOwnerName, anotherUser);
         }
     }
 }

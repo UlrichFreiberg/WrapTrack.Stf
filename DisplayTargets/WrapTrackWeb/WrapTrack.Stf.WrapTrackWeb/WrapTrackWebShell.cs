@@ -9,6 +9,7 @@
 // --------------------------------------------------------------------------------------------------------------------
 
 using System;
+using System.Collections.Generic;
 
 namespace WrapTrack.Stf.WrapTrackWeb
 {
@@ -20,6 +21,7 @@ namespace WrapTrack.Stf.WrapTrackWeb
     using WrapTrack.Stf.WrapTrackWeb.Interfaces.Explore;
     using WrapTrack.Stf.WrapTrackWeb.Interfaces.FaqContact;
     using WrapTrack.Stf.WrapTrackWeb.Interfaces.Me;
+    using WrapTrack.Stf.WrapTrackWeb.Interfaces.News;
 
     /// <summary>
     /// The demo corp web shell.
@@ -120,20 +122,47 @@ namespace WrapTrack.Stf.WrapTrackWeb
         public bool SignUp()
         {
             const string Password = "123456";
-            var newUsername = WtUtils.GetRandomUsername();
+            var randomUsername = WtUtils.GetRandomUsername();
+            var retVal = SignUp(randomUsername, Password);
 
+            // Remember the logged in user
+            CurrentLoggedInUser = randomUsername;
+
+            return retVal;
+        }
+
+        /// <summary>
+        /// The sign up.
+        /// </summary>
+        /// <param name="newUserName">
+        /// The new user name.
+        /// </param>
+        /// <param name="password">
+        /// The password.
+        /// </param>
+        /// <returns>
+        /// The <see cref="bool"/>.
+        /// </returns>
+        public bool SignUp(string newUserName, string password)
+        {
             WebAdapter.ButtonClickById("nav_login");
-            WebAdapter.TextboxSetTextById("input_newuser", newUsername);
-            WebAdapter.TextboxSetTextById("input_newPW", Password);
-            WebAdapter.TextboxSetTextById("input_email", newUsername + "@mitsite.org");
+            WebAdapter.TextboxSetTextById("input_newuser", newUserName);
+            WebAdapter.TextboxSetTextById("input_newPW", password);
+            WebAdapter.TextboxSetTextById("input_email", newUserName + "@mitsite.org");
             WebAdapter.CheckBoxSetValueById("check_cond", true);
             WebAdapter.ButtonClickById("OpretProfilKnap");
 
             // when debugging, we probably want to get to the signed up user 
-            StfLogger.LogKeyValue("SignUpUserName", newUsername, "SignUpUserName");
-            StfLogger.LogKeyValue("SignUpPassword", Password, "SignUpPassword");
+            StfLogger.LogKeyValue("SignUpUserName", newUserName, "SignUpUserName");
+            StfLogger.LogKeyValue("SignUpPassword", password, "SignUpPassword");
 
-            return true;
+            // Check If still on LOGIN page <h1>Login</h1> - if so then the signup failed
+            var loginHeader = WebAdapter.FindElement(By.XPath("//h1[text='Login']"), 2);
+            var retVal = loginHeader == null || CheckSignUpValidationMessages();
+
+            ChooseEnglish(); 
+
+            return retVal;
         }
 
         /// <summary>
@@ -168,12 +197,32 @@ namespace WrapTrack.Stf.WrapTrackWeb
                 return null;
             }
 
-            // press the second level top menu tab - called "profile"
-            buttonClicked = WebAdapter.ButtonClickByXpath("//a[contains(@href,'/Profile/vis_profil/')]");
+            // when number of wraps is high, the rendering might take some time...
+            // TODO: Implement using Selenium Waiter
+            WebAdapter.WaitForComplete(5);
 
-            var retVal = buttonClicked 
-                ? StfContainer.Get<IMeProfile>() 
+            // press the second level top menu tab - called "profile"
+            buttonClicked = WebAdapter.ButtonClickById("nav_profile");
+
+            var retVal = buttonClicked
+                ? StfContainer.Get<IMeProfile>()
                 : null;
+
+            return retVal;
+        }
+
+        /// <summary>
+        /// The news.
+        /// </summary>
+        /// <returns>
+        /// The <see cref="INews"/>.
+        /// </returns>
+        public INews News()
+        {
+            var clicked = WebAdapter.ButtonClickById("nav_home");
+            var retVal = clicked
+                       ? StfContainer.Get<INews>()
+                       : null;
 
             return retVal;
         }
@@ -186,9 +235,8 @@ namespace WrapTrack.Stf.WrapTrackWeb
         /// </returns>
         public IExplore Explore()
         {
-            // WebAdapter.Click(By.Id("nav_expl"));
-            var clicked = WebAdapter.ButtonClickByXpath("//a[normalize-space()='Explore']");
-            var retVal = clicked 
+            var clicked = WebAdapter.ButtonClickById("nav_explore");
+            var retVal = clicked
                        ? StfContainer.Get<IExplore>()
                        : null;
 
@@ -228,14 +276,21 @@ namespace WrapTrack.Stf.WrapTrackWeb
         /// </returns>
         public bool Logout(bool doCareAboutErrors = true)
         {
-            if (WebAdapter.Click(By.Id("nav_logout")))
+            try
             {
-                return true;
-            }
+                if (WebAdapter.Click(By.Id("nav_logout")))
+                {
+                    return true;
+                }
 
-            if (doCareAboutErrors)
+                if (doCareAboutErrors)
+                {
+                    StfLogger.LogError("Got error while logging out");
+                }
+            }
+            catch
             {
-                StfLogger.LogError("Got error while logging out");
+                // slurp
             }
 
             // if we cant click the logout button, then the return value is down to if we care or not:-)
@@ -278,11 +333,37 @@ namespace WrapTrack.Stf.WrapTrackWeb
         public IWrap GetToWrap(string wrapId)
         {
             var baseUrl = WtConfiguration.Url;
-            var wrapIdUrl = $"{baseUrl}wrap/{wrapId}";
+            var wrapIdUrl = $"{baseUrl}Collection/wrap/{wrapId}";
+            var openUrl = WebAdapter.OpenUrl(wrapIdUrl);
 
-            WebAdapter.OpenUrl(wrapIdUrl);
+            if (!openUrl)
+            {
+                StfLogger.LogError($"Couldn't open the url [{wrapIdUrl}]");
+                return null;
+            }
 
             var retVal = StfContainer.Get<IWrap>();
+
+            return retVal;
+        }
+
+        /// <summary>
+        /// The get to model.
+        /// </summary>
+        /// <param name="modelId">
+        /// The model id.
+        /// </param>
+        /// <returns>
+        /// The <see cref="IModel"/>.
+        /// </returns>
+        public IModel GetToModel(string modelId)
+        {
+            var baseUrl = WtConfiguration.Url;
+            var modelIdUrl = $"{baseUrl}Catalog/model/{modelId}";
+
+            WebAdapter.OpenUrl(modelIdUrl);
+
+            var retVal = StfContainer.Get<IModel>();
 
             return retVal;
         }
@@ -321,6 +402,66 @@ namespace WrapTrack.Stf.WrapTrackWeb
         }
 
         /// <summary>
+        /// The sign up and login.
+        /// </summary>
+        /// <returns>
+        /// The <see cref="bool"/>.
+        /// </returns>
+        public bool SignUpAndLogin()
+        {
+            try
+            {
+                const string Password = "123456";
+                var newUsername = WtUtils.GetRandomUsername();
+                var signUpNewUser = SignUp(newUsername, Password);
+
+                return signUpNewUser;
+            }
+            catch (Exception ex)
+            {
+                StfLogger.LogError($"Something went wrong when sign up and login. Message : [{ex.Message}]");
+                throw;
+            }
+        }
+
+        /// <summary>
+        /// The check sign up validation messages.
+        /// </summary>
+        /// <returns>
+        /// The <see cref="bool"/>.
+        /// </returns>
+        private bool CheckSignUpValidationMessages()
+        {
+            var signUpValidationMessages = new List<string>
+            {
+                "Please read and approve the terms and conditions",
+                "The username must be between four and 25 characters long. Only numbers, letters, and hyphen are accepted.",
+                "The password must be at least five characters long.",
+                "Please specify a valid e-mail address"
+            };
+
+            // we dont want to wait "long time" for each message, which we would if not initially wating 3 secs.. Now each can wait 1!
+            WebAdapter.WaitForComplete(3);
+
+            foreach (var signUpValidationMessage in signUpValidationMessages)
+            {
+                var xpath = $@"(//p[text()='{signUpValidationMessage}'])[1]";
+                var validationMessageElement = WebAdapter.FindElement(By.XPath(xpath), 1);
+
+                if (validationMessageElement == null)
+                {
+                    // found no error indication - All's well - so far...
+                    continue;
+                }
+
+                StfLogger.LogError($"SignUp. There is validation error. Message : [{signUpValidationMessage}]");
+                return false;
+            }
+
+            return true;
+        }
+
+        /// <summary>
         /// The handle default.
         /// </summary>
         /// <param name="value">
@@ -340,6 +481,17 @@ namespace WrapTrack.Stf.WrapTrackWeb
             }
 
             return value;
+        }
+
+        /// <summary>
+        /// The choose english.
+        /// </summary>
+        private void ChooseEnglish()
+        {
+            const string Xpath = @"//sprog_valg//img[@src=""http://wt.troldvaerk.org/grafik/flag/2.svg""]";
+
+            WebAdapter.ButtonClickByXpath(Xpath);
+            WebAdapter.WaitForComplete(1);
         }
     }
 }

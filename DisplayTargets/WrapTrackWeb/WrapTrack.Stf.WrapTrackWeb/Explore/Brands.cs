@@ -11,6 +11,7 @@
 namespace WrapTrack.Stf.WrapTrackWeb.Explore
 {
     using WrapTrack.Stf.WrapTrackWeb.Interfaces;
+    using WrapTrack.Stf.WrapTrackWeb.Interfaces.Brand;
     using WrapTrack.Stf.WrapTrackWeb.Interfaces.Explore;
     using WrapTrack.Stf.WrapTrackWeb.Interfaces.Explore.Brands;
 
@@ -33,10 +34,13 @@ namespace WrapTrack.Stf.WrapTrackWeb.Explore
         /// <summary>
         /// Gets or sets the all.
         /// </summary>
+        /// <returns>
+        /// The <see cref="IAllBrands"/>.
+        /// </returns>
         public IAllBrands All()
         {
             var clicked = WebAdapter.ButtonClickByXpath("//a[normalize-space()='all']");
-            var retVal = Get<IAllBrands>();
+            var retVal = clicked ? Get<IAllBrands>() : null;
 
             return retVal;
         }
@@ -49,8 +53,26 @@ namespace WrapTrack.Stf.WrapTrackWeb.Explore
         /// </returns>
         public IAddBrand AddBrand()
         {
-            var clicked = WebAdapter.ButtonClickByXpath("//a[normalize-space()='add brand']");
-            var retVal = Get<IAddBrand>();
+            StfLogger.LogError("AddBrand is no longer supported by the WrapTrack UI");
+            StfLogger.LogInconclusive("UnSUpported", "AddBrand is no longer supported by the WrapTrack UI");
+
+            return null;
+        }
+
+        /// <summary>
+        /// The select and open brand.
+        /// </summary>
+        /// <param name="brandName">
+        /// The brand name.
+        /// </param>
+        /// <returns>
+        /// The <see cref="IBrand"/>.
+        /// </returns>
+        public IBrand SelectAndOpenBrand(string brandName)
+        {
+            var xpath = $"//p[normalize-space()='{brandName.Trim()}']/../div";
+            var clicked = WebAdapter.ButtonClickByXpath(xpath);
+            var retVal = clicked ? Get<IBrand>() : null;
 
             return retVal;
         }

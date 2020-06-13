@@ -140,33 +140,74 @@ namespace WrapTrack.Stf.WrapTrackWeb.Me.Collection
         {
             var existingListOfWtIds = GetListOfWtIds();
 
+            // TODO: Is now related to English language
+            var typeCarrier = "woven wrap";
+
             WebAdapter.ButtonClickById("but_add_carrier");
-            ClickById("lin_newwrap");
 
             if (brand == null)
             {
                 brand = "Didymos";
                 pattern = "Nino";
-                model = "Balu";
+                model = "Blau";
             }
 
+            SelectDropdownByIdAndText("selTypeCarrier", typeCarrier);
             SelectDropdownByIdAndText("sel_brand", brand);
             SelectDropdownByIdAndText("sel_pattern", pattern);
             SelectDropdownByIdAndText("sel_model", model);
-            SelectDropdownByIdAndText("vaelg_str", size.ToString());
+            SelectDropdownByIdAndText("selWrapSize", size.ToString());
 
-            // add And Exit
-            if (!WebAdapter.ButtonClickById("opretvikle1knap"))
+            // Button says save - we wanna add And Exit
+            if (!WebAdapter.ButtonClickById("but_add_wrap"))
             {
                 return null;
             }
 
-            var newListOfWtIds = this.GetListOfWtIds();
+            // TODO: the insert of the wrap might take some time...
+            // TODO: Implement using Selenium Waiter
+            WebAdapter.WaitForComplete(3);
+
+            // gotta fix that after adding a wrap the wrap itself is shown
+            // not the collection as it used to
+            var me = WrapTrackWebShell.Me();
+
+            me.GetCollection();
+
+            var newListOfWtIds = GetListOfWtIds();
             var diffList = newListOfWtIds.Except(existingListOfWtIds);
             var enumerable = diffList as string[] ?? diffList.ToArray();
 
             // Return the wrap just added or null
             return enumerable.Length == 1 ? enumerable.First() : null;
+        }
+
+        /// <summary>
+        /// The add carrier.
+        /// </summary>
+        /// <typeparam name="T">
+        /// The interface for a carrier add
+        /// </typeparam>
+        /// <returns>
+        /// An instance of t
+        /// </returns>
+        public T AddCarrier<T>()
+        {
+            WebAdapter.ButtonClickById("but_add_carrier");
+
+            // Give WT time to load the page
+            WebAdapter.WaitForComplete(2);
+
+            var selectCarrierType = GetAddCarrierSelectTypeByInterface<T>();
+
+            WebAdapter.SelectElementSetText(By.Id("selTypeCarrier"), selectCarrierType);
+
+            // Selecting the Carrier Type makes the page reload
+            WebAdapter.WaitForComplete(2);
+
+            var retVal = Get<T>();
+
+            return retVal;
         }
 
         /// <summary>
@@ -267,23 +308,40 @@ namespace WrapTrack.Stf.WrapTrackWeb.Me.Collection
         }
 
         /// <summary>
-        /// The click by id.
+        /// The get add carrier select type by interface.
         /// </summary>
-        /// <param name="id">
-        /// The id.
-        /// </param>
-        private void ClickById(string id)
+        /// <typeparam name="T">
+        /// Expected carrier type to select in the dropdown for the Add Carrier
+        /// </typeparam>
+        /// <returns>
+        /// The <see cref="string"/>.
+        /// </returns>
+        private string GetAddCarrierSelectTypeByInterface<T>()
         {
-            var elem = WebAdapter.FindElement(By.Id(id));
+            var typeName = typeof(T).Name;
 
-            try
+            switch (typeName)
             {
-                elem.Click();
-            }
-            catch
-            {
-                WebAdapter.MoveToElement(elem);
-                elem.Click();
+                case "IRingSling": return "ring sling";
+                case "IWowenWrap": return "woven wrap";
+                case "IStretchyWrap": return "stretchy wrap";
+                case "IHybridWrap": return "hybrid wrap";
+                case "IHalfBuckleMeiTai": return "half buckle mei tai";
+                case "IMeiTai": return "mei tai";
+                case "IWrapTai": return "wrap tai";
+                case "IHalfBuckleWrapTai": return "half buckle wrap tai";
+                case "IOnbuhimo": return "onbuhimo";
+                case "IReverseOnbuhimo": return "reverse onbuhimo";
+                case "IBuckleOnbuhimo": return "buckle onbuhimo";
+                case "IPodeagi": return "podeagi";
+                case "INyia": return "nyia";
+                case "IDollSling": return "doll sling";
+                case "IFullBuckleMeiTai": return "full buckle mei tai";
+                case "IKanga": return "kanga";
+                case "IFullBuckle": return "full buckle";
+
+                // TODO:case "MISSING IMPLEMENTATION": return "other carrier";
+                default: return "AddCarrier:Unsupported value";
             }
         }
 

@@ -94,6 +94,7 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Linq.Dynamic, Version=1.0.6132.35681, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\..\packages\System.Linq.Dynamic.1.0.7\lib\net40\System.Linq.Dynamic.dll</HintPath>
@@ -123,20 +124,36 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
+    <Compile Include="Collection\AddCarrier\TestCase031.cs" />
+    <Compile Include="Collection\AddCarrier\TestCaseUtils.cs" />
+    <Compile Include="Collection\AddCarrier\TestCase029.cs" />
+    <Compile Include="Collection\AddCarrier\TestData\TestDataBase.cs" />
+    <Compile Include="Collection\AddCarrier\TestData\TestDataAddWrapConversion.cs" />
     <Compile Include="Collection\TestCase010.cs" />
     <Compile Include="Collection\TestCase011.cs" />
     <Compile Include="Collection\TestCase006.cs" />
     <Compile Include="Collection\TestCase007.cs" />
     <Compile Include="Collection\TestCase012.cs" />
+    <Compile Include="Collection\TestCase028.cs" />
     <Compile Include="Collection\TestCase013.cs" />
+    <Compile Include="Collection\TestCase026.cs" />
+    <Compile Include="Collection\TestCase024.cs" />
+    <Compile Include="Collection\TestCase025.cs" />
+    <Compile Include="Collection\TestCase030.cs" />
     <Compile Include="Explore\Brands\TestCase014.cs" />
     <Compile Include="Explore\Brands\TestCase016.cs" />
     <Compile Include="Explore\Brands\TestCase015.cs" />
+    <Compile Include="News\TestCase038.cs" />
+    <Compile Include="News\TestCase037.cs" />
+    <Compile Include="News\TestCase036.cs" />
+    <Compile Include="News\TestCase027.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SignUp - LogIn\TestCase001.cs" />
     <Compile Include="SignUp - LogIn\TestCase002.cs" />
     <Compile Include="SignUp - LogIn\TestCase003.cs" />
+    <Compile Include="SignUp - LogIn\TestCase034.cs" />
     <Compile Include="SignUp - LogIn\TestCase004.cs" />
+    <Compile Include="TestCase032.cs" />
     <Compile Include="Upload Pictures\TestCase009.cs" />
     <Compile Include="ZDeveloperTests\DataDrivenTests.cs" />
     <Compile Include="ZDeveloperTests\MenuTests.cs" />
@@ -144,10 +161,14 @@
     <Compile Include="Upload Pictures\TestCase005.cs" />
     <Compile Include="WrapTrackTestScriptBase.cs" />
     <Compile Include="WtTestscriptUtils.cs" />
-    <Compile Include="Collection\TestCase024.cs" />
-    <Compile Include="ZDeveloperTests\XBRO\TestCaseXB001.cs" />
+    <Compile Include="Collection\TestCase020.cs" />
+    <Compile Include="Collection\AddCarrier\TestData\TestDataAddWrap.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Collection\AddCarrier\TestData\TestdataAddWrapConversion.csv" />
+    <None Include="Collection\AddCarrier\TestData\TestdataAddWrap.csv">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Include="Collection\Data010.csv" />
     <None Include="packages.config">
       <SubType>Designer</SubType>
@@ -182,7 +203,10 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="ZDeveloperTests\Ulrich\" />
+    <Folder Include="ZDeveloperTests\XBRO\" />
+  </ItemGroup>
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">
       <ItemGroup>

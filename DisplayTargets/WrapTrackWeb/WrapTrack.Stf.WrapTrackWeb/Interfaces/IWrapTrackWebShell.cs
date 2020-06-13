@@ -18,6 +18,7 @@ namespace WrapTrack.Stf.WrapTrackWeb.Interfaces
     using WrapTrack.Stf.WrapTrackWeb.Interfaces.Explore;
     using WrapTrack.Stf.WrapTrackWeb.Interfaces.FaqContact;
     using WrapTrack.Stf.WrapTrackWeb.Interfaces.Me;
+    using WrapTrack.Stf.WrapTrackWeb.Interfaces.News;
 
     /// <summary>
     /// The WrapTrackWebShell interface.
@@ -60,6 +61,14 @@ namespace WrapTrack.Stf.WrapTrackWeb.Interfaces
         /// The <see cref="IMeProfile"/>.
         /// </returns>
         IMeProfile Me();
+
+        /// <summary>
+        /// The news.
+        /// </summary>
+        /// <returns>
+        /// The <see cref="INews"/>.
+        /// </returns>
+        INews News();
 
         /// <summary>
         /// The explorer.
@@ -124,6 +133,20 @@ namespace WrapTrack.Stf.WrapTrackWeb.Interfaces
         bool SignUp();
 
         /// <summary>
+        /// The sign up and login
+        /// </summary>
+        /// <returns></returns>
+        bool SignUpAndLogin();
+
+        /// <summary>
+        /// The sign up
+        /// </summary>
+        /// <param name="newUserName"></param>
+        /// <param name="password"></param>
+        /// <returns></returns>
+        bool SignUp(string newUserName, string password);
+
+        /// <summary>
         /// Checks if feedback for user is shown
         /// </summary>
         /// <param name="v">
@@ -160,5 +183,17 @@ namespace WrapTrack.Stf.WrapTrackWeb.Interfaces
         /// The <see cref="IWrap"/>.
         /// </returns>
         IWrap GetToWrap(string wrapId);
+
+        /// <summary>
+        /// The get to model.
+        /// </summary>
+        /// <param name="modelId">
+        ///     The model id.
+        /// </param>
+        /// <returns>
+        /// The <see cref="IModel"/>.
+        /// </returns>
+        IModel GetToModel(string modelId);
+
     }
 }

@@ -67,5 +67,17 @@ namespace WrapTrack.Stf.Adapters.WebAdapter.Configuration
         /// </summary>
         [StfConfiguration("Configuration.Adapters.WebAdapter.Browsers.DriverLogLevel", DefaultValue = "Trace")]
         public string DriverLogLevel { get; set; }
+
+        /// <summary>
+        /// Gets or sets a value indicating whether check for errors on all pages.
+        /// </summary>
+        [StfConfiguration("Configuration.Adapters.WebAdapter.ErrorHandling.CheckForErrorsOnAllPages", DefaultValue = "false")]
+        public bool CheckForErrorsOnAllPages { get; set; }
+
+        /// <summary>
+        /// Gets or sets a value indicating whether check for errors on all pages text.
+        /// </summary>
+        [StfConfiguration("Configuration.Adapters.WebAdapter.ErrorHandling.CheckForErrorsOnAllPagesText", DefaultValue = "PHP")]
+        public string CheckForErrorsOnAllPagesText { get; set; }
     }
 }

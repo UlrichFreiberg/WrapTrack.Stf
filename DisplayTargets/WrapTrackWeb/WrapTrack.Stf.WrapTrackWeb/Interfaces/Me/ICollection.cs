@@ -84,5 +84,16 @@ namespace WrapTrack.Stf.WrapTrackWeb.Interfaces.Me
         /// List of WtId as strings
         /// </returns>
         List<string> GetListOfWtIds();
+
+        /// <summary>
+        /// The add carrier.
+        /// </summary>
+        /// <typeparam name="T">
+        /// The interface for a carrier add
+        /// </typeparam>
+        /// <returns>
+        /// An instance of t
+        /// </returns>
+        T AddCarrier<T>();
     }
 }

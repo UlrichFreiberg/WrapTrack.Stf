@@ -10,6 +10,8 @@
 
 namespace WrapTrackWebTests.Explore.Brands
 {
+    using System;
+
     using Microsoft.VisualStudio.TestTools.UnitTesting;
 
     using WrapTrack.Stf.WrapTrackApi.Interfaces;
@@ -22,11 +24,6 @@ namespace WrapTrackWebTests.Explore.Brands
     [TestClass]
     public class TestCase015 : WrapTrackTestScriptBase
     {
-        /// <summary>
-        /// The brand id. Should NOT be hardcoded - randomBrand is not that random;-)
-        /// </summary>
-        private const string BrandId = "306";
-
         /// <summary>
         /// The wt utils.
         /// </summary>
@@ -52,31 +49,32 @@ namespace WrapTrackWebTests.Explore.Brands
         }
 
         /// <summary>
-        /// The log in test.
+        /// Test of creating new pattern.
         /// </summary>
-        /// <remarks>
-        /// After log in it's possible to acess 'MeProfile-page'
-        /// </remarks>
         [TestMethod]
         public void Tc015()
         {
+            // For now hard coded. TOdo: Random
+           const string BrandId = "289";
+           const string BrandName = "Agossie";
+
             // Use default user
-            WrapTrackShell.LoginAsAdmin();
+            WrapTrackShell.Login();
             StfAssert.IsNotNull("wrapTrackShell", WrapTrackShell);
 
-            var randomBrand = GetRandomBrand();
+            var randomBrand = this.GetBrand(BrandName);
             var newPatternName = WtUtils.GetRandomString("StfPattern");
             var baseLineNumberOfPatterns = wtApi.BrandNumberOfPatterns(BrandId);
             var patternAdded = randomBrand.AddPattern(newPatternName);
             var numberOfPatterns = wtApi.BrandNumberOfPatterns(BrandId);
 
-            StfAssert.IsTrue($"Pattern {newPatternName} Added", patternAdded);
+            StfAssert.IsTrue($"Pattern {newPatternName} Added", patternAdded);          
             StfAssert.GreaterThan("Number of patterns for brand up by one", numberOfPatterns, baseLineNumberOfPatterns);
-
+           
             var patternDeleted = randomBrand.DeletePattern(newPatternName);
 
-            numberOfPatterns = wtApi.BrandNumberOfPatterns(BrandId);
             StfAssert.IsTrue($"Pattern {newPatternName} Deleted", patternDeleted);
+            numberOfPatterns = wtApi.BrandNumberOfPatterns(BrandId);
             StfAssert.AreEqual($"Number of patterns for brand as baseline", numberOfPatterns, baseLineNumberOfPatterns);
         }
     }

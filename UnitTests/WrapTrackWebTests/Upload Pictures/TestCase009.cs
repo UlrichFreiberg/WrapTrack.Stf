@@ -76,7 +76,7 @@ namespace WrapTrackWebTests.Upload_Pictures
             StfAssert.AreEqual("4 pictures after upload", numberOfPictures, 4);
 
             // Remove two pictures and assert there is 2 picture left
-            RemovePicturesFromWrap(theOneAndOnlyWrap, 2);
+            this.RemovePicturesFromWrap(theOneAndOnlyWrap, 2);
             Wait(TimeSpan.FromSeconds(3));
             numberOfPictures = GetNumberOfPictures(validationTarget, wtId);
             StfAssert.AreEqual("2 picture left", 2, numberOfPictures);
@@ -91,9 +91,6 @@ namespace WrapTrackWebTests.Upload_Pictures
         /// <param name="numberOfPictures">
         /// The number of pictures.
         /// </param>
-        /// <param name="secondsToWaitForWtSync">
-        /// The seconds to wait for wt sync.
-        /// </param>
         /// <returns>
         /// The <see cref="int"/>.
         /// </returns>
@@ -101,8 +98,7 @@ namespace WrapTrackWebTests.Upload_Pictures
         // - Okay - might make it as a general utils, and then we want it to return int
         private int RemovePicturesFromWrap(
             IWrap wrap,
-            int numberOfPictures,
-            int secondsToWaitForWtSync = 2)
+            int numberOfPictures)
         {
             for (var i = 0; i < numberOfPictures; i++)
             {
